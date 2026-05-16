@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #c9a84c;
+  --color-gold-light: #e5c97e;
+  --color-gold-dark: #9a7a35;
+  --color-surface-1: #111111;
+  --color-surface-2: #161616;
+  --color-surface-3: #1e1e1e;
+  --color-border: #2a2a2a;
+  --color-text-muted: #7a7a7a;
+  --color-text-secondary: #a0a0a0;
+
+  --font-display: var(--font-geist-sans);
+  --font-body: var(--font-geist-sans);
+}
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Gold gradient text utility */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #c9a84c 0%, #e5c97e 50%, #c9a84c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtle gold glow */
+.glow-gold {
+  box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+}
+
+/* Card hover border animation */
+.card-hover {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.card-hover:hover {
+  border-color: #c9a84c;
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Beat waveform placeholder animation */
+@keyframes pulse-bar {
+  0%, 100% { height: 30%; }
+  50% { height: 100%; }
+}
+
+.waveform-bar {
+  animation: pulse-bar 1s ease-in-out infinite;
+}
