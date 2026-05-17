@@ -4,54 +4,56 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Book a Session — LoopGem",
-  description: "Book a private 1-on-1 video call with LoopGem for music production mentorship, beat feedback, and strategy.",
+  description: "Book a 1-on-1 video call with Sfooxbeats and learn how to sell beats and music services as a freelance music producer.",
 };
 
 const sessions = [
   {
     id: "s1",
-    name: "Quick Fire",
+    name: "Starter Session",
     duration: "30 minutes",
     price: 49.99,
     perks: [
-      "Beat or track feedback",
-      "Specific question answers",
-      "Mix review & tips",
+      "How to price your beats & services",
+      "Where to sell beats online (platforms overview)",
+      "Setting up your first store or profile",
+      "Q&A — bring your specific questions",
       "Recorded session (on request)",
     ],
-    best: "First-timers & quick questions",
+    best: "Producers just starting to sell",
     highlight: false,
   },
   {
     id: "s2",
-    name: "Deep Dive",
+    name: "Sales Strategy Call",
     duration: "60 minutes",
     price: 89.99,
     perks: [
-      "Full project or career review",
-      "Custom action plan",
-      "Brand & positioning feedback",
-      "Beat & marketing critique",
-      "Recorded session",
-      "Follow-up summary email",
+      "Full breakdown of your current setup & gaps",
+      "How to attract clients for mixing, beats & kits",
+      "Pricing strategy for all your services",
+      "Social media & content plan that converts",
+      "How to close deals via DM and email",
+      "Recorded session + follow-up action plan",
     ],
-    best: "Producers serious about growth",
+    best: "Producers ready to go full-time",
     highlight: true,
   },
   {
     id: "s3",
-    name: "Mentorship Pack",
+    name: "Freelancer Blueprint",
     duration: "4 × 60 min (monthly)",
     price: 299.99,
     perks: [
-      "4 weekly 60-min calls",
-      "Accountability check-ins",
-      "Unlimited email support",
-      "Custom growth roadmap",
+      "4 weekly calls — full freelance business build",
+      "Beat selling, mixing clients & kit sales strategy",
+      "Brand identity & online presence setup",
+      "How to get recurring clients & retainers",
+      "Contracts, licensing & protecting your work",
+      "Unlimited email support between sessions",
       "All sessions recorded",
-      "Priority response time",
     ],
-    best: "Producers committed to transformation",
+    best: "Producers building a real income",
     highlight: false,
   },
 ];
@@ -67,7 +69,7 @@ export default function Booking() {
           <span className="text-gold-gradient">Video Call</span>
         </h1>
         <p className="text-[#a0a0a0] max-w-2xl mx-auto">
-          Get direct access — real talk, real feedback, real strategy. No templates, no generic advice. Just what you specifically need.
+          Learn exactly how to sell beats, mixing services, and drum kits as a freelance music producer — straight from someone doing it. No theory, no fluff.
         </p>
       </div>
 
@@ -149,19 +151,27 @@ export default function Booking() {
           {[
             {
               q: "What platform do we use for calls?",
-              a: "Zoom or Google Meet — your choice. The link is sent after booking.",
+              a: "Zoom or Google Meet — your choice. The link is sent to your email after booking.",
+            },
+            {
+              q: "What will I actually learn?",
+              a: "How to sell beats, mixing services, and drum kits online — pricing, platforms, getting clients, social media strategy, closing deals, and protecting your work with contracts.",
+            },
+            {
+              q: "Do I need to already be making money to book?",
+              a: "No. The Starter Session is built for producers who haven't sold yet and want to know exactly where to start.",
+            },
+            {
+              q: "What should I prepare before the call?",
+              a: "Send your current setup — links to your store, socials, or any questions in advance via email so we can get straight to work.",
             },
             {
               q: "Can I get a refund if I can't make it?",
               a: "Yes. Cancel at least 24 hours before and receive a full refund or rescheduling.",
             },
             {
-              q: "What should I prepare before the call?",
-              a: "Send any tracks, links, or questions in advance via email so we can dive straight in.",
-            },
-            {
               q: "Are sessions recorded?",
-              a: "Yes — recordings are available on request for the Deep Dive and Mentorship Pack.",
+              a: "Yes — recordings are available on request for the Sales Strategy Call and Freelancer Blueprint.",
             },
           ].map((faq) => (
             <details
