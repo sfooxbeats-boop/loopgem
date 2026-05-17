@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PayPalButton from "@/components/PayPalButton";
+import CoursePayPalButton from "@/components/CoursePayPalButton";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -218,10 +218,10 @@ export default function Courses() {
                   ))}
                 </ul>
 
-                <PayPalButton
+                <CoursePayPalButton
                   amount={course.price.toFixed(2)}
-                  description={`LoopGem PDF Course: ${course.title}`}
-                  successMessage="Payment confirmed! Your PDF will be sent to your email within a few hours."
+                  courseId={course.id}
+                  courseName={course.title}
                 />
 
                 <p className="text-center text-xs text-[#7a7a7a] mt-4">

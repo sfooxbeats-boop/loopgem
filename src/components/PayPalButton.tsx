@@ -9,28 +9,6 @@ interface PayPalButtonProps {
   onPaid?: () => void;
 }
 
-type PayPalActions = {
-  order: {
-    create: (opts: unknown) => Promise<string>;
-    capture: () => Promise<unknown>;
-  };
-};
-
-declare global {
-  interface Window {
-    paypal?: {
-      FUNDING: { PAYPAL: string; CARD: string };
-      Buttons: (config: {
-        fundingSource?: string;
-        createOrder: (data: unknown, actions: PayPalActions) => Promise<string>;
-        onApprove: (data: unknown, actions: PayPalActions) => Promise<void>;
-        onError: (err: unknown) => void;
-        style?: Record<string, unknown>;
-      }) => { isEligible: () => boolean; render: (el: HTMLElement) => void };
-    };
-  }
-}
-
 export default function PayPalButton({ amount, description, successMessage, onPaid }: PayPalButtonProps) {
   const paypalRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -49,10 +27,10 @@ export default function PayPalButton({ amount, description, successMessage, onPa
         purchase_units: [{ description, amount: { value: amount, currency_code: "USD" } }],
       };
 
-      const createOrder = (_d: unknown, actions: PayPalActions) =>
+      const createOrder = (_d: unknown, actions: PayPalOrderActions) =>
         actions.order.create(orderConfig);
 
-      const onApprove = async (_d: unknown, actions: PayPalActions) => {
+      const onApprove = async (_d: unknown, actions: PayPalOrderActions) => {
         await actions.order.capture();
         setSuccess(true);
         onPaid?.();
