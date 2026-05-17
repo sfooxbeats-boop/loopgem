@@ -4,80 +4,116 @@
 
 Music production services website for **Soufiane Remdane (Sfooxbeats)** at **loopgem.com**.
 
-## Repository
-- **GitHub:** https://github.com/sfooxbeats-boop/loopgem
-- **Branch:** main
-- **Deployment:** Vercel (connect repo at vercel.com — env var required)
+## Repository & Deployment
+- **GitHub:** https://github.com/sfooxbeats-boop/loopgem (branch: main)
+- **Live site:** https://loopgem.vercel.app
+- **Final domain:** loopgem.com — not yet linked to Vercel
+- Vercel auto-deploys on every `git push` to main
 
 ## Stack
-- **Next.js 16** (App Router, Turbopack) — see AGENTS.md for breaking changes
-- **Tailwind CSS v4** — configured via `@theme` block in `globals.css`, NO `tailwind.config.ts`
-- **TypeScript**
-- **PayPal JS SDK** — client-side script injection in `PayPalButton.tsx`
-- **jsPDF** — client-side exclusive contract PDF generation in `BeatCard.tsx`
+- **Next.js 16** (App Router, Turbopack) — read AGENTS.md before touching routing or layouts
+- **Tailwind CSS v4** — `@theme {}` block in `globals.css` only, NO `tailwind.config.ts`
+- **TypeScript** — global PayPal types in `src/types/paypal.d.ts` (ambient, no export)
+- **PayPal JS SDK** — client-side script injection, `NEXT_PUBLIC_PAYPAL_CLIENT_ID` in env
+- **jsPDF** — client-side beat contract PDF generation inside `BeatCard.tsx`
+- **Resend** — server-side email, `/api/send-course` sends course PDF download links
 
 ## Environment Variables
-| Key | Where |
+| Key | Status |
 |---|---|
-| `NEXT_PUBLIC_PAYPAL_CLIENT_ID` | `.env.local` locally, Vercel dashboard in production |
+| `NEXT_PUBLIC_PAYPAL_CLIENT_ID` | ✅ Set in `.env.local` + Vercel |
+| `RESEND_API_KEY` | ⏳ Placeholder in `.env.local` — needs real key added to Vercel |
+| `NEXT_PUBLIC_SITE_URL` | ⏳ Needs adding to Vercel (`https://loopgem.vercel.app`) |
 
-Never commit `.env.local` — it is covered by `.gitignore`.
+Never commit `.env.local` — covered by `.gitignore`.
 
 ## Brand
 - Website: **LoopGem** (loopgem.com)
 - Producer: **Sfooxbeats** (Soufiane Remdane)
 - Email: Sfooxbeats@gmail.com
 - Instagram: @Sfoox_beats
-- Theme: dark (`#0a0a0a` bg) + gold (`#c9a84c` accent)
-- Custom CSS utilities in `globals.css`: `.text-gold-gradient`, `.glow-gold`, `.card-hover`
+- Theme: `#0a0a0a` bg + `#c9a84c` gold accent
+- CSS utilities in `globals.css`: `.text-gold-gradient`, `.glow-gold`, `.card-hover`
 
 ## Services & Pricing
-| Service | Price | Payment flow |
+| Service | Price | Payment Flow |
 |---|---|---|
-| Exclusive Beat (store) | $250 | PayPal/card on site — contract PDF auto-generated |
-| Custom Beat (made to order) | $250 | Client emails requirements → built → paid on delivery |
-| Mixing & Mastering | $500 | PayPal/card on site → client emails stems |
-| Custom Drum Kit / Sound Kit | $250 (up to 300 sounds) | Client emails requirements → built → paid on delivery |
-| 1-on-1 Coaching 30 min | $49.99 | PayPal/card on site |
-| 1-on-1 Coaching 60 min | $89.99 | PayPal/card on site |
-| Mentorship Pack 4×60 min | $299.99 | PayPal/card on site |
+| Exclusive Beat | $250 | PayPal/card → jsPDF contract auto-downloaded |
+| Custom Beat (made to order) | $250 | Email requirements → built → paid on delivery |
+| Mixing & Mastering | $500 | PayPal/card → client emails stems to Sfooxbeats@gmail.com |
+| Custom Drum Kit / Sound Kit | $250 (up to 300 sounds) | Email requirements → built → paid on delivery |
+| 1-on-1 Session — 30 min | $49.99 | PayPal/card |
+| 1-on-1 Session — 60 min | $89.99 | PayPal/card |
+| Mentorship Pack 4×60 min | $299.99 | PayPal/card |
+| PDF Course — Fiverr Beat Seller Blueprint | $27 | PayPal/card → Resend auto-delivers PDF by email |
+| PDF Course — Sell Music Services on Fiverr | $27 | PayPal/card → Resend auto-delivers PDF by email |
+| PDF Course — Full Freelance Music Producer Playbook | $47 | PayPal/card → Resend auto-delivers PDF by email |
 
 ## Routes
 | Route | Description |
 |---|---|
 | `/` | Home — hero, stats, services grid, featured beats, testimonials |
-| `/beat-store` | 6 beats at $250 exclusive each — contract form + PayPal |
-| `/services` | Hub — 3 clickable service cards |
+| `/beat-store` | 6 beats at $250 exclusive — 3-step form + PayPal + jsPDF contract |
+| `/services` | Hub page — 3 clickable service cards |
 | `/services/mixing-mastering` | Full detail + PayPal checkout |
 | `/services/custom-beat` | Detail + email request flow (no upfront payment) |
 | `/services/custom-drum-kit` | Detail + email request flow (no upfront payment) |
-| `/courses` | 3 producer courses — PayPal enrollment |
-| `/booking` | 1-on-1 video call sessions — PayPal |
-| `/drum-kits` | Pre-made drum kits store — PayPal |
+| `/courses` | 3 PDF courses — CoursePayPalButton + Resend auto-delivery |
+| `/booking` | 1-on-1 sessions — topic: how to sell beats & music services as freelancer |
+| `/drum-kits` | Pre-made drum kits — PayPal |
 | `/about` | Soufiane Remdane / Sfooxbeats story, timeline, values |
-| `/contact` | Contact form — needs Formspree ID (see below) |
+| `/contact` | Contact form — Formspree (needs real ID replacing `YOUR_FORM_ID`) |
+| `/api/send-course` | POST route — sends course PDF download link via Resend |
 
 ## Key Components
 | File | Notes |
 |---|---|
-| `src/components/PayPalButton.tsx` | Client component. Props: `amount`, `description`, `successMessage` (string), `onPaid` (fn — only between client components, never from server pages). Renders PayPal + debit/credit card buttons. |
-| `src/components/BeatCard.tsx` | Client component. 3-step flow: idle → form (legal name, stage name, address) → payment → done + PDF download. Uses jsPDF for contract. |
-| `src/components/Navbar.tsx` | Sticky nav, mobile hamburger. Shows "LoopGem / by Sfooxbeats". |
-| `src/components/Footer.tsx` | Links, Instagram (@Sfoox_beats), email (Sfooxbeats@gmail.com). |
-
-## Known TODOs
-- **Contact form:** Replace `YOUR_FORM_ID` in `src/app/contact/page.tsx` with real Formspree ID (formspree.io — free, points to Sfooxbeats@gmail.com)
-- **Beat audio previews:** Add MP3 files to `public/audio/` and set `audioSrc` on each beat in `src/app/beat-store/page.tsx`
-- **Domain:** Point loopgem.com to Vercel after deployment
+| `src/components/PayPalButton.tsx` | Generic PayPal + card checkout. Props: `amount`, `description`, `successMessage` (string — safe from server pages), `onPaid` (fn — only between client components) |
+| `src/components/CoursePayPalButton.tsx` | Course-specific. Extracts buyer email from PayPal capture, calls `/api/send-course`, shows sending/done/error states |
+| `src/components/BeatCard.tsx` | 3-step: idle → form (legal name, stage name, address) → payment → PDF contract download |
+| `src/components/Navbar.tsx` | Sticky, mobile hamburger. Shows "LoopGem" only (no subtitle) |
+| `src/components/Footer.tsx` | Links, Instagram @Sfoox_beats, email Sfooxbeats@gmail.com, "LoopGem" only |
+| `src/types/paypal.d.ts` | Ambient global types for `window.paypal` and `PayPalOrderActions` — no `export {}` |
 
 ## Critical Rules
-- **Server → Client function props are forbidden.** Use `successMessage: string` when calling `PayPalButton` from server pages. Only use `onPaid: () => void` between client components (e.g. inside `BeatCard`).
-- **Tailwind v4 has no config file.** All custom tokens live in the `@theme {}` block inside `src/app/globals.css`.
-- **PayPal script loads once per page.** The component checks for `script[data-paypal-sdk]` before injecting to avoid duplicates.
+- **Never pass functions as props from Server Components to Client Components.** Use `successMessage: string` for server pages. Only use `onPaid: () => void` between client components.
+- **Tailwind v4 — no config file.** All custom tokens in `@theme {}` inside `src/app/globals.css`.
+- **PayPal SDK loads once per page** — component checks for `script[data-paypal-sdk]` before injecting.
+- **Global types** go in `src/types/paypal.d.ts` without `export {}` (ambient module).
+
+## ⚠️ WHERE WE LEFT OFF — Pending Tasks
+
+### 1. Beat store style update
+User wants to restyle the beat store page. **This is next when they return.**
+
+### 2. Upload PDF course files
+When the 3 PDFs are written and ready, upload to `public/downloads/` with these exact names:
+- `course-fiverr-beat-seller-blueprint.pdf`
+- `course-sell-music-services-fiverr.pdf`
+- `course-full-freelance-music-producer-playbook.pdf`
+
+Then: `git add . && git commit -m "add course PDFs" && git push`
+
+### 3. Add Resend API key to Vercel
+- Free account at resend.com → API Keys → Create Key
+- Vercel: loopgem project → Settings → Environment Variables:
+  - `RESEND_API_KEY` = key from Resend
+  - `NEXT_PUBLIC_SITE_URL` = `https://loopgem.vercel.app`
+- Trigger a redeploy after adding
+
+### 4. Link loopgem.com domain to Vercel
+- Vercel → loopgem project → Settings → Domains → Add `loopgem.com`
+- Update DNS at domain registrar to point to Vercel
+
+### 5. Wire up contact form (Formspree)
+- Free account at formspree.io → create form pointing to Sfooxbeats@gmail.com
+- Replace `YOUR_FORM_ID` in `src/app/contact/page.tsx` with real ID
+- Push to GitHub
 
 ## Deploy Checklist
-1. `npm run build` — must pass with no errors
-2. Push to GitHub (`git push`)
-3. Vercel picks up the push and auto-deploys
-4. Set `NEXT_PUBLIC_PAYPAL_CLIENT_ID` in Vercel dashboard → Environment Variables
-5. Add custom domain `loopgem.com` in Vercel → Domains
+```bash
+npm run build    # must pass clean before pushing
+git add .
+git commit -m "your message"
+git push         # Vercel auto-deploys
+```
