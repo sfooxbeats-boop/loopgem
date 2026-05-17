@@ -24,7 +24,6 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex flex-col leading-none shrink-0">
             <span className="text-xl font-bold tracking-tight text-gold-gradient">LoopGem</span>
-            <span className="text-[9px] uppercase tracking-widest text-[#7a7a7a]">by Sfooxbeats</span>
           </Link>
 
           <div className="hidden lg:flex items-center gap-6">
