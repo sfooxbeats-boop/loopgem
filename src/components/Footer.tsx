@@ -17,8 +17,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
             <span className="text-2xl font-bold text-gold-gradient">LoopGem</span>
-            <p className="text-xs text-[#7a7a7a] mt-0.5 mb-3">by Sfooxbeats</p>
-            <p className="text-sm text-[#7a7a7a] leading-relaxed max-w-xs">
+            <p className="text-sm text-[#7a7a7a] leading-relaxed max-w-xs mt-3">
               Premium exclusive beats, mixing &amp; mastering, drum kits, courses, and 1-on-1 coaching for serious music producers.
             </p>
           </div>
@@ -80,7 +79,7 @@ export default function Footer() {
 
         <div className="mt-10 pt-6 border-t border-[#2a2a2a] flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-[#7a7a7a]">
-            &copy; {new Date().getFullYear()} LoopGem / Sfooxbeats. All rights reserved.
+            &copy; {new Date().getFullYear()} LoopGem. All rights reserved.
           </p>
           <p className="text-xs text-[#7a7a7a]">loopgem.com</p>
         </div>
