@@ -1,8 +1,6 @@
 import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const courseFiles: Record<string, { name: string; file: string }> = {
   "c1": {
     name: "Fiverr Beat Seller Blueprint",
@@ -20,6 +18,7 @@ const courseFiles: Record<string, { name: string; file: string }> = {
 
 export async function POST(req: NextRequest) {
   try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const { payerEmail, payerName, courseId } = await req.json();
 
     const course = courseFiles[courseId];
