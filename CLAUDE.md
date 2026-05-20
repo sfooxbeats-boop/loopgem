@@ -53,7 +53,7 @@ Never commit `.env.local` — covered by `.gitignore`.
 ## Routes
 | Route | Description |
 |---|---|
-| `/` | Home — animated hero, stats, instructor quote, benefits, how it works, courses preview, coaching preview, testimonials, FAQ, CTA |
+| `/` | Home — VSL-style page: YouTube video hero, CTA, proof screenshots grid, "Is This For You" section, testimonials, courses, coaching CTA |
 | `/courses` | 3 PDF courses — CoursePayPalButton + Resend auto-delivery |
 | `/booking` | 1-on-1 coaching sessions — 3 pricing tiers + how it works + FAQ |
 | `/about` | Soufiane Remdane / Sfooxbeats story |
@@ -95,7 +95,11 @@ Never commit `.env.local` — covered by `.gitignore`.
 
 ## ⚠️ Pending Tasks
 
-### 1. Upload PDF course files
+### 1. Add sales proof screenshots to home page
+Put screenshot images in `public/proof/` and update the `proofScreenshots` array at the top of `src/app/page.tsx`.
+Each entry: `{ label: "...", src: "/proof/your-image.png" }`
+
+### 2. Upload PDF course files
 When the 3 PDFs are written and ready, upload to `public/downloads/` with these exact names:
 - `course-fiverr-beat-seller-blueprint.pdf`
 - `course-sell-music-services-fiverr.pdf`

@@ -38,17 +38,6 @@ export default function Home() {
         <div className="absolute inset-0 pointer-events-none opacity-[0.02]" style={{ backgroundImage: "linear-gradient(#c9a84c 1px, transparent 1px), linear-gradient(90deg, #c9a84c 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
 
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 text-center">
-          {/* Label */}
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 border border-[#c9a84c]/25 bg-[#c9a84c]/5 text-[#c9a84c] text-xs font-bold uppercase tracking-[0.2em] mb-6"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#c9a84c] animate-pulse" />
-            Free Training for Music Producers
-          </motion.div>
-
           {/* Headline */}
           <motion.h1
             className="text-5xl sm:text-7xl lg:text-8xl font-black uppercase leading-none tracking-tight mb-5"
