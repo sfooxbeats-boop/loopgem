@@ -3,8 +3,8 @@ import PayPalButton from "@/components/PayPalButton";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Book a Session — LoopGem",
-  description: "Book a 1-on-1 video call with Sfooxbeats and learn how to sell beats and music services as a freelance music producer.",
+  title: "1-on-1 Coaching — LoopGem",
+  description: "Book a 1-on-1 coaching call with Sfooxbeats. Learn how to sell beats and music services as a freelance music producer.",
 };
 
 const sessions = [
@@ -13,203 +13,221 @@ const sessions = [
     name: "Starter Session",
     duration: "30 minutes",
     price: 49.99,
-    perks: [
-      "How to price your beats & services",
-      "Where to sell beats online (platforms overview)",
-      "Setting up your first store or profile",
-      "Q&A — bring your specific questions",
-      "Recorded session (on request)",
-    ],
     best: "Producers just starting to sell",
     highlight: false,
+    perks: [
+      "How to price your beats & services",
+      "Best platforms to start selling on",
+      "Setting up your first profile or store",
+      "Q&A — bring your exact questions",
+      "Recorded session on request",
+    ],
   },
   {
     id: "s2",
     name: "Sales Strategy Call",
     duration: "60 minutes",
     price: 89.99,
+    best: "Producers ready to scale",
+    highlight: true,
     perks: [
-      "Full breakdown of your current setup & gaps",
-      "How to attract clients for mixing, beats & kits",
+      "Full breakdown of your setup & gaps",
       "Pricing strategy for all your services",
+      "How to attract mixing, beat & production clients",
       "Social media & content plan that converts",
       "How to close deals via DM and email",
-      "Recorded session + follow-up action plan",
+      "Recorded session + written action plan",
     ],
-    best: "Producers ready to go full-time",
-    highlight: true,
   },
   {
     id: "s3",
     name: "Freelancer Blueprint",
     duration: "4 × 60 min (monthly)",
     price: 299.99,
+    best: "Producers building a real income",
+    highlight: false,
     perks: [
-      "4 weekly calls — full freelance business build",
-      "Beat selling, mixing clients & kit sales strategy",
-      "Brand identity & online presence setup",
+      "4 weekly calls — full freelance build",
+      "Beat selling, services & brand strategy",
+      "Online presence & profile setup",
       "How to get recurring clients & retainers",
       "Contracts, licensing & protecting your work",
       "Unlimited email support between sessions",
       "All sessions recorded",
     ],
-    best: "Producers building a real income",
-    highlight: false,
   },
+];
+
+const steps = [
+  { n: "01", title: "Pick a Session", desc: "Choose the plan that fits where you are and where you want to go." },
+  { n: "02", title: "Complete Payment", desc: "Secure checkout via PayPal or card. No subscription, no commitment." },
+  { n: "03", title: "Get Your Link", desc: "You'll receive a scheduling email within 24 hours to pick your time." },
+  { n: "04", title: "Show Up & Learn", desc: "Join on Zoom or Google Meet. Come with questions — leave with a plan." },
+];
+
+const faqs = [
+  { q: "What platform do we use?", a: "Zoom or Google Meet — your choice. The link is sent to your email after booking." },
+  { q: "What will I actually learn?", a: "How to sell beats, mixing services, and music products online — pricing, platforms, getting clients, social media strategy, and closing deals." },
+  { q: "Do I need to already be making money?", a: "No. The Starter Session is built for producers who haven't sold yet and want a clear starting point." },
+  { q: "What should I prepare before the call?", a: "Send your current setup — links to your profiles or any questions in advance — so we can get straight into it." },
+  { q: "Can I get a refund?", a: "Yes. Cancel at least 24 hours before and receive a full refund or rescheduling at no cost." },
+  { q: "Are sessions recorded?", a: "Yes — recordings available on request for the Sales Strategy Call and Freelancer Blueprint." },
 ];
 
 export default function Booking() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      {/* Header */}
-      <div className="text-center mb-16">
-        <p className="text-xs font-semibold uppercase tracking-widest text-[#c9a84c] mb-2">1-on-1 Sessions</p>
-        <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-          Book a{" "}
-          <span className="text-gold-gradient">Video Call</span>
-        </h1>
-        <p className="text-[#a0a0a0] max-w-2xl mx-auto">
-          Learn exactly how to sell beats, mixing services, and drum kits as a freelance music producer — straight from someone doing it. No theory, no fluff.
-        </p>
-      </div>
+    <div className="bg-[#080808] min-h-screen">
 
-      {/* Session cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-        {sessions.map((s) => (
-          <div
-            key={s.id}
-            className={`relative flex flex-col rounded-xl border p-6 ${
-              s.highlight ? "border-[#c9a84c] glow-gold" : "border-[#2a2a2a]"
-            } bg-[#111111]`}
+      {/* ── HEADER ── */}
+      <div className="border-b border-white/5 py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#c9a84c] mb-3">1-on-1 Coaching</p>
+          <h1
+            className="text-6xl sm:text-8xl font-black uppercase tracking-tight leading-none mb-5"
+            style={{ fontFamily: "var(--font-barlow)" }}
           >
-            {s.highlight && (
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-[#c9a84c] text-[#0a0a0a] text-xs font-bold">
-                Most Popular
-              </div>
-            )}
-
-            <div className="mb-4">
-              <h2 className="text-xl font-bold mb-0.5">{s.name}</h2>
-              <p className="text-xs text-[#c9a84c] font-medium">{s.duration}</p>
-            </div>
-
-            <div className="mb-5">
-              <span className="text-3xl font-bold text-gold-gradient">${s.price.toFixed(2)}</span>
-            </div>
-
-            <p className="text-xs text-[#7a7a7a] mb-4">Best for: {s.best}</p>
-
-            <ul className="space-y-2 flex-1 mb-6">
-              {s.perks.map((p) => (
-                <li key={p} className="flex items-start gap-2 text-sm text-[#a0a0a0]">
-                  <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#c9a84c" strokeWidth={2} className="shrink-0 mt-0.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                  </svg>
-                  {p}
-                </li>
-              ))}
-            </ul>
-
-            <PayPalButton
-              amount={s.price.toFixed(2)}
-              description={`LoopGem Coaching: ${s.name} (${s.duration})`}
-              successMessage="Booking confirmed! We'll send a scheduling link to your email within 24 hours."
-            />
-          </div>
-        ))}
+            Book a Call
+          </h1>
+          <p className="text-[#666] text-base max-w-xl">
+            Direct, personalised coaching from Sfooxbeats — no theory, no fluff. Learn exactly what to do to start getting paid as a music producer.
+          </p>
+        </div>
       </div>
 
-      {/* How it works */}
-      <section className="border border-[#2a2a2a] rounded-2xl bg-[#111111] p-10 mb-16">
-        <h2 className="text-2xl font-bold mb-8 text-center">
-          How It <span className="text-gold-gradient">Works</span>
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {[
-            { step: "1", title: "Pick a Session", desc: "Choose the plan that fits your goals and budget." },
-            { step: "2", title: "Complete Payment", desc: "Secure checkout via PayPal. No subscription required." },
-            { step: "3", title: "Get Your Link", desc: "Receive a scheduling email within 24 hours." },
-            { step: "4", title: "Join the Call", desc: "Hop on Zoom or Google Meet and let's get to work." },
-          ].map((s) => (
-            <div key={s.step} className="text-center">
-              <div className="w-10 h-10 rounded-full border border-[#c9a84c] text-[#c9a84c] font-bold text-sm flex items-center justify-center mx-auto mb-3">
-                {s.step}
+      {/* ── PRICING CARDS ── */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-20">
+          {sessions.map((s) => (
+            <div
+              key={s.id}
+              className={`relative flex flex-col p-8 border transition-colors duration-200 ${
+                s.highlight
+                  ? "border-[#c9a84c]/60 bg-[#c9a84c]/5"
+                  : "border-white/5 bg-[#0f0f0f]"
+              }`}
+            >
+              {s.highlight && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-[#c9a84c] text-black text-[10px] font-black uppercase tracking-widest whitespace-nowrap">
+                  Most Popular
+                </div>
+              )}
+
+              <p className="text-[10px] uppercase tracking-[0.2em] text-[#c9a84c] mb-2">{s.duration}</p>
+              <h2
+                className="text-2xl font-black uppercase tracking-tight mb-1"
+                style={{ fontFamily: "var(--font-barlow)" }}
+              >
+                {s.name}
+              </h2>
+              <p className="text-xs text-[#444] mb-5">Best for: {s.best}</p>
+
+              <div className="mb-7">
+                <span
+                  className="text-5xl font-black"
+                  style={{ fontFamily: "var(--font-barlow)" }}
+                >
+                  ${s.price.toFixed(2)}
+                </span>
               </div>
-              <h3 className="font-semibold text-sm mb-1">{s.title}</h3>
-              <p className="text-xs text-[#7a7a7a]">{s.desc}</p>
+
+              <ul className="space-y-2.5 flex-1 mb-8">
+                {s.perks.map((p) => (
+                  <li key={p} className="flex items-start gap-2.5 text-sm text-[#777]">
+                    <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="#c9a84c" strokeWidth={2.5} className="shrink-0 mt-0.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                    </svg>
+                    {p}
+                  </li>
+                ))}
+              </ul>
+
+              <PayPalButton
+                amount={s.price.toFixed(2)}
+                description={`LoopGem Coaching: ${s.name} (${s.duration})`}
+                successMessage="Booking confirmed! You'll receive a scheduling link within 24 hours."
+              />
             </div>
           ))}
         </div>
-      </section>
 
-      {/* FAQ */}
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-8">
-          Common <span className="text-gold-gradient">Questions</span>
-        </h2>
-        <div className="space-y-4">
-          {[
-            {
-              q: "What platform do we use for calls?",
-              a: "Zoom or Google Meet — your choice. The link is sent to your email after booking.",
-            },
-            {
-              q: "What will I actually learn?",
-              a: "How to sell beats, mixing services, and drum kits online — pricing, platforms, getting clients, social media strategy, closing deals, and protecting your work with contracts.",
-            },
-            {
-              q: "Do I need to already be making money to book?",
-              a: "No. The Starter Session is built for producers who haven't sold yet and want to know exactly where to start.",
-            },
-            {
-              q: "What should I prepare before the call?",
-              a: "Send your current setup — links to your store, socials, or any questions in advance via email so we can get straight to work.",
-            },
-            {
-              q: "Can I get a refund if I can't make it?",
-              a: "Yes. Cancel at least 24 hours before and receive a full refund or rescheduling.",
-            },
-            {
-              q: "Are sessions recorded?",
-              a: "Yes — recordings are available on request for the Sales Strategy Call and Freelancer Blueprint.",
-            },
-          ].map((faq) => (
-            <details
-              key={faq.q}
-              className="group border border-[#2a2a2a] rounded-xl bg-[#111111] overflow-hidden"
+        {/* ── HOW IT WORKS ── */}
+        <div className="border border-white/5 bg-[#0f0f0f] p-10 mb-16">
+          <div className="mb-10">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#c9a84c] mb-2">Simple Process</p>
+            <h2
+              className="text-4xl font-black uppercase tracking-tight"
+              style={{ fontFamily: "var(--font-barlow)" }}
             >
-              <summary className="flex items-center justify-between px-6 py-4 cursor-pointer list-none text-sm font-semibold">
-                {faq.q}
-                <svg
-                  width="16"
-                  height="16"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  className="group-open:rotate-180 transition-transform duration-200 shrink-0"
+              How It Works
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {steps.map((s) => (
+              <div key={s.n}>
+                <div
+                  className="text-6xl font-black leading-none mb-3"
+                  style={{ fontFamily: "var(--font-barlow)", color: "#c9a84c", opacity: 0.15 }}
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                </svg>
-              </summary>
-              <div className="px-6 pb-5 text-sm text-[#a0a0a0] border-t border-[#2a2a2a] pt-4">
-                {faq.a}
+                  {s.n}
+                </div>
+                <h3
+                  className="text-lg font-black uppercase tracking-tight mb-2"
+                  style={{ fontFamily: "var(--font-barlow)" }}
+                >
+                  {s.title}
+                </h3>
+                <p className="text-xs text-[#555] leading-relaxed">{s.desc}</p>
               </div>
-            </details>
-          ))}
+            ))}
+          </div>
         </div>
-      </section>
 
-      {/* Contact CTA */}
-      <div className="border border-[#c9a84c]/20 rounded-xl bg-[#c9a84c]/5 p-8 text-center">
-        <h2 className="text-xl font-bold mb-2">Not sure which session is right for you?</h2>
-        <p className="text-[#a0a0a0] text-sm mb-5">Send a message and we'll help you pick.</p>
-        <Link
-          href="/contact"
-          className="inline-block px-6 py-3 rounded-md border border-[#c9a84c] text-[#c9a84c] font-semibold text-sm hover:bg-[#c9a84c] hover:text-[#0a0a0a] transition-colors duration-150"
-        >
-          Contact Us
-        </Link>
+        {/* ── FAQ ── */}
+        <div className="mb-16">
+          <div className="mb-8">
+            <h2
+              className="text-4xl font-black uppercase tracking-tight"
+              style={{ fontFamily: "var(--font-barlow)" }}
+            >
+              FAQ
+            </h2>
+          </div>
+          <div className="divide-y divide-white/5">
+            {faqs.map((faq) => (
+              <details key={faq.q} className="group py-5">
+                <summary className="flex items-center justify-between cursor-pointer list-none text-sm font-semibold text-white hover:text-[#c9a84c] transition-colors">
+                  {faq.q}
+                  <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="shrink-0 group-open:rotate-180 transition-transform duration-200 text-[#444]">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <p className="mt-3 text-sm text-[#666] leading-relaxed">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+
+        {/* ── COURSES UPSELL ── */}
+        <div className="border border-[#c9a84c]/20 bg-[#c9a84c]/5 p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#c9a84c] mb-2">Prefer self-paced learning?</p>
+            <h2
+              className="text-3xl font-black uppercase tracking-tight mb-1"
+              style={{ fontFamily: "var(--font-barlow)" }}
+            >
+              Browse PDF Courses
+            </h2>
+            <p className="text-[#666] text-sm">From $27 — yours forever, read at your own pace.</p>
+          </div>
+          <Link
+            href="/courses"
+            className="shrink-0 px-8 py-3.5 border border-[#c9a84c] text-[#c9a84c] font-black text-sm uppercase tracking-widest hover:bg-[#c9a84c] hover:text-black transition-colors"
+            style={{ fontFamily: "var(--font-barlow)" }}
+          >
+            View Courses
+          </Link>
+        </div>
+
       </div>
     </div>
   );

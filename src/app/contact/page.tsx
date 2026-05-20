@@ -29,12 +29,9 @@ function ContactForm() {
   };
 
   const reasons = [
-    "Custom beat request",
-    "Exclusive licensing inquiry",
-    "Mixing / mastering project",
-    "Collaboration",
     "Course question",
-    "1-on-1 coaching",
+    "1-on-1 coaching inquiry",
+    "General question",
     "Other",
   ];
 
@@ -79,10 +76,9 @@ function ContactForm() {
             <h2 className="text-sm font-semibold mb-4 text-[#ededed]">Or jump straight to it</h2>
             <div className="space-y-3">
               {[
-                { label: "Beat Store", href: "/beat-store", icon: "🎵" },
-                { label: "Services & Pricing", href: "/services", icon: "🎚️" },
+                { label: "Browse Courses", href: "/courses", icon: "🎓" },
                 { label: "Book a 1-on-1 Call", href: "/booking", icon: "📅" },
-                { label: "Producer Courses", href: "/courses", icon: "🎓" },
+                { label: "About Sfooxbeats", href: "/about", icon: "👤" },
               ].map((l) => (
                 <Link
                   key={l.href}

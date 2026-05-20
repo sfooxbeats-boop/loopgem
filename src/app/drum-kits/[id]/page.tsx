@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
-export default function BeatStore() {
+export default function DrumKitDetail() {
   redirect("/courses");
 }
