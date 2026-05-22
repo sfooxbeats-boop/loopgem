@@ -320,7 +320,7 @@ export default function Home() {
                 return (
                   <motion.div
                     key={i}
-                    className="absolute rounded-xl overflow-hidden border border-white/10 cursor-pointer"
+                    className="absolute rounded-2xl overflow-hidden border border-white/8 cursor-pointer"
                     style={{
                       top: pos.top,
                       left: pos.left,
@@ -329,30 +329,16 @@ export default function Home() {
                       rotate: pos.rotate,
                       boxShadow: "0 24px 64px rgba(0,0,0,0.85), 0 4px 16px rgba(0,0,0,0.6)",
                     }}
-                    whileHover={{ rotate: 0, scale: 1.04, zIndex: 100, boxShadow: "0 32px 80px rgba(0,0,0,0.9), 0 0 40px rgba(201,168,76,0.1)" }}
+                    whileHover={{ rotate: 0, scale: 1.05, zIndex: 100, boxShadow: "0 32px 80px rgba(0,0,0,0.9), 0 0 40px rgba(201,168,76,0.12)" }}
                     transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
                   >
-                    {/* Browser / phone chrome */}
-                    <div className="h-7 bg-[#161616] border-b border-white/5 flex items-center px-3 gap-1.5 shrink-0">
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
-                      <div className="flex-1 mx-2 h-3.5 rounded-sm bg-[#222] border border-white/5" />
-                    </div>
-                    {/* Screenshot content */}
-                    <div
-                      className="bg-[#0d0d0d] w-full"
-                      style={{ aspectRatio: pos.aspect }}
-                    >
+                    <div className="w-full" style={{ aspectRatio: pos.aspect }}>
                       {shot?.src ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img src={shot.src} alt={shot?.label ?? ""} className="w-full h-full object-cover" />
                       ) : (
-                        <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-[#0a0a0a]">
-                          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#1e1e1e" strokeWidth={1.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 20.25h18a.75.75 0 00.75-.75v-15a.75.75 0 00-.75-.75H3a.75.75 0 00-.75.75v15a.75.75 0 00.75.75z" />
-                          </svg>
-                          <span className="text-[9px] text-[#1a1a1a] uppercase tracking-widest">{shot?.label}</span>
+                        <div className="w-full h-full flex items-center justify-center bg-[#0a0a0a]">
+                          <span className="text-[9px] text-[#1a1a1a] uppercase tracking-widest px-2 text-center">{shot?.label}</span>
                         </div>
                       )}
                     </div>
@@ -362,26 +348,49 @@ export default function Home() {
             </div>
           </FadeIn>
 
-          {/* ── Mobile: 2-column grid ── */}
-          <div className="lg:hidden grid grid-cols-2 gap-3">
-            {proofScreenshots.map((shot, i) => (
-              <div key={i} className="rounded-xl overflow-hidden border border-white/[0.06]"
-                style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.6)" }}>
-                <div className="h-6 bg-[#161616] border-b border-white/5 flex items-center px-2.5 gap-1">
-                  <div className="w-2 h-2 rounded-full bg-[#ff5f57]" />
-                  <div className="w-2 h-2 rounded-full bg-[#febc2e]" />
-                  <div className="w-2 h-2 rounded-full bg-[#28c840]" />
-                </div>
-                <div className="aspect-video bg-[#0a0a0a] flex items-center justify-center">
-                  {shot.src ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={shot.src} alt={shot.label} className="w-full h-full object-cover" />
-                  ) : (
-                    <span className="text-[9px] text-[#1a1a1a] uppercase tracking-widest text-center px-2">{shot.label}</span>
-                  )}
-                </div>
-              </div>
-            ))}
+          {/* ── Mobile: overlapping collage ── */}
+          <div className="lg:hidden relative mx-auto overflow-visible" style={{ height: "640px", width: "360px", maxWidth: "100%" }}>
+            {[
+              { top: 0,   left: 0,   w: 158, r: -3,   z: 5  },
+              { top: 22,  left: 108, w: 168, r: 2,    z: 15 },
+              { top: 4,   left: 218, w: 152, r: -2,   z: 10 },
+              { top: 210, left: 8,   w: 162, r: -2,   z: 20 },
+              { top: 225, left: 118, w: 172, r: 1.5,  z: 30 },
+              { top: 210, left: 232, w: 150, r: 3,    z: 22 },
+              { top: 420, left: 0,   w: 160, r: -1.5, z: 40 },
+              { top: 432, w: 170,    left: 112, r: 2, z: 50 },
+              { top: 420, left: 228, w: 155, r: -2.5, z: 42 },
+              { top: 426, left: 58,  w: 158, r: 1,    z: 35 },
+            ].map((pos, i) => {
+              const shot = proofScreenshots[i];
+              return (
+                <motion.div
+                  key={i}
+                  className="absolute rounded-2xl overflow-hidden border border-white/8"
+                  style={{
+                    top: pos.top,
+                    left: pos.left,
+                    width: pos.w,
+                    zIndex: pos.z,
+                    rotate: pos.r,
+                    boxShadow: "0 12px 40px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.5)",
+                  }}
+                  whileHover={{ rotate: 0, scale: 1.06, zIndex: 100 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="w-full" style={{ aspectRatio: "9/16" }}>
+                    {shot?.src ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={shot.src} alt={shot?.label ?? ""} className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-[#0a0a0a]">
+                        <span className="text-[9px] text-[#1a1a1a] uppercase tracking-widest">{shot?.label}</span>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
 
           <FadeIn delay={0.3} className="mt-12 text-center">
