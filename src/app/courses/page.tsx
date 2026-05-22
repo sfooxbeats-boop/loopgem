@@ -10,8 +10,9 @@ export const metadata: Metadata = {
 const courses = [
   {
     id: "c1",
+    n: "01",
     title: "Fiverr Beat Seller Blueprint",
-    tagline: "The complete guide to selling beats on Fiverr from zero to consistent orders",
+    tagline: "Zero to consistent orders on Fiverr — even with no reviews.",
     price: 27,
     originalPrice: 47,
     pages: 45,
@@ -42,8 +43,9 @@ const courses = [
   },
   {
     id: "c2",
+    n: "02",
     title: "Sell Music Services on Fiverr",
-    tagline: "How to sell mixing, mastering, and production services as a freelancer",
+    tagline: "Build a freelance business around mixing, mastering & production.",
     price: 27,
     originalPrice: 47,
     pages: 40,
@@ -72,8 +74,9 @@ const courses = [
   },
   {
     id: "c3",
-    title: "The Full Freelance Music Producer Playbook",
-    tagline: "Beats + services + everything — the complete freelancer guide across all platforms",
+    n: "03",
+    title: "Full Freelance Music Producer Playbook",
+    tagline: "Every income stream. Every platform. One complete PDF.",
     price: 47,
     originalPrice: 97,
     pages: 80,
@@ -93,7 +96,7 @@ const courses = [
     ],
     chapters_list: [
       "Chapter 1: Building Your Producer Business from Scratch",
-      "Chapter 2: The Three Income Streams (Beats, Services, Products)",
+      "Chapter 2: The Three Income Streams",
       "Chapter 3: Fiverr Setup for All Three Streams",
       "Chapter 4: Beatstars & Other Beat Platforms",
       "Chapter 5: Personal Brand & Online Presence",
@@ -112,74 +115,65 @@ export default function Courses() {
   return (
     <div className="bg-[#080808] min-h-screen">
 
-      {/* ── HEADER ── */}
-      <div className="border-b border-white/5 py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#c9a84c] mb-3">PDF Guides</p>
-          <h1
-            className="text-6xl sm:text-8xl font-black uppercase tracking-tight leading-none mb-5"
-            style={{ fontFamily: "var(--font-barlow)" }}
-          >
+      {/* Header */}
+      <div className="border-b border-white/[0.04] py-20 px-6 sm:px-10 lg:px-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center gap-3 mb-8">
+            <span className="text-sm font-black text-[#c9a84c]" style={{ fontFamily: "var(--font-barlow)" }}>PDF</span>
+            <div className="w-8 h-px bg-[#c9a84c]/30" />
+            <span className="text-[10px] uppercase tracking-[0.25em] text-[#444]">Guides</span>
+          </div>
+          <h1 className="font-black uppercase leading-none tracking-tight mb-5"
+            style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(60px, 9vw, 120px)" }}>
             Courses
           </h1>
-          <p className="text-[#666] text-base max-w-xl">
-            Step-by-step PDF guides written by Sfooxbeats from real experience — no fluff, just the exact strategies that work.
+          <p className="text-[#555] text-sm max-w-md">
+            Step-by-step guides written from real experience. No theory — just the exact strategies that work.
           </p>
         </div>
       </div>
 
-      {/* ── TRUST ROW ── */}
-      <div className="border-b border-white/5 bg-[#0a0a0a]">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-wrap gap-x-10 gap-y-3">
-            {["PDF — read on any device", "Instant delivery after payment", "Yours forever — no expiry", "30-day money-back guarantee"].map((f) => (
-              <div key={f} className="flex items-center gap-2 text-xs text-[#555]">
-                <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#c9a84c" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                </svg>
-                {f}
-              </div>
-            ))}
-          </div>
+      {/* Trust bar */}
+      <div className="border-b border-white/[0.04] bg-[#050505]">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-5 flex flex-wrap gap-x-10 gap-y-2">
+          {["PDF — read on any device", "Instant delivery after payment", "Yours forever", "30-day money-back guarantee"].map((f) => (
+            <div key={f} className="flex items-center gap-2 text-[11px] text-[#333]">
+              <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="#c9a84c" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              {f}
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* ── COURSE LIST ── */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-5">
+      {/* Course list */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16 space-y-px">
         {courses.map((course) => (
-          <div
-            key={course.id}
-            className={`border overflow-hidden ${course.highlight ? "border-[#c9a84c]/40" : "border-white/5"}`}
-          >
+          <div key={course.id} className={`border-l-2 ${course.highlight ? "border-[#c9a84c]" : "border-white/[0.04]"}`}>
             <div className="grid grid-cols-1 lg:grid-cols-3">
-
               {/* Left: info */}
-              <div className="lg:col-span-2 bg-[#0f0f0f] p-8 sm:p-10">
-                <div className="flex flex-wrap items-center gap-3 mb-4">
+              <div className="lg:col-span-2 bg-[#0a0a0a] hover:bg-[#0d0d0d] transition-colors p-8 sm:p-12">
+                <div className="flex flex-wrap items-center gap-3 mb-5">
+                  <span className="text-xs font-black text-[#2a2a2a]" style={{ fontFamily: "var(--font-barlow)" }}>{course.n}</span>
                   {course.badge && (
-                    <span className="px-3 py-0.5 bg-[#c9a84c] text-black text-[10px] font-black uppercase tracking-widest">
-                      {course.badge}
-                    </span>
+                    <span className="px-2.5 py-0.5 bg-[#c9a84c] text-black text-[9px] font-black uppercase tracking-widest">{course.badge}</span>
                   )}
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-[#444]">
-                    {course.pages} pages · {course.chapters} chapters · PDF
-                  </span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-[#2a2a2a]">{course.pages} pages · {course.chapters} chapters</span>
                 </div>
 
-                <h2
-                  className="text-3xl sm:text-4xl font-black uppercase tracking-tight mb-3"
-                  style={{ fontFamily: "var(--font-barlow)" }}
-                >
+                <h2 className="font-black uppercase tracking-tight leading-none mb-3"
+                  style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(28px, 3.5vw, 48px)" }}>
                   {course.title}
                 </h2>
-                <p className="text-sm text-[#666] leading-relaxed mb-8">{course.description}</p>
+                <p className="text-[11px] uppercase tracking-[0.15em] text-[#c9a84c] mb-6">{course.tagline}</p>
+                <p className="text-sm text-[#555] leading-relaxed mb-8 max-w-lg">{course.description}</p>
 
-                {/* What you learn */}
-                <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#c9a84c] mb-4">What&apos;s Inside</h3>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-7">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-[#c9a84c] mb-4">What&apos;s Inside</p>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-8">
                   {course.whatYouLearn.map((item) => (
-                    <li key={item} className="flex items-start gap-2.5 text-sm text-[#777]">
-                      <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="#c9a84c" strokeWidth={2.5} className="shrink-0 mt-0.5">
+                    <li key={item} className="flex items-start gap-2.5 text-sm text-[#555]">
+                      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#c9a84c" strokeWidth={2.5} className="shrink-0 mt-0.5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                       </svg>
                       {item}
@@ -187,41 +181,37 @@ export default function Courses() {
                   ))}
                 </ul>
 
-                {/* Chapter list toggle */}
                 <details className="group">
-                  <summary className="cursor-pointer text-xs font-bold uppercase tracking-[0.15em] text-[#555] hover:text-[#c9a84c] transition-colors list-none flex items-center gap-2">
+                  <summary className="cursor-pointer text-[11px] font-bold uppercase tracking-[0.15em] text-[#333] hover:text-[#c9a84c] transition-colors list-none flex items-center gap-2">
                     <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} className="group-open:rotate-90 transition-transform duration-150">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                     </svg>
                     View {course.chapters} chapters
                   </summary>
-                  <ul className="mt-4 space-y-1.5 pl-4 border-l border-white/5">
+                  <ul className="mt-4 space-y-1.5 pl-4 border-l border-white/[0.04]">
                     {course.chapters_list.map((c) => (
-                      <li key={c} className="text-xs text-[#444]">{c}</li>
+                      <li key={c} className="text-xs text-[#333]">{c}</li>
                     ))}
                   </ul>
                 </details>
               </div>
 
               {/* Right: checkout */}
-              <div className="bg-[#0a0a0a] border-t lg:border-t-0 lg:border-l border-white/5 p-8 flex flex-col justify-center">
+              <div className="bg-[#050505] border-t lg:border-t-0 lg:border-l border-white/[0.04] p-8 sm:p-12 flex flex-col justify-center">
                 <div className="mb-6">
-                  <div className="flex items-baseline gap-2 mb-1">
-                    <span
-                      className="text-5xl font-black text-gold-gradient"
-                      style={{ fontFamily: "var(--font-barlow)" }}
-                    >
+                  <div className="flex items-baseline gap-3 mb-1">
+                    <span className="font-black text-gold-gradient" style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(48px, 5vw, 64px)" }}>
                       ${course.price}
                     </span>
-                    <span className="text-[#444] line-through text-sm">${course.originalPrice}</span>
+                    <span className="text-[#2a2a2a] line-through text-sm">${course.originalPrice}</span>
                   </div>
-                  <p className="text-xs text-[#c9a84c] font-bold">Save ${course.originalPrice - course.price}</p>
+                  <p className="text-[11px] text-[#c9a84c] font-bold uppercase tracking-widest">Save ${course.originalPrice - course.price}</p>
                 </div>
 
-                <ul className="space-y-2.5 mb-7">
+                <ul className="space-y-2.5 mb-8">
                   {["PDF delivered to your email", "Read on any device", "Yours forever", "30-day money-back guarantee"].map((p) => (
-                    <li key={p} className="flex items-center gap-2.5 text-xs text-[#555]">
-                      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#c9a84c" strokeWidth={2.5}>
+                    <li key={p} className="flex items-center gap-2.5 text-xs text-[#444]">
+                      <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="#c9a84c" strokeWidth={2.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                       </svg>
                       {p}
@@ -229,13 +219,9 @@ export default function Courses() {
                   ))}
                 </ul>
 
-                <CoursePayPalButton
-                  amount={course.price.toFixed(2)}
-                  courseId={course.id}
-                  courseName={course.title}
-                />
+                <CoursePayPalButton amount={course.price.toFixed(2)} courseId={course.id} courseName={course.title} />
 
-                <p className="text-center text-xs text-[#444] mt-4">
+                <p className="text-center text-xs text-[#2a2a2a] mt-4">
                   Questions?{" "}
                   <Link href="/contact" className="text-[#c9a84c] hover:underline">Contact us</Link>
                 </p>
@@ -245,24 +231,19 @@ export default function Courses() {
         ))}
       </div>
 
-      {/* ── COACHING UPSELL ── */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-        <div className="border border-[#c9a84c]/20 bg-[#c9a84c]/5 p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+      {/* Coaching upsell */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pb-24">
+        <div className="border border-[#c9a84c]/15 bg-[#c9a84c]/4 p-10 sm:p-14 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#c9a84c] mb-2">Prefer personalised help?</p>
-            <h2
-              className="text-3xl font-black uppercase tracking-tight mb-1"
-              style={{ fontFamily: "var(--font-barlow)" }}
-            >
+            <p className="text-[10px] uppercase tracking-[0.25em] text-[#c9a84c] mb-2">Prefer personalised help?</p>
+            <h2 className="font-black uppercase tracking-tight leading-none"
+              style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(32px, 4vw, 52px)" }}>
               Book a 1-on-1 Coaching Call
             </h2>
-            <p className="text-[#666] text-sm">Get direct guidance tailored to your exact situation.</p>
           </div>
-          <Link
-            href="/booking"
-            className="shrink-0 px-8 py-3.5 bg-[#c9a84c] text-black font-black text-sm uppercase tracking-widest hover:bg-[#e5c97e] transition-colors"
-            style={{ fontFamily: "var(--font-barlow)" }}
-          >
+          <Link href="/booking"
+            className="shrink-0 px-8 py-3.5 bg-[#c9a84c] text-black font-black text-xs uppercase tracking-[0.2em] hover:bg-[#f0d070] transition-colors whitespace-nowrap"
+            style={{ fontFamily: "var(--font-barlow)" }}>
             Book a Session
           </Link>
         </div>

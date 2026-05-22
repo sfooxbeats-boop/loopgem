@@ -38,7 +38,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${barlowCondensed.variable} h-full`}>
-      <body className="min-h-full flex flex-col bg-[#0a0a0a] text-[#ededed] antialiased">
+      <body className="min-h-full flex flex-col bg-[#080808] text-[#f0ece4] antialiased">
+        <div className="grain" aria-hidden="true" />
         <SmoothScroll />
         <Navbar />
         <main className="flex-1 pt-16">{children}</main>
