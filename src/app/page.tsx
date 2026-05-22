@@ -5,13 +5,38 @@ import { motion } from "motion/react";
 import { FadeIn, StaggerChildren, StaggerItem } from "@/components/Animate";
 import Marquee from "@/components/Marquee";
 
+// ─── Replace src with real paths once screenshots are ready ───────────────────
 const proofScreenshots = [
-  { label: "Fiverr Sales Dashboard", src: null, tall: true },
-  { label: "Order Notifications",    src: null, tall: false },
-  { label: "Monthly Earnings",       src: null, tall: false },
-  { label: "5-Star Client Reviews",  src: null, tall: true },
-  { label: "Beatstars Revenue",      src: null, tall: false },
-  { label: "Payment History",        src: null, tall: false },
+  { label: "Fiverr Sales Dashboard", src: null },
+  { label: "Order Notifications",    src: null },
+  { label: "Monthly Earnings",       src: null },
+  { label: "5-Star Client Reviews",  src: null },
+  { label: "Beatstars Revenue",      src: null },
+  { label: "Payment History",        src: null },
+];
+// ─────────────────────────────────────────────────────────────────────────────
+
+const problems = [
+  {
+    icon: "🎵",
+    title: "Your Fiverr profile is set up but gets zero orders",
+    desc: "You've filled everything in but clients scroll straight past you. You don't know why.",
+  },
+  {
+    icon: "💸",
+    title: "You're giving your music away too cheap — or for free",
+    desc: "Artists lowball you and you say yes because you don't have a better option yet.",
+  },
+  {
+    icon: "🔍",
+    title: "No clients for mixing or production services",
+    desc: "You know you're good but you can't figure out how to get people to pay you for it.",
+  },
+  {
+    icon: "📱",
+    title: "You don't know what to post or how to market yourself",
+    desc: "You post here and there but nothing converts. No strategy, no consistency, no results.",
+  },
 ];
 
 const testimonials = [
@@ -26,110 +51,94 @@ const courses = [
   { id: "c3", title: "Full Freelance Music Producer Playbook", price: 47, originalPrice: 97, pages: 80, badge: "Best Value" },
 ];
 
-function SectionLabel({ n, label }: { n: string; label: string }) {
-  return (
-    <div className="flex items-center gap-3 mb-8">
-      <span className="text-sm font-black text-[#c9a84c]" style={{ fontFamily: "var(--font-barlow)" }}>{n}</span>
-      <div className="w-8 h-px bg-[#c9a84c]/30" />
-      <span className="text-[10px] uppercase tracking-[0.25em] text-[#444]">{label}</span>
-    </div>
-  );
-}
+const platforms = ["Fiverr", "Beatstars", "PayPal", "Instagram", "YouTube", "Gumroad"];
 
 export default function Home() {
   return (
-    <div className="bg-[#080808] overflow-x-hidden">
+    <div className="bg-black overflow-x-hidden">
 
-      {/* ── 01 HERO ── */}
-      <section className="relative min-h-screen flex flex-col justify-center pt-24 pb-16 overflow-hidden">
-        {/* Atmospheric bg */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] pointer-events-none"
-          style={{ background: "radial-gradient(circle at 80% 20%, rgba(201,168,76,0.06) 0%, transparent 60%)" }} />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] pointer-events-none"
-          style={{ background: "radial-gradient(circle at 20% 80%, rgba(201,168,76,0.03) 0%, transparent 60%)" }} />
-        {/* Grid */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.018]"
-          style={{ backgroundImage: "linear-gradient(#c9a84c 1px, transparent 1px), linear-gradient(90deg, #c9a84c 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
+      {/* ── HERO ── */}
+      <section className="relative min-h-screen flex flex-col justify-center pt-24 pb-0 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 60%)" }} />
 
-        <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 w-full">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <SectionLabel n="01" label="Watch This First" />
+        <div className="relative max-w-4xl mx-auto px-6 sm:px-10 w-full text-center">
+          {/* Social proof pill */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/8 bg-white/4 text-[11px] text-[#888] uppercase tracking-widest mb-8"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#c9a84c] animate-pulse" />
+            200+ Producers Already Inside
           </motion.div>
 
           {/* Headline */}
           <motion.h1
-            className="font-black uppercase leading-[0.88] tracking-tight mb-8"
-            style={{
-              fontFamily: "var(--font-barlow)",
-              fontSize: "clamp(64px, 10.5vw, 148px)",
-            }}
-            initial={{ opacity: 0, y: 50 }}
+            className="font-black uppercase leading-[0.9] tracking-tight mb-6 text-white"
+            style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(56px, 9vw, 120px)" }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
-            Stop Giving<br />
-            Your Music<br />
-            <em className="not-italic text-gold-gradient">Away for Free</em>
+            Stop Giving Your<br />
+            Music Away<br />
+            <span className="text-gold-gradient">For Free</span>
           </motion.h1>
 
-          {/* Sub row */}
-          <motion.div
-            className="flex flex-col lg:flex-row items-start lg:items-end gap-8 lg:gap-16"
-            initial={{ opacity: 0, y: 24 }}
+          <motion.p
+            className="text-[#666] text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.22 }}
+            transition={{ duration: 0.5, delay: 0.22 }}
           >
-            <p className="text-[#555] text-base leading-relaxed max-w-sm">
-              Watch the video below to see exactly how I built a consistent income selling beats and music services — and how you can do the same.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-                <Link href="/courses"
-                  className="inline-block px-8 py-3.5 font-black text-xs uppercase tracking-[0.2em] bg-[#c9a84c] text-black hover:bg-[#f0d070] transition-colors"
-                  style={{ fontFamily: "var(--font-barlow)" }}>
-                  Get the Course
-                </Link>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-                <Link href="/booking"
-                  className="inline-block px-8 py-3.5 font-black text-xs uppercase tracking-[0.2em] border border-white/10 text-[#888] hover:border-[#c9a84c] hover:text-[#c9a84c] transition-colors"
-                  style={{ fontFamily: "var(--font-barlow)" }}>
-                  Book a Call
-                </Link>
-              </motion.div>
-            </div>
+            Learn the exact system I used to build a consistent income selling beats and music services — through step-by-step courses and 1-on-1 coaching.
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.32 }}
+          >
+            <Link href="/courses" className="btn-gold">
+              Get the Course — From $27 →
+            </Link>
+            <Link href="/booking" className="btn-outline">
+              Book a 1-on-1 Call
+            </Link>
           </motion.div>
 
-          {/* Floating stat accents */}
+          {/* Platform logos row */}
           <motion.div
-            className="hidden lg:flex items-center gap-10 mt-16 pt-10 border-t border-white/[0.04]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
+            className="flex flex-wrap items-center justify-center gap-4"
           >
-            {[["200+", "Producers coached"], ["4.9★", "Average rating"], ["$27", "Starting price"], ["30 days", "Avg. first client"]].map(([v, l]) => (
-              <div key={l}>
-                <p className="text-2xl font-black text-[#c9a84c]" style={{ fontFamily: "var(--font-barlow)" }}>{v}</p>
-                <p className="text-[10px] uppercase tracking-[0.18em] text-[#333] mt-0.5">{l}</p>
-              </div>
+            <span className="text-[10px] uppercase tracking-[0.2em] text-[#333] mr-2">Sell on</span>
+            {platforms.map((p) => (
+              <span key={p} className="text-[12px] font-bold text-[#333] uppercase tracking-wider hover:text-[#c9a84c] transition-colors cursor-default">
+                {p}
+              </span>
             ))}
           </motion.div>
         </div>
+
+        <div className="h-20 bg-gradient-to-b from-transparent to-black pointer-events-none mt-16" />
       </section>
 
       {/* ── VIDEO ── */}
-      <section className="relative pb-16">
+      <section className="pb-16">
         <motion.div
-          className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16"
-          initial={{ opacity: 0, y: 50 }}
+          className="max-w-4xl mx-auto px-6 sm:px-10"
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Video glow */}
-          <div className="absolute inset-x-0 top-0 h-full pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 65%)" }} />
-
-          <div className="relative border border-[#c9a84c]/15 shadow-[0_32px_80px_rgba(0,0,0,0.6),0_0_60px_rgba(201,168,76,0.07)]">
+          <div className="relative border border-[#c9a84c]/12 rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.8),0_0_80px_rgba(201,168,76,0.06)]">
             <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
               <iframe
                 className="absolute inset-0 w-full h-full"
@@ -141,145 +150,170 @@ export default function Home() {
             </div>
           </div>
 
-          {/* CTA below video */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
-            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-              <Link href="/courses"
-                className="block px-10 py-4 font-black text-sm uppercase tracking-widest bg-[#c9a84c] text-black hover:bg-[#f0d070] transition-colors"
-                style={{ fontFamily: "var(--font-barlow)" }}>
-                Get the Course — From $27
-              </Link>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-              <Link href="/booking"
-                className="block px-10 py-4 font-black text-sm uppercase tracking-widest border border-white/8 text-[#666] hover:border-[#c9a84c] hover:text-[#c9a84c] transition-colors"
-                style={{ fontFamily: "var(--font-barlow)" }}>
-                Book a 1-on-1 Call
-              </Link>
-            </motion.div>
+            <Link href="/courses" className="btn-gold">
+              Get the Course — From $27 →
+            </Link>
+            <Link href="/booking" className="btn-outline">
+              Book a 1-on-1 Call
+            </Link>
           </div>
         </motion.div>
       </section>
 
       <Marquee />
 
-      {/* ── 02 PROOF ── */}
+      {/* ── PROBLEM SECTION ("Tu te reconnais dans ces blocages?") ── */}
       <section className="py-28">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          <FadeIn className="mb-14">
-            <SectionLabel n="02" label="Real Results" />
-            <h2 className="font-black uppercase leading-none tracking-tight mb-4"
-              style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(48px, 7vw, 96px)" }}>
-              My Actual Sales<br />&amp; Results
+        <div className="max-w-4xl mx-auto px-6 sm:px-10">
+          <FadeIn className="text-center mb-16">
+            <p className="text-[11px] uppercase tracking-[0.25em] text-[#c9a84c] font-bold mb-4">Le Problème · The Problem</p>
+            <h2 className="font-black uppercase leading-[0.9] tracking-tight text-white"
+              style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(40px, 6vw, 80px)" }}>
+              Do You Recognize<br />
+              <span className="text-gold-gradient">Yourself in These?</span>
             </h2>
-            <p className="text-[#444] text-sm max-w-sm">
-              Real screenshots from my Fiverr, Beatstars, and PayPal accounts. No fabricated numbers.
-            </p>
           </FadeIn>
 
-          {/* Asymmetric mosaic grid */}
-          <StaggerChildren className="grid grid-cols-2 lg:grid-cols-3 gap-3" staggerDelay={0.07}>
-            {proofScreenshots.map((shot, i) => (
-              <StaggerItem key={i}>
+          <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 gap-4" staggerDelay={0.1}>
+            {problems.map((p) => (
+              <StaggerItem key={p.title}>
                 <motion.div
-                  className="relative overflow-hidden border border-white/[0.04] bg-[#0d0d0d] group"
-                  style={{ aspectRatio: shot.tall ? "3/4" : "16/10" }}
-                  whileHover={{ borderColor: "rgba(201,168,76,0.25)", scale: 1.01 }}
+                  className="rounded-2xl bg-[#0a0a0a] border border-white/5 p-6 flex items-start gap-4 h-full"
+                  whileHover={{ borderColor: "rgba(201,168,76,0.2)", y: -3 }}
                   transition={{ duration: 0.2 }}
                 >
-                  {shot.src ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={shot.src} alt={shot.label} className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center gap-3">
-                      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#222" strokeWidth={1.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 20.25h18A.75.75 0 0021.75 19.5v-15A.75.75 0 0021 3.75H3A.75.75 0 002.25 4.5v15a.75.75 0 00.75.75z" />
-                      </svg>
-                      <span className="text-[10px] text-[#222] uppercase tracking-widest">Add screenshot</span>
-                    </div>
-                  )}
-                  <div className="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black/90 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <p className="text-[11px] font-bold text-white uppercase tracking-wider">{shot.label}</p>
+                  <div className="w-10 h-10 rounded-full bg-[#c9a84c]/10 border border-[#c9a84c]/20 flex items-center justify-center text-lg shrink-0">
+                    {p.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-white mb-1.5 leading-snug">{p.title}</h3>
+                    <p className="text-xs text-[#555] leading-relaxed">{p.desc}</p>
                   </div>
                 </motion.div>
               </StaggerItem>
             ))}
           </StaggerChildren>
+        </div>
+      </section>
 
-          <FadeIn delay={0.3} className="mt-6">
-            <p className="text-[10px] text-[#2a2a2a] uppercase tracking-[0.2em]">All results from real accounts · No guarantees implied</p>
+      {/* ── SOLUTION ── */}
+      <section className="py-16">
+        <div className="max-w-4xl mx-auto px-6 sm:px-10">
+          <FadeIn>
+            <div className="rounded-3xl border border-[#c9a84c]/15 bg-[#c9a84c]/4 p-12 sm:p-16 text-center">
+              <p className="text-[11px] uppercase tracking-[0.25em] text-[#c9a84c] font-bold mb-4">La Solution · The Solution</p>
+              <h2 className="font-black uppercase leading-[0.9] tracking-tight text-white mb-6"
+                style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(36px, 5.5vw, 72px)" }}>
+                LoopGem Fixes<br />All of This.<br />
+                <span className="text-gold-gradient">A to Z.</span>
+              </h2>
+              <p className="text-[#666] text-sm max-w-md mx-auto mb-10 leading-relaxed">
+                I&apos;ve been exactly where you are. Zero clients, zero confidence, zero system. I built the exact roadmap that took me from that to a consistent income — and I packaged it into courses and coaching so you can shortcut the process.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link href="/courses" className="btn-gold">
+                  View the Courses →
+                </Link>
+                <Link href="/booking" className="btn-outline">
+                  Book a Call
+                </Link>
+              </div>
+            </div>
           </FadeIn>
         </div>
       </section>
 
       <Marquee speed={50} />
 
-      {/* ── 03 IS THIS YOU ── */}
-      <section className="py-28 bg-[#050505]">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <FadeIn>
-              <SectionLabel n="03" label="Qualification" />
-              <h2 className="font-black uppercase leading-none tracking-tight"
-                style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(48px, 6vw, 88px)" }}>
-                This Is<br />For You<br />
-                <span className="text-gold-gradient">If…</span>
-              </h2>
-            </FadeIn>
+      {/* ── PROOF — REAL RESULTS ── */}
+      <section className="py-28">
+        <div className="max-w-5xl mx-auto px-6 sm:px-10">
+          <FadeIn className="text-center mb-14">
+            <p className="text-[11px] uppercase tracking-[0.25em] text-[#c9a84c] font-bold mb-4">Proof · Real Numbers</p>
+            <h2 className="font-black uppercase leading-[0.9] tracking-tight text-white"
+              style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(40px, 6vw, 80px)" }}>
+              My Actual Sales<br />&amp; Results
+            </h2>
+            <p className="text-[#444] text-sm mt-4">Real screenshots · No fabricated numbers</p>
+          </FadeIn>
 
-            <StaggerChildren className="space-y-0 pt-4" staggerDelay={0.07}>
-              {[
-                "You make beats but don't know how to sell them consistently",
-                "You've tried Fiverr but got zero orders or bad results",
-                "You're tired of giving music away cheap or for free",
-                "You want to turn your skills into real monthly income",
-                "You don't know how to price your services or what to offer",
-                "You want a mentor who's actually done it — not just theory",
-              ].map((item, i) => (
-                <StaggerItem key={i}>
-                  <div className="flex items-start gap-5 py-5 border-b border-white/[0.04] group">
-                    <span className="text-xs font-black text-[#2a2a2a] mt-0.5 shrink-0 w-6"
-                      style={{ fontFamily: "var(--font-barlow)" }}>
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <p className="text-sm text-[#666] leading-relaxed group-hover:text-[#999] transition-colors duration-200">{item}</p>
+          <StaggerChildren className="grid grid-cols-2 lg:grid-cols-3 gap-3" staggerDelay={0.07}>
+            {proofScreenshots.map((shot, i) => (
+              <StaggerItem key={i}>
+                <motion.div
+                  className="relative overflow-hidden rounded-xl border border-white/[0.04] bg-[#0a0a0a] group"
+                  style={{ aspectRatio: i % 3 === 0 ? "3/4" : "16/10" }}
+                  whileHover={{ borderColor: "rgba(201,168,76,0.2)", scale: 1.01 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {shot.src ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={shot.src} alt={shot.label} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full flex flex-col items-center justify-center gap-2">
+                      <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#1e1e1e" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 20.25h18A.75.75 0 0021.75 19.5v-15A.75.75 0 0021 3.75H3A.75.75 0 002.25 4.5v15a.75.75 0 00.75.75z" />
+                      </svg>
+                      <span className="text-[10px] text-[#1e1e1e] uppercase tracking-widest">Add screenshot</span>
+                    </div>
+                  )}
+                  <div className="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-b-xl">
+                    <p className="text-[11px] font-bold text-white uppercase tracking-wider">{shot.label}</p>
                   </div>
-                </StaggerItem>
-              ))}
-            </StaggerChildren>
-          </div>
+                </motion.div>
+              </StaggerItem>
+            ))}
+          </StaggerChildren>
         </div>
       </section>
 
-      {/* ── 04 TESTIMONIALS ── */}
+      {/* ── STATS ── */}
+      <section className="border-y border-white/[0.04] bg-[#050505] py-12">
+        <StaggerChildren className="max-w-4xl mx-auto px-6 sm:px-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center" staggerDelay={0.1}>
+          {[
+            { value: "200+", label: "Producers Coached" },
+            { value: "4.9★", label: "Average Rating" },
+            { value: "$27", label: "Starting Price" },
+            { value: "30 days", label: "Avg. First Client" },
+          ].map((s) => (
+            <StaggerItem key={s.label}>
+              <p className="text-4xl font-black text-gold-gradient mb-1" style={{ fontFamily: "var(--font-barlow)" }}>{s.value}</p>
+              <p className="text-[10px] uppercase tracking-[0.18em] text-[#333]">{s.label}</p>
+            </StaggerItem>
+          ))}
+        </StaggerChildren>
+      </section>
+
+      {/* ── TESTIMONIALS ── */}
       <section className="py-28">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          <FadeIn className="mb-16">
-            <SectionLabel n="04" label="Proof It Works" />
-            <h2 className="font-black uppercase leading-none tracking-tight"
-              style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(48px, 7vw, 96px)" }}>
+        <div className="max-w-5xl mx-auto px-6 sm:px-10">
+          <FadeIn className="text-center mb-14">
+            <p className="text-[11px] uppercase tracking-[0.25em] text-[#c9a84c] font-bold mb-4">Proof It Works</p>
+            <h2 className="font-black uppercase leading-[0.9] tracking-tight text-white"
+              style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(40px, 6vw, 80px)" }}>
               Student Results
             </h2>
           </FadeIn>
 
-          <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.03]" staggerDelay={0.1}>
+          <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-5" staggerDelay={0.12}>
             {testimonials.map((t) => (
               <StaggerItem key={t.author}>
                 <motion.div
-                  className="bg-[#080808] p-10 flex flex-col h-full hover:bg-[#0a0a0a] transition-colors duration-300"
-                  whileHover={{ y: -4 }}
+                  className="rounded-2xl bg-[#0a0a0a] border border-white/5 p-8 flex flex-col h-full"
+                  whileHover={{ borderColor: "rgba(201,168,76,0.2)", y: -4 }}
                   transition={{ duration: 0.2 }}
                 >
-                  {/* Big metric */}
-                  <p className="text-5xl font-black text-[#c9a84c] mb-6 leading-none"
-                    style={{ fontFamily: "var(--font-barlow)" }}>
-                    {t.metric}
-                  </p>
-                  {/* Big quote mark */}
-                  <div className="text-7xl leading-none text-[#1a1a1a] font-black mb-2 select-none"
-                    style={{ fontFamily: "var(--font-barlow)" }}>"</div>
-                  <p className="text-[#555] text-sm leading-relaxed flex-1 mb-8">{t.quote}</p>
-                  <div className="border-t border-white/[0.05] pt-5">
+                  <div className="flex gap-0.5 mb-4">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <svg key={i} width="12" height="12" fill="#c9a84c" viewBox="0 0 24 24">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <p className="text-4xl font-black text-[#c9a84c] mb-3" style={{ fontFamily: "var(--font-barlow)" }}>{t.metric}</p>
+                  <p className="text-sm text-[#555] leading-relaxed flex-1 mb-6">&ldquo;{t.quote}&rdquo;</p>
+                  <div className="border-t border-white/[0.04] pt-4">
                     <p className="text-sm font-bold text-[#888]">{t.author}</p>
                     <p className="text-[11px] text-[#333] uppercase tracking-wider mt-0.5">{t.role}</p>
                   </div>
@@ -290,55 +324,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 05 COURSES ── */}
+      {/* ── COURSES ── */}
       <section className="py-28 bg-[#050505]">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          <FadeIn className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14">
-            <div>
-              <SectionLabel n="05" label="The System" />
-              <h2 className="font-black uppercase leading-none tracking-tight"
-                style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(48px, 7vw, 96px)" }}>
-                Get the Course
-              </h2>
-            </div>
-            <Link href="/courses"
-              className="shrink-0 text-[11px] font-black uppercase tracking-[0.2em] text-[#c9a84c] hover:text-white border-b border-[#c9a84c]/30 hover:border-white pb-0.5 transition-colors">
-              View All →
-            </Link>
+        <div className="max-w-5xl mx-auto px-6 sm:px-10">
+          <FadeIn className="text-center mb-14">
+            <p className="text-[11px] uppercase tracking-[0.25em] text-[#c9a84c] font-bold mb-4">What&apos;s Included</p>
+            <h2 className="font-black uppercase leading-[0.9] tracking-tight text-white"
+              style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(40px, 6vw, 80px)" }}>
+              The Courses
+            </h2>
           </FadeIn>
 
-          <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.03]" staggerDelay={0.1}>
-            {courses.map((c, i) => (
+          <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10" staggerDelay={0.1}>
+            {courses.map((c) => (
               <StaggerItem key={c.id}>
                 <motion.div
-                  className="relative bg-[#050505] p-8 flex flex-col h-full hover:bg-[#080808] transition-colors duration-300"
-                  whileHover={{ y: -4 }}
+                  className={`relative rounded-2xl bg-[#0a0a0a] border flex flex-col p-7 h-full ${c.badge === "Best Seller" ? "border-[#c9a84c]/30" : "border-white/5"}`}
+                  whileHover={{ borderColor: "rgba(201,168,76,0.3)", y: -5 }}
                   transition={{ duration: 0.2 }}
                 >
                   {c.badge && (
-                    <div className="absolute top-8 right-8 px-2.5 py-0.5 bg-[#c9a84c] text-black text-[9px] font-black uppercase tracking-widest">
-                      {c.badge}
-                    </div>
+                    <div className="absolute -top-3 left-5 px-3 py-0.5 rounded-full bg-[#c9a84c] text-black text-[10px] font-black uppercase tracking-widest">{c.badge}</div>
                   )}
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-[#2a2a2a] mb-4">
-                    {String(i + 1).padStart(2, "0")} · {c.pages} pages
-                  </p>
-                  <h3 className="text-2xl font-black uppercase tracking-tight leading-tight mb-auto pb-8"
-                    style={{ fontFamily: "var(--font-barlow)" }}>
-                    {c.title}
-                  </h3>
-                  <div className="border-t border-white/[0.04] pt-6 flex items-end justify-between">
-                    <div>
-                      <span className="text-4xl font-black" style={{ fontFamily: "var(--font-barlow)" }}>${c.price}</span>
-                      <span className="text-xs text-[#2a2a2a] line-through ml-2">${c.originalPrice}</span>
-                    </div>
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}>
-                      <Link href="/courses"
-                        className="text-[11px] font-black uppercase tracking-[0.18em] text-[#c9a84c] hover:text-white transition-colors">
-                        Get It →
-                      </Link>
-                    </motion.div>
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-[#333] mb-3">{c.pages} pages · PDF</p>
+                  <h3 className="text-xl font-black uppercase tracking-tight leading-tight mb-4 flex-1 text-white"
+                    style={{ fontFamily: "var(--font-barlow)" }}>{c.title}</h3>
+                  <div className="flex items-baseline gap-2 mb-5">
+                    <span className="text-3xl font-black text-white" style={{ fontFamily: "var(--font-barlow)" }}>${c.price}</span>
+                    <span className="text-sm text-[#333] line-through">${c.originalPrice}</span>
                   </div>
+                  <Link href="/courses" className="btn-gold text-sm">
+                    Get This Course →
+                  </Link>
                 </motion.div>
               </StaggerItem>
             ))}
@@ -346,60 +363,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 06 COACHING ── */}
+      {/* ── COACHING ── */}
       <section className="py-28">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <FadeIn>
-              <SectionLabel n="06" label="1-on-1 Sessions" />
-              <h2 className="font-black uppercase leading-none tracking-tight mb-6"
-                style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(48px, 6.5vw, 88px)" }}>
-                Work With<br />Me Directly
+        <div className="max-w-4xl mx-auto px-6 sm:px-10">
+          <FadeIn>
+            <div className="rounded-3xl border border-[#c9a84c]/15 bg-[#c9a84c]/3 p-12 sm:p-16 text-center">
+              <p className="text-[11px] uppercase tracking-[0.25em] text-[#c9a84c] font-bold mb-4">1-on-1 Coaching</p>
+              <h2 className="font-black uppercase leading-[0.9] tracking-tight text-white mb-6"
+                style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(36px, 5.5vw, 72px)" }}>
+                Work With Me<br />
+                <span className="text-gold-gradient">Directly</span>
               </h2>
-              <p className="text-[#555] text-sm leading-relaxed max-w-sm mb-8">
-                Skip the guesswork. Book a direct video call and I&apos;ll build your entire sales strategy with you — tailored to your exact situation.
+              <p className="text-[#666] text-sm max-w-md mx-auto mb-8 leading-relaxed">
+                Book a direct video call and I&apos;ll build your entire sales strategy with you — tailored to your situation, your niche, your level.
               </p>
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                <Link href="/booking"
-                  className="inline-block px-10 py-4 font-black text-sm uppercase tracking-widest bg-[#c9a84c] text-black hover:bg-[#f0d070] transition-colors"
-                  style={{ fontFamily: "var(--font-barlow)" }}>
-                  Book a Call — From $49.99
-                </Link>
-              </motion.div>
-            </FadeIn>
-
-            <StaggerChildren className="space-y-0" staggerDelay={0.1}>
-              {[
-                { name: "Starter Session", duration: "30 min", price: "$49.99" },
-                { name: "Sales Strategy Call", duration: "60 min", price: "$89.99", featured: true },
-                { name: "Freelancer Blueprint", duration: "4 × 60 min", price: "$299.99" },
-              ].map((s) => (
-                <StaggerItem key={s.name}>
-                  <Link href="/booking">
-                    <motion.div
-                      className={`flex items-center justify-between py-6 px-6 border-b border-white/[0.04] group cursor-pointer ${s.featured ? "bg-[#c9a84c]/4" : ""}`}
-                      whileHover={{ x: 6 }}
-                      transition={{ duration: 0.15 }}
-                    >
-                      <div>
-                        <p className={`text-base font-bold ${s.featured ? "text-white" : "text-[#666] group-hover:text-white"} transition-colors`}>
-                          {s.name}
-                          {s.featured && <span className="ml-3 text-[9px] bg-[#c9a84c] text-black px-2 py-0.5 font-black uppercase tracking-widest">Popular</span>}
-                        </p>
-                        <p className="text-[11px] text-[#333] uppercase tracking-wider mt-0.5">{s.duration}</p>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <span className="text-2xl font-black text-[#c9a84c]" style={{ fontFamily: "var(--font-barlow)" }}>{s.price}</span>
-                        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#333" strokeWidth={2} className="group-hover:stroke-[#c9a84c] transition-colors">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                        </svg>
-                      </div>
-                    </motion.div>
-                  </Link>
-                </StaggerItem>
-              ))}
-            </StaggerChildren>
-          </div>
+              <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
+                {[["30 min", "$49.99"], ["60 min", "$89.99"], ["4×60 min", "$299.99"]].map(([d, p]) => (
+                  <div key={d} className="rounded-2xl border border-white/8 bg-black px-6 py-4 text-center">
+                    <p className="text-lg font-black text-white" style={{ fontFamily: "var(--font-barlow)" }}>{p}</p>
+                    <p className="text-[11px] text-[#444] uppercase tracking-wider">{d}</p>
+                  </div>
+                ))}
+              </div>
+              <Link href="/booking" className="btn-gold">
+                Book a Session →
+              </Link>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
@@ -409,37 +399,29 @@ export default function Home() {
       <section className="py-36 relative overflow-hidden">
         <motion.div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 60%)" }}
-          animate={{ scale: [1, 1.15, 1], opacity: [0.5, 1, 0.5] }}
+          style={{ background: "radial-gradient(ellipse at center, rgba(201,168,76,0.07) 0%, transparent 65%)" }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.4, 1, 0.4] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
-        <div className="absolute inset-0 pointer-events-none opacity-[0.015]"
-          style={{ backgroundImage: "linear-gradient(#c9a84c 1px, transparent 1px), linear-gradient(90deg, #c9a84c 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
-
-        <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+        <div className="relative max-w-3xl mx-auto px-6 sm:px-10 text-center">
           <FadeIn>
-            <p className="text-[11px] font-black uppercase tracking-[0.3em] text-[#c9a84c] mb-6">Your Move</p>
-            <h2 className="font-black uppercase leading-[0.88] tracking-tight mb-10"
-              style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(64px, 10vw, 140px)" }}>
+            <p className="text-[11px] uppercase tracking-[0.25em] text-[#c9a84c] font-bold mb-6">Your Move</p>
+            <h2 className="font-black uppercase leading-[0.88] tracking-tight text-white mb-6"
+              style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(56px, 9vw, 120px)" }}>
               Ready to Get<br />
               <span className="text-gold-gradient">Paid for Your</span><br />
               Music?
             </h2>
-            <div className="flex flex-wrap gap-4">
-              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-                <Link href="/courses"
-                  className="block px-12 py-4 font-black text-sm uppercase tracking-widest bg-[#c9a84c] text-black hover:bg-[#f0d070] transition-colors"
-                  style={{ fontFamily: "var(--font-barlow)" }}>
-                  Get the Course — From $27
-                </Link>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-                <Link href="/booking"
-                  className="block px-12 py-4 font-black text-sm uppercase tracking-widest border border-white/8 text-[#666] hover:border-[#c9a84c] hover:text-[#c9a84c] transition-colors"
-                  style={{ fontFamily: "var(--font-barlow)" }}>
-                  Book a 1-on-1 Call
-                </Link>
-              </motion.div>
+            <p className="text-[#555] text-base mb-10 max-w-lg mx-auto">
+              Everything you need is already in you. You just need the system.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link href="/courses" className="btn-gold">
+                Get the Course — From $27 →
+              </Link>
+              <Link href="/booking" className="btn-outline">
+                Book a 1-on-1 Call
+              </Link>
             </div>
           </FadeIn>
         </div>

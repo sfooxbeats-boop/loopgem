@@ -45,10 +45,7 @@ export default function Navbar() {
           </div>
 
           <div className="hidden lg:block">
-            <Link
-              href="/booking"
-              className="px-5 py-2.5 text-sm font-bold bg-[#c9a84c] text-black hover:bg-[#e5c97e] transition-colors duration-150"
-            >
+            <Link href="/booking" className="btn-gold !py-2.5 !px-6 !text-xs">
               Book a Call
             </Link>
           </div>
@@ -79,11 +76,7 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <Link
-            href="/booking"
-            onClick={() => setOpen(false)}
-            className="mt-2 px-5 py-3 text-sm font-bold bg-[#c9a84c] text-black text-center hover:bg-[#e5c97e] transition-colors"
-          >
+          <Link href="/booking" onClick={() => setOpen(false)} className="btn-gold mt-2 !w-full !justify-center">
             Book a Call
           </Link>
         </div>

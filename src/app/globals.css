@@ -16,7 +16,7 @@
 }
 
 :root {
-  --background: #080808;
+  --background: #000000;
   --foreground: #f0ece4;
 }
 
@@ -34,6 +34,49 @@ body {
   font-family: var(--font-geist-sans), Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
+/* ── PILL BUTTON ─────────────────────────────────────── */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: #c9a84c;
+  color: #000;
+  font-family: var(--font-barlow);
+  font-weight: 900;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-gold:hover { background: #f0d070; transform: scale(1.03); }
+.btn-gold:active { transform: scale(0.97); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: transparent;
+  color: #888;
+  font-family: var(--font-barlow);
+  font-weight: 900;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, transform 0.15s;
+}
+.btn-outline:hover { border-color: #c9a84c; color: #c9a84c; transform: scale(1.03); }
+.btn-outline:active { transform: scale(0.97); }
 
 /* ── GRAIN OVERLAY ─────────────────────────────────── */
 .grain {
