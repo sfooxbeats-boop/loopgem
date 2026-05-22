@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { motion } from "motion/react";
 import { FadeIn, StaggerChildren, StaggerItem } from "@/components/Animate";
 import Marquee from "@/components/Marquee";
@@ -117,6 +118,8 @@ const courses = [
 const platforms = ["Fiverr", "Beatstars", "PayPal", "Instagram", "YouTube", "Gumroad"];
 
 export default function Home() {
+  const [activeMobile, setActiveMobile] = useState<number | null>(null);
+
   return (
     <div className="bg-black overflow-x-hidden">
 
@@ -349,7 +352,11 @@ export default function Home() {
           </FadeIn>
 
           {/* ── Mobile: overlapping collage ── */}
-          <div className="lg:hidden relative mx-auto overflow-visible" style={{ height: "640px", width: "360px", maxWidth: "100%" }}>
+          <div
+            className="lg:hidden relative mx-auto overflow-visible"
+            style={{ height: "640px", width: "360px", maxWidth: "100%" }}
+            onClick={() => setActiveMobile(null)}
+          >
             {[
               { top: 0,   left: 0,   w: 158, r: -3,   z: 5  },
               { top: 22,  left: 108, w: 168, r: 2,    z: 15 },
@@ -358,25 +365,35 @@ export default function Home() {
               { top: 225, left: 118, w: 172, r: 1.5,  z: 30 },
               { top: 210, left: 232, w: 150, r: 3,    z: 22 },
               { top: 420, left: 0,   w: 160, r: -1.5, z: 40 },
-              { top: 432, w: 170,    left: 112, r: 2, z: 50 },
+              { top: 432, left: 112, w: 170, r: 2,    z: 50 },
               { top: 420, left: 228, w: 155, r: -2.5, z: 42 },
               { top: 426, left: 58,  w: 158, r: 1,    z: 35 },
             ].map((pos, i) => {
               const shot = proofScreenshots[i];
+              const isActive = activeMobile === i;
               return (
                 <motion.div
                   key={i}
-                  className="absolute rounded-2xl overflow-hidden border border-white/8"
+                  className="absolute rounded-2xl overflow-hidden border cursor-pointer"
                   style={{
                     top: pos.top,
                     left: pos.left,
                     width: pos.w,
-                    zIndex: pos.z,
-                    rotate: pos.r,
-                    boxShadow: "0 12px 40px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.5)",
+                    borderColor: isActive ? "rgba(201,168,76,0.4)" : "rgba(255,255,255,0.08)",
                   }}
-                  whileHover={{ rotate: 0, scale: 1.06, zIndex: 100 }}
-                  transition={{ duration: 0.2 }}
+                  animate={{
+                    rotate: isActive ? 0 : pos.r,
+                    scale: isActive ? 1.08 : 1,
+                    zIndex: isActive ? 100 : pos.z,
+                    boxShadow: isActive
+                      ? "0 32px 80px rgba(0,0,0,0.95), 0 0 40px rgba(201,168,76,0.15)"
+                      : "0 12px 40px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.5)",
+                  }}
+                  transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveMobile(isActive ? null : i);
+                  }}
                 >
                   <div className="w-full" style={{ aspectRatio: "9/16" }}>
                     {shot?.src ? (
