@@ -40,9 +40,41 @@ const problems = [
 ];
 
 const testimonials = [
-  { quote: "I bought the Fiverr Blueprint and landed my first order within 3 weeks. The gig setup advice alone was worth 10x the price.", author: "DeeMarkez", role: "Music Producer · Fiverr", metric: "First order in 3 weeks" },
-  { quote: "The coaching call changed everything. Soufiane broke down exactly what I was doing wrong. I doubled my prices after that call.", author: "Jay Morrow", role: "Mixing Engineer", metric: "2× price increase" },
-  { quote: "Went from 0 to $1,200/month on Fiverr in 2 months following the playbook. Step by step, no fluff.", author: "Kira Voss", role: "Beatmaker & Producer", metric: "$1,200/mo in 2 months" },
+  {
+    author: "herecomesfriday",
+    rating: 5.0,
+    quote: "He and his crew did an amazing job in designing the beats that I was looking for, they fit my song ideas perfectly! They are an amazing rap and hip hop music production crew that went above and beyond for my order. Thanks!",
+    scores: { communication: 5.0, quality: 5.0, value: 5.0 },
+    tip: false,
+  },
+  {
+    author: "lvn_strng",
+    rating: 4.7,
+    quote: "Amazing production quality and the delivery was amazing, the time frame was amazing. Everything was amazing. I had a custom order and he was able to fulfill it.",
+    scores: { communication: 5.0, quality: 5.0, value: 4.0 },
+    tip: false,
+  },
+  {
+    author: "Arella",
+    rating: 5.0,
+    quote: "Great custom beat made for my song in less than 24 hours. I recommend!",
+    scores: { communication: 5.0, quality: 5.0, value: 5.0 },
+    tip: false,
+  },
+  {
+    author: "Tony L",
+    rating: 5.0,
+    quote: "Great job!",
+    scores: { communication: 5.0, quality: 5.0, value: 5.0 },
+    tip: true,
+  },
+  {
+    author: "pcronin20",
+    rating: 5.0,
+    quote: "Once again, a great experience. Thanks!",
+    scores: { communication: 5.0, quality: 5.0, value: 5.0 },
+    tip: false,
+  },
 ];
 
 const courses = [
@@ -285,37 +317,89 @@ export default function Home() {
         </StaggerChildren>
       </section>
 
-      {/* ── TESTIMONIALS ── */}
+      {/* ── TESTIMONIALS (Fiverr Reviews) ── */}
       <section className="py-28">
         <div className="max-w-5xl mx-auto px-6 sm:px-10">
           <FadeIn className="text-center mb-14">
-            <p className="text-[11px] uppercase tracking-[0.25em] text-[#c9a84c] font-bold mb-4">Proof It Works</p>
+            <p className="text-[11px] uppercase tracking-[0.25em] text-[#c9a84c] font-bold mb-4">Verified Fiverr Reviews</p>
             <h2 className="font-black uppercase leading-[0.9] tracking-tight text-white"
               style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(40px, 6vw, 80px)" }}>
-              Student Results
+              What Clients Say
             </h2>
+            {/* Fiverr badge */}
+            <div className="inline-flex items-center gap-2 mt-5 px-4 py-2 rounded-full border border-white/8 bg-white/3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#1DBF73">
+                <path d="M21.168 17.609c-.088 0-.176-.011-.264-.033-1.155-.294-1.89-1.146-1.89-2.151 0-1.302 1.06-2.362 2.362-2.362s2.362 1.06 2.362 2.362c0 1.143-.858 2.096-1.912 2.306-.218.043-.44.065-.658.065v-.187zm-7.243-5.428l-2.066 5.428h-2.131l-2.066-5.428H6.1l2.918 7.263H10.9l2.918-7.263h-1.893zM1.832 6.581C.822 6.581 0 7.403 0 8.413c0 1.01.822 1.832 1.832 1.832h4.583v1.832H1.832C.822 12.077 0 12.899 0 13.909s.822 1.832 1.832 1.832h4.583v5.496h2.198v-5.496h2.198v5.496h2.198V8.413c0-1.01-.822-1.832-1.832-1.832H1.832z"/>
+              </svg>
+              <span className="text-[11px] text-[#888] font-medium">All reviews from Fiverr</span>
+            </div>
           </FadeIn>
 
-          <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-5" staggerDelay={0.12}>
+          <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" staggerDelay={0.09}>
             {testimonials.map((t) => (
               <StaggerItem key={t.author}>
                 <motion.div
-                  className="rounded-2xl bg-[#0a0a0a] border border-white/5 p-8 flex flex-col h-full"
-                  whileHover={{ borderColor: "rgba(201,168,76,0.2)", y: -4 }}
+                  className="rounded-2xl bg-[#0a0a0a] border border-white/5 overflow-hidden flex flex-col h-full"
+                  whileHover={{ borderColor: "rgba(201,168,76,0.25)", y: -4 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <div className="flex gap-0.5 mb-4">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <svg key={i} width="12" height="12" fill="#c9a84c" viewBox="0 0 24 24">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                      </svg>
+                  {/* Card header */}
+                  <div className="px-5 pt-5 pb-4 border-b border-white/[0.04]">
+                    <div className="flex items-center justify-between mb-3">
+                      {/* Avatar + name */}
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-full bg-[#c9a84c]/20 border border-[#c9a84c]/30 flex items-center justify-center text-[#c9a84c] text-xs font-black">
+                          {t.author[0].toUpperCase()}
+                        </div>
+                        <div>
+                          <p className="text-sm font-bold text-white leading-tight">{t.author}</p>
+                          {t.tip && (
+                            <p className="text-[10px] text-[#c9a84c]">💰 Left a tip</p>
+                          )}
+                        </div>
+                      </div>
+                      {/* Rating */}
+                      <div className="flex items-center gap-1.5">
+                        <div className="flex gap-0.5">
+                          {Array.from({ length: 5 }).map((_, i) => (
+                            <svg key={i} width="11" height="11" fill={i < Math.floor(t.rating) ? "#222" : "#111"} viewBox="0 0 24 24">
+                              <path fill={i < Math.floor(t.rating) ? "#1a1a1a" : "#111"} d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke={i < Math.round(t.rating) ? "#c9a84c" : "#222"} strokeWidth="1"/>
+                            </svg>
+                          ))}
+                        </div>
+                        <span className="text-sm font-black text-[#c9a84c]" style={{ fontFamily: "var(--font-barlow)" }}>{t.rating.toFixed(1)}</span>
+                      </div>
+                    </div>
+
+                    {/* Review text */}
+                    <p className="text-sm text-[#777] leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
+                  </div>
+
+                  {/* Score breakdown */}
+                  <div className="px-5 py-4 space-y-2 flex-1">
+                    {[
+                      { label: "Seller communication", score: t.scores.communication },
+                      { label: "Quality of delivery", score: t.scores.quality },
+                      { label: "Value of delivery", score: t.scores.value },
+                    ].map((s) => (
+                      <div key={s.label} className="flex items-center justify-between">
+                        <span className="text-[11px] text-[#444]">{s.label}</span>
+                        <div className="flex items-center gap-1">
+                          <svg width="10" height="10" fill="#c9a84c" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                          </svg>
+                          <span className="text-[11px] font-bold text-[#888]">{s.score.toFixed(1)}</span>
+                        </div>
+                      </div>
                     ))}
                   </div>
-                  <p className="text-4xl font-black text-[#c9a84c] mb-3" style={{ fontFamily: "var(--font-barlow)" }}>{t.metric}</p>
-                  <p className="text-sm text-[#555] leading-relaxed flex-1 mb-6">&ldquo;{t.quote}&rdquo;</p>
-                  <div className="border-t border-white/[0.04] pt-4">
-                    <p className="text-sm font-bold text-[#888]">{t.author}</p>
-                    <p className="text-[11px] text-[#333] uppercase tracking-wider mt-0.5">{t.role}</p>
+
+                  {/* Footer */}
+                  <div className="px-5 pb-4 flex items-center gap-1.5">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="#1DBF73">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                    </svg>
+                    <span className="text-[10px] text-[#333] uppercase tracking-wider">Verified on Fiverr</span>
                   </div>
                 </motion.div>
               </StaggerItem>
