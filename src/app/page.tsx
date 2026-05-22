@@ -288,9 +288,9 @@ export default function Home() {
       <Marquee speed={50} />
 
       {/* ── PROOF — REAL RESULTS ── */}
-      <section className="py-28">
+      <section className="py-28 overflow-hidden">
         <div className="max-w-5xl mx-auto px-6 sm:px-10">
-          <FadeIn className="text-center mb-14">
+          <FadeIn className="text-center mb-16">
             <p className="text-[11px] uppercase tracking-[0.25em] text-[#c9a84c] font-bold mb-4">Proof · Real Numbers</p>
             <h2 className="font-black uppercase leading-[0.9] tracking-tight text-white"
               style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(40px, 6vw, 80px)" }}>
@@ -299,33 +299,88 @@ export default function Home() {
             <p className="text-[#444] text-sm mt-4">Real screenshots · No fabricated numbers</p>
           </FadeIn>
 
-          <StaggerChildren className="grid grid-cols-2 lg:grid-cols-3 gap-3" staggerDelay={0.07}>
+          {/* ── Desktop: overlapping collage ── */}
+          <FadeIn>
+            <div className="hidden lg:block relative mx-auto" style={{ height: "640px", maxWidth: "860px" }}>
+              {[
+                { top: 0,   left: 0,    width: 380, rotate: -2,   z: 10, aspect: "16/10" },
+                { top: 40,  left: 200,  width: 420, rotate: 1.5,  z: 30, aspect: "16/10" },
+                { top: 10,  left: 490,  width: 340, rotate: 2.5,  z: 20, aspect: "16/10" },
+                { top: 310, left: 0,    width: 340, rotate: -1.5, z: 40, aspect: "9/16"  },
+                { top: 280, left: 230,  width: 400, rotate: 0.5,  z: 50, aspect: "16/10" },
+                { top: 300, left: 520,  width: 320, rotate: -2.5, z: 35, aspect: "9/16"  },
+              ].map((pos, i) => {
+                const shot = proofScreenshots[i];
+                return (
+                  <motion.div
+                    key={i}
+                    className="absolute rounded-xl overflow-hidden border border-white/10 cursor-pointer"
+                    style={{
+                      top: pos.top,
+                      left: pos.left,
+                      width: pos.width,
+                      zIndex: pos.z,
+                      rotate: pos.rotate,
+                      boxShadow: "0 24px 64px rgba(0,0,0,0.85), 0 4px 16px rgba(0,0,0,0.6)",
+                    }}
+                    whileHover={{ rotate: 0, scale: 1.04, zIndex: 100, boxShadow: "0 32px 80px rgba(0,0,0,0.9), 0 0 40px rgba(201,168,76,0.1)" }}
+                    transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+                  >
+                    {/* Browser / phone chrome */}
+                    <div className="h-7 bg-[#161616] border-b border-white/5 flex items-center px-3 gap-1.5 shrink-0">
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+                      <div className="flex-1 mx-2 h-3.5 rounded-sm bg-[#222] border border-white/5" />
+                    </div>
+                    {/* Screenshot content */}
+                    <div
+                      className="bg-[#0d0d0d] w-full"
+                      style={{ aspectRatio: pos.aspect }}
+                    >
+                      {shot?.src ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={shot.src} alt={shot?.label ?? ""} className="w-full h-full object-cover" />
+                      ) : (
+                        <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-[#0a0a0a]">
+                          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#1e1e1e" strokeWidth={1.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 20.25h18a.75.75 0 00.75-.75v-15a.75.75 0 00-.75-.75H3a.75.75 0 00-.75.75v15a.75.75 0 00.75.75z" />
+                          </svg>
+                          <span className="text-[9px] text-[#1a1a1a] uppercase tracking-widest">{shot?.label}</span>
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </FadeIn>
+
+          {/* ── Mobile: 2-column grid ── */}
+          <div className="lg:hidden grid grid-cols-2 gap-3">
             {proofScreenshots.map((shot, i) => (
-              <StaggerItem key={i}>
-                <motion.div
-                  className="relative overflow-hidden rounded-xl border border-white/[0.04] bg-[#0a0a0a] group"
-                  style={{ aspectRatio: i % 3 === 0 ? "3/4" : "16/10" }}
-                  whileHover={{ borderColor: "rgba(201,168,76,0.2)", scale: 1.01 }}
-                  transition={{ duration: 0.2 }}
-                >
+              <div key={i} className="rounded-xl overflow-hidden border border-white/[0.06]"
+                style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.6)" }}>
+                <div className="h-6 bg-[#161616] border-b border-white/5 flex items-center px-2.5 gap-1">
+                  <div className="w-2 h-2 rounded-full bg-[#ff5f57]" />
+                  <div className="w-2 h-2 rounded-full bg-[#febc2e]" />
+                  <div className="w-2 h-2 rounded-full bg-[#28c840]" />
+                </div>
+                <div className="aspect-video bg-[#0a0a0a] flex items-center justify-center">
                   {shot.src ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={shot.src} alt={shot.label} className="w-full h-full object-cover" />
                   ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center gap-2">
-                      <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#1e1e1e" strokeWidth={1.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 20.25h18A.75.75 0 0021.75 19.5v-15A.75.75 0 0021 3.75H3A.75.75 0 002.25 4.5v15a.75.75 0 00.75.75z" />
-                      </svg>
-                      <span className="text-[10px] text-[#1e1e1e] uppercase tracking-widest">Add screenshot</span>
-                    </div>
+                    <span className="text-[9px] text-[#1a1a1a] uppercase tracking-widest text-center px-2">{shot.label}</span>
                   )}
-                  <div className="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-b-xl">
-                    <p className="text-[11px] font-bold text-white uppercase tracking-wider">{shot.label}</p>
-                  </div>
-                </motion.div>
-              </StaggerItem>
+                </div>
+              </div>
             ))}
-          </StaggerChildren>
+          </div>
+
+          <FadeIn delay={0.3} className="mt-12 text-center">
+            <p className="text-[10px] text-[#222] uppercase tracking-[0.2em]">All results from real accounts · No guarantees implied</p>
+          </FadeIn>
         </div>
       </section>
 
