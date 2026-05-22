@@ -75,6 +75,35 @@ const testimonials = [
     scores: { communication: 5.0, quality: 5.0, value: 5.0 },
     tip: false,
   },
+  {
+    author: "bullygraphics",
+    rating: 5.0,
+    quote: "He listened to what I wanted and delivered!!!!!",
+    scores: { communication: 5.0, quality: 5.0, value: 5.0 },
+    tip: false,
+  },
+  {
+    author: "Pascal Gebert",
+    rating: 5.0,
+    quote: "Another good experience thank you so much!",
+    scores: { communication: 5.0, quality: 5.0, value: 5.0 },
+    tip: false,
+  },
+  {
+    author: "antoniodela",
+    rating: 5.0,
+    quote: "Top top top 👌👏👏",
+    scores: { communication: 5.0, quality: 5.0, value: 5.0 },
+    tip: false,
+  },
+  {
+    author: "Tony L",
+    rating: 5.0,
+    quote: "Great job as always! I highly recommend this seller.",
+    scores: { communication: 5.0, quality: 5.0, value: 5.0 },
+    tip: false,
+    key: "tony-l-2",
+  },
 ];
 
 const courses = [
@@ -336,8 +365,8 @@ export default function Home() {
           </FadeIn>
 
           <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" staggerDelay={0.09}>
-            {testimonials.map((t) => (
-              <StaggerItem key={t.author}>
+            {testimonials.map((t, idx) => (
+              <StaggerItem key={(t as { key?: string }).key ?? `${t.author}-${idx}`}>
                 <motion.div
                   className="rounded-2xl bg-[#0a0a0a] border border-white/5 overflow-hidden flex flex-col h-full"
                   whileHover={{ borderColor: "rgba(201,168,76,0.25)", y: -4 }}
