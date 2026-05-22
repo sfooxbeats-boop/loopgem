@@ -3,21 +3,22 @@
 # LoopGem — Project Overview
 
 Music producer coaching & courses website for **Soufiane Remdane (Sfooxbeats)** at **loopgem.com**.
-The site is focused entirely on **selling PDF courses and 1-on-1 coaching calls** that teach producers how to sell beats and music services online. Beats, drum kits, and production services have been removed.
+Focused entirely on **selling PDF courses and 1-on-1 coaching calls** teaching producers how to sell beats and music services online. Beats, drum kits, and production services have been removed.
 
 ## Repository & Deployment
 - **GitHub:** https://github.com/sfooxbeats-boop/loopgem (branch: main)
 - **Live site:** https://loopgem.vercel.app
 - **Final domain:** loopgem.com — not yet linked to Vercel
 - Vercel auto-deploys on every `git push` to main
+- **Vercel config fix:** `next.config.mjs` with `outputFileTracingRoot: __dirname` — do NOT remove this or Vercel build will crash with `TypeError: The "path" argument must be of type string`
 
 ## Stack
 - **Next.js 16.2.6** (App Router, Turbopack) — read AGENTS.md before touching routing or layouts
 - **Tailwind CSS v4** — `@theme {}` block in `globals.css` only, NO `tailwind.config.ts`
 - **TypeScript** — global PayPal types in `src/types/paypal.d.ts` (ambient, no export)
 - **PayPal JS SDK** — client-side script injection, `NEXT_PUBLIC_PAYPAL_CLIENT_ID` in env
-- **Resend** — server-side email, `/api/send-course` sends course PDF download links
-- **Framer Motion** — animations (scroll-triggered reveals, hover effects, stagger)
+- **Resend** — server-side email, `/api/send-course` — Resend client initialised INSIDE the handler (not at module level) to prevent Vercel build crash
+- **motion** (`motion/react`) — animations. Import from `"motion/react"` NOT `"framer-motion"`
 - **Lenis** — smooth scroll (initialised globally in `SmoothScroll.tsx`)
 - **Barlow Condensed** (Google Font) — display headings via `--font-barlow` CSS variable
 
@@ -30,15 +31,40 @@ The site is focused entirely on **selling PDF courses and 1-on-1 coaching calls*
 
 Never commit `.env.local` — covered by `.gitignore`.
 
-## Brand
+## Brand & Design System
 - Website: **LoopGem** (loopgem.com)
 - Producer: **Sfooxbeats** (Soufiane Remdane)
 - Email: Sfooxbeats@gmail.com
 - Instagram: @Sfoox_beats
-- Background: `#080808` · Gold accent: `#c9a84c`
-- Display font: Barlow Condensed (bold, uppercase headings)
+- Background: `#000000` (pure black)
+- Gold accent: `#c9a84c`
+- Display font: Barlow Condensed (bold, uppercase headings) via `style={{ fontFamily: "var(--font-barlow)" }}`
 - Body font: Geist Sans
-- CSS utilities in `globals.css`: `.text-gold-gradient`, `.glow-gold`, `.card-hover`
+
+### CSS Utilities (`globals.css`)
+- `.text-gold-gradient` — gold gradient text
+- `.btn-gold` — pill-shaped gold filled button (use this everywhere for primary CTAs)
+- `.btn-outline` — pill-shaped outlined button for secondary CTAs
+- `.grain` — animated film grain overlay (applied in `layout.tsx` as `<div className="grain">`)
+- `.card-hover` — hover lift effect
+
+## Home Page Structure (`src/app/page.tsx`) — "use client"
+The home page is a VSL-style conversion page. Structure top to bottom:
+1. **Video** — YouTube embed is the VERY FIRST thing (no hero text above it). `pt-24` accounts for navbar.
+2. **CTAs** — Get Course + Book a Call below video
+3. **Marquee** — scrolling ticker
+4. **Problem section** — "Do You Recognize Yourself in These?" — 4 pain point cards
+5. **Solution block** — rounded card with gold border
+6. **Marquee** (second)
+7. **Proof screenshots** — 10 real Fiverr screenshots in overlapping collage (`/public/proof/r1.jpeg`–`r10.jpeg`)
+   - Desktop: absolute positioned, staggered angles, hover to bring to front
+   - Mobile: same collage layout with tap-to-pop animation (state: `activeMobile`)
+8. **Stats strip**
+9. **Testimonials** — 9 real Fiverr reviews with score breakdown (communication/quality/value)
+10. **Courses** — 3 course cards
+11. **Coaching** — 3 session options with pricing
+12. **Marquee** (third)
+13. **Final CTA**
 
 ## Products & Pricing
 | Product | Price | Payment Flow |
@@ -53,7 +79,7 @@ Never commit `.env.local` — covered by `.gitignore`.
 ## Routes
 | Route | Description |
 |---|---|
-| `/` | Home — VSL-style page: YouTube video hero, CTA, proof screenshots grid, "Is This For You" section, testimonials, courses, coaching CTA |
+| `/` | Home — video-first VSL page (see structure above) |
 | `/courses` | 3 PDF courses — CoursePayPalButton + Resend auto-delivery |
 | `/booking` | 1-on-1 coaching sessions — 3 pricing tiers + how it works + FAQ |
 | `/about` | Soufiane Remdane / Sfooxbeats story |
@@ -70,37 +96,28 @@ Never commit `.env.local` — covered by `.gitignore`.
 ## Key Components
 | File | Notes |
 |---|---|
-| `src/components/PayPalButton.tsx` | Generic PayPal + card checkout. Props: `amount`, `description`, `successMessage` (string — safe from server pages), `onPaid` (fn — only between client components) |
-| `src/components/CoursePayPalButton.tsx` | Course-specific. Extracts buyer email from PayPal capture, calls `/api/send-course`, shows sending/done/error states |
-| `src/components/Navbar.tsx` | Sticky, mobile hamburger. Links: Courses, 1-on-1 Coaching, About, Contact. CTA: Book a Call |
-| `src/components/Footer.tsx` | Links, Instagram @Sfoox_beats, email, Book a Call CTA |
-| `src/components/SmoothScroll.tsx` | Client component — initialises Lenis smooth scroll globally (mounted in layout.tsx) |
-| `src/components/Animate.tsx` | Reusable Framer Motion wrappers: `FadeIn`, `StaggerChildren`, `StaggerItem`, `ScaleIn`, `CountUp` |
-| `src/types/paypal.d.ts` | Ambient global types for `window.paypal` and `PayPalOrderActions` — no `export {}` |
-
-## Animation System (`src/components/Animate.tsx`)
-- `<FadeIn direction="up|down|left|right|none" delay={0} duration={0.6}>` — fades in when scrolled into view
-- `<StaggerChildren staggerDelay={0.1}>` + `<StaggerItem>` — staggered reveal for grids/lists
-- `<ScaleIn delay={0}>` — scale + fade on scroll
-- All use `useInView` with `once: true` — animate once, not on every scroll
-- Framer Motion `whileHover` / `whileTap` used directly on `motion.div` for interactive elements
+| `src/components/PayPalButton.tsx` | Generic PayPal + card checkout. Props: `amount`, `description`, `successMessage` (string), `onPaid` (fn — client only) |
+| `src/components/CoursePayPalButton.tsx` | Course-specific. Captures buyer email, calls `/api/send-course`, shows states |
+| `src/components/Navbar.tsx` | Sticky, mobile hamburger. Uses `.btn-gold` for CTA. Links: Courses, 1-on-1 Coaching, About, Contact |
+| `src/components/Footer.tsx` | Links, Instagram, email, Book a Call CTA |
+| `src/components/SmoothScroll.tsx` | Lenis smooth scroll — mounted in `layout.tsx` |
+| `src/components/Animate.tsx` | `FadeIn`, `StaggerChildren`, `StaggerItem`, `ScaleIn`, `CountUp` — all use `motion/react` |
+| `src/components/Marquee.tsx` | Scrolling ticker with gold `✦` separators — uses `motion/react` |
+| `src/types/paypal.d.ts` | Ambient global PayPal types — no `export {}` |
 
 ## Critical Rules
-- **Never pass functions as props from Server Components to Client Components.** Use `successMessage: string` for server pages. Only use `onPaid: () => void` between client components.
-- **Tailwind v4 — no config file.** All custom tokens in `@theme {}` inside `src/app/globals.css`.
-- **PayPal SDK loads once per page** — component checks for `script[data-paypal-sdk]` before injecting.
-- **Global types** go in `src/types/paypal.d.ts` without `export {}` (ambient module).
-- **Pages with animations must be `"use client"`** — Framer Motion hooks don't work in Server Components.
-- **Lenis smooth scroll** is initialised in `SmoothScroll.tsx` (client) and mounted in `layout.tsx`.
+- **Import animations from `"motion/react"`** — NOT `"framer-motion"` (package was migrated)
+- **Never pass functions as props from Server → Client Components.** Use `successMessage: string` for server pages.
+- **Tailwind v4 — no config file.** All tokens in `@theme {}` in `src/app/globals.css`.
+- **PayPal SDK loads once per page** — checks for `script[data-paypal-sdk]` before injecting.
+- **Resend must be lazy-init** — `new Resend(key)` inside the POST handler, never at module top level.
+- **next.config.mjs must keep `outputFileTracingRoot`** — removing it breaks Vercel builds.
+- **Proof images** live in `public/proof/` named `r1.jpeg`–`r10.jpeg` (no spaces in filenames — spaces break Vercel).
 
 ## ⚠️ Pending Tasks
 
-### 1. Add sales proof screenshots to home page
-Put screenshot images in `public/proof/` and update the `proofScreenshots` array at the top of `src/app/page.tsx`.
-Each entry: `{ label: "...", src: "/proof/your-image.png" }`
-
-### 2. Upload PDF course files
-When the 3 PDFs are written and ready, upload to `public/downloads/` with these exact names:
+### 1. Upload PDF course files
+When the 3 PDFs are ready, upload to `public/downloads/` with these exact names:
 - `course-fiverr-beat-seller-blueprint.pdf`
 - `course-sell-music-services-fiverr.pdf`
 - `course-full-freelance-music-producer-playbook.pdf`
@@ -119,9 +136,14 @@ Then: `git add . && git commit -m "add course PDFs" && git push`
 - Update DNS at domain registrar to point to Vercel
 
 ### 4. Wire up contact form (Formspree)
-- Free account at formspree.io → create form pointing to Sfooxbeats@gmail.com
-- Replace `YOUR_FORM_ID` in `src/app/contact/page.tsx` with real ID
+- Free account at formspree.io → create form → copy form ID
+- Replace `YOUR_FORM_ID` in `src/app/contact/page.tsx`
 - Push to GitHub
+
+### 5. Add more proof screenshots (optional)
+- Save images to `public/proof/` as `r11.jpeg`, `r12.jpeg` etc. (no spaces in filenames)
+- Add entries to `proofScreenshots` array at top of `src/app/page.tsx`
+- Add matching position object to both desktop and mobile collage arrays
 
 ## Deploy Checklist
 ```bash
