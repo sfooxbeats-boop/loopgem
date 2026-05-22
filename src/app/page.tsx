@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { FadeIn, StaggerChildren, StaggerItem } from "@/components/Animate";
 
 // ─── REPLACE these with real screenshot image paths once you have them ───────
