@@ -5,16 +5,17 @@ import { motion } from "motion/react";
 import { FadeIn, StaggerChildren, StaggerItem } from "@/components/Animate";
 import Marquee from "@/components/Marquee";
 
-// ─── Replace src with real paths once screenshots are ready ───────────────────
 const proofScreenshots = [
-  { label: "Fiverr Sales Dashboard", src: null },
-  { label: "Order Notifications",    src: null },
-  { label: "Monthly Earnings",       src: null },
-  { label: "5-Star Client Reviews",  src: null },
-  { label: "Beatstars Revenue",      src: null },
-  { label: "Payment History",        src: null },
+  { label: "Fiverr Review", src: "/proof/r%20(1).jpeg" },
+  { label: "Fiverr Review", src: "/proof/r%20(2).jpeg" },
+  { label: "Fiverr Review", src: "/proof/r%20(3).jpeg" },
+  { label: "Fiverr Review", src: "/proof/r%20(4).jpeg" },
+  { label: "Fiverr Review", src: "/proof/r%20(5).jpeg" },
+  { label: "Fiverr Review", src: "/proof/r%20(6).jpeg" },
+  { label: "Fiverr Review", src: "/proof/r%20(7).jpeg" },
+  { label: "Fiverr Review", src: "/proof/r%20(8).jpeg" },
+  { label: "Fiverr Review", src: "/proof/r%20(9).jpeg" },
 ];
-// ─────────────────────────────────────────────────────────────────────────────
 
 const problems = [
   {
@@ -301,14 +302,17 @@ export default function Home() {
 
           {/* ── Desktop: overlapping collage ── */}
           <FadeIn>
-            <div className="hidden lg:block relative mx-auto" style={{ height: "640px", maxWidth: "860px" }}>
+            <div className="hidden lg:block relative mx-auto" style={{ height: "860px", maxWidth: "900px" }}>
               {[
-                { top: 0,   left: 0,    width: 380, rotate: -2,   z: 10, aspect: "16/10" },
-                { top: 40,  left: 200,  width: 420, rotate: 1.5,  z: 30, aspect: "16/10" },
-                { top: 10,  left: 490,  width: 340, rotate: 2.5,  z: 20, aspect: "16/10" },
-                { top: 310, left: 0,    width: 340, rotate: -1.5, z: 40, aspect: "9/16"  },
-                { top: 280, left: 230,  width: 400, rotate: 0.5,  z: 50, aspect: "16/10" },
-                { top: 300, left: 520,  width: 320, rotate: -2.5, z: 35, aspect: "9/16"  },
+                { top: 0,   left: 0,   width: 265, rotate: -2.5, z: 5,  aspect: "9/16" },
+                { top: 20,  left: 170, width: 285, rotate: 1.5,  z: 15, aspect: "9/16" },
+                { top: 0,   left: 365, width: 265, rotate: 3,    z: 10, aspect: "9/16" },
+                { top: 10,  left: 560, width: 260, rotate: -2,   z: 8,  aspect: "9/16" },
+                { top: 290, left: 0,   width: 275, rotate: -1.5, z: 25, aspect: "9/16" },
+                { top: 310, left: 190, width: 295, rotate: 1,    z: 35, aspect: "9/16" },
+                { top: 290, left: 400, width: 265, rotate: -2.5, z: 28, aspect: "9/16" },
+                { top: 580, left: 80,  width: 280, rotate: -1,   z: 45, aspect: "9/16" },
+                { top: 575, left: 390, width: 290, rotate: 2,    z: 50, aspect: "9/16" },
               ].map((pos, i) => {
                 const shot = proofScreenshots[i];
                 return (
