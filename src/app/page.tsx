@@ -115,7 +115,6 @@ const courses = [
   { id: "c3", title: "Full Freelance Music Producer Playbook", price: 47, originalPrice: 97, pages: 80, badge: "Best Value" },
 ];
 
-const platforms = ["Fiverr", "Beatstars", "PayPal", "Instagram", "YouTube", "Gumroad"];
 
 export default function Home() {
   const [activeMobile, setActiveMobile] = useState<number | null>(null);
@@ -123,86 +122,13 @@ export default function Home() {
   return (
     <div className="bg-black overflow-x-hidden">
 
-      {/* ── HERO ── */}
-      <section className="relative min-h-screen flex flex-col justify-center pt-24 pb-0 overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 60%)" }} />
-
-        <div className="relative max-w-4xl mx-auto px-6 sm:px-10 w-full text-center">
-          {/* Social proof pill */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/8 bg-white/4 text-[11px] text-[#888] uppercase tracking-widest mb-8"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#c9a84c] animate-pulse" />
-            200+ Producers Already Inside
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h1
-            className="font-black uppercase leading-[0.9] tracking-tight mb-6 text-white"
-            style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(56px, 9vw, 120px)" }}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Stop Giving Your<br />
-            Music Away<br />
-            <span className="text-gold-gradient">For Free</span>
-          </motion.h1>
-
-          <motion.p
-            className="text-[#666] text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.22 }}
-          >
-            Learn the exact system I used to build a consistent income selling beats and music services — through step-by-step courses and 1-on-1 coaching.
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.32 }}
-          >
-            <Link href="/courses" className="btn-gold">
-              Get the Course — From $27 →
-            </Link>
-            <Link href="/booking" className="btn-outline">
-              Book a 1-on-1 Call
-            </Link>
-          </motion.div>
-
-          {/* Platform logos row */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.45 }}
-            className="flex flex-wrap items-center justify-center gap-4"
-          >
-            <span className="text-[10px] uppercase tracking-[0.2em] text-[#333] mr-2">Sell on</span>
-            {platforms.map((p) => (
-              <span key={p} className="text-[12px] font-bold text-[#333] uppercase tracking-wider hover:text-[#c9a84c] transition-colors cursor-default">
-                {p}
-              </span>
-            ))}
-          </motion.div>
-        </div>
-
-        <div className="h-20 bg-gradient-to-b from-transparent to-black pointer-events-none mt-16" />
-      </section>
-
-      {/* ── VIDEO ── */}
-      <section className="pb-16">
+      {/* ── VIDEO (first thing visible) ── */}
+      <section className="pt-24 pb-10">
         <motion.div
           className="max-w-4xl mx-auto px-6 sm:px-10"
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="relative border border-[#c9a84c]/12 rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.8),0_0_80px_rgba(201,168,76,0.06)]">
             <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
