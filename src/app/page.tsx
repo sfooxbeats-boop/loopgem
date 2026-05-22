@@ -15,6 +15,7 @@ const proofScreenshots = [
   { label: "Fiverr Review", src: "/proof/r%20(7).jpeg" },
   { label: "Fiverr Review", src: "/proof/r%20(8).jpeg" },
   { label: "Fiverr Review", src: "/proof/r%20(9).jpeg" },
+  { label: "Fiverr Review", src: "/proof/r%20(10).jpeg" },
 ];
 
 const problems = [
@@ -313,6 +314,7 @@ export default function Home() {
                 { top: 290, left: 400, width: 265, rotate: -2.5, z: 28, aspect: "9/16" },
                 { top: 580, left: 80,  width: 280, rotate: -1,   z: 45, aspect: "9/16" },
                 { top: 575, left: 390, width: 290, rotate: 2,    z: 50, aspect: "9/16" },
+                { top: 570, left: 650, width: 265, rotate: -1.5, z: 42, aspect: "9/16" },
               ].map((pos, i) => {
                 const shot = proofScreenshots[i];
                 return (
