@@ -7,16 +7,16 @@ import { FadeIn, StaggerChildren, StaggerItem } from "@/components/Animate";
 import Marquee from "@/components/Marquee";
 
 const proofScreenshots = [
-  { label: "Fiverr Review", src: "/proof/r%20(1).jpeg" },
-  { label: "Fiverr Review", src: "/proof/r%20(2).jpeg" },
-  { label: "Fiverr Review", src: "/proof/r%20(3).jpeg" },
-  { label: "Fiverr Review", src: "/proof/r%20(4).jpeg" },
-  { label: "Fiverr Review", src: "/proof/r%20(5).jpeg" },
-  { label: "Fiverr Review", src: "/proof/r%20(6).jpeg" },
-  { label: "Fiverr Review", src: "/proof/r%20(7).jpeg" },
-  { label: "Fiverr Review", src: "/proof/r%20(8).jpeg" },
-  { label: "Fiverr Review", src: "/proof/r%20(9).jpeg" },
-  { label: "Fiverr Review", src: "/proof/r%20(10).jpeg" },
+  { label: "Fiverr Review", src: "/proof/r1.jpeg" },
+  { label: "Fiverr Review", src: "/proof/r2.jpeg" },
+  { label: "Fiverr Review", src: "/proof/r3.jpeg" },
+  { label: "Fiverr Review", src: "/proof/r4.jpeg" },
+  { label: "Fiverr Review", src: "/proof/r5.jpeg" },
+  { label: "Fiverr Review", src: "/proof/r6.jpeg" },
+  { label: "Fiverr Review", src: "/proof/r7.jpeg" },
+  { label: "Fiverr Review", src: "/proof/r8.jpeg" },
+  { label: "Fiverr Review", src: "/proof/r9.jpeg" },
+  { label: "Fiverr Review", src: "/proof/r10.jpeg" },
 ];
 
 const problems = [
