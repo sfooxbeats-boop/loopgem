@@ -293,7 +293,7 @@ export default function Home() {
       <Marquee speed={50} />
 
       {/* ── PROOF — REAL RESULTS ── */}
-      <section className="py-28 overflow-hidden">
+      <section className="py-28">
         <div className="max-w-5xl mx-auto px-6 sm:px-10">
           <FadeIn className="text-center mb-16">
             <p className="text-[11px] uppercase tracking-[0.25em] text-[#c9a84c] font-bold mb-4">Proof · Real Numbers</p>
@@ -374,20 +374,23 @@ export default function Home() {
               return (
                 <motion.div
                   key={i}
-                  className="absolute rounded-2xl overflow-hidden border cursor-pointer"
+                  className="absolute rounded-2xl overflow-hidden cursor-pointer"
                   style={{
                     top: pos.top,
                     left: pos.left,
                     width: pos.w,
-                    borderColor: isActive ? "rgba(201,168,76,0.4)" : "rgba(255,255,255,0.08)",
+                    // zIndex MUST be in style, not animate
+                    zIndex: isActive ? 100 : pos.z,
+                    border: isActive
+                      ? "1px solid rgba(201,168,76,0.5)"
+                      : "1px solid rgba(255,255,255,0.08)",
+                    boxShadow: isActive
+                      ? "0 32px 80px rgba(0,0,0,0.95), 0 0 40px rgba(201,168,76,0.2)"
+                      : "0 12px 40px rgba(0,0,0,0.8)",
                   }}
                   animate={{
                     rotate: isActive ? 0 : pos.r,
-                    scale: isActive ? 1.08 : 1,
-                    zIndex: isActive ? 100 : pos.z,
-                    boxShadow: isActive
-                      ? "0 32px 80px rgba(0,0,0,0.95), 0 0 40px rgba(201,168,76,0.15)"
-                      : "0 12px 40px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.5)",
+                    scale: isActive ? 1.1 : 1,
                   }}
                   transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
                   onClick={(e) => {
