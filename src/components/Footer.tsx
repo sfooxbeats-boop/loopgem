@@ -15,7 +15,6 @@ export default function Footer() {
         >
           <div>
             <div className="lg-logo" style={{ marginBottom: 18 }}>
-              <span className="lg-logo-mark">L</span>
               <span>LoopGem</span>
             </div>
             <p
