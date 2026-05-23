@@ -270,9 +270,10 @@ body {
   background: var(--bg-2);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 28px 28px 24px;
+  padding: 22px 20px 20px;
   position: relative;
   overflow: hidden;
+  min-width: 0;
 }
 .stat-tile::before {
   content: '';
@@ -284,12 +285,14 @@ body {
 .stat-value {
   font-family: var(--font-archivo-black), sans-serif;
   font-weight: 400;
-  font-size: clamp(40px, 6vw, 72px);
+  font-size: clamp(28px, 3vw, 44px);
   line-height: 1;
   letter-spacing: -0.025em;
   color: var(--fg);
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  word-break: keep-all;
+  white-space: nowrap;
 }
 .stat-label {
   font-family: var(--font-jetbrains-mono), monospace;

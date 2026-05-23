@@ -13,10 +13,10 @@ const milestones = [
   { year: "2018", t: "Bedroom studio, no clients", d: "Got serious about producing in a tiny bedroom in Casablanca. Watched every YouTube tutorial that existed." },
   { year: "2019", t: "First beat sold online", d: "Joined Fiverr, BeatStars, SoundCloud. Sold my first beat for $25. Made every mistake possible." },
   { year: "2020", t: "Launched mixing services", d: "Realized 'mixing' converted easier than 'beats'. Added it as a service. Order volume tripled in 4 months." },
-  { year: "2021", t: "200+ orders delivered", d: "Stopped dropping prices to compete. Started selling outcomes. Repeat clients pushed me top-rated." },
+  { year: "2021", t: "Hundreds of orders delivered", d: "Stopped dropping prices to compete. Started selling outcomes. Repeat clients pushed me top-rated." },
   { year: "2022", t: "Released first course", d: "After 200 DMs asking 'how' — wrote the first PDF. Sold 80 copies the first month." },
   { year: "2023", t: "Launched LoopGem", d: "Brought everything under one roof — beats, services, courses, coaching." },
-  { year: "2026", t: "500+ orders. 50+ students", d: "5.0 average across 7 years on Fiverr. Now spending more time teaching than producing." },
+  { year: "2026", t: "$127k+ · 2,019 orders · 982 clients", d: "8 years on Fiverr, 5.0 average rating. Now spending more time teaching than producing." },
 ];
 
 const values = [
@@ -75,9 +75,9 @@ export default function AboutPage() {
                     margin: 0,
                   }}
                 >
-                  Music producer. Top-rated Fiverr seller since 2020. Built a full freelance income
-                  from a bedroom studio — and now teaches other producers how to do the same,
-                  without the gatekeeping.
+                  Music producer. On Fiverr since 2018, top-rated since 2020. $127k+ generated
+                  across 2,019 orders for 982 unique clients — built entirely from a bedroom
+                  studio. Now teaching other producers how to do the same, without the gatekeeping.
                 </p>
               </FadeIn>
             </div>
@@ -164,9 +164,9 @@ export default function AboutPage() {
             className="stats-strip"
           >
             {[
-              { v: 7, label: "Years producing" },
-              { v: 500, suffix: "+", label: "Orders delivered" },
-              { v: 127, prefix: "$", suffix: "k+", label: "In real Fiverr orders" },
+              { v: 127, prefix: "$", suffix: "k", label: "Generated on Fiverr" },
+              { v: 2019, label: "Orders delivered" },
+              { v: 982, label: "Unique clients" },
               { v: 5.0, dec: 1, label: "★ Average rating" },
             ].map((s, i) => (
               <FadeIn key={s.label} delay={i * 0.08}>

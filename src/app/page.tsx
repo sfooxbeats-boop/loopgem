@@ -180,7 +180,7 @@ export default function Home() {
                   ))}
                 </div>
                 <div style={{ color: "var(--accent)", fontSize: 13 }}>
-                  ★★★★★ <span style={{ color: "var(--fg-muted)" }}>5.0 · 200+ Fiverr orders</span>
+                  ★★★★★ <span style={{ color: "var(--fg-muted)" }}>5.0 · 2,019 Fiverr orders</span>
                 </div>
               </div>
               <div className="h-eyebrow" style={{ color: "var(--fg-dim)" }}>
@@ -258,7 +258,7 @@ export default function Home() {
                   <div style={{ color: "var(--accent)", fontSize: 13 }}>
                     ★★★★★{" "}
                     <span style={{ color: "var(--fg-muted)" }}>
-                      5.0 average · 200+ Fiverr orders
+                      5.0 average · 2,019 Fiverr orders
                     </span>
                   </div>
                   <div className="h-eyebrow" style={{ color: "var(--fg-dim)", marginTop: 4 }}>
@@ -272,27 +272,27 @@ export default function Home() {
               <div className="hero-stats">
                 <div className="stat-tile">
                   <span className="stat-value">
-                    <CountUp to={127} prefix="$" suffix="k+" />
+                    <CountUp to={127} prefix="$" suffix="k" />
                   </span>
                   <span className="stat-label">Generated on Fiverr</span>
                 </div>
                 <div className="stat-tile">
                   <span className="stat-value">
-                    <CountUp to={500} suffix="+" />
+                    <CountUp to={2019} />
                   </span>
                   <span className="stat-label">Orders delivered</span>
+                </div>
+                <div className="stat-tile">
+                  <span className="stat-value">
+                    <CountUp to={982} />
+                  </span>
+                  <span className="stat-label">Unique clients</span>
                 </div>
                 <div className="stat-tile">
                   <span className="stat-value">
                     <CountUp to={5.0} decimals={1} />
                   </span>
                   <span className="stat-label">Average rating</span>
-                </div>
-                <div className="stat-tile">
-                  <span className="stat-value">
-                    <CountUp to={7} />
-                  </span>
-                  <span className="stat-label">Years selling online</span>
                 </div>
               </div>
             </FadeIn>
@@ -397,7 +397,7 @@ export default function Home() {
                   }}
                 >
                   A system you can copy — built on{" "}
-                  <span className="text-gold-gradient">$127k+ in real orders.</span>
+                  <span className="text-gold-gradient">$127k+ across 2,019 real orders.</span>
                 </h2>
                 <p
                   style={{
@@ -433,7 +433,7 @@ export default function Home() {
 
       <Marquee
         items={[
-          "★★★★★ 5.0 average across 200+ orders",
+          "★★★★★ 5.0 average across 2,019 orders",
           "No bots. No fakes. Just real Fiverr buyers.",
           "Top-rated seller since 2020",
         ]}
@@ -475,10 +475,10 @@ export default function Home() {
             className="stats-strip"
           >
             {[
-              { v: "5.0", s: "★ Average rating", d: "across 200+ orders" },
+              { v: "5.0", s: "★ Average rating", d: "across 2,019 orders" },
+              { v: "982", s: "Unique clients", d: "since 2018" },
               { v: "24h", s: "Avg. delivery", d: "for most gigs" },
-              { v: "93%", s: "Repeat clients", d: "come back for more" },
-              { v: "12", s: "Countries served", d: "and counting" },
+              { v: "8 yrs", s: "On Fiverr", d: "top-rated since 2020" },
             ].map((s, i) => (
               <FadeIn key={s.s} delay={i * 0.08}>
                 <div>
