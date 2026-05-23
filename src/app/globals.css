@@ -285,13 +285,12 @@ body {
 .stat-value {
   font-family: var(--font-archivo-black), sans-serif;
   font-weight: 400;
-  font-size: clamp(28px, 3vw, 44px);
+  font-size: clamp(36px, 4vw, 56px);
   line-height: 1;
   letter-spacing: -0.025em;
   color: var(--fg);
   display: block;
   margin-bottom: 10px;
-  word-break: keep-all;
   white-space: nowrap;
 }
 .stat-label {
@@ -553,11 +552,8 @@ body {
 
 .hero-stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
-}
-@media (max-width: 720px) {
-  .hero-stats { grid-template-columns: repeat(2, 1fr); }
 }
 
 .module-list {
