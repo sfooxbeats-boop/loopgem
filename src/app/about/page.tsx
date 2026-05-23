@@ -1,146 +1,359 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FadeIn, CountUp } from "@/components/Animate";
+import Marquee from "@/components/Marquee";
 
 export const metadata: Metadata = {
   title: "About — LoopGem",
-  description: "LoopGem is built by Soufiane Remdane, known as Sfooxbeats — a music producer dedicated to quality sound and real producer education.",
+  description:
+    "LoopGem is built by Soufiane Remdane (Sfooxbeats) — a music producer dedicated to teaching other producers how to actually get paid online.",
 };
 
 const milestones = [
-  { year: "2018", event: "Started making beats — bedroom studio, big dreams" },
-  { year: "2019", event: "First beats sold online, first real clients" },
-  { year: "2020", event: "Launched professional mixing & mastering services" },
-  { year: "2021", event: "200+ clients served, placements across multiple genres" },
-  { year: "2022", event: "Released first producer course — real income strategies" },
-  { year: "2023", event: "Launched LoopGem as a full brand and platform" },
-  { year: "2024+", event: "500+ beats, 50+ artists, fully exclusive catalog" },
+  { year: "2018", t: "Bedroom studio, no clients", d: "Got serious about producing in a tiny bedroom in Casablanca. Watched every YouTube tutorial that existed." },
+  { year: "2019", t: "First beat sold online", d: "Joined Fiverr, BeatStars, SoundCloud. Sold my first beat for $25. Made every mistake possible." },
+  { year: "2020", t: "Launched mixing services", d: "Realized 'mixing' converted easier than 'beats'. Added it as a service. Order volume tripled in 4 months." },
+  { year: "2021", t: "200+ orders delivered", d: "Stopped dropping prices to compete. Started selling outcomes. Repeat clients pushed me top-rated." },
+  { year: "2022", t: "Released first course", d: "After 200 DMs asking 'how' — wrote the first PDF. Sold 80 copies the first month." },
+  { year: "2023", t: "Launched LoopGem", d: "Brought everything under one roof — beats, services, courses, coaching." },
+  { year: "2026", t: "500+ orders. 50+ students", d: "5.0 average across 7 years on Fiverr. Now spending more time teaching than producing." },
 ];
 
 const values = [
-  {
-    title: "Exclusive Only",
-    desc: "Every beat sold is yours alone — removed from the store the moment you purchase. No shared licenses, no grey areas.",
-    icon: (
-      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-      </svg>
-    ),
-  },
-  {
-    title: "Professional Quality",
-    desc: "Every beat, mix, and kit is crafted with the same standard as major-label production — no shortcuts.",
-    icon: (
-      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
-      </svg>
-    ),
-  },
-  {
-    title: "Real Education",
-    desc: "The courses teach what actually works — built from years of real experience making money as an independent producer.",
-    icon: (
-      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
-      </svg>
-    ),
-  },
+  { n: "01", t: "No theory", d: "Every framework was tested by me, on my own profile, with my own money. If it didn't work, it didn't make it in." },
+  { n: "02", t: "No upsell trap", d: "Three courses. Three call options. That's the whole catalog. No '$2k mastermind' waiting at the end." },
+  { n: "03", t: "Real receipts", d: "Every Fiverr review you see on this site is real and verifiable. No bots. No paid testimonials." },
+  { n: "04", t: "Producer-first", d: "Built by a producer, for producers. Not a marketing guru who happens to know about music." },
 ];
 
-export default function About() {
+export default function AboutPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <>
       {/* Hero */}
-      <div className="max-w-3xl mb-20">
-        <p className="text-xs font-semibold uppercase tracking-widest text-[#c9a84c] mb-2">The Producer Behind LoopGem</p>
-        <h1 className="text-4xl sm:text-5xl font-bold mb-2">
-          Soufiane Remdane
-        </h1>
-        <p className="text-xl text-[#c9a84c] font-semibold mb-6">aka Sfooxbeats</p>
-        <p className="text-[#a0a0a0] text-lg leading-relaxed mb-5">
-          LoopGem is the home of Sfooxbeats — a music producer who started in a bedroom and built a full production service brand from scratch.
-        </p>
-        <p className="text-[#a0a0a0] leading-relaxed mb-5">
-          Every beat in the store was crafted personally. Every mix and master is handled with attention to detail. Every course is built from real experience — not theory. The goal from day one has always been simple: give artists and producers access to professional-quality work and honest education, without the gatekeeping.
-        </p>
-        <p className="text-[#a0a0a0] leading-relaxed">
-          LoopGem operates on one rule — exclusive only. When you buy a beat here, it&apos;s yours alone. You get the files, the contract, and the confidence that no one else is rapping over the same track.
-        </p>
-      </div>
-
-      {/* Values */}
-      <section className="mb-20">
-        <h2 className="text-2xl font-bold mb-8">
-          How We <span className="text-gold-gradient">Operate</span>
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {values.map((v) => (
-            <div key={v.title} className="border border-[#2a2a2a] rounded-xl bg-[#111111] p-6">
-              <div className="w-11 h-11 rounded-lg bg-[#c9a84c]/10 text-[#c9a84c] flex items-center justify-center mb-4">
-                {v.icon}
-              </div>
-              <h3 className="font-bold mb-2">{v.title}</h3>
-              <p className="text-sm text-[#7a7a7a] leading-relaxed">{v.desc}</p>
+      <section style={{ padding: "88px 0 32px", position: "relative" }}>
+        <div className="glow-radial" aria-hidden="true" />
+        <div className="container-lg" style={{ position: "relative", zIndex: 1 }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1.7fr 1fr",
+              gap: 56,
+              alignItems: "end",
+            }}
+            className="about-hero-grid"
+          >
+            <div>
+              <FadeIn>
+                <div className="section-label" style={{ marginBottom: 24 }}>
+                  About · The producer
+                </div>
+              </FadeIn>
+              <FadeIn delay={0.06}>
+                <h1
+                  className="font-display"
+                  style={{
+                    fontSize: "clamp(48px, 8vw, 112px)",
+                    lineHeight: 0.92,
+                    margin: "0 0 28px",
+                    paddingBottom: "0.08em",
+                  }}
+                >
+                  Soufiane
+                  <br />
+                  Remdane.
+                  <br />
+                  <span className="text-gold-gradient">aka Sfooxbeats.</span>
+                </h1>
+              </FadeIn>
+              <FadeIn delay={0.14}>
+                <p
+                  style={{
+                    color: "var(--fg-muted)",
+                    fontSize: 19,
+                    lineHeight: 1.6,
+                    maxWidth: 580,
+                    margin: 0,
+                  }}
+                >
+                  Music producer. Top-rated Fiverr seller since 2020. Built a full freelance income
+                  from a bedroom studio — and now teaches other producers how to do the same,
+                  without the gatekeeping.
+                </p>
+              </FadeIn>
             </div>
-          ))}
+            <FadeIn delay={0.2}>
+              <div
+                className="ph-img"
+                style={{ aspectRatio: "4 / 5", borderRadius: "var(--radius-lg)" }}
+              >
+                <span className="ph-img-label">Portrait of Sfooxbeats in studio</span>
+              </div>
+            </FadeIn>
+          </div>
+          <style>{`
+            @media (max-width: 880px) {
+              .about-hero-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+            }
+          `}</style>
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="mb-20">
-        <h2 className="text-2xl font-bold mb-10">
-          The <span className="text-gold-gradient">Journey</span>
-        </h2>
-        <div className="relative pl-6 border-l border-[#2a2a2a] space-y-8">
-          {milestones.map((m) => (
-            <div key={m.year} className="relative">
-              <div className="absolute -left-[25px] w-4 h-4 rounded-full border-2 border-[#c9a84c] bg-[#0a0a0a]" />
-              <p className="text-xs font-bold text-[#c9a84c] mb-1">{m.year}</p>
-              <p className="text-sm text-[#a0a0a0]">{m.event}</p>
+      {/* Story */}
+      <section style={{ padding: "88px 0" }}>
+        <div
+          className="container-lg about-story-grid"
+          style={{ display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: 80 }}
+        >
+          <FadeIn>
+            <div style={{ position: "sticky", top: 96 }}>
+              <div className="section-label">The story</div>
+              <h2
+                className="font-display"
+                style={{ fontSize: 44, lineHeight: 0.95, margin: "8px 0 0" }}
+              >
+                From bedroom to <span className="text-gold-gradient">top-rated.</span>
+              </h2>
             </div>
-          ))}
+          </FadeIn>
+          <FadeIn delay={0.12}>
+            <div className="prose">
+              <p>
+                I started producing in 2018 with a laptop and a $30 mic. The first two years were
+                brutal. Every gig I posted on Fiverr got buried. Every cold DM I sent got ignored.
+                I lowered my prices to $5, then to free, then to &ldquo;I&apos;ll do anything for
+                a portfolio piece.&rdquo;
+              </p>
+              <p>
+                Around 2020 something clicked. I stopped trying to &ldquo;sell beats&rdquo; and
+                started selling <strong>outcomes</strong> — the song the artist actually wanted in
+                their head. I rebuilt my profile around it. Orders started coming in. Then more.
+                Then enough to quit doing client work I hated.
+              </p>
+              <p>
+                Today LoopGem is the result of 7 years of figuring this out the hard way. The
+                courses are the system, written down in plain language. The coaching calls are me
+                applying that system to your profile, your genre, your gigs.
+              </p>
+              <p>
+                I&apos;m not a marketing guru. I&apos;m a producer who learned how to sell —
+                because if I hadn&apos;t, I&apos;d still be making free beats in that bedroom.
+              </p>
+            </div>
+          </FadeIn>
+          <style>{`
+            @media (max-width: 880px) {
+              .about-story-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+            }
+          `}</style>
         </div>
       </section>
 
       {/* Stats */}
-      <section className="border border-[#2a2a2a] rounded-2xl bg-[#111111] p-10 mb-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {[
-            { value: "500+", label: "Beats Produced" },
-            { value: "200+", label: "Happy Clients" },
-            { value: "50+", label: "Artists Served" },
-            { value: "100%", label: "Exclusive Sales" },
-          ].map((s) => (
-            <div key={s.label}>
-              <p className="text-4xl font-bold text-gold-gradient">{s.value}</p>
-              <p className="text-sm text-[#7a7a7a] mt-1">{s.label}</p>
-            </div>
-          ))}
+      <section style={{ padding: "0 0 88px" }}>
+        <div className="container-lg">
+          <div
+            style={{
+              border: "1px solid var(--border-strong)",
+              background: "var(--bg-2)",
+              borderRadius: "var(--radius-lg)",
+              padding: "56px 48px",
+              display: "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: 32,
+            }}
+            className="stats-strip"
+          >
+            {[
+              { v: 7, label: "Years producing" },
+              { v: 500, suffix: "+", label: "Orders delivered" },
+              { v: 127, prefix: "$", suffix: "k+", label: "In real Fiverr orders" },
+              { v: 5.0, dec: 1, label: "★ Average rating" },
+            ].map((s, i) => (
+              <FadeIn key={s.label} delay={i * 0.08}>
+                <div>
+                  <div
+                    className="font-display"
+                    style={{
+                      fontSize: "clamp(48px, 6vw, 84px)",
+                      color: "var(--accent)",
+                      lineHeight: 1,
+                      marginBottom: 8,
+                    }}
+                  >
+                    <CountUp
+                      to={s.v}
+                      prefix={s.prefix || ""}
+                      suffix={s.suffix || ""}
+                      decimals={s.dec || 0}
+                    />
+                  </div>
+                  <div className="h-eyebrow" style={{ color: "var(--fg-dim)" }}>
+                    {s.label}
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+            <style>{`
+              @media (max-width: 880px) {
+                .stats-strip { grid-template-columns: repeat(2, 1fr) !important; padding: 32px !important; gap: 24px !important; }
+              }
+            `}</style>
+          </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <div className="text-center">
-        <h2 className="text-2xl font-bold mb-4">
-          Ready to Work <span className="text-gold-gradient">Together?</span>
-        </h2>
-        <p className="text-[#a0a0a0] mb-6 max-w-md mx-auto">
-          Whether you need an exclusive beat, a mix, a course, or a direct conversation — reach out.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/contact"
-            className="px-7 py-3 rounded-md bg-[#c9a84c] text-[#0a0a0a] font-semibold hover:bg-[#e5c97e] transition-colors duration-150"
-          >
-            Get in Touch
-          </Link>
-          <Link
-            href="/booking"
-            className="px-7 py-3 rounded-md border border-[#2a2a2a] text-[#ededed] font-semibold hover:border-[#c9a84c] hover:text-[#c9a84c] transition-colors duration-150"
-          >
-            Book a Call
-          </Link>
+      {/* Timeline */}
+      <section style={{ padding: "0 0 120px" }}>
+        <div className="container-lg">
+          <SectionHeader
+            eyebrow="The road"
+            title={
+              <>
+                Seven years. <span className="text-gold-gradient">Receipts attached.</span>
+              </>
+            }
+          />
+          <FadeIn>
+            <div>
+              {milestones.map((m) => (
+                <div key={m.year} className="tl-row">
+                  <div className="tl-year">{m.year}</div>
+                  <div>
+                    <div
+                      className="font-display"
+                      style={{ fontSize: 24, lineHeight: 1.05, marginBottom: 6 }}
+                    >
+                      {m.t}
+                    </div>
+                    <p
+                      style={{
+                        color: "var(--fg-muted)",
+                        margin: 0,
+                        fontSize: 15,
+                        lineHeight: 1.6,
+                        maxWidth: 720,
+                      }}
+                    >
+                      {m.d}
+                    </p>
+                  </div>
+                </div>
+              ))}
+              <div style={{ borderTop: "1px solid var(--border)" }} />
+            </div>
+          </FadeIn>
         </div>
-      </div>
+      </section>
+
+      {/* Values */}
+      <section style={{ padding: "0 0 120px" }}>
+        <div className="container-lg">
+          <SectionHeader eyebrow="How I operate" title="Four rules. No exceptions." />
+          <div
+            style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 18 }}
+            className="grid-4-2"
+          >
+            {values.map((v, i) => (
+              <FadeIn key={v.n} delay={i * 0.08}>
+                <div className="problem-card">
+                  <span className="problem-num">{v.n}</span>
+                  <h3
+                    className="font-display"
+                    style={{ fontSize: 22, margin: "0 0 10px", lineHeight: 1.05 }}
+                  >
+                    {v.t}
+                  </h3>
+                  <p
+                    style={{
+                      color: "var(--fg-muted)",
+                      fontSize: 14,
+                      lineHeight: 1.55,
+                      margin: 0,
+                    }}
+                  >
+                    {v.d}
+                  </p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+          <style>{`
+            @media (max-width: 1024px) { .grid-4-2 { grid-template-columns: repeat(2, 1fr) !important; } }
+            @media (max-width: 560px) { .grid-4-2 { grid-template-columns: 1fr !important; } }
+          `}</style>
+        </div>
+      </section>
+
+      <Marquee
+        items={[
+          "Casablanca · Producer · 2018→",
+          "Sfooxbeats · @Sfoox_beats",
+          "No gatekeeping. No fluff.",
+        ]}
+        accent
+      />
+
+      {/* CTA */}
+      <section style={{ padding: "120px 0 80px" }}>
+        <div className="container-lg" style={{ textAlign: "center", maxWidth: 880 }}>
+          <FadeIn>
+            <h2
+              className="font-display"
+              style={{
+                fontSize: "clamp(44px, 8vw, 96px)",
+                lineHeight: 0.94,
+                margin: "0 0 24px",
+                paddingBottom: "0.05em",
+              }}
+            >
+              Ready to actually <span className="text-gold-gradient">get paid?</span>
+            </h2>
+          </FadeIn>
+          <FadeIn delay={0.08}>
+            <p
+              style={{
+                color: "var(--fg-muted)",
+                fontSize: 18,
+                maxWidth: 560,
+                margin: "0 auto 32px",
+              }}
+            >
+              Start with a course. Or skip the reading and book me on Zoom.
+            </p>
+          </FadeIn>
+          <FadeIn delay={0.16}>
+            <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+              <Link href="/courses" className="btn btn-primary">
+                See the courses
+              </Link>
+              <Link href="/booking" className="btn btn-ghost">
+                Book a call
+              </Link>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function SectionHeader({
+  eyebrow,
+  title,
+}: {
+  eyebrow?: string;
+  title: React.ReactNode;
+}) {
+  return (
+    <div style={{ margin: "0 0 56px", maxWidth: 720 }}>
+      {eyebrow && (
+        <FadeIn>
+          <div className="section-label">{eyebrow}</div>
+        </FadeIn>
+      )}
+      <FadeIn delay={0.08}>
+        <h2 className="font-display section-h">{title}</h2>
+      </FadeIn>
     </div>
   );
 }

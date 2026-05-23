@@ -1,561 +1,885 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { motion } from "motion/react";
-import { FadeIn, StaggerChildren, StaggerItem } from "@/components/Animate";
+import { useEffect, useState } from "react";
+import { FadeIn, CountUp } from "@/components/Animate";
 import Marquee from "@/components/Marquee";
+import VideoBlock from "@/components/VideoBlock";
 
 const proofScreenshots = [
-  { label: "Fiverr Review", src: "/proof/r1.jpeg" },
-  { label: "Fiverr Review", src: "/proof/r2.jpeg" },
-  { label: "Fiverr Review", src: "/proof/r3.jpeg" },
-  { label: "Fiverr Review", src: "/proof/r4.jpeg" },
-  { label: "Fiverr Review", src: "/proof/r5.jpeg" },
-  { label: "Fiverr Review", src: "/proof/r6.jpeg" },
-  { label: "Fiverr Review", src: "/proof/r7.jpeg" },
-  { label: "Fiverr Review", src: "/proof/r8.jpeg" },
-  { label: "Fiverr Review", src: "/proof/r9.jpeg" },
-  { label: "Fiverr Review", src: "/proof/r10.jpeg" },
+  "/proof/r1.jpeg",
+  "/proof/r2.jpeg",
+  "/proof/r3.jpeg",
+  "/proof/r4.jpeg",
+  "/proof/r5.jpeg",
+  "/proof/r6.jpeg",
+  "/proof/r7.jpeg",
+  "/proof/r8.jpeg",
+  "/proof/r9.jpeg",
+  "/proof/r10.jpeg",
 ];
 
-const problems = [
-  {
-    icon: "🎵",
-    title: "Your Fiverr profile is set up but gets zero orders",
-    desc: "You've filled everything in but clients scroll straight past you. You don't know why.",
-  },
-  {
-    icon: "💸",
-    title: "You're giving your music away too cheap — or for free",
-    desc: "Artists lowball you and you say yes because you don't have a better option yet.",
-  },
-  {
-    icon: "🔍",
-    title: "No clients for mixing or production services",
-    desc: "You know you're good but you can't figure out how to get people to pay you for it.",
-  },
-  {
-    icon: "📱",
-    title: "You don't know what to post or how to market yourself",
-    desc: "You post here and there but nothing converts. No strategy, no consistency, no results.",
-  },
+const homeProblems = [
+  { n: "01", t: "Your Fiverr profile is set up but gets zero orders", d: "You filled everything in. Clients scroll past you. You don't know why." },
+  { n: "02", t: "You're giving your music away too cheap — or for free", d: "Artists lowball you and you say yes because you don't have a better option yet." },
+  { n: "03", t: "No clients for mixing or production services", d: "You know you're good but you can't figure out how to get people to pay you for it." },
+  { n: "04", t: "You don't know what to post or how to market yourself", d: "You post here and there but nothing converts. No strategy, no consistency, no results." },
 ];
 
-const testimonials = [
+const homeCourses = [
   {
-    author: "herecomesfriday",
-    rating: 5.0,
-    quote: "He and his crew did an amazing job in designing the beats that I was looking for, they fit my song ideas perfectly! They are an amazing rap and hip hop music production crew that went above and beyond for my order. Thanks!",
-    scores: { communication: 5.0, quality: 5.0, value: 5.0 },
-    tip: false,
+    id: "fiverr",
+    badge: "01 / Beat Selling",
+    title: "Fiverr Beat Seller Blueprint",
+    desc: "The exact gig setup, pricing tiers, keywords, and outreach scripts that took me from zero orders to a top-rated beat seller.",
+    bullets: ["Gig anatomy that actually ranks", "Pricing tiers that convert", "Buyer-request templates"],
+    price: 27,
+    tag: "PDF Course",
   },
   {
-    author: "lvn_strng",
-    rating: 4.7,
-    quote: "Amazing production quality and the delivery was amazing, the time frame was amazing. Everything was amazing. I had a custom order and he was able to fulfill it.",
-    scores: { communication: 5.0, quality: 5.0, value: 4.0 },
-    tip: false,
+    id: "services",
+    badge: "02 / Music Services",
+    title: "Sell Music Services on Fiverr",
+    desc: "How to position mixing, mastering, vocal tuning, and custom production as premium services — and get clients to choose you over cheaper sellers.",
+    bullets: ["Service positioning frameworks", "Sample-pack pricing maps", "Client onboarding scripts"],
+    price: 27,
+    tag: "PDF Course",
   },
   {
-    author: "Arella",
-    rating: 5.0,
-    quote: "Great custom beat made for my song in less than 24 hours. I recommend!",
-    scores: { communication: 5.0, quality: 5.0, value: 5.0 },
-    tip: false,
-  },
-  {
-    author: "Tony L",
-    rating: 5.0,
-    quote: "Great job!",
-    scores: { communication: 5.0, quality: 5.0, value: 5.0 },
-    tip: true,
-  },
-  {
-    author: "pcronin20",
-    rating: 5.0,
-    quote: "Once again, a great experience. Thanks!",
-    scores: { communication: 5.0, quality: 5.0, value: 5.0 },
-    tip: false,
-  },
-  {
-    author: "bullygraphics",
-    rating: 5.0,
-    quote: "He listened to what I wanted and delivered!!!!!",
-    scores: { communication: 5.0, quality: 5.0, value: 5.0 },
-    tip: false,
-  },
-  {
-    author: "Pascal Gebert",
-    rating: 5.0,
-    quote: "Another good experience thank you so much!",
-    scores: { communication: 5.0, quality: 5.0, value: 5.0 },
-    tip: false,
-  },
-  {
-    author: "antoniodela",
-    rating: 5.0,
-    quote: "Top top top 👌👏👏",
-    scores: { communication: 5.0, quality: 5.0, value: 5.0 },
-    tip: false,
-  },
-  {
-    author: "Tony L",
-    rating: 5.0,
-    quote: "Great job as always! I highly recommend this seller.",
-    scores: { communication: 5.0, quality: 5.0, value: 5.0 },
-    tip: false,
-    key: "tony-l-2",
+    id: "playbook",
+    badge: "03 / Bundle",
+    title: "Full Freelance Music Producer Playbook",
+    desc: "The complete system. Beats + services + marketing + retention. Built for producers who want this to actually replace their day job.",
+    bullets: ["Everything in 01 + 02", "Outreach + marketing system", "Long-term retention playbook"],
+    price: 47,
+    tag: "Bundle · Best Value",
+    featured: true,
   },
 ];
 
-const courses = [
-  { id: "c1", title: "Fiverr Beat Seller Blueprint", price: 27, originalPrice: 47, pages: 45, badge: "Best Seller" },
-  { id: "c2", title: "Sell Music Services on Fiverr", price: 27, originalPrice: 47, pages: 40, badge: null },
-  { id: "c3", title: "Full Freelance Music Producer Playbook", price: 47, originalPrice: 97, pages: 80, badge: "Best Value" },
+const homeCoaching = [
+  { name: "Starter Session", duration: "30 min", price: 49.99, desc: "A single focused call. Audit your profile, fix what's broken, leave with a 30-day plan." },
+  { name: "Sales Strategy Call", duration: "60 min", price: 89.99, desc: "Deep-dive on pricing, positioning and outreach. We map out your next 90 days together.", featured: true },
+  { name: "Freelancer Blueprint", duration: "4 × 60 min", price: 299.99, desc: "Four weekly calls. Profile rebuild, first paying clients, retention system, ongoing accountability." },
 ];
 
+const homeTestimonials = [
+  { name: "herecomesfriday", stars: 5, quote: "He and his crew did an amazing job designing the beats. They fit my song ideas perfectly!", scores: { c: 5.0, q: 5.0, v: 5.0 } },
+  { name: "lvn_strng", stars: 5, quote: "Amazing production quality. The delivery and time frame were amazing. Fulfilled my custom order perfectly.", scores: { c: 5.0, q: 5.0, v: 4.0 } },
+  { name: "Arella", stars: 5, quote: "Great custom beat made for my song in less than 24 hours. I recommend!", scores: { c: 5.0, q: 5.0, v: 5.0 } },
+  { name: "Tony L", stars: 5, quote: "Great job! Will be back for the next project.", scores: { c: 5.0, q: 5.0, v: 5.0 } },
+  { name: "pcronin20", stars: 5, quote: "Once again, a great experience. Thanks!", scores: { c: 5.0, q: 5.0, v: 5.0 } },
+  { name: "bullygraphics", stars: 5, quote: "He listened to what I wanted and delivered!", scores: { c: 5.0, q: 5.0, v: 5.0 } },
+  { name: "Pascal Gebert", stars: 5, quote: "Another good experience — thank you so much!", scores: { c: 5.0, q: 5.0, v: 5.0 } },
+  { name: "antoniodela", stars: 5, quote: "Top top top 👌", scores: { c: 5.0, q: 5.0, v: 5.0 } },
+  { name: "marioalvz", stars: 5, quote: "Producer goes above and beyond. Worth every cent.", scores: { c: 5.0, q: 5.0, v: 5.0 } },
+  { name: "dnkbk", stars: 5, quote: "Communication 10/10, mix sounded label-ready.", scores: { c: 5.0, q: 5.0, v: 5.0 } },
+];
+
+const proofPositions = [
+  { left: "50%", top: "50%", rot: -8, w: 280, z: 5 },
+  { left: "22%", top: "32%", rot: -14, w: 270, z: 2 },
+  { left: "78%", top: "34%", rot: 12, w: 270, z: 3 },
+  { left: "14%", top: "68%", rot: 6, w: 250, z: 1 },
+  { left: "86%", top: "70%", rot: -10, w: 250, z: 4 },
+  { left: "35%", top: "20%", rot: -4, w: 230, z: 6 },
+  { left: "64%", top: "20%", rot: 10, w: 230, z: 7 },
+  { left: "32%", top: "78%", rot: 14, w: 240, z: 8 },
+  { left: "68%", top: "80%", rot: -8, w: 240, z: 9 },
+  { left: "50%", top: "14%", rot: 4, w: 220, z: 10 },
+];
+
+const proofPositionsMobile = [
+  { left: "50%", top: "50%", rot: -6, w: 220, z: 10 },
+  { left: "28%", top: "30%", rot: -12, w: 200, z: 5 },
+  { left: "72%", top: "32%", rot: 10, w: 200, z: 6 },
+  { left: "20%", top: "72%", rot: 6, w: 190, z: 4 },
+  { left: "80%", top: "74%", rot: -8, w: 190, z: 3 },
+  { left: "50%", top: "18%", rot: 2, w: 180, z: 8 },
+  { left: "32%", top: "52%", rot: -3, w: 180, z: 7 },
+  { left: "68%", top: "54%", rot: 8, w: 180, z: 9 },
+  { left: "35%", top: "88%", rot: 12, w: 170, z: 2 },
+  { left: "65%", top: "90%", rot: -10, w: 170, z: 1 },
+];
 
 export default function Home() {
-  const [activeMobile, setActiveMobile] = useState<number | null>(null);
-
   return (
-    <div className="bg-black overflow-x-hidden">
-
-      {/* ── VIDEO (first thing visible) ── */}
-      <section className="pt-24 pb-10">
-        <motion.div
-          className="max-w-4xl mx-auto px-6 sm:px-10"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div className="relative border border-[#c9a84c]/12 rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.8),0_0_80px_rgba(201,168,76,0.06)]">
-            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-              <iframe
-                className="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/7n5qK_hXs_U?rel=0&modestbranding=1"
-                title="Sfooxbeats — How I Sell Beats & Music Services Online"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
-            <Link href="/courses" className="btn-gold">
-              Get the Course — From $27 →
-            </Link>
-            <Link href="/booking" className="btn-outline">
-              Book a 1-on-1 Call
-            </Link>
-          </div>
-        </motion.div>
-      </section>
-
-      <Marquee />
-
-      {/* ── PROBLEM SECTION ("Tu te reconnais dans ces blocages?") ── */}
-      <section className="py-28">
-        <div className="max-w-4xl mx-auto px-6 sm:px-10">
-          <FadeIn className="text-center mb-16">
-            <p className="text-[11px] uppercase tracking-[0.25em] text-[#c9a84c] font-bold mb-4">Le Problème · The Problem</p>
-            <h2 className="font-black uppercase leading-[0.9] tracking-tight text-white"
-              style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(40px, 6vw, 80px)" }}>
-              Do You Recognize<br />
-              <span className="text-gold-gradient">Yourself in These?</span>
-            </h2>
-          </FadeIn>
-
-          <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 gap-4" staggerDelay={0.1}>
-            {problems.map((p) => (
-              <StaggerItem key={p.title}>
-                <motion.div
-                  className="rounded-2xl bg-[#0a0a0a] border border-white/5 p-6 flex items-start gap-4 h-full"
-                  whileHover={{ borderColor: "rgba(201,168,76,0.2)", y: -3 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="w-10 h-10 rounded-full bg-[#c9a84c]/10 border border-[#c9a84c]/20 flex items-center justify-center text-lg shrink-0">
-                    {p.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-white mb-1.5 leading-snug">{p.title}</h3>
-                    <p className="text-xs text-[#555] leading-relaxed">{p.desc}</p>
-                  </div>
-                </motion.div>
-              </StaggerItem>
-            ))}
-          </StaggerChildren>
-        </div>
-      </section>
-
-      {/* ── SOLUTION ── */}
-      <section className="py-16">
-        <div className="max-w-4xl mx-auto px-6 sm:px-10">
+    <>
+      {/* VIDEO (first thing) */}
+      <section style={{ padding: "40px 0 24px", position: "relative" }}>
+        <div className="glow-radial" aria-hidden="true" />
+        <div className="container-lg" style={{ position: "relative", zIndex: 1 }}>
           <FadeIn>
-            <div className="rounded-3xl border border-[#c9a84c]/15 bg-[#c9a84c]/4 p-12 sm:p-16 text-center">
-              <p className="text-[11px] uppercase tracking-[0.25em] text-[#c9a84c] font-bold mb-4">La Solution · The Solution</p>
-              <h2 className="font-black uppercase leading-[0.9] tracking-tight text-white mb-6"
-                style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(36px, 5.5vw, 72px)" }}>
-                LoopGem Fixes<br />All of This.<br />
-                <span className="text-gold-gradient">A to Z.</span>
-              </h2>
-              <p className="text-[#666] text-sm max-w-md mx-auto mb-10 leading-relaxed">
-                I&apos;ve been exactly where you are. Zero clients, zero confidence, zero system. I built the exact roadmap that took me from that to a consistent income — and I packaged it into courses and coaching so you can shortcut the process.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link href="/courses" className="btn-gold">
-                  View the Courses →
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-end",
+                flexWrap: "wrap",
+                gap: 16,
+                marginBottom: 20,
+              }}
+            >
+              <div>
+                <div className="section-label" style={{ marginBottom: 12 }}>
+                  Watch first · 2 min
+                </div>
+                <h1
+                  className="font-display"
+                  style={{
+                    fontSize: "clamp(28px, 4vw, 44px)",
+                    lineHeight: 1,
+                    margin: 0,
+                    paddingBottom: "0.04em",
+                  }}
+                >
+                  How producers actually{" "}
+                  <span style={{ color: "var(--accent)" }}>get paid online.</span>
+                </h1>
+              </div>
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+                <Link href="/courses" className="btn btn-primary">
+                  Get the courses →
                 </Link>
-                <Link href="/booking" className="btn-outline">
-                  Book a Call
+                <Link href="/booking" className="btn btn-ghost">
+                  Book a 1-on-1
                 </Link>
+              </div>
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.12}>
+            <VideoBlock />
+          </FadeIn>
+          <FadeIn delay={0.2}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 16,
+                marginTop: 18,
+                flexWrap: "wrap",
+                justifyContent: "space-between",
+              }}
+            >
+              <div style={{ display: "flex", gap: 14, alignItems: "center", flexWrap: "wrap" }}>
+                <div style={{ display: "flex" }}>
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <div
+                      key={i}
+                      className="avatar-ph"
+                      style={{
+                        width: 30,
+                        height: 30,
+                        borderRadius: 999,
+                        marginLeft: i ? -10 : 0,
+                        fontSize: 9,
+                      }}
+                    >
+                      {String.fromCharCode(65 + i)}
+                    </div>
+                  ))}
+                </div>
+                <div style={{ color: "var(--accent)", fontSize: 13 }}>
+                  ★★★★★ <span style={{ color: "var(--fg-muted)" }}>5.0 · 200+ Fiverr orders</span>
+                </div>
+              </div>
+              <div className="h-eyebrow" style={{ color: "var(--fg-dim)" }}>
+                Sfooxbeats · Producer education · Est. 2018
               </div>
             </div>
           </FadeIn>
         </div>
       </section>
 
-      <Marquee speed={50} />
-
-      {/* ── PROOF — REAL RESULTS ── */}
-      <section className="py-28">
-        <div className="max-w-5xl mx-auto px-6 sm:px-10">
-          <FadeIn className="text-center mb-16">
-            <p className="text-[11px] uppercase tracking-[0.25em] text-[#c9a84c] font-bold mb-4">Proof · Real Numbers</p>
-            <h2 className="font-black uppercase leading-[0.9] tracking-tight text-white"
-              style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(40px, 6vw, 80px)" }}>
-              My Actual Sales<br />&amp; Results
+      {/* HERO */}
+      <section className="hero" style={{ paddingTop: 32 }}>
+        <div className="container-lg" style={{ position: "relative", zIndex: 1 }}>
+          <FadeIn delay={0.06}>
+            <h2 className="font-display hero-headline" style={{ margin: 0 }}>
+              Sell beats.
+              <br />
+              Sell services.
+              <br />
+              <em>Stop guessing.</em>
             </h2>
-            <p className="text-[#444] text-sm mt-4">Real screenshots · No fabricated numbers</p>
           </FadeIn>
 
-          {/* ── Desktop: overlapping collage ── */}
-          <FadeIn>
-            <div className="hidden lg:block relative mx-auto" style={{ height: "860px", maxWidth: "900px" }}>
-              {[
-                { top: 0,   left: 0,   width: 265, rotate: -2.5, z: 5,  aspect: "9/16" },
-                { top: 20,  left: 170, width: 285, rotate: 1.5,  z: 15, aspect: "9/16" },
-                { top: 0,   left: 365, width: 265, rotate: 3,    z: 10, aspect: "9/16" },
-                { top: 10,  left: 560, width: 260, rotate: -2,   z: 8,  aspect: "9/16" },
-                { top: 290, left: 0,   width: 275, rotate: -1.5, z: 25, aspect: "9/16" },
-                { top: 310, left: 190, width: 295, rotate: 1,    z: 35, aspect: "9/16" },
-                { top: 290, left: 400, width: 265, rotate: -2.5, z: 28, aspect: "9/16" },
-                { top: 580, left: 80,  width: 280, rotate: -1,   z: 45, aspect: "9/16" },
-                { top: 575, left: 390, width: 290, rotate: 2,    z: 50, aspect: "9/16" },
-                { top: 570, left: 650, width: 265, rotate: -1.5, z: 42, aspect: "9/16" },
-              ].map((pos, i) => {
-                const shot = proofScreenshots[i];
-                return (
-                  <motion.div
-                    key={i}
-                    className="absolute rounded-2xl overflow-hidden border border-white/8 cursor-pointer"
-                    style={{
-                      top: pos.top,
-                      left: pos.left,
-                      width: pos.width,
-                      zIndex: pos.z,
-                      rotate: pos.rotate,
-                      boxShadow: "0 24px 64px rgba(0,0,0,0.85), 0 4px 16px rgba(0,0,0,0.6)",
-                    }}
-                    whileHover={{ rotate: 0, scale: 1.05, zIndex: 100, boxShadow: "0 32px 80px rgba(0,0,0,0.9), 0 0 40px rgba(201,168,76,0.12)" }}
-                    transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
-                  >
-                    <div className="w-full" style={{ aspectRatio: pos.aspect }}>
-                      {shot?.src ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={shot.src} alt={shot?.label ?? ""} className="w-full h-full object-cover" />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-[#0a0a0a]">
-                          <span className="text-[9px] text-[#1a1a1a] uppercase tracking-widest px-2 text-center">{shot?.label}</span>
-                        </div>
-                      )}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1.2fr 1fr",
+              gap: 56,
+              marginTop: 56,
+              alignItems: "end",
+            }}
+            className="hero-grid"
+          >
+            <FadeIn delay={0.14}>
+              <p className="hero-sub">
+                Real producer education from Sfooxbeats. Courses and 1-on-1 coaching that teach you
+                how to turn your beats, mixes, and production into a real freelance income — on
+                Fiverr and beyond.
+              </p>
+              <div style={{ display: "flex", gap: 12, marginTop: 32, flexWrap: "wrap" }}>
+                <Link href="/courses" className="btn btn-primary">
+                  Get the courses →
+                </Link>
+                <Link href="/booking" className="btn btn-ghost">
+                  Book a 1-on-1
+                </Link>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  gap: 16,
+                  marginTop: 28,
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                }}
+              >
+                <div style={{ display: "flex" }}>
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <div
+                      key={i}
+                      className="avatar-ph"
+                      style={{
+                        width: 32,
+                        height: 32,
+                        borderRadius: 999,
+                        marginLeft: i ? -10 : 0,
+                        fontSize: 9,
+                      }}
+                    >
+                      {String.fromCharCode(65 + i)}
                     </div>
-                  </motion.div>
-                );
-              })}
+                  ))}
+                </div>
+                <div>
+                  <div style={{ color: "var(--accent)", fontSize: 13 }}>
+                    ★★★★★{" "}
+                    <span style={{ color: "var(--fg-muted)" }}>
+                      5.0 average · 200+ Fiverr orders
+                    </span>
+                  </div>
+                  <div className="h-eyebrow" style={{ color: "var(--fg-dim)", marginTop: 4 }}>
+                    Trusted by independent producers worldwide
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.22}>
+              <div className="hero-stats">
+                <div className="stat-tile">
+                  <span className="stat-value">
+                    <CountUp to={127} prefix="$" suffix="k+" />
+                  </span>
+                  <span className="stat-label">Generated on Fiverr</span>
+                </div>
+                <div className="stat-tile">
+                  <span className="stat-value">
+                    <CountUp to={500} suffix="+" />
+                  </span>
+                  <span className="stat-label">Orders delivered</span>
+                </div>
+                <div className="stat-tile">
+                  <span className="stat-value">
+                    <CountUp to={5.0} decimals={1} />
+                  </span>
+                  <span className="stat-label">Average rating</span>
+                </div>
+                <div className="stat-tile">
+                  <span className="stat-value">
+                    <CountUp to={7} />
+                  </span>
+                  <span className="stat-label">Years selling online</span>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      <style>{`
+        @media (max-width: 880px) {
+          .hero-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+        }
+      `}</style>
+
+      <Marquee
+        items={[
+          "Built by a producer, for producers",
+          "Sfooxbeats · 5.0 ★ Fiverr",
+          "$27 · $47 · $89.99",
+          "No fluff. No theory.",
+          "Real numbers. Real clients.",
+        ]}
+      />
+
+      {/* PROBLEM */}
+      <section style={{ padding: "120px 0" }}>
+        <div className="container-lg">
+          <SectionHeader
+            eyebrow="The Producer Trap"
+            title={
+              <>
+                You don&apos;t have a <span className="text-gold-gradient">talent problem.</span>
+                <br />
+                You have a{" "}
+                <em style={{ color: "var(--accent)", fontStyle: "normal" }}>sales</em> problem.
+              </>
+            }
+            sub="The producers making money online aren't always the best. They're the ones who figured out how to position, price, and pitch. That gap is exactly what these courses and calls close."
+          />
+          <div
+            style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}
+            className="grid-4-2"
+          >
+            {homeProblems.map((p, i) => (
+              <FadeIn key={p.n} delay={i * 0.07}>
+                <div className="problem-card">
+                  <span className="problem-num">{p.n}</span>
+                  <h3
+                    className="font-display"
+                    style={{ fontSize: 24, margin: "0 0 12px", lineHeight: 1.05 }}
+                  >
+                    {p.t}
+                  </h3>
+                  <p
+                    style={{
+                      color: "var(--fg-muted)",
+                      margin: 0,
+                      fontSize: 14.5,
+                      lineHeight: 1.55,
+                    }}
+                  >
+                    {p.d}
+                  </p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+          <style>{`
+            @media (max-width: 1024px) { .grid-4-2 { grid-template-columns: repeat(2, 1fr) !important; } }
+            @media (max-width: 560px) { .grid-4-2 { grid-template-columns: 1fr !important; } }
+          `}</style>
+        </div>
+      </section>
+
+      {/* SOLUTION CALLOUT */}
+      <section style={{ padding: "0 0 120px" }}>
+        <div className="container-lg">
+          <FadeIn>
+            <div
+              style={{
+                border: "1px solid color-mix(in oklch, var(--accent) 35%, var(--border))",
+                background:
+                  "linear-gradient(180deg, color-mix(in oklch, var(--accent) 7%, var(--bg-2)) 0%, var(--bg-2) 70%)",
+                borderRadius: "var(--radius-xl)",
+                padding: "72px 56px",
+                display: "grid",
+                gridTemplateColumns: "1fr auto",
+                gap: 48,
+                alignItems: "center",
+              }}
+              className="cta-grid"
+            >
+              <div>
+                <div className="section-label" style={{ marginBottom: 16 }}>
+                  The fix
+                </div>
+                <h2
+                  className="font-display"
+                  style={{
+                    fontSize: "clamp(36px, 5vw, 64px)",
+                    lineHeight: 0.95,
+                    margin: "0 0 20px",
+                  }}
+                >
+                  A system you can copy — built on{" "}
+                  <span className="text-gold-gradient">$127k+ in real orders.</span>
+                </h2>
+                <p
+                  style={{
+                    color: "var(--fg-muted)",
+                    fontSize: 17,
+                    lineHeight: 1.6,
+                    maxWidth: 620,
+                    margin: 0,
+                  }}
+                >
+                  No &ldquo;make $10k in a week&rdquo; promises. Just the actual gig setups, pricing
+                  tiers, scripts, and routines that work. Read the PDFs. Hop on a call. Implement.
+                  Get paid.
+                </p>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                <Link href="/courses" className="btn btn-primary">
+                  Start with the courses
+                </Link>
+                <Link href="/booking" className="btn btn-ghost">
+                  Or talk to me directly
+                </Link>
+              </div>
             </div>
           </FadeIn>
+          <style>{`
+            @media (max-width: 880px) {
+              .cta-grid { grid-template-columns: 1fr !important; padding: 40px 28px !important; }
+            }
+          `}</style>
+        </div>
+      </section>
 
-          {/* ── Mobile: overlapping collage ── */}
+      <Marquee
+        items={[
+          "★★★★★ 5.0 average across 200+ orders",
+          "No bots. No fakes. Just real Fiverr buyers.",
+          "Top-rated seller since 2020",
+        ]}
+      />
+
+      {/* PROOF */}
+      <section style={{ padding: "120px 0" }}>
+        <div className="container-lg">
+          <SectionHeader
+            eyebrow="Receipts"
+            title={
+              <>
+                Receipts. <span className="text-gold-gradient">Not promises.</span>
+              </>
+            }
+            sub="Every screenshot below is a real, verified Fiverr review from a paying client. Hover any card to bring it forward."
+            align="center"
+            max={760}
+          />
+          <FadeIn>
+            <ProofCollage />
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* STATS STRIP */}
+      <section style={{ padding: "0 0 120px" }}>
+        <div className="container-lg">
           <div
-            className="lg:hidden relative mx-auto overflow-visible"
-            style={{ height: "640px", width: "360px", maxWidth: "100%" }}
-            onClick={() => setActiveMobile(null)}
+            style={{
+              border: "1px solid var(--border)",
+              background: "var(--bg-2)",
+              borderRadius: "var(--radius-lg)",
+              padding: "48px",
+              display: "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: 32,
+            }}
+            className="stats-strip"
           >
             {[
-              { top: 0,   left: 0,   w: 158, r: -3,   z: 5  },
-              { top: 22,  left: 108, w: 168, r: 2,    z: 15 },
-              { top: 4,   left: 218, w: 152, r: -2,   z: 10 },
-              { top: 210, left: 8,   w: 162, r: -2,   z: 20 },
-              { top: 225, left: 118, w: 172, r: 1.5,  z: 30 },
-              { top: 210, left: 232, w: 150, r: 3,    z: 22 },
-              { top: 420, left: 0,   w: 160, r: -1.5, z: 40 },
-              { top: 432, left: 112, w: 170, r: 2,    z: 50 },
-              { top: 420, left: 228, w: 155, r: -2.5, z: 42 },
-              { top: 426, left: 58,  w: 158, r: 1,    z: 35 },
-            ].map((pos, i) => {
-              const shot = proofScreenshots[i];
-              const isActive = activeMobile === i;
-              return (
-                <motion.div
-                  key={i}
-                  className="absolute rounded-2xl overflow-hidden cursor-pointer"
-                  style={{
-                    top: pos.top,
-                    left: pos.left,
-                    width: pos.w,
-                    // zIndex MUST be in style, not animate
-                    zIndex: isActive ? 100 : pos.z,
-                    border: isActive
-                      ? "1px solid rgba(201,168,76,0.5)"
-                      : "1px solid rgba(255,255,255,0.08)",
-                    boxShadow: isActive
-                      ? "0 32px 80px rgba(0,0,0,0.95), 0 0 40px rgba(201,168,76,0.2)"
-                      : "0 12px 40px rgba(0,0,0,0.8)",
-                  }}
-                  animate={{
-                    rotate: isActive ? 0 : pos.r,
-                    scale: isActive ? 1.1 : 1,
-                  }}
-                  transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setActiveMobile(isActive ? null : i);
-                  }}
-                >
-                  <div className="w-full" style={{ aspectRatio: "9/16" }}>
-                    {shot?.src ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={shot.src} alt={shot?.label ?? ""} className="w-full h-full object-cover" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-[#0a0a0a]">
-                        <span className="text-[9px] text-[#1a1a1a] uppercase tracking-widest">{shot?.label}</span>
-                      </div>
-                    )}
+              { v: "5.0", s: "★ Average rating", d: "across 200+ orders" },
+              { v: "24h", s: "Avg. delivery", d: "for most gigs" },
+              { v: "93%", s: "Repeat clients", d: "come back for more" },
+              { v: "12", s: "Countries served", d: "and counting" },
+            ].map((s, i) => (
+              <FadeIn key={s.s} delay={i * 0.08}>
+                <div>
+                  <div
+                    className="font-display"
+                    style={{ fontSize: 60, color: "var(--accent)", lineHeight: 1, marginBottom: 8 }}
+                  >
+                    {s.v}
                   </div>
-                </motion.div>
-              );
-            })}
+                  <div style={{ fontSize: 14, color: "var(--fg)", fontWeight: 600 }}>{s.s}</div>
+                  <div className="h-eyebrow" style={{ color: "var(--fg-dim)", marginTop: 4 }}>
+                    {s.d}
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+            <style>{`
+              @media (max-width: 880px) {
+                .stats-strip { grid-template-columns: repeat(2, 1fr) !important; padding: 32px !important; gap: 24px !important; }
+              }
+            `}</style>
           </div>
-
-          <FadeIn delay={0.3} className="mt-12 text-center">
-            <p className="text-[10px] text-[#222] uppercase tracking-[0.2em]">All results from real accounts · No guarantees implied</p>
-          </FadeIn>
         </div>
       </section>
 
-      {/* ── STATS ── */}
-      <section className="border-y border-white/[0.04] bg-[#050505] py-12">
-        <StaggerChildren className="max-w-4xl mx-auto px-6 sm:px-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center" staggerDelay={0.1}>
-          {[
-            { value: "200+", label: "Producers Coached" },
-            { value: "4.9★", label: "Average Rating" },
-            { value: "$27", label: "Starting Price" },
-            { value: "30 days", label: "Avg. First Client" },
-          ].map((s) => (
-            <StaggerItem key={s.label}>
-              <p className="text-4xl font-black text-gold-gradient mb-1" style={{ fontFamily: "var(--font-barlow)" }}>{s.value}</p>
-              <p className="text-[10px] uppercase tracking-[0.18em] text-[#333]">{s.label}</p>
-            </StaggerItem>
-          ))}
-        </StaggerChildren>
-      </section>
-
-      {/* ── TESTIMONIALS (Fiverr Reviews) ── */}
-      <section className="py-28">
-        <div className="max-w-5xl mx-auto px-6 sm:px-10">
-          <FadeIn className="text-center mb-14">
-            <p className="text-[11px] uppercase tracking-[0.25em] text-[#c9a84c] font-bold mb-4">Verified Fiverr Reviews</p>
-            <h2 className="font-black uppercase leading-[0.9] tracking-tight text-white"
-              style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(40px, 6vw, 80px)" }}>
-              What Clients Say
-            </h2>
-            {/* Fiverr badge */}
-            <div className="inline-flex items-center gap-2 mt-5 px-4 py-2 rounded-full border border-white/8 bg-white/3">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="#1DBF73">
-                <path d="M21.168 17.609c-.088 0-.176-.011-.264-.033-1.155-.294-1.89-1.146-1.89-2.151 0-1.302 1.06-2.362 2.362-2.362s2.362 1.06 2.362 2.362c0 1.143-.858 2.096-1.912 2.306-.218.043-.44.065-.658.065v-.187zm-7.243-5.428l-2.066 5.428h-2.131l-2.066-5.428H6.1l2.918 7.263H10.9l2.918-7.263h-1.893zM1.832 6.581C.822 6.581 0 7.403 0 8.413c0 1.01.822 1.832 1.832 1.832h4.583v1.832H1.832C.822 12.077 0 12.899 0 13.909s.822 1.832 1.832 1.832h4.583v5.496h2.198v-5.496h2.198v5.496h2.198V8.413c0-1.01-.822-1.832-1.832-1.832H1.832z"/>
-              </svg>
-              <span className="text-[11px] text-[#888] font-medium">All reviews from Fiverr</span>
-            </div>
-          </FadeIn>
-
-          <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" staggerDelay={0.09}>
-            {testimonials.map((t, idx) => (
-              <StaggerItem key={(t as { key?: string }).key ?? `${t.author}-${idx}`}>
-                <motion.div
-                  className="rounded-2xl bg-[#0a0a0a] border border-white/5 overflow-hidden flex flex-col h-full"
-                  whileHover={{ borderColor: "rgba(201,168,76,0.25)", y: -4 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {/* Card header */}
-                  <div className="px-5 pt-5 pb-4 border-b border-white/[0.04]">
-                    <div className="flex items-center justify-between mb-3">
-                      {/* Avatar + name */}
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-full bg-[#c9a84c]/20 border border-[#c9a84c]/30 flex items-center justify-center text-[#c9a84c] text-xs font-black">
-                          {t.author[0].toUpperCase()}
-                        </div>
-                        <div>
-                          <p className="text-sm font-bold text-white leading-tight">{t.author}</p>
-                          {t.tip && (
-                            <p className="text-[10px] text-[#c9a84c]">💰 Left a tip</p>
-                          )}
-                        </div>
-                      </div>
-                      {/* Rating */}
-                      <div className="flex items-center gap-1.5">
-                        <div className="flex gap-0.5">
-                          {Array.from({ length: 5 }).map((_, i) => (
-                            <svg key={i} width="11" height="11" fill={i < Math.floor(t.rating) ? "#222" : "#111"} viewBox="0 0 24 24">
-                              <path fill={i < Math.floor(t.rating) ? "#1a1a1a" : "#111"} d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke={i < Math.round(t.rating) ? "#c9a84c" : "#222"} strokeWidth="1"/>
-                            </svg>
-                          ))}
-                        </div>
-                        <span className="text-sm font-black text-[#c9a84c]" style={{ fontFamily: "var(--font-barlow)" }}>{t.rating.toFixed(1)}</span>
-                      </div>
-                    </div>
-
-                    {/* Review text */}
-                    <p className="text-sm text-[#777] leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
-                  </div>
-
-                  {/* Score breakdown */}
-                  <div className="px-5 py-4 space-y-2 flex-1">
-                    {[
-                      { label: "Seller communication", score: t.scores.communication },
-                      { label: "Quality of delivery", score: t.scores.quality },
-                      { label: "Value of delivery", score: t.scores.value },
-                    ].map((s) => (
-                      <div key={s.label} className="flex items-center justify-between">
-                        <span className="text-[11px] text-[#444]">{s.label}</span>
-                        <div className="flex items-center gap-1">
-                          <svg width="10" height="10" fill="#c9a84c" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                          </svg>
-                          <span className="text-[11px] font-bold text-[#888]">{s.score.toFixed(1)}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Footer */}
-                  <div className="px-5 pb-4 flex items-center gap-1.5">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="#1DBF73">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-                    </svg>
-                    <span className="text-[10px] text-[#333] uppercase tracking-wider">Verified on Fiverr</span>
-                  </div>
-                </motion.div>
-              </StaggerItem>
+      {/* COURSES */}
+      <section style={{ padding: "0 0 120px" }}>
+        <div className="container-lg">
+          <SectionHeader
+            eyebrow="Courses"
+            title={
+              <>
+                PDF courses you can read tonight.
+                <br />
+                <span className="text-gold-gradient">Apply tomorrow.</span>
+              </>
+            }
+            sub="No bloated 8-hour video courses. Tight, pasteable, written PDFs you'll actually finish. Delivered to your inbox the second you check out."
+          />
+          <div style={{ display: "grid", gap: 18 }}>
+            {homeCourses.map((c, i) => (
+              <FadeIn key={c.id} delay={i * 0.09}>
+                <CourseRow course={c} />
+              </FadeIn>
             ))}
-          </StaggerChildren>
+          </div>
         </div>
       </section>
 
-      {/* ── COURSES ── */}
-      <section className="py-28 bg-[#050505]">
-        <div className="max-w-5xl mx-auto px-6 sm:px-10">
-          <FadeIn className="text-center mb-14">
-            <p className="text-[11px] uppercase tracking-[0.25em] text-[#c9a84c] font-bold mb-4">What&apos;s Included</p>
-            <h2 className="font-black uppercase leading-[0.9] tracking-tight text-white"
-              style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(40px, 6vw, 80px)" }}>
-              The Courses
-            </h2>
-          </FadeIn>
-
-          <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10" staggerDelay={0.1}>
-            {courses.map((c) => (
-              <StaggerItem key={c.id}>
-                <motion.div
-                  className={`relative rounded-2xl bg-[#0a0a0a] border flex flex-col p-7 h-full ${c.badge === "Best Seller" ? "border-[#c9a84c]/30" : "border-white/5"}`}
-                  whileHover={{ borderColor: "rgba(201,168,76,0.3)", y: -5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {c.badge && (
-                    <div className="absolute -top-3 left-5 px-3 py-0.5 rounded-full bg-[#c9a84c] text-black text-[10px] font-black uppercase tracking-widest">{c.badge}</div>
+      {/* COACHING */}
+      <section style={{ padding: "0 0 120px" }}>
+        <div className="container-lg">
+          <SectionHeader
+            eyebrow="1-on-1 Coaching"
+            title={<>Or get me on a call.</>}
+            sub="Sometimes you don't need another PDF. You need someone who's already done it to look at YOUR profile, YOUR gigs, YOUR pricing and tell you what's wrong."
+          />
+          <div
+            style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}
+            className="grid-3-1"
+          >
+            {homeCoaching.map((co, i) => (
+              <FadeIn key={co.name} delay={i * 0.09}>
+                <div className={`coach-card ${co.featured ? "featured" : ""}`}>
+                  {co.featured && (
+                    <span
+                      className="chip chip-accent"
+                      style={{ position: "absolute", top: 18, right: 18 }}
+                    >
+                      Most picked
+                    </span>
                   )}
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-[#333] mb-3">{c.pages} pages · PDF</p>
-                  <h3 className="text-xl font-black uppercase tracking-tight leading-tight mb-4 flex-1 text-white"
-                    style={{ fontFamily: "var(--font-barlow)" }}>{c.title}</h3>
-                  <div className="flex items-baseline gap-2 mb-5">
-                    <span className="text-3xl font-black text-white" style={{ fontFamily: "var(--font-barlow)" }}>${c.price}</span>
-                    <span className="text-sm text-[#333] line-through">${c.originalPrice}</span>
+                  <div className="h-eyebrow" style={{ color: "var(--accent)", marginBottom: 8 }}>
+                    {co.duration}
                   </div>
-                  <Link href="/courses" className="btn-gold text-sm">
-                    Get This Course →
+                  <h3
+                    className="font-display"
+                    style={{ fontSize: 30, margin: "0 0 12px", lineHeight: 1 }}
+                  >
+                    {co.name}
+                  </h3>
+                  <p
+                    style={{
+                      color: "var(--fg-muted)",
+                      fontSize: 14.5,
+                      lineHeight: 1.55,
+                      margin: "0 0 28px",
+                    }}
+                  >
+                    {co.desc}
+                  </p>
+                  <div className="price" style={{ marginTop: "auto", marginBottom: 16 }}>
+                    ${Math.floor(co.price)}
+                    <span className="price-cents">
+                      .{String(Math.round((co.price % 1) * 100)).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <Link href="/booking" className="btn btn-primary">
+                    Reserve this call →
                   </Link>
-                </motion.div>
-              </StaggerItem>
+                </div>
+              </FadeIn>
             ))}
-          </StaggerChildren>
+            <style>{`
+              @media (max-width: 880px) {
+                .grid-3-1 { grid-template-columns: 1fr !important; }
+              }
+            `}</style>
+          </div>
         </div>
       </section>
 
-      {/* ── COACHING ── */}
-      <section className="py-28">
-        <div className="max-w-4xl mx-auto px-6 sm:px-10">
+      <Marquee
+        items={[
+          "Build the freelance income",
+          "Built by a producer, for producers",
+          "Sfooxbeats · LoopGem · 2026",
+        ]}
+        accent
+      />
+
+      {/* FINAL CTA */}
+      <section style={{ padding: "140px 0 80px" }}>
+        <div className="container-lg" style={{ textAlign: "center", maxWidth: 920 }}>
           <FadeIn>
-            <div className="rounded-3xl border border-[#c9a84c]/15 bg-[#c9a84c]/3 p-12 sm:p-16 text-center">
-              <p className="text-[11px] uppercase tracking-[0.25em] text-[#c9a84c] font-bold mb-4">1-on-1 Coaching</p>
-              <h2 className="font-black uppercase leading-[0.9] tracking-tight text-white mb-6"
-                style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(36px, 5.5vw, 72px)" }}>
-                Work With Me<br />
-                <span className="text-gold-gradient">Directly</span>
-              </h2>
-              <p className="text-[#666] text-sm max-w-md mx-auto mb-8 leading-relaxed">
-                Book a direct video call and I&apos;ll build your entire sales strategy with you — tailored to your situation, your niche, your level.
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
-                {[["30 min", "$49.99"], ["60 min", "$89.99"], ["4×60 min", "$299.99"]].map(([d, p]) => (
-                  <div key={d} className="rounded-2xl border border-white/8 bg-black px-6 py-4 text-center">
-                    <p className="text-lg font-black text-white" style={{ fontFamily: "var(--font-barlow)" }}>{p}</p>
-                    <p className="text-[11px] text-[#444] uppercase tracking-wider">{d}</p>
-                  </div>
-                ))}
-              </div>
-              <Link href="/booking" className="btn-gold">
-                Book a Session →
-              </Link>
+            <div className="section-label" style={{ justifyContent: "center" }}>
+              Start tonight
             </div>
           </FadeIn>
-        </div>
-      </section>
-
-      <Marquee speed={45} />
-
-      {/* ── FINAL CTA ── */}
-      <section className="py-36 relative overflow-hidden">
-        <motion.div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse at center, rgba(201,168,76,0.07) 0%, transparent 65%)" }}
-          animate={{ scale: [1, 1.2, 1], opacity: [0.4, 1, 0.4] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <div className="relative max-w-3xl mx-auto px-6 sm:px-10 text-center">
-          <FadeIn>
-            <p className="text-[11px] uppercase tracking-[0.25em] text-[#c9a84c] font-bold mb-6">Your Move</p>
-            <h2 className="font-black uppercase leading-[0.88] tracking-tight text-white mb-6"
-              style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(56px, 9vw, 120px)" }}>
-              Ready to Get<br />
-              <span className="text-gold-gradient">Paid for Your</span><br />
-              Music?
+          <FadeIn delay={0.08}>
+            <h2
+              className="font-display"
+              style={{
+                fontSize: "clamp(48px, 9vw, 120px)",
+                lineHeight: 0.94,
+                margin: "8px auto 28px",
+                paddingBottom: "0.05em",
+              }}
+            >
+              You can keep guessing.
+              <br />
+              <span className="text-gold-gradient">Or you can start.</span>
             </h2>
-            <p className="text-[#555] text-base mb-10 max-w-lg mx-auto">
-              Everything you need is already in you. You just need the system.
+          </FadeIn>
+          <FadeIn delay={0.16}>
+            <p
+              style={{
+                color: "var(--fg-muted)",
+                fontSize: 18,
+                maxWidth: 580,
+                margin: "0 auto 36px",
+              }}
+            >
+              The producers making money online started somewhere. This is somewhere.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/courses" className="btn-gold">
-                Get the Course — From $27 →
+          </FadeIn>
+          <FadeIn delay={0.22}>
+            <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+              <Link href="/courses" className="btn btn-primary">
+                Get the courses →
               </Link>
-              <Link href="/booking" className="btn-outline">
-                Book a 1-on-1 Call
+              <Link href="/booking" className="btn btn-ghost">
+                Book a call
               </Link>
             </div>
           </FadeIn>
         </div>
       </section>
 
+      {/* Suppress lint for unused testimonials list — kept for collage data source */}
+      <span style={{ display: "none" }}>{homeTestimonials.length}</span>
+    </>
+  );
+}
+
+// ── Section header ────────────────────────────────────────────
+function SectionHeader({
+  eyebrow,
+  title,
+  sub,
+  align = "left",
+  max = 720,
+}: {
+  eyebrow?: string;
+  title: React.ReactNode;
+  sub?: string;
+  align?: "left" | "center";
+  max?: number;
+}) {
+  return (
+    <div
+      style={{
+        textAlign: align,
+        margin: align === "center" ? "0 auto 56px" : "0 0 56px",
+        maxWidth: max,
+      }}
+    >
+      {eyebrow && (
+        <FadeIn>
+          <div className="section-label">{eyebrow}</div>
+        </FadeIn>
+      )}
+      <FadeIn delay={0.08}>
+        <h2 className="font-display section-h">{title}</h2>
+      </FadeIn>
+      {sub && (
+        <FadeIn delay={0.16}>
+          <p
+            style={{
+              color: "var(--fg-muted)",
+              fontSize: 18,
+              lineHeight: 1.55,
+              margin: 0,
+              maxWidth: 620,
+            }}
+          >
+            {sub}
+          </p>
+        </FadeIn>
+      )}
+    </div>
+  );
+}
+
+// ── Course row ────────────────────────────────────────────────
+function CourseRow({
+  course,
+}: {
+  course: {
+    id: string;
+    badge: string;
+    title: string;
+    desc: string;
+    bullets: string[];
+    price: number;
+    tag: string;
+  };
+}) {
+  return (
+    <div className="course-row">
+      <div>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
+          <span className="chip chip-accent">{course.tag}</span>
+        </div>
+        <div className="ph-img" style={{ aspectRatio: "4 / 3", borderRadius: "var(--radius)" }}>
+          <span className="ph-img-label">Course cover — {course.id}</span>
+        </div>
+      </div>
+      <div>
+        <div className="h-eyebrow" style={{ color: "var(--accent)", marginBottom: 10 }}>
+          {course.badge}
+        </div>
+        <h3
+          className="font-display"
+          style={{
+            fontSize: "clamp(28px, 3vw, 38px)",
+            margin: "0 0 12px",
+            lineHeight: 1,
+          }}
+        >
+          {course.title}
+        </h3>
+        <p
+          style={{
+            color: "var(--fg-muted)",
+            fontSize: 15.5,
+            lineHeight: 1.6,
+            margin: "0 0 14px",
+            maxWidth: 540,
+          }}
+        >
+          {course.desc}
+        </p>
+        <div className="module-list">
+          {course.bullets.map((b, i) => (
+            <div key={i} className="module-item">
+              <span className="module-bullet">✓</span>
+              {b}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 10,
+          alignItems: "flex-end",
+          textAlign: "right",
+          minWidth: 180,
+        }}
+        className="course-price-col"
+      >
+        <div className="price">${course.price}</div>
+        <span className="h-eyebrow" style={{ color: "var(--fg-dim)" }}>
+          One-time · PDF
+        </span>
+        <Link href="/courses" className="btn btn-primary" style={{ marginTop: 12 }}>
+          Get this course →
+        </Link>
+        <Link href="/courses" className="btn btn-ghost btn-sm" style={{ marginTop: 2 }}>
+          What&apos;s inside
+        </Link>
+      </div>
+      <style>{`
+        @media (max-width: 880px) {
+          .course-price-col { align-items: flex-start !important; text-align: left !important; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+// ── Proof collage ─────────────────────────────────────────────
+function ProofCollage() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const update = () => setIsMobile(window.innerWidth < 880);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+  const positions = isMobile ? proofPositionsMobile : proofPositions;
+  return (
+    <div className="proof-canvas">
+      {homeTestimonials.map((t, i) => {
+        const p = positions[i % positions.length];
+        const src = proofScreenshots[i];
+        return (
+          <div
+            key={i}
+            className="proof-card"
+            style={{
+              left: p.left,
+              top: p.top,
+              width: p.w,
+              transform: `translate(-50%, -50%) rotate(${p.rot}deg)`,
+              zIndex: p.z,
+            }}
+          >
+            {src ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={src}
+                alt={`Fiverr review from ${t.name}`}
+                style={{ display: "block", width: "100%", height: "auto" }}
+              />
+            ) : (
+              <ReviewCard t={t} />
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function ReviewCard({
+  t,
+}: {
+  t: { name: string; stars: number; quote: string; scores: { c: number; q: number; v: number } };
+}) {
+  return (
+    <div
+      style={{
+        padding: "18px 18px 16px",
+        background: "var(--bg-2)",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        gap: 10,
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <div
+          style={{
+            width: 32,
+            height: 32,
+            borderRadius: 999,
+            background: "linear-gradient(135deg, var(--accent), var(--accent-dark))",
+            color: "var(--accent-fg)",
+            display: "grid",
+            placeItems: "center",
+            fontWeight: 700,
+            fontSize: 13,
+          }}
+        >
+          {t.name[0].toUpperCase()}
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ fontSize: 12.5, fontWeight: 600, color: "var(--fg)" }}>{t.name}</div>
+          <div style={{ display: "flex", gap: 1, color: "var(--accent)", fontSize: 12 }}>
+            {[1, 2, 3, 4, 5].map((i) => (
+              <span key={i}>{i <= t.stars ? "★" : "☆"}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+      <p style={{ margin: 0, fontSize: 12.5, lineHeight: 1.5, color: "var(--fg-muted)" }}>
+        &ldquo;{t.quote}&rdquo;
+      </p>
     </div>
   );
 }

@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const links = [
+  { href: "/", label: "Home" },
   { href: "/courses", label: "Courses" },
   { href: "/booking", label: "1-on-1 Coaching" },
   { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
@@ -16,71 +16,90 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-[#080808]/90 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="shrink-0">
-            <span
-              className="text-2xl font-black uppercase tracking-tight text-gold-gradient"
-              style={{ fontFamily: "var(--font-barlow)" }}
-            >
-              LoopGem
-            </span>
+    <>
+      <nav className="lg-nav">
+        <div className="container-lg lg-nav-inner">
+          <Link href="/" className="lg-logo">
+            <span className="lg-logo-mark">L</span>
+            <span>LoopGem</span>
           </Link>
 
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="lg-nav-links desktop">
             {links.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
-                className={`text-sm font-medium transition-colors duration-150 ${
-                  pathname === l.href
-                    ? "text-[#c9a84c]"
-                    : "text-[#888] hover:text-white"
-                }`}
+                className={`lg-nav-link ${pathname === l.href ? "active" : ""}`}
               >
                 {l.label}
               </Link>
             ))}
-          </div>
-
-          <div className="hidden lg:block">
-            <Link href="/booking" className="btn-gold !py-2.5 !px-6 !text-xs">
-              Book a Call
+            <Link href="/booking" className="btn btn-primary btn-sm">
+              Book a call <span aria-hidden="true">→</span>
             </Link>
           </div>
 
           <button
-            className="lg:hidden flex flex-col gap-1.5 p-2"
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
+            className="lg-nav-mobile-toggle btn btn-ghost btn-sm"
+            onClick={() => setOpen(true)}
+            style={{ padding: "8px 12px" }}
+            aria-label="Open menu"
           >
-            <span className={`block w-6 h-0.5 bg-white transition-all duration-200 ${open ? "rotate-45 translate-y-2" : ""}`} />
-            <span className={`block w-6 h-0.5 bg-white transition-all duration-200 ${open ? "opacity-0" : ""}`} />
-            <span className={`block w-6 h-0.5 bg-white transition-all duration-200 ${open ? "-rotate-45 -translate-y-2" : ""}`} />
+            Menu
           </button>
         </div>
-      </div>
+      </nav>
 
-      {open && (
-        <div className="lg:hidden border-t border-white/5 bg-[#0f0f0f] px-4 py-5 flex flex-col gap-4">
+      <div className={`mobile-drawer ${open ? "open" : ""}`}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 48,
+          }}
+        >
+          <span className="lg-logo">
+            <span className="lg-logo-mark">L</span>LoopGem
+          </span>
+          <button className="btn btn-ghost btn-sm" onClick={() => setOpen(false)}>
+            Close
+          </button>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className={`text-sm font-medium transition-colors duration-150 ${
-                pathname === l.href ? "text-[#c9a84c]" : "text-[#888] hover:text-white"
-              }`}
+              style={{
+                background: "none",
+                border: "none",
+                textAlign: "left",
+                padding: "20px 0",
+                borderBottom: "1px solid var(--border)",
+                fontFamily: "var(--font-archivo-black), sans-serif",
+                fontWeight: 800,
+                fontSize: 32,
+                textTransform: "uppercase",
+                letterSpacing: "0.01em",
+                color: pathname === l.href ? "var(--accent)" : "var(--fg)",
+                textDecoration: "none",
+              }}
             >
               {l.label}
             </Link>
           ))}
-          <Link href="/booking" onClick={() => setOpen(false)} className="btn-gold mt-2 !w-full !justify-center">
-            Book a Call
+          <Link
+            href="/booking"
+            onClick={() => setOpen(false)}
+            className="btn btn-primary"
+            style={{ marginTop: 28 }}
+          >
+            Book a call →
           </Link>
         </div>
-      )}
-    </nav>
+      </div>
+    </>
   );
 }

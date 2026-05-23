@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { FadeIn } from "@/components/Animate";
 
 function ContactForm() {
   const searchParams = useSearchParams();
@@ -18,7 +19,6 @@ function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Submits to Formspree — replace YOUR_FORM_ID with your Formspree form ID
     await fetch("https://formspree.io/f/YOUR_FORM_ID", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -28,160 +28,250 @@ function ContactForm() {
     setLoading(false);
   };
 
-  const reasons = [
-    "Course question",
-    "1-on-1 coaching inquiry",
-    "General question",
-    "Other",
-  ];
+  const reasons = ["Course question", "1-on-1 coaching inquiry", "General question", "Other"];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      {/* Header */}
-      <div className="text-center mb-16">
-        <p className="text-xs font-semibold uppercase tracking-widest text-[#c9a84c] mb-2">Get in Touch</p>
-        <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-          Let&apos;s <span className="text-gold-gradient">Talk</span>
-        </h1>
-        <p className="text-[#a0a0a0] max-w-xl mx-auto">
-          Questions, custom requests, or just want to connect — send a message and we&apos;ll get back to you within 24 hours.
-        </p>
-      </div>
+    <section style={{ padding: "88px 0 120px", position: "relative" }}>
+      <div className="glow-radial" aria-hidden="true" />
+      <div className="container-lg" style={{ position: "relative", zIndex: 1 }}>
+        <FadeIn>
+          <div className="section-label" style={{ marginBottom: 24 }}>
+            Get in touch
+          </div>
+        </FadeIn>
+        <FadeIn delay={0.06}>
+          <h1
+            className="font-display"
+            style={{
+              fontSize: "clamp(48px, 8vw, 104px)",
+              lineHeight: 0.95,
+              margin: "0 0 24px",
+              paddingBottom: "0.08em",
+            }}
+          >
+            Let&apos;s <span className="text-gold-gradient">talk.</span>
+          </h1>
+        </FadeIn>
+        <FadeIn delay={0.14}>
+          <p
+            style={{
+              color: "var(--fg-muted)",
+              fontSize: 18,
+              lineHeight: 1.6,
+              maxWidth: 620,
+              margin: "0 0 56px",
+            }}
+          >
+            Questions, custom requests, or just want to connect — send a message and we&apos;ll get
+            back to you within 24 hours.
+          </p>
+        </FadeIn>
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-        {/* Left info */}
-        <div className="lg:col-span-2 flex flex-col gap-8">
-          {/* Quick links */}
-          <div>
-            <h2 className="text-sm font-semibold mb-4 text-[#ededed]">What are you reaching out about?</h2>
-            <div className="flex flex-col gap-2">
-              {reasons.map((r) => (
-                <button
-                  key={r}
-                  onClick={() => setForm((f) => ({ ...f, subject: r }))}
-                  className={`text-left text-sm px-4 py-2.5 rounded-lg border transition-colors duration-150 ${
-                    form.subject === r
-                      ? "border-[#c9a84c] bg-[#c9a84c]/5 text-[#c9a84c]"
-                      : "border-[#2a2a2a] bg-[#111111] text-[#7a7a7a] hover:border-[#3a3a3a] hover:text-[#a0a0a0]"
-                  }`}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1.4fr",
+            gap: 40,
+          }}
+          className="contact-grid"
+        >
+          <FadeIn>
+            <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+              <div>
+                <div
+                  className="h-eyebrow"
+                  style={{ color: "var(--accent)", marginBottom: 14 }}
                 >
-                  {r}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Direct links */}
-          <div className="border border-[#2a2a2a] rounded-xl bg-[#111111] p-5">
-            <h2 className="text-sm font-semibold mb-4 text-[#ededed]">Or jump straight to it</h2>
-            <div className="space-y-3">
-              {[
-                { label: "Browse Courses", href: "/courses", icon: "🎓" },
-                { label: "Book a 1-on-1 Call", href: "/booking", icon: "📅" },
-                { label: "About Sfooxbeats", href: "/about", icon: "👤" },
-              ].map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className="flex items-center gap-3 text-sm text-[#7a7a7a] hover:text-[#c9a84c] transition-colors duration-150"
-                >
-                  <span>{l.icon}</span>
-                  {l.label}
-                  <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="ml-auto">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                  </svg>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Response time */}
-          <div className="flex items-center gap-3 text-xs text-[#7a7a7a]">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shrink-0" />
-            Typical response time: under 24 hours
-          </div>
-        </div>
-
-        {/* Contact form */}
-        <div className="lg:col-span-3">
-          {sent ? (
-            <div className="border border-[#c9a84c]/30 rounded-2xl bg-[#c9a84c]/5 p-12 text-center flex flex-col items-center justify-center h-full min-h-[400px]">
-              <div className="w-14 h-14 rounded-full bg-[#c9a84c]/20 border border-[#c9a84c]/40 flex items-center justify-center mb-5">
-                <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#c9a84c" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                </svg>
-              </div>
-              <h2 className="text-xl font-bold mb-2">Message Sent!</h2>
-              <p className="text-[#a0a0a0] text-sm max-w-xs">
-                Thanks for reaching out. We&apos;ll get back to you within 24 hours.
-              </p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="border border-[#2a2a2a] rounded-2xl bg-[#111111] p-8 flex flex-col gap-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-xs font-medium text-[#a0a0a0] mb-2">Name *</label>
-                  <input
-                    type="text"
-                    required
-                    value={form.name}
-                    onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-                    className="w-full px-4 py-3 rounded-lg bg-[#161616] border border-[#2a2a2a] text-[#ededed] text-sm placeholder-[#4a4a4a] focus:outline-none focus:border-[#c9a84c] transition-colors duration-150"
-                    placeholder="Your name"
-                  />
+                  What about?
                 </div>
-                <div>
-                  <label className="block text-xs font-medium text-[#a0a0a0] mb-2">Email *</label>
-                  <input
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-                    className="w-full px-4 py-3 rounded-lg bg-[#161616] border border-[#2a2a2a] text-[#ededed] text-sm placeholder-[#4a4a4a] focus:outline-none focus:border-[#c9a84c] transition-colors duration-150"
-                    placeholder="your@email.com"
-                  />
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  {reasons.map((r) => (
+                    <button
+                      key={r}
+                      type="button"
+                      onClick={() => setForm((f) => ({ ...f, subject: r }))}
+                      className="lg-input"
+                      style={{
+                        textAlign: "left",
+                        cursor: "pointer",
+                        borderColor: form.subject === r ? "var(--accent)" : "var(--border-strong)",
+                        color: form.subject === r ? "var(--accent)" : "var(--fg)",
+                        background: form.subject === r ? "var(--accent-soft)" : "var(--bg)",
+                        fontWeight: 600,
+                      }}
+                    >
+                      {r}
+                    </button>
+                  ))}
                 </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-medium text-[#a0a0a0] mb-2">Subject</label>
-                <input
-                  type="text"
-                  value={form.subject}
-                  onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))}
-                  className="w-full px-4 py-3 rounded-lg bg-[#161616] border border-[#2a2a2a] text-[#ededed] text-sm placeholder-[#4a4a4a] focus:outline-none focus:border-[#c9a84c] transition-colors duration-150"
-                  placeholder="What's this about?"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-[#a0a0a0] mb-2">Message *</label>
-                <textarea
-                  required
-                  rows={6}
-                  value={form.message}
-                  onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-                  className="w-full px-4 py-3 rounded-lg bg-[#161616] border border-[#2a2a2a] text-[#ededed] text-sm placeholder-[#4a4a4a] focus:outline-none focus:border-[#c9a84c] transition-colors duration-150 resize-none"
-                  placeholder="Tell us what you need..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-3.5 rounded-lg bg-[#c9a84c] text-[#0a0a0a] font-semibold text-sm hover:bg-[#e5c97e] disabled:opacity-60 disabled:cursor-not-allowed transition-colors duration-150"
+              <div
+                className="card"
+                style={{ padding: 24, background: "var(--bg-2)" }}
               >
-                {loading ? "Sending..." : "Send Message"}
-              </button>
+                <div
+                  className="h-eyebrow"
+                  style={{ color: "var(--accent)", marginBottom: 14 }}
+                >
+                  Or jump straight to it
+                </div>
+                <div style={{ display: "grid", gap: 10 }}>
+                  {[
+                    { label: "Browse Courses", href: "/courses" },
+                    { label: "Book a 1-on-1 Call", href: "/booking" },
+                    { label: "About Sfooxbeats", href: "/about" },
+                  ].map((l) => (
+                    <Link
+                      key={l.href}
+                      href={l.href}
+                      className="lg-nav-link"
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        color: "var(--fg)",
+                      }}
+                    >
+                      {l.label} <span aria-hidden="true">→</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
 
-              <p className="text-xs text-[#4a4a4a] text-center">
-                We don&apos;t share your information with anyone. Ever.
-              </p>
-            </form>
-          )}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                  color: "var(--fg-muted)",
+                  fontSize: 13,
+                }}
+              >
+                <span
+                  style={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: 999,
+                    background: "var(--accent)",
+                    display: "inline-block",
+                  }}
+                />
+                Typical response: under 24 hours
+              </div>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.1}>
+            {sent ? (
+              <div
+                className="card"
+                style={{
+                  padding: 56,
+                  textAlign: "center",
+                  background: "var(--bg-2)",
+                  borderColor: "color-mix(in oklch, var(--accent) 35%, var(--border))",
+                }}
+              >
+                <div
+                  className="font-display"
+                  style={{ fontSize: 36, color: "var(--accent)", marginBottom: 10 }}
+                >
+                  Message sent!
+                </div>
+                <p style={{ color: "var(--fg-muted)", margin: 0 }}>
+                  Thanks for reaching out. We&apos;ll get back to you within 24 hours.
+                </p>
+              </div>
+            ) : (
+              <form
+                onSubmit={handleSubmit}
+                className="card"
+                style={{ padding: 32, display: "grid", gap: 14, background: "var(--bg-2)" }}
+              >
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+                  <Field label="Name *">
+                    <input
+                      className="lg-input"
+                      required
+                      value={form.name}
+                      onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                      placeholder="Your name"
+                    />
+                  </Field>
+                  <Field label="Email *">
+                    <input
+                      className="lg-input"
+                      type="email"
+                      required
+                      value={form.email}
+                      onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                      placeholder="you@email.com"
+                    />
+                  </Field>
+                </div>
+                <Field label="Subject">
+                  <input
+                    className="lg-input"
+                    value={form.subject}
+                    onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))}
+                    placeholder="What's this about?"
+                  />
+                </Field>
+                <Field label="Message *">
+                  <textarea
+                    className="lg-input"
+                    required
+                    rows={6}
+                    value={form.message}
+                    onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+                    placeholder="Tell us what you need..."
+                    style={{ resize: "vertical" }}
+                  />
+                </Field>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="btn btn-primary"
+                  style={{ width: "100%", opacity: loading ? 0.6 : 1 }}
+                >
+                  {loading ? "Sending..." : "Send message →"}
+                </button>
+                <p
+                  style={{
+                    color: "var(--fg-dim)",
+                    fontSize: 12,
+                    textAlign: "center",
+                    margin: 0,
+                  }}
+                >
+                  We don&apos;t share your information with anyone. Ever.
+                </p>
+              </form>
+            )}
+          </FadeIn>
         </div>
+
+        <style>{`
+          @media (max-width: 880px) {
+            .contact-grid { grid-template-columns: 1fr !important; }
+          }
+        `}</style>
       </div>
-    </div>
+    </section>
+  );
+}
+
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <label style={{ display: "block" }}>
+      <span
+        className="h-eyebrow"
+        style={{ color: "var(--fg-muted)", display: "block", marginBottom: 7 }}
+      >
+        {label}
+      </span>
+      {children}
+    </label>
   );
 }
 

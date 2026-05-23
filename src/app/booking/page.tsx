@@ -1,219 +1,354 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState } from "react";
+import { FadeIn } from "@/components/Animate";
+import Marquee from "@/components/Marquee";
 import PayPalButton from "@/components/PayPalButton";
-import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "1-on-1 Coaching — LoopGem",
-  description: "Book a 1-on-1 coaching call with Sfooxbeats. Learn how to sell beats and music services as a freelance music producer.",
-};
-
-const sessions = [
+const tiers = [
   {
-    id: "s1",
-    n: "01",
+    id: "starter",
     name: "Starter Session",
-    duration: "30 minutes",
+    duration: "30 min",
     price: 49.99,
-    best: "Producers just starting to sell",
-    highlight: false,
-    perks: [
-      "How to price your beats & services",
-      "Best platforms to start selling on",
-      "Setting up your first profile or store",
-      "Q&A — bring your exact questions",
-      "Recorded session on request",
+    desc: "One focused call. We audit your Fiverr profile, fix the obvious leaks, and leave you with a 30-day plan you can start tomorrow.",
+    includes: [
+      "Full profile + gig audit",
+      "Pricing tier feedback",
+      "Top 3 things to change this week",
+      "Written recap delivered post-call",
     ],
   },
   {
-    id: "s2",
-    n: "02",
+    id: "sales",
     name: "Sales Strategy Call",
-    duration: "60 minutes",
+    duration: "60 min",
     price: 89.99,
-    best: "Producers ready to scale",
-    highlight: true,
-    perks: [
-      "Full breakdown of your setup & gaps",
-      "Pricing strategy for all your services",
-      "How to attract mixing, beat & production clients",
-      "Social media & content plan that converts",
-      "How to close deals via DM and email",
-      "Recorded session + written action plan",
+    desc: "We map your 90-day strategy. Pricing, positioning, gig overhaul, outreach scripts — calibrated for YOUR genre and where you are now.",
+    includes: [
+      "Everything in Starter, plus:",
+      "90-day strategy map",
+      "Outreach script bundle (DM + Buyer Requests)",
+      "Gig rewrite suggestions on the call",
+      "Follow-up email within 48h",
     ],
+    featured: true,
   },
   {
-    id: "s3",
-    n: "03",
+    id: "blueprint",
     name: "Freelancer Blueprint",
-    duration: "4 × 60 min (monthly)",
+    duration: "4 × 60 min",
     price: 299.99,
-    best: "Producers building a real income",
-    highlight: false,
-    perks: [
-      "4 weekly calls — full freelance build",
-      "Beat selling, services & brand strategy",
-      "Online presence & profile setup",
-      "How to get recurring clients & retainers",
-      "Contracts, licensing & protecting your work",
-      "Unlimited email support between sessions",
-      "All sessions recorded",
+    desc: "Four weekly calls. We rebuild your profile, land your first paying clients, install a retention system, and keep accountability week-to-week.",
+    includes: [
+      "Week 1 — Profile + gig rebuild",
+      "Week 2 — First-client outreach push",
+      "Week 3 — Pricing ladder + upsell scripts",
+      "Week 4 — Retention + content rhythm",
+      "Voice-note support between calls",
     ],
   },
 ];
 
-const steps = [
-  { n: "01", title: "Pick a Session", desc: "Choose the plan that fits where you are and where you want to go." },
-  { n: "02", title: "Pay Securely", desc: "Checkout via PayPal or card. No subscription, no commitment." },
-  { n: "03", title: "Get Your Link", desc: "Scheduling email arrives within 24 hours. Pick your time." },
-  { n: "04", title: "Show Up & Learn", desc: "Join on Zoom or Google Meet. Come with questions, leave with a plan." },
+const howItWorks = [
+  { n: "01", t: "Book + pay", d: "Pick the call type that matches where you're stuck. Pay securely. You're locked in." },
+  { n: "02", t: "Pre-call form", d: "You get a short form to fill in — Fiverr profile link, genre, what you've tried, what is broken." },
+  { n: "03", t: "The call", d: "We get on Zoom. No fluff. Screen share, walk through your profile, and rebuild it live." },
+  { n: "04", t: "The recap", d: "You get a written summary, links, and homework within 48h. So nothing gets lost." },
 ];
 
-const faqs = [
-  { q: "What platform do we use?", a: "Zoom or Google Meet — your choice. The link is sent to your email after booking." },
-  { q: "What will I actually learn?", a: "How to sell beats, mixing services, and music products online — pricing, platforms, getting clients, social media strategy, and closing deals." },
-  { q: "Do I need to already be making money?", a: "No. The Starter Session is built for producers who haven't sold yet and want a clear starting point." },
-  { q: "What should I prepare?", a: "Send your current setup links or questions in advance so we can skip the intro and get straight to work." },
-  { q: "Can I get a refund?", a: "Yes. Cancel at least 24 hours before and receive a full refund or free rescheduling." },
-  { q: "Are sessions recorded?", a: "Yes — recordings available on request for the Sales Strategy Call and Freelancer Blueprint." },
+const bookingFaqs = [
+  { q: "How is this different from the PDF courses?", a: "The courses are the system, written down. The calls are me applying that system to YOUR profile, YOUR genre, YOUR pricing. If you can implement on your own, the courses are enough. If you want a human to look at your stuff and tell you what to do, that is what the calls are for." },
+  { q: "Do you have a refund policy?", a: "If after your call you genuinely feel it did not help, email me within 7 days and I will refund the call in full. No drama. (Has not happened yet.)" },
+  { q: "Do I need to be on Fiverr already?", a: "No. About 30% of the producers I coach are starting from scratch. We will set up your profile from zero on the call." },
+  { q: "What if I sell beats on a different platform?", a: "Most of the system carries over — BeatStars, Airbit, Soundee, your own site. We will adapt to whichever platform you actually want to sell on." },
+  { q: "Can I bring my own questions?", a: "Yes. The 30-min Starter is mostly me auditing your profile. The 60-min Strategy call splits time between audit + your specific questions. The Blueprint is fully shaped around what you bring." },
+  { q: "What if I am a complete beginner producer?", a: "These calls are about SELLING, not about how to mix a 808 or arrange a song. If you have not yet got beats you are willing to charge for, start with FL Studio or YouTube tutorials, then come back." },
 ];
 
-export default function Booking() {
+export default function BookingPage() {
+  const [openFaq, setOpenFaq] = useState<number>(0);
+
   return (
-    <div className="bg-[#080808] min-h-screen">
-
-      {/* Header */}
-      <div className="border-b border-white/[0.04] py-20 px-6 sm:px-10 lg:px-16">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-3 mb-8">
-            <span className="text-sm font-black text-[#c9a84c]" style={{ fontFamily: "var(--font-barlow)" }}>1-on-1</span>
-            <div className="w-8 h-px bg-[#c9a84c]/30" />
-            <span className="text-[10px] uppercase tracking-[0.25em] text-[#444]">Coaching Sessions</span>
-          </div>
-          <h1 className="font-black uppercase leading-none tracking-tight mb-5"
-            style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(60px, 9vw, 120px)" }}>
-            Book a Call
-          </h1>
-          <p className="text-[#555] text-sm max-w-md">
-            Direct, personalised coaching — no theory, no fluff. Learn exactly what to do to start getting paid as a music producer.
-          </p>
-        </div>
-      </div>
-
-      {/* Session cards */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.03] mb-px">
-          {sessions.map((s) => (
-            <div
-              key={s.id}
-              className={`relative flex flex-col p-10 ${s.highlight ? "bg-[#0d0d0d]" : "bg-[#080808] hover:bg-[#0a0a0a]"} transition-colors`}
-            >
-              {s.highlight && (
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-[#c9a84c]" />
-              )}
-
-              <div className="flex items-start justify-between mb-6">
-                <div>
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-[#c9a84c] mb-1">{s.duration}</p>
-                  <h2 className="font-black uppercase tracking-tight"
-                    style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(22px, 2.5vw, 30px)" }}>
-                    {s.name}
-                  </h2>
-                </div>
-                {s.highlight && (
-                  <span className="text-[9px] bg-[#c9a84c] text-black px-2 py-0.5 font-black uppercase tracking-widest shrink-0 mt-1">Popular</span>
-                )}
-              </div>
-
-              <p className="text-[11px] text-[#333] uppercase tracking-wider mb-6">Best for: {s.best}</p>
-
-              <ul className="space-y-2.5 flex-1 mb-8">
-                {s.perks.map((p) => (
-                  <li key={p} className="flex items-start gap-2.5 text-sm text-[#555]">
-                    <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#c9a84c" strokeWidth={2.5} className="shrink-0 mt-0.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                    </svg>
-                    {p}
-                  </li>
-                ))}
-              </ul>
-
-              <div className="border-t border-white/[0.04] pt-6">
-                <p className="font-black mb-5" style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(36px, 4vw, 48px)" }}>
-                  ${s.price.toFixed(2)}
-                </p>
-                <PayPalButton
-                  amount={s.price.toFixed(2)}
-                  description={`LoopGem Coaching: ${s.name} (${s.duration})`}
-                  successMessage="Booking confirmed! You'll receive a scheduling link within 24 hours."
-                />
-              </div>
+    <>
+      {/* Hero */}
+      <section style={{ padding: "88px 0 56px", position: "relative" }}>
+        <div className="glow-radial" aria-hidden="true" />
+        <div className="container-lg" style={{ position: "relative", zIndex: 1 }}>
+          <FadeIn>
+            <div className="section-label" style={{ marginBottom: 24 }}>
+              1-on-1 coaching
             </div>
-          ))}
-        </div>
-
-        {/* How it works */}
-        <div className="border border-white/[0.04] bg-[#050505] p-10 sm:p-14 mb-16 mt-16">
-          <div className="mb-12">
-            <p className="text-[10px] uppercase tracking-[0.25em] text-[#c9a84c] mb-3">Simple Process</p>
-            <h2 className="font-black uppercase tracking-tight"
-              style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(36px, 5vw, 64px)" }}>
-              How It Works
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-            {steps.map((s) => (
-              <div key={s.n}>
-                <p className="font-black leading-none mb-4 select-none"
-                  style={{ fontFamily: "var(--font-barlow)", fontSize: "72px", color: "#c9a84c", opacity: 0.1 }}>
-                  {s.n}
-                </p>
-                <h3 className="text-lg font-black uppercase tracking-tight mb-2"
-                  style={{ fontFamily: "var(--font-barlow)" }}>
-                  {s.title}
-                </h3>
-                <p className="text-xs text-[#444] leading-relaxed">{s.desc}</p>
+          </FadeIn>
+          <FadeIn delay={0.06}>
+            <h1
+              className="font-display"
+              style={{
+                fontSize: "clamp(56px, 9vw, 128px)",
+                lineHeight: 0.95,
+                margin: "0 0 28px",
+                maxWidth: 1100,
+                paddingBottom: "0.08em",
+              }}
+            >
+              Get me on a call.
+              <br />
+              <span className="text-gold-gradient">Fix what&apos;s broken.</span>
+            </h1>
+          </FadeIn>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1.4fr 1fr",
+              gap: 56,
+              alignItems: "end",
+            }}
+            className="booking-hero-grid"
+          >
+            <FadeIn delay={0.14}>
+              <p
+                style={{
+                  color: "var(--fg-muted)",
+                  fontSize: 18,
+                  lineHeight: 1.6,
+                  maxWidth: 620,
+                  margin: 0,
+                }}
+              >
+                Pick a session length. Tell me what&apos;s broken. We hop on Zoom and rebuild your
+                profile, pricing and outreach in real time. No &ldquo;frameworks&rdquo; — just
+                direct work on your gigs.
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.22}>
+              <div style={{ display: "flex", gap: 22, flexWrap: "wrap" }}>
+                <Mini label="Sessions" value="3" />
+                <Mini label="Format" value="Zoom" />
+                <Mini label="Recap" value="Written" />
+                <Mini label="Spots / wk" value="6" />
               </div>
+            </FadeIn>
+          </div>
+          <style>{`
+            @media (max-width: 880px) {
+              .booking-hero-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+            }
+          `}</style>
+        </div>
+      </section>
+
+      <Marquee
+        items={[
+          "6 spots a week",
+          "Zoom · 30 / 60 / 4×60 min",
+          "7-day refund policy",
+          "No upsells — just the call",
+        ]}
+      />
+
+      {/* Tiers */}
+      <section style={{ padding: "88px 0" }}>
+        <div className="container-lg">
+          <SectionHeader
+            eyebrow="Pick your call"
+            title="Three formats. Pick yours."
+            sub="Short audit, deep strategy, or the full 4-week rebuild. Same producer on the other side of the call either way."
+          />
+          <div
+            style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}
+            className="grid-3-1"
+          >
+            {tiers.map((t, i) => (
+              <FadeIn key={t.id} delay={i * 0.09}>
+                <div className={`coach-card ${t.featured ? "featured" : ""}`}>
+                  {t.featured && (
+                    <span
+                      className="chip chip-accent"
+                      style={{ position: "absolute", top: 18, right: 18 }}
+                    >
+                      Most picked
+                    </span>
+                  )}
+                  <div className="h-eyebrow" style={{ color: "var(--accent)", marginBottom: 8 }}>
+                    {t.duration}
+                  </div>
+                  <h3
+                    className="font-display"
+                    style={{ fontSize: 30, margin: "0 0 10px", lineHeight: 1 }}
+                  >
+                    {t.name}
+                  </h3>
+                  <p
+                    style={{
+                      color: "var(--fg-muted)",
+                      fontSize: 14.5,
+                      lineHeight: 1.55,
+                      margin: "0 0 18px",
+                    }}
+                  >
+                    {t.desc}
+                  </p>
+                  <div style={{ display: "grid", gap: 8, marginBottom: 22 }}>
+                    {t.includes.map((b, idx) => (
+                      <div key={idx} className="module-item" style={{ fontSize: 13.5 }}>
+                        <span className="module-bullet">✓</span>
+                        <span>{b}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="price" style={{ marginTop: "auto", marginBottom: 14 }}>
+                    ${Math.floor(t.price)}
+                    <span className="price-cents">
+                      .{String(Math.round((t.price % 1) * 100)).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <PayPalButton
+                    amount={t.price.toFixed(2)}
+                    description={`LoopGem Coaching: ${t.name} (${t.duration})`}
+                    successMessage="Booking confirmed! You'll receive a scheduling link within 24 hours."
+                  />
+                </div>
+              </FadeIn>
+            ))}
+            <style>{`
+              @media (max-width: 880px) {
+                .grid-3-1 { grid-template-columns: 1fr !important; }
+              }
+            `}</style>
+          </div>
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section style={{ padding: "0 0 120px" }}>
+        <div className="container-lg">
+          <SectionHeader
+            eyebrow="How it works"
+            title="From clicking 'book' to working on your gigs."
+            sub="No mystery. Four steps. Most producers go from booking to call inside a week."
+          />
+          <div
+            style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 18 }}
+            className="grid-4-2"
+          >
+            {howItWorks.map((s, i) => (
+              <FadeIn key={s.n} delay={i * 0.08}>
+                <div className="problem-card" style={{ height: "100%" }}>
+                  <span className="problem-num">{s.n}</span>
+                  <h3
+                    className="font-display"
+                    style={{ fontSize: 22, margin: "0 0 10px", lineHeight: 1.05 }}
+                  >
+                    {s.t}
+                  </h3>
+                  <p
+                    style={{
+                      color: "var(--fg-muted)",
+                      fontSize: 14,
+                      lineHeight: 1.55,
+                      margin: 0,
+                    }}
+                  >
+                    {s.d}
+                  </p>
+                </div>
+              </FadeIn>
             ))}
           </div>
+          <style>{`
+            @media (max-width: 1024px) { .grid-4-2 { grid-template-columns: repeat(2, 1fr) !important; } }
+            @media (max-width: 560px) { .grid-4-2 { grid-template-columns: 1fr !important; } }
+          `}</style>
         </div>
+      </section>
 
-        {/* FAQ */}
-        <div className="mb-16">
-          <h2 className="font-black uppercase tracking-tight mb-10"
-            style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(36px, 5vw, 64px)" }}>
-            FAQ
-          </h2>
-          <div className="divide-y divide-white/[0.04]">
-            {faqs.map((faq) => (
-              <details key={faq.q} className="group py-5">
-                <summary className="flex items-center justify-between cursor-pointer list-none text-sm font-semibold text-[#888] hover:text-white transition-colors">
-                  {faq.q}
-                  <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="shrink-0 group-open:rotate-180 transition-transform duration-300 text-[#333]">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                  </svg>
-                </summary>
-                <p className="mt-3 text-sm text-[#444] leading-relaxed">{faq.a}</p>
-              </details>
-            ))}
-          </div>
+      {/* FAQ */}
+      <section style={{ padding: "0 0 120px" }}>
+        <div className="container-lg" style={{ maxWidth: 880 }}>
+          <SectionHeader eyebrow="FAQ" title="Questions before booking?" align="left" />
+          <FadeIn>
+            <div>
+              {bookingFaqs.map((f, i) => (
+                <div
+                  key={i}
+                  className="faq-item"
+                  data-open={openFaq === i}
+                  onClick={() => setOpenFaq(openFaq === i ? -1 : i)}
+                >
+                  <div className="faq-q">
+                    <span>{f.q}</span>
+                    <span className="faq-icon">+</span>
+                  </div>
+                  <div className="faq-a">
+                    <p style={{ margin: 0, lineHeight: 1.65, fontSize: 15.5 }}>{f.a}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
         </div>
+      </section>
+    </>
+  );
+}
 
-        {/* Courses upsell */}
-        <div className="border border-[#c9a84c]/15 bg-[#c9a84c]/4 p-10 sm:p-14 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
-          <div>
-            <p className="text-[10px] uppercase tracking-[0.25em] text-[#c9a84c] mb-2">Prefer self-paced learning?</p>
-            <h2 className="font-black uppercase tracking-tight leading-none"
-              style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(28px, 3.5vw, 48px)" }}>
-              Browse PDF Courses
-            </h2>
-            <p className="text-[#555] text-xs mt-2">From $27 · Yours forever · Read at your own pace</p>
-          </div>
-          <Link href="/courses"
-            className="shrink-0 px-8 py-3.5 border border-[#c9a84c]/30 text-[#c9a84c] font-black text-xs uppercase tracking-[0.2em] hover:bg-[#c9a84c] hover:text-black hover:border-[#c9a84c] transition-colors whitespace-nowrap"
-            style={{ fontFamily: "var(--font-barlow)" }}>
-            View Courses
-          </Link>
-        </div>
+function SectionHeader({
+  eyebrow,
+  title,
+  sub,
+  align = "left",
+}: {
+  eyebrow?: string;
+  title: React.ReactNode;
+  sub?: string;
+  align?: "left" | "center";
+}) {
+  return (
+    <div
+      style={{
+        textAlign: align,
+        margin: align === "center" ? "0 auto 56px" : "0 0 56px",
+        maxWidth: 720,
+      }}
+    >
+      {eyebrow && (
+        <FadeIn>
+          <div className="section-label">{eyebrow}</div>
+        </FadeIn>
+      )}
+      <FadeIn delay={0.08}>
+        <h2 className="font-display section-h">{title}</h2>
+      </FadeIn>
+      {sub && (
+        <FadeIn delay={0.16}>
+          <p
+            style={{
+              color: "var(--fg-muted)",
+              fontSize: 18,
+              lineHeight: 1.55,
+              margin: 0,
+              maxWidth: 620,
+            }}
+          >
+            {sub}
+          </p>
+        </FadeIn>
+      )}
+    </div>
+  );
+}
+
+function Mini({ label, value }: { label: string; value: string }) {
+  return (
+    <div style={{ minWidth: 88 }}>
+      <div
+        className="font-display"
+        style={{ fontSize: 36, color: "var(--accent)", lineHeight: 1 }}
+      >
+        {value}
+      </div>
+      <div className="h-eyebrow" style={{ color: "var(--fg-dim)", marginTop: 4 }}>
+        {label}
       </div>
     </div>
   );

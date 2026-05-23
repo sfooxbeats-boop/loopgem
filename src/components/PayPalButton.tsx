@@ -72,9 +72,20 @@ export default function PayPalButton({ amount, description, successMessage, onPa
 
   if (success) {
     return (
-      <div className="w-full rounded-lg bg-[#c9a84c]/10 border border-[#c9a84c]/30 px-4 py-3 text-center">
-        <p className="text-sm text-[#c9a84c] font-semibold">Payment Complete!</p>
-        <p className="text-xs text-[#a0a0a0] mt-0.5">
+      <div
+        style={{
+          width: "100%",
+          borderRadius: 12,
+          background: "var(--accent-soft)",
+          border: "1px solid color-mix(in oklch, var(--accent) 35%, var(--border))",
+          padding: "14px 16px",
+          textAlign: "center",
+        }}
+      >
+        <p style={{ margin: 0, fontSize: 14, color: "var(--accent)", fontWeight: 700 }}>
+          Payment Complete!
+        </p>
+        <p style={{ margin: "4px 0 0", fontSize: 12, color: "var(--fg-muted)" }}>
           {successMessage ?? "Check your email for next steps."}
         </p>
       </div>
@@ -82,14 +93,24 @@ export default function PayPalButton({ amount, description, successMessage, onPa
   }
 
   return (
-    <div className="flex flex-col gap-2 w-full">
-      <div ref={paypalRef} className="w-full" />
-      <div className="flex items-center gap-2">
-        <div className="flex-1 h-px bg-[#2a2a2a]" />
-        <span className="text-[10px] text-[#4a4a4a] uppercase tracking-widest">or</span>
-        <div className="flex-1 h-px bg-[#2a2a2a]" />
+    <div style={{ display: "flex", flexDirection: "column", gap: 8, width: "100%" }}>
+      <div ref={paypalRef} style={{ width: "100%" }} />
+      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
+        <span
+          style={{
+            fontSize: 10,
+            color: "var(--fg-dim)",
+            textTransform: "uppercase",
+            letterSpacing: "0.18em",
+            fontFamily: "var(--font-jetbrains-mono), monospace",
+          }}
+        >
+          or
+        </span>
+        <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
       </div>
-      <div ref={cardRef} className="w-full" />
+      <div ref={cardRef} style={{ width: "100%" }} />
     </div>
   );
 }

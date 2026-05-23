@@ -1,94 +1,179 @@
 import Link from "next/link";
 
-const links = [
-  { href: "/courses", label: "Courses" },
-  { href: "/booking", label: "1-on-1 Coaching" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-];
-
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 bg-[#080808]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-
-          {/* Brand */}
-          <div className="md:col-span-1">
-            <span
-              className="text-3xl font-black uppercase tracking-tight text-gold-gradient"
-              style={{ fontFamily: "var(--font-barlow)" }}
+    <footer className="lg-footer">
+      <div className="container-lg">
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1.6fr 1fr 1fr 1fr",
+            gap: 48,
+            marginBottom: 64,
+          }}
+          className="footer-grid"
+        >
+          <div>
+            <div className="lg-logo" style={{ marginBottom: 18 }}>
+              <span className="lg-logo-mark">L</span>
+              <span>LoopGem</span>
+            </div>
+            <p
+              style={{
+                color: "var(--fg-muted)",
+                fontSize: 15,
+                lineHeight: 1.6,
+                maxWidth: 360,
+                margin: "0 0 20px",
+              }}
             >
-              LoopGem
-            </span>
-            <p className="text-sm text-[#555] leading-relaxed max-w-xs mt-4">
-              Helping music producers turn their skills into a real business — through proven courses and 1-on-1 coaching.
+              Real producer education from Sfooxbeats. Learn how to sell beats,
+              mixing, and music services online — without guessing.
             </p>
-            <div className="flex gap-3 mt-6">
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+              <a
+                href="mailto:Sfooxbeats@gmail.com"
+                className="chip"
+                style={{ textDecoration: "none" }}
+              >
+                Sfooxbeats@gmail.com
+              </a>
               <a
                 href="https://instagram.com/Sfoox_beats"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="w-9 h-9 border border-white/10 flex items-center justify-center text-[#555] hover:border-[#c9a84c] hover:text-[#c9a84c] transition-colors duration-150"
+                className="chip"
+                style={{ textDecoration: "none" }}
               >
-                <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                </svg>
-              </a>
-              <a
-                href="#"
-                aria-label="YouTube"
-                className="w-9 h-9 border border-white/10 flex items-center justify-center text-[#555] hover:border-[#c9a84c] hover:text-[#c9a84c] transition-colors duration-150"
-              >
-                <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z" />
-                </svg>
+                @Sfoox_beats
               </a>
             </div>
           </div>
-
-          {/* Links */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#c9a84c] mb-5">Navigation</h3>
-            <ul className="space-y-3">
-              {links.map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-[#555] hover:text-white transition-colors duration-150">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
+            <div
+              className="h-eyebrow"
+              style={{ color: "var(--fg-dim)", marginBottom: 16 }}
+            >
+              Learn
+            </div>
+            <ul
+              style={{
+                listStyle: "none",
+                padding: 0,
+                margin: 0,
+                display: "grid",
+                gap: 10,
+              }}
+            >
+              <li>
+                <Link
+                  href="/courses"
+                  className="lg-nav-link"
+                  style={{ color: "var(--fg)" }}
+                >
+                  Courses
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/booking"
+                  className="lg-nav-link"
+                  style={{ color: "var(--fg)" }}
+                >
+                  1-on-1 Coaching
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/about"
+                  className="lg-nav-link"
+                  style={{ color: "var(--fg)" }}
+                >
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="lg-nav-link"
+                  style={{ color: "var(--fg)" }}
+                >
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
-
-          {/* Contact */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#c9a84c] mb-5">Get in Touch</h3>
-            <a
-              href="mailto:Sfooxbeats@gmail.com"
-              className="text-sm text-[#555] hover:text-[#c9a84c] transition-colors duration-150 block mb-2"
+            <div
+              className="h-eyebrow"
+              style={{ color: "var(--fg-dim)", marginBottom: 16 }}
             >
-              Sfooxbeats@gmail.com
-            </a>
-            <p className="text-xs text-[#333] mb-6">Response within 24 hours</p>
-            <Link
-              href="/booking"
-              className="inline-block px-5 py-2.5 text-sm font-bold bg-[#c9a84c] text-black hover:bg-[#e5c97e] transition-colors duration-150"
+              Topics
+            </div>
+            <ul
+              style={{
+                listStyle: "none",
+                padding: 0,
+                margin: 0,
+                display: "grid",
+                gap: 10,
+                color: "var(--fg-muted)",
+                fontSize: 14,
+              }}
             >
-              Book a 1-on-1 Call
-            </Link>
+              <li>Selling beats on Fiverr</li>
+              <li>Mixing & mastering services</li>
+              <li>Music marketing</li>
+              <li>Freelance pricing</li>
+            </ul>
           </div>
-
+          <div>
+            <div
+              className="h-eyebrow"
+              style={{ color: "var(--fg-dim)", marginBottom: 16 }}
+            >
+              Get started
+            </div>
+            <Link href="/booking" className="btn btn-primary">
+              Book a call →
+            </Link>
+            <p
+              style={{
+                color: "var(--fg-dim)",
+                fontSize: 12,
+                marginTop: 14,
+              }}
+            >
+              Reply within 24h. Spots limited.
+            </p>
+          </div>
         </div>
-
-        <div className="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-[#333]">
-            &copy; {new Date().getFullYear()} LoopGem. All rights reserved.
-          </p>
-          <p className="text-xs text-[#333]">Built by Sfooxbeats · loopgem.com</p>
+        <div
+          className="hairline"
+          style={{
+            paddingTop: 24,
+            display: "flex",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: 12,
+            color: "var(--fg-dim)",
+            fontSize: 12.5,
+          }}
+        >
+          <span>
+            © {new Date().getFullYear()} LoopGem — Sfooxbeats (Soufiane Remdane)
+          </span>
+          <span style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}>
+            Built for producers who actually want to get paid.
+          </span>
         </div>
       </div>
+      <style>{`
+        @media (max-width: 880px) {
+          .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 32px !important; }
+          .footer-grid > div:first-child { grid-column: span 2; }
+        }
+      `}</style>
     </footer>
   );
 }

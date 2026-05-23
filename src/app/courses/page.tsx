@@ -1,254 +1,411 @@
-import type { Metadata } from "next";
-import CoursePayPalButton from "@/components/CoursePayPalButton";
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
+import { FadeIn } from "@/components/Animate";
+import Marquee from "@/components/Marquee";
+import CoursePayPalButton from "@/components/CoursePayPalButton";
 
-export const metadata: Metadata = {
-  title: "Courses — LoopGem",
-  description: "PDF courses on how to sell beats and music services on Fiverr. Real strategies from Sfooxbeats.",
-};
-
-const courses = [
+const coursesList = [
   {
     id: "c1",
-    n: "01",
+    badge: "Course 01",
+    tag: "For: producers with zero Fiverr orders",
     title: "Fiverr Beat Seller Blueprint",
-    tagline: "Zero to consistent orders on Fiverr — even with no reviews.",
+    sub: "The exact gig setup, pricing tiers, and keyword strategy that took me from invisible to top-rated.",
     price: 27,
-    originalPrice: 47,
-    pages: 45,
-    chapters: 8,
-    badge: "Best Seller",
-    highlight: true,
-    description: "Everything you need to set up a high-converting Fiverr beat selling gig, rank in search, and get your first paying clients — even with zero reviews.",
-    whatYouLearn: [
-      "How to set up your Fiverr profile the right way",
-      "Writing a gig title & description that ranks and converts",
-      "Pricing your beats correctly for Fiverr buyers",
-      "Choosing the right tags and keywords to get found",
-      "How to get your first 5-star review fast",
-      "Upselling exclusive licenses to Fiverr clients",
-      "How to respond to buyers and close orders",
-      "Scaling from 1 order to consistent weekly income",
+    delivery: "Instant PDF · Delivered by email",
+    modules: [
+      { n: "01", t: "Profile that screams pro", d: "Bio, tags, portfolio order, audio samples — what wins, what kills you." },
+      { n: "02", t: "Gig anatomy that ranks", d: "Titles, search-friendly tags, packaging tiers, FAQs, gallery order." },
+      { n: "03", t: "Pricing tiers that convert", d: "Why $5 kills you and the exact 3-tier model that doubles orders." },
+      { n: "04", t: "Buyer-request automation", d: "The 5-line message template that converts cold buyer requests into clients." },
+      { n: "05", t: "Delivery + 5-star reviews", d: "Communication scripts, revision boundaries, getting tips and repeat orders." },
     ],
-    chapters_list: [
-      "Chapter 1: Why Fiverr Works for Beat Sellers",
-      "Chapter 2: Setting Up a Winning Profile",
-      "Chapter 3: Creating Gigs That Rank",
-      "Chapter 4: Pricing & Package Strategy",
-      "Chapter 5: Getting Your First Orders",
-      "Chapter 6: Delivering & Getting 5-Star Reviews",
-      "Chapter 7: Upselling & Increasing Order Value",
-      "Chapter 8: Scaling to Consistent Income",
+    bullets: [
+      "45-page tactical PDF (no fluff)",
+      "Templates for gig copy + buyer-request DMs",
+      "Pricing calculator (Numbers / Sheets compatible)",
+      "Lifetime updates — free",
     ],
   },
   {
     id: "c2",
-    n: "02",
+    badge: "Course 02",
+    tag: "For: mixing / mastering / vocal tuning sellers",
     title: "Sell Music Services on Fiverr",
-    tagline: "Build a freelance business around mixing, mastering & production.",
+    sub: "Position mixing, mastering, vocal tuning and custom production as premium services worth $80+ a session — not $15.",
     price: 27,
-    originalPrice: 47,
-    pages: 40,
-    chapters: 7,
-    badge: null,
-    highlight: false,
-    description: "A step-by-step PDF on building a Fiverr business around mixing, mastering, and music production services — and turning one-time clients into repeat buyers.",
-    whatYouLearn: [
-      "How to position yourself as a mixing & mastering expert",
-      "Setting up gigs for mixing, mastering & beat production",
-      "What to include in your packages to stand out",
-      "How to communicate with clients professionally",
-      "Delivering files and handling revision requests",
-      "Getting repeat clients and referrals",
-      "Expanding beyond Fiverr to other platforms",
+    delivery: "Instant PDF · Delivered by email",
+    modules: [
+      { n: "01", t: "Service positioning", d: "Stop selling 'mixing' — start selling outcomes. The exact reframes that lift prices 3x." },
+      { n: "02", t: "Sample pack pricing maps", d: "How to price mixing, mastering, vocal tuning, and stem mastering by genre." },
+      { n: "03", t: "Client onboarding scripts", d: "Pre-purchase questions, briefing template, file-format checklist, project tracker." },
+      { n: "04", t: "The 'reference track' close", d: "How the way you talk about reference tracks pre-sells the upsell." },
+      { n: "05", t: "Reviews that resell themselves", d: "Wording your delivery so 70%+ of clients leave a 5-star + come back." },
     ],
-    chapters_list: [
-      "Chapter 1: The Opportunity in Music Services Freelancing",
-      "Chapter 2: Your Niche & Positioning",
-      "Chapter 3: Building Your Fiverr Service Gigs",
-      "Chapter 4: Pricing Your Services Right",
-      "Chapter 5: Client Communication & Delivery",
-      "Chapter 6: Reviews, Retention & Referrals",
-      "Chapter 7: Growing Beyond Fiverr",
+    bullets: [
+      "40-page service-seller playbook",
+      "Onboarding form + brief template",
+      "Genre-by-genre price ranges (hip-hop, R&B, afrobeats, pop)",
+      "Lifetime updates — free",
     ],
   },
   {
     id: "c3",
-    n: "03",
+    badge: "Course 03 · Bundle",
+    tag: "For: producers going full-time",
     title: "Full Freelance Music Producer Playbook",
-    tagline: "Every income stream. Every platform. One complete PDF.",
+    sub: "The complete system: beats + services + marketing + retention. Built for producers who want this to replace the day job — not just be a side hustle.",
     price: 47,
-    originalPrice: 97,
-    pages: 80,
-    chapters: 12,
-    badge: "Best Value",
-    highlight: false,
-    description: "The complete playbook combining beat selling, music services, and digital products across Fiverr, Beatstars, and beyond. Everything in one PDF.",
-    whatYouLearn: [
-      "Selling beats on Fiverr, Beatstars & your own site",
-      "Offering mixing, mastering & production as services",
-      "How to juggle multiple income streams as a producer",
-      "Building a personal brand that attracts clients",
-      "Social media strategy for Fiverr profile growth",
-      "Contracts, licensing & protecting your work",
-      "Going from side income to full-time producer",
-      "Scaling with automation and systems",
+    featured: true,
+    delivery: "Instant PDF · Delivered by email",
+    modules: [
+      { n: "01", t: "Everything in 01 + 02", d: "Both courses, fully bundled, with cross-course frameworks for selling beats AND services from one profile." },
+      { n: "02", t: "Outreach + cold-DM system", d: "How to land your first 10 paying clients off-platform — Instagram, SoundCloud, YouTube." },
+      { n: "03", t: "Content engine for producers", d: "A 30-day content calendar for IG/TikTok that drives Fiverr traffic. No dancing required." },
+      { n: "04", t: "Retention + ascension ladder", d: "Turning $30 buyers into $300 clients into $3k clients. The 4-step ladder." },
+      { n: "05", t: "The 90-day income runway", d: "A week-by-week 90-day plan from 'current you' to 'first $1k month'." },
     ],
-    chapters_list: [
-      "Chapter 1: Building Your Producer Business from Scratch",
-      "Chapter 2: The Three Income Streams",
-      "Chapter 3: Fiverr Setup for All Three Streams",
-      "Chapter 4: Beatstars & Other Beat Platforms",
-      "Chapter 5: Personal Brand & Online Presence",
-      "Chapter 6: Social Media That Drives Sales",
-      "Chapter 7: Pricing Everything You Offer",
-      "Chapter 8: Closing Clients & Handling Orders",
-      "Chapter 9: Contracts & Protecting Your Work",
-      "Chapter 10: Scaling to Full-Time Income",
-      "Chapter 11: Long-Term Growth & Automation",
-      "Chapter 12: Building Recurring Income",
+    bullets: [
+      "Both PDFs (01 + 02) + Playbook PDF",
+      "90-day step-by-step roadmap",
+      "Notion workspace template",
+      "Priority email support for 30 days",
+      "Lifetime updates — free",
     ],
   },
 ];
 
-export default function Courses() {
+export default function CoursesPage() {
+  const [openModules, setOpenModules] = useState<Record<string, boolean>>({ c3: true });
+  const toggle = (id: string) =>
+    setOpenModules((o) => ({ ...o, [id]: !o[id] }));
+
   return (
-    <div className="bg-[#080808] min-h-screen">
-
-      {/* Header */}
-      <div className="border-b border-white/[0.04] py-20 px-6 sm:px-10 lg:px-16">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-3 mb-8">
-            <span className="text-sm font-black text-[#c9a84c]" style={{ fontFamily: "var(--font-barlow)" }}>PDF</span>
-            <div className="w-8 h-px bg-[#c9a84c]/30" />
-            <span className="text-[10px] uppercase tracking-[0.25em] text-[#444]">Guides</span>
-          </div>
-          <h1 className="font-black uppercase leading-none tracking-tight mb-5"
-            style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(60px, 9vw, 120px)" }}>
-            Courses
-          </h1>
-          <p className="text-[#555] text-sm max-w-md">
-            Step-by-step guides written from real experience. No theory — just the exact strategies that work.
-          </p>
-        </div>
-      </div>
-
-      {/* Trust bar */}
-      <div className="border-b border-white/[0.04] bg-[#050505]">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-5 flex flex-wrap gap-x-10 gap-y-2">
-          {["PDF — read on any device", "Instant delivery after payment", "Yours forever", "30-day money-back guarantee"].map((f) => (
-            <div key={f} className="flex items-center gap-2 text-[11px] text-[#333]">
-              <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="#c9a84c" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-              </svg>
-              {f}
+    <>
+      {/* Hero */}
+      <section style={{ padding: "88px 0 64px", position: "relative" }}>
+        <div className="glow-radial" aria-hidden="true" />
+        <div className="container-lg" style={{ position: "relative" }}>
+          <FadeIn>
+            <div className="section-label" style={{ marginBottom: 24 }}>
+              Courses
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Course list */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16 space-y-px">
-        {courses.map((course) => (
-          <div key={course.id} className={`border-l-2 ${course.highlight ? "border-[#c9a84c]" : "border-white/[0.04]"}`}>
-            <div className="grid grid-cols-1 lg:grid-cols-3">
-              {/* Left: info */}
-              <div className="lg:col-span-2 bg-[#0a0a0a] hover:bg-[#0d0d0d] transition-colors p-8 sm:p-12">
-                <div className="flex flex-wrap items-center gap-3 mb-5">
-                  <span className="text-xs font-black text-[#2a2a2a]" style={{ fontFamily: "var(--font-barlow)" }}>{course.n}</span>
-                  {course.badge && (
-                    <span className="px-2.5 py-0.5 bg-[#c9a84c] text-black text-[9px] font-black uppercase tracking-widest">{course.badge}</span>
-                  )}
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-[#2a2a2a]">{course.pages} pages · {course.chapters} chapters</span>
-                </div>
-
-                <h2 className="font-black uppercase tracking-tight leading-none mb-3"
-                  style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(28px, 3.5vw, 48px)" }}>
-                  {course.title}
-                </h2>
-                <p className="text-[11px] uppercase tracking-[0.15em] text-[#c9a84c] mb-6">{course.tagline}</p>
-                <p className="text-sm text-[#555] leading-relaxed mb-8 max-w-lg">{course.description}</p>
-
-                <p className="text-[10px] uppercase tracking-[0.2em] text-[#c9a84c] mb-4">What&apos;s Inside</p>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-8">
-                  {course.whatYouLearn.map((item) => (
-                    <li key={item} className="flex items-start gap-2.5 text-sm text-[#555]">
-                      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#c9a84c" strokeWidth={2.5} className="shrink-0 mt-0.5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                      </svg>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-
-                <details className="group">
-                  <summary className="cursor-pointer text-[11px] font-bold uppercase tracking-[0.15em] text-[#333] hover:text-[#c9a84c] transition-colors list-none flex items-center gap-2">
-                    <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} className="group-open:rotate-90 transition-transform duration-150">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                    </svg>
-                    View {course.chapters} chapters
-                  </summary>
-                  <ul className="mt-4 space-y-1.5 pl-4 border-l border-white/[0.04]">
-                    {course.chapters_list.map((c) => (
-                      <li key={c} className="text-xs text-[#333]">{c}</li>
-                    ))}
-                  </ul>
-                </details>
+          </FadeIn>
+          <FadeIn delay={0.06}>
+            <h1
+              className="font-display"
+              style={{
+                fontSize: "clamp(56px, 9vw, 128px)",
+                lineHeight: 0.95,
+                margin: "0 0 28px",
+                maxWidth: 1100,
+                paddingBottom: "0.08em",
+              }}
+            >
+              Read tonight.
+              <br />
+              <span className="text-gold-gradient">Get paid this month.</span>
+            </h1>
+          </FadeIn>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1.4fr 1fr",
+              gap: 56,
+              alignItems: "end",
+              marginTop: 24,
+            }}
+            className="courses-hero-grid"
+          >
+            <FadeIn delay={0.14}>
+              <p
+                style={{
+                  color: "var(--fg-muted)",
+                  fontSize: 18,
+                  lineHeight: 1.6,
+                  maxWidth: 640,
+                  margin: 0,
+                }}
+              >
+                Three tight PDF courses you&apos;ll actually finish. Built from $127k+ of real
+                Fiverr orders, not theory. Pick one, or grab the bundle.
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.22}>
+              <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
+                <Mini label="Courses" value="3" />
+                <Mini label="Format" value="PDF" />
+                <Mini label="Delivery" value="Instant" />
+                <Mini label="Updates" value="Lifetime" />
               </div>
+            </FadeIn>
+          </div>
+          <style>{`
+            @media (max-width: 880px) {
+              .courses-hero-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+            }
+          `}</style>
+        </div>
+      </section>
 
-              {/* Right: checkout */}
-              <div className="bg-[#050505] border-t lg:border-t-0 lg:border-l border-white/[0.04] p-8 sm:p-12 flex flex-col justify-center">
-                <div className="mb-6">
-                  <div className="flex items-baseline gap-3 mb-1">
-                    <span className="font-black text-gold-gradient" style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(48px, 5vw, 64px)" }}>
-                      ${course.price}
-                    </span>
-                    <span className="text-[#2a2a2a] line-through text-sm">${course.originalPrice}</span>
-                  </div>
-                  <p className="text-[11px] text-[#c9a84c] font-bold uppercase tracking-widest">Save ${course.originalPrice - course.price}</p>
-                </div>
+      <Marquee
+        items={[
+          "$27 · $27 · $47",
+          "PDF · Instant delivery",
+          "Built from real Fiverr orders",
+          "Lifetime updates included",
+        ]}
+      />
 
-                <ul className="space-y-2.5 mb-8">
-                  {["PDF delivered to your email", "Read on any device", "Yours forever", "30-day money-back guarantee"].map((p) => (
-                    <li key={p} className="flex items-center gap-2.5 text-xs text-[#444]">
-                      <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="#c9a84c" strokeWidth={2.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                      </svg>
-                      {p}
-                    </li>
-                  ))}
-                </ul>
+      {/* Course rows */}
+      <section style={{ padding: "88px 0" }}>
+        <div className="container-lg">
+          <div style={{ display: "grid", gap: 24 }}>
+            {coursesList.map((c, i) => (
+              <FadeIn key={c.id} delay={i * 0.1}>
+                <CourseDetailRow
+                  course={c}
+                  open={!!openModules[c.id]}
+                  onToggle={() => toggle(c.id)}
+                />
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                <CoursePayPalButton amount={course.price.toFixed(2)} courseId={course.id} courseName={course.title} />
-
-                <p className="text-center text-xs text-[#2a2a2a] mt-4">
-                  Questions?{" "}
-                  <Link href="/contact" className="text-[#c9a84c] hover:underline">Contact us</Link>
+      {/* CTA */}
+      <section style={{ padding: "0 0 120px" }}>
+        <div className="container-lg">
+          <FadeIn>
+            <div
+              style={{
+                border: "1px solid var(--border-strong)",
+                background: "var(--bg-2)",
+                borderRadius: "var(--radius-xl)",
+                padding: "56px",
+                display: "grid",
+                gridTemplateColumns: "1fr auto",
+                gap: 32,
+                alignItems: "center",
+              }}
+              className="cta-grid"
+            >
+              <div>
+                <h2
+                  className="font-display"
+                  style={{
+                    fontSize: "clamp(32px, 4vw, 52px)",
+                    lineHeight: 1,
+                    margin: "0 0 12px",
+                  }}
+                >
+                  Still not sure?{" "}
+                  <span className="text-gold-gradient">Book a 15-min intro call.</span>
+                </h2>
+                <p
+                  style={{
+                    color: "var(--fg-muted)",
+                    fontSize: 17,
+                    margin: 0,
+                    maxWidth: 600,
+                  }}
+                >
+                  Tell me where you&apos;re stuck. I&apos;ll tell you which course will move the
+                  needle — or if a 1-on-1 makes more sense.
                 </p>
               </div>
+              <Link href="/booking" className="btn btn-primary">
+                Book the intro call →
+              </Link>
             </div>
-          </div>
-        ))}
-      </div>
+          </FadeIn>
+          <style>{`
+            @media (max-width: 880px) {
+              .cta-grid { grid-template-columns: 1fr !important; padding: 40px 28px !important; }
+            }
+          `}</style>
+        </div>
+      </section>
+    </>
+  );
+}
 
-      {/* Coaching upsell */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pb-24">
-        <div className="border border-[#c9a84c]/15 bg-[#c9a84c]/4 p-10 sm:p-14 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
-          <div>
-            <p className="text-[10px] uppercase tracking-[0.25em] text-[#c9a84c] mb-2">Prefer personalised help?</p>
-            <h2 className="font-black uppercase tracking-tight leading-none"
-              style={{ fontFamily: "var(--font-barlow)", fontSize: "clamp(32px, 4vw, 52px)" }}>
-              Book a 1-on-1 Coaching Call
-            </h2>
+function Mini({ label, value }: { label: string; value: string }) {
+  return (
+    <div style={{ minWidth: 92 }}>
+      <div
+        className="font-display"
+        style={{ fontSize: 36, color: "var(--accent)", lineHeight: 1 }}
+      >
+        {value}
+      </div>
+      <div className="h-eyebrow" style={{ color: "var(--fg-dim)", marginTop: 4 }}>
+        {label}
+      </div>
+    </div>
+  );
+}
+
+function CourseDetailRow({
+  course,
+  open,
+  onToggle,
+}: {
+  course: (typeof coursesList)[number];
+  open: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <div
+      className="card"
+      style={{
+        padding: 0,
+        borderColor: course.featured
+          ? "color-mix(in oklch, var(--accent) 45%, var(--border))"
+          : "var(--border)",
+        background: course.featured
+          ? "linear-gradient(180deg, color-mix(in oklch, var(--accent) 8%, var(--bg-2)) 0%, var(--bg-2) 60%)"
+          : "var(--bg-2)",
+      }}
+    >
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "minmax(0, 260px) 1fr minmax(0, 280px)",
+          gap: 32,
+          padding: 36,
+          alignItems: "center",
+        }}
+        className="course-detail-grid"
+      >
+        <div className="ph-img" style={{ aspectRatio: "1 / 1", borderRadius: "var(--radius)" }}>
+          <span className="ph-img-label">Cover: {course.id}</span>
+        </div>
+        <div>
+          <div style={{ display: "flex", gap: 8, marginBottom: 14, flexWrap: "wrap" }}>
+            <span className="chip chip-accent">{course.badge}</span>
+            <span className="chip">{course.tag}</span>
           </div>
-          <Link href="/booking"
-            className="shrink-0 px-8 py-3.5 bg-[#c9a84c] text-black font-black text-xs uppercase tracking-[0.2em] hover:bg-[#f0d070] transition-colors whitespace-nowrap"
-            style={{ fontFamily: "var(--font-barlow)" }}>
-            Book a Session
-          </Link>
+          <h3
+            className="font-display"
+            style={{
+              fontSize: "clamp(32px, 4vw, 48px)",
+              margin: "0 0 12px",
+              lineHeight: 0.95,
+            }}
+          >
+            {course.title}
+          </h3>
+          <p
+            style={{
+              color: "var(--fg-muted)",
+              fontSize: 16,
+              lineHeight: 1.6,
+              margin: "0 0 16px",
+              maxWidth: 560,
+            }}
+          >
+            {course.sub}
+          </p>
+          <div style={{ display: "grid", gap: 8 }}>
+            {course.bullets.map((b, i) => (
+              <div key={i} className="module-item">
+                <span className="module-bullet">✓</span>
+                <span>{b}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          <div className="price" style={{ alignSelf: "center" }}>
+            ${course.price}
+          </div>
+          <span
+            className="h-eyebrow"
+            style={{ color: "var(--fg-dim)", textAlign: "center" }}
+          >
+            {course.delivery}
+          </span>
+          <div style={{ marginTop: 8 }}>
+            <CoursePayPalButton
+              amount={course.price.toFixed(2)}
+              courseId={course.id}
+              courseName={course.title}
+            />
+          </div>
+          <button className="btn btn-ghost btn-sm" onClick={onToggle}>
+            {open ? "Hide modules" : "See the modules"}
+          </button>
         </div>
       </div>
-
+      {open && (
+        <div
+          style={{
+            borderTop: "1px solid var(--border)",
+            padding: 36,
+            background: "color-mix(in oklch, var(--bg) 30%, var(--bg-2))",
+          }}
+        >
+          <div className="h-eyebrow" style={{ color: "var(--accent)", marginBottom: 18 }}>
+            What&apos;s inside
+          </div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: 18,
+            }}
+          >
+            {course.modules.map((m) => (
+              <div
+                key={m.n}
+                style={{
+                  padding: 18,
+                  border: "1px solid var(--border)",
+                  borderRadius: "var(--radius)",
+                  background: "var(--bg)",
+                }}
+              >
+                <div
+                  className="font-display"
+                  style={{
+                    fontSize: 22,
+                    color: "var(--accent)",
+                    lineHeight: 1,
+                    marginBottom: 8,
+                  }}
+                >
+                  {m.n}
+                </div>
+                <div
+                  className="font-display"
+                  style={{ fontSize: 18, margin: "0 0 8px", lineHeight: 1.1 }}
+                >
+                  {m.t}
+                </div>
+                <p
+                  style={{
+                    color: "var(--fg-muted)",
+                    fontSize: 13.5,
+                    margin: 0,
+                    lineHeight: 1.55,
+                  }}
+                >
+                  {m.d}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      <style>{`
+        @media (max-width: 1024px) {
+          .course-detail-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+        }
+      `}</style>
     </div>
   );
 }

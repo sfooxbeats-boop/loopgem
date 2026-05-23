@@ -90,43 +90,91 @@ export default function CoursePayPalButton({ amount, courseId, courseName }: Pro
 
   if (state === "sending") {
     return (
-      <div className="w-full rounded-lg bg-[#111111] border border-[#2a2a2a] px-4 py-4 text-center">
-        <p className="text-sm text-[#a0a0a0]">Payment confirmed — sending your PDF...</p>
+      <div style={notice("muted")}>
+        <p style={{ margin: 0, fontSize: 14, color: "var(--fg-muted)" }}>
+          Payment confirmed — sending your PDF...
+        </p>
       </div>
     );
   }
 
   if (state === "done") {
     return (
-      <div className="w-full rounded-lg bg-[#c9a84c]/10 border border-[#c9a84c]/30 px-4 py-4 text-center">
-        <p className="text-sm text-[#c9a84c] font-bold mb-1">PDF sent to your email!</p>
-        <p className="text-xs text-[#a0a0a0]">Check your inbox (and spam folder) for the download link.</p>
+      <div style={notice("accent")}>
+        <p style={{ margin: 0, fontSize: 14, color: "var(--accent)", fontWeight: 700 }}>
+          PDF sent to your email!
+        </p>
+        <p style={{ margin: "4px 0 0", fontSize: 12, color: "var(--fg-muted)" }}>
+          Check your inbox (and spam folder) for the download link.
+        </p>
       </div>
     );
   }
 
   if (state === "error") {
     return (
-      <div className="w-full rounded-lg bg-red-900/20 border border-red-800/40 px-4 py-4 text-center">
-        <p className="text-sm text-red-400 font-semibold mb-1">Payment received!</p>
-        <p className="text-xs text-[#a0a0a0]">
+      <div style={notice("error")}>
+        <p style={{ margin: 0, fontSize: 14, color: "#b8131f", fontWeight: 700 }}>
+          Payment received!
+        </p>
+        <p style={{ margin: "4px 0 0", fontSize: 12, color: "var(--fg-muted)" }}>
           Email delivery failed — contact{" "}
-          <a href="mailto:Sfooxbeats@gmail.com" className="text-[#c9a84c] underline">Sfooxbeats@gmail.com</a>
-          {" "}and we&apos;ll send your PDF right away.
+          <a href="mailto:Sfooxbeats@gmail.com" style={{ color: "var(--accent)", textDecoration: "underline" }}>
+            Sfooxbeats@gmail.com
+          </a>{" "}
+          and we&apos;ll send your PDF right away.
         </p>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col gap-2 w-full">
-      <div ref={paypalRef} className="w-full" />
-      <div className="flex items-center gap-2">
-        <div className="flex-1 h-px bg-[#2a2a2a]" />
-        <span className="text-[10px] text-[#4a4a4a] uppercase tracking-widest">or</span>
-        <div className="flex-1 h-px bg-[#2a2a2a]" />
+    <div style={{ display: "flex", flexDirection: "column", gap: 8, width: "100%" }}>
+      <div ref={paypalRef} style={{ width: "100%" }} />
+      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
+        <span
+          style={{
+            fontSize: 10,
+            color: "var(--fg-dim)",
+            textTransform: "uppercase",
+            letterSpacing: "0.18em",
+            fontFamily: "var(--font-jetbrains-mono), monospace",
+          }}
+        >
+          or
+        </span>
+        <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
       </div>
-      <div ref={cardRef} className="w-full" />
+      <div ref={cardRef} style={{ width: "100%" }} />
     </div>
   );
+}
+
+function notice(variant: "muted" | "accent" | "error"): React.CSSProperties {
+  const base: React.CSSProperties = {
+    width: "100%",
+    borderRadius: 12,
+    padding: "14px 16px",
+    textAlign: "center",
+  };
+  if (variant === "accent") {
+    return {
+      ...base,
+      background: "var(--accent-soft)",
+      border: "1px solid color-mix(in oklch, var(--accent) 35%, var(--border))",
+    };
+  }
+  if (variant === "error") {
+    return {
+      ...base,
+      background: "rgba(184,19,31,0.08)",
+      border: "1px solid rgba(184,19,31,0.30)",
+    };
+  }
+  return {
+    ...base,
+    background: "var(--bg-3)",
+    border: "1px solid var(--border)",
+  };
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "motion/react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type FadeProps = {
   children: React.ReactNode;
@@ -9,29 +9,68 @@ type FadeProps = {
   delay?: number;
   direction?: "up" | "down" | "left" | "right" | "none";
   duration?: number;
+  style?: React.CSSProperties;
 };
 
-export function FadeIn({ children, className, delay = 0, direction = "up", duration = 0.6 }: FadeProps) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+/**
+ * Defaults to visible after a 700ms fallback timer so content never gets
+ * permanently hidden in iframe/preview contexts where IntersectionObserver
+ * doesn't fire.
+ */
+export function FadeIn({
+  children,
+  className = "",
+  delay = 0,
+  duration = 0.8,
+  style,
+}: FadeProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [shown, setShown] = useState(false);
 
-  const offset = 32;
-  const initial = {
-    opacity: 0,
-    y: direction === "up" ? offset : direction === "down" ? -offset : 0,
-    x: direction === "left" ? offset : direction === "right" ? -offset : 0,
-  };
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const fallback = setTimeout(() => setShown(true), 700);
+    let io: IntersectionObserver | undefined;
+    try {
+      io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              setShown(true);
+              io?.unobserve(el);
+            }
+          });
+        },
+        { threshold: 0.05, rootMargin: "0px 0px -40px 0px" }
+      );
+      io.observe(el);
+    } catch {
+      setShown(true);
+    }
+    const raf = requestAnimationFrame(() => {
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) setShown(true);
+    });
+    return () => {
+      clearTimeout(fallback);
+      cancelAnimationFrame(raf);
+      io?.disconnect();
+    };
+  }, []);
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      className={className}
-      initial={initial}
-      animate={inView ? { opacity: 1, y: 0, x: 0 } : initial}
-      transition={{ duration, delay, ease: [0.25, 0.1, 0.25, 1] }}
+      className={`reveal ${shown ? "in" : ""} ${className}`}
+      style={{
+        ...style,
+        ["--reveal-delay" as string]: `${delay * 1000}ms`,
+        transitionDuration: `${duration}s`,
+      }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -42,7 +81,12 @@ type StaggerProps = {
   baseDelay?: number;
 };
 
-export function StaggerChildren({ children, className, staggerDelay = 0.1, baseDelay = 0 }: StaggerProps) {
+export function StaggerChildren({
+  children,
+  className,
+  staggerDelay = 0.1,
+  baseDelay = 0,
+}: StaggerProps) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
@@ -93,19 +137,75 @@ export function ScaleIn({ children, className, delay = 0 }: FadeProps) {
   );
 }
 
-export function CountUp({ value, suffix = "", className }: { value: string; suffix?: string; className?: string }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
+type CountUpProps = {
+  to: number;
+  prefix?: string;
+  suffix?: string;
+  duration?: number;
+  decimals?: number;
+};
+
+export function CountUp({
+  to,
+  prefix = "",
+  suffix = "",
+  duration = 1800,
+  decimals = 0,
+}: CountUpProps) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [val, setVal] = useState(0);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || started) return;
+    const fallback = setTimeout(() => setStarted(true), 900);
+    let io: IntersectionObserver | undefined;
+    try {
+      io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              setStarted(true);
+              io?.unobserve(el);
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+      io.observe(el);
+    } catch {
+      setStarted(true);
+    }
+    return () => {
+      clearTimeout(fallback);
+      io?.disconnect();
+    };
+  }, [started]);
+
+  useEffect(() => {
+    if (!started) return;
+    let raf = 0;
+    let t0: number | null = null;
+    const animate = (t: number) => {
+      if (t0 === null) t0 = t;
+      const p = Math.min(1, (t - t0) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setVal(to * eased);
+      if (p < 1) raf = requestAnimationFrame(animate);
+    };
+    raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+  }, [started, to, duration]);
+
+  const formatted =
+    decimals > 0 ? val.toFixed(decimals) : Math.floor(val).toLocaleString();
 
   return (
-    <motion.span
-      ref={ref}
-      className={className}
-      initial={{ opacity: 0, y: 16 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-    >
-      {value}{suffix}
-    </motion.span>
+    <span ref={ref}>
+      {prefix}
+      {formatted}
+      {suffix}
+    </span>
   );
 }
