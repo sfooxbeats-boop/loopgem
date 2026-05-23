@@ -78,28 +78,28 @@ const homeTestimonials = [
 
 const proofPositions = [
   { left: "50%", top: "50%", rot: -8, w: 280, z: 5 },
-  { left: "22%", top: "32%", rot: -14, w: 270, z: 2 },
-  { left: "78%", top: "34%", rot: 12, w: 270, z: 3 },
-  { left: "14%", top: "68%", rot: 6, w: 250, z: 1 },
-  { left: "86%", top: "70%", rot: -10, w: 250, z: 4 },
-  { left: "35%", top: "20%", rot: -4, w: 230, z: 6 },
-  { left: "64%", top: "20%", rot: 10, w: 230, z: 7 },
-  { left: "32%", top: "78%", rot: 14, w: 240, z: 8 },
-  { left: "68%", top: "80%", rot: -8, w: 240, z: 9 },
-  { left: "50%", top: "14%", rot: 4, w: 220, z: 10 },
+  { left: "22%", top: "34%", rot: -14, w: 270, z: 2 },
+  { left: "78%", top: "36%", rot: 12, w: 270, z: 3 },
+  { left: "14%", top: "66%", rot: 6, w: 250, z: 1 },
+  { left: "86%", top: "68%", rot: -10, w: 250, z: 4 },
+  { left: "35%", top: "22%", rot: -4, w: 230, z: 6 },
+  { left: "64%", top: "22%", rot: 10, w: 230, z: 7 },
+  { left: "32%", top: "76%", rot: 14, w: 240, z: 8 },
+  { left: "68%", top: "78%", rot: -8, w: 240, z: 9 },
+  { left: "50%", top: "20%", rot: 4, w: 220, z: 10 },
 ];
 
 const proofPositionsMobile = [
-  { left: "50%", top: "50%", rot: -6, w: 220, z: 10 },
-  { left: "28%", top: "30%", rot: -12, w: 200, z: 5 },
-  { left: "72%", top: "32%", rot: 10, w: 200, z: 6 },
-  { left: "20%", top: "72%", rot: 6, w: 190, z: 4 },
-  { left: "80%", top: "74%", rot: -8, w: 190, z: 3 },
-  { left: "50%", top: "18%", rot: 2, w: 180, z: 8 },
-  { left: "32%", top: "52%", rot: -3, w: 180, z: 7 },
-  { left: "68%", top: "54%", rot: 8, w: 180, z: 9 },
-  { left: "35%", top: "88%", rot: 12, w: 170, z: 2 },
-  { left: "65%", top: "90%", rot: -10, w: 170, z: 1 },
+  { left: "50%", top: "50%", rot: -6, w: 180, z: 10 },
+  { left: "28%", top: "32%", rot: -12, w: 160, z: 5 },
+  { left: "72%", top: "34%", rot: 10, w: 160, z: 6 },
+  { left: "20%", top: "70%", rot: 6, w: 150, z: 4 },
+  { left: "80%", top: "72%", rot: -8, w: 150, z: 3 },
+  { left: "50%", top: "22%", rot: 2, w: 145, z: 8 },
+  { left: "32%", top: "52%", rot: -3, w: 145, z: 7 },
+  { left: "68%", top: "54%", rot: 8, w: 145, z: 9 },
+  { left: "35%", top: "82%", rot: 12, w: 140, z: 2 },
+  { left: "65%", top: "84%", rot: -10, w: 140, z: 1 },
 ];
 
 export default function Home() {
@@ -821,11 +821,7 @@ function ProofCollage() {
           >
             {src ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={src}
-                alt={`Fiverr review from ${t.name}`}
-                style={{ display: "block", width: "100%", height: "auto" }}
-              />
+              <img src={src} alt={`Fiverr review from ${t.name}`} />
             ) : (
               <ReviewCard t={t} />
             )}

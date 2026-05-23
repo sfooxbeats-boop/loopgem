@@ -329,7 +329,7 @@ body {
 /* ── proof collage ─────────────────────────────────────────────── */
 .proof-canvas {
   position: relative;
-  height: 620px;
+  height: 900px;
   width: 100%;
   overflow: hidden;
 }
@@ -342,6 +342,14 @@ body {
   box-shadow: 0 30px 60px -30px rgba(0,0,0,0.35);
   transition: transform 0.4s cubic-bezier(.2,.7,.2,1), box-shadow 0.3s, z-index 0s linear 0.4s;
   cursor: pointer;
+  aspect-ratio: 3 / 4;
+}
+.proof-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
 }
 .proof-card:hover {
   transform: translate(-50%, -50%) rotate(0deg) scale(1.06) !important;
@@ -350,7 +358,7 @@ body {
   transition-delay: 0s;
 }
 @media (max-width: 880px) {
-  .proof-canvas { height: 480px; }
+  .proof-canvas { height: 720px; }
 }
 
 /* ── course row ─────────────────────────────────────────────────── */
