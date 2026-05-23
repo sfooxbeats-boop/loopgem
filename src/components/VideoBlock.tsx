@@ -78,14 +78,12 @@ export default function VideoBlock({
           />
           <div
             style={{
-              position: "absolute",
-              top: 16,
-              right: 16,
+              position: "relative",
               zIndex: 3,
               display: "grid",
               placeItems: "center",
-              width: "clamp(40px, 6vw, 78px)",
-              height: "clamp(40px, 6vw, 78px)",
+              width: "clamp(44px, 5vw, 72px)",
+              height: "clamp(44px, 5vw, 72px)",
               borderRadius: 999,
               background: "var(--accent)",
               color: "var(--accent-fg)",
