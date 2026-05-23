@@ -78,17 +78,19 @@ export default function VideoBlock({
           />
           <div
             style={{
-              position: "relative",
-              zIndex: 2,
+              position: "absolute",
+              top: 22,
+              right: 22,
+              zIndex: 3,
               display: "grid",
               placeItems: "center",
-              width: "clamp(72px, 9vw, 110px)",
-              height: "clamp(72px, 9vw, 110px)",
+              width: "clamp(56px, 6vw, 78px)",
+              height: "clamp(56px, 6vw, 78px)",
               borderRadius: 999,
               background: "var(--accent)",
               color: "var(--accent-fg)",
               boxShadow:
-                "0 24px 60px -16px color-mix(in oklch, var(--accent) 75%, transparent), 0 0 0 8px color-mix(in oklch, var(--accent) 20%, transparent)",
+                "0 16px 40px -12px color-mix(in oklch, var(--accent) 75%, transparent), 0 0 0 6px color-mix(in oklch, var(--accent) 18%, transparent)",
               transition: "transform 0.25s cubic-bezier(.2,.7,.2,1), box-shadow 0.25s",
             }}
           >
