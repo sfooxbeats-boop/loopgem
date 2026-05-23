@@ -97,6 +97,7 @@ export default function VideoBlock({
             </svg>
           </div>
           <div
+            className="video-caption"
             style={{
               position: "absolute",
               left: 28,
@@ -131,6 +132,11 @@ export default function VideoBlock({
               <span className="chip chip-accent">Free</span>
             </div>
           </div>
+          <style>{`
+            @media (max-width: 720px) {
+              .video-caption { display: none !important; }
+            }
+          `}</style>
         </button>
       )}
     </div>
