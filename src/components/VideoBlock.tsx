@@ -45,24 +45,35 @@ export default function VideoBlock({
             inset: 0,
             display: "grid",
             placeItems: "center",
-            background: `radial-gradient(60% 50% at 50% 45%, color-mix(in oklch, var(--accent) 12%, transparent), transparent 70%),
-              linear-gradient(180deg, var(--bg-3) 0%, color-mix(in oklch, var(--accent) 4%, var(--bg-3)) 100%)`,
+            background: "var(--bg-3)",
             border: 0,
             cursor: "pointer",
             color: "inherit",
             padding: 0,
           }}
         >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+            }}
+            alt={title}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
           <div
             aria-hidden="true"
             style={{
               position: "absolute",
               inset: 0,
-              background: `repeating-linear-gradient(135deg,
-                color-mix(in oklch, var(--fg) 3%, transparent),
-                color-mix(in oklch, var(--fg) 3%, transparent) 10px,
-                transparent 10px, transparent 20px)`,
-              opacity: 0.55,
+              background:
+                "linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.35) 65%, rgba(0,0,0,0.55) 100%)",
             }}
           />
           <div
@@ -100,15 +111,16 @@ export default function VideoBlock({
             }}
           >
             <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-              <span className="h-eyebrow" style={{ color: "var(--fg-dim)" }}>
+              <span className="h-eyebrow" style={{ color: "rgba(255,255,255,0.75)" }}>
                 Intro video · {duration}
               </span>
               <span
                 style={{
-                  color: "var(--fg)",
+                  color: "#fff",
                   fontWeight: 700,
                   fontSize: 16,
                   fontFamily: "var(--font-manrope), sans-serif",
+                  textShadow: "0 2px 12px rgba(0,0,0,0.5)",
                 }}
               >
                 {title}
