@@ -71,19 +71,26 @@ Never commit `.env.local` — covered by `.gitignore`.
 - **Reveal animation**: scroll-triggered fade + 24px y-translate, 800ms ease-out. JS via `IntersectionObserver` with a 700ms fallback timer.
 
 ### Page structure (Home — video-first VSL)
-1. **Video** — 16:9 YouTube embed is the FIRST visible block (above the fold). Click-to-load facade; large red play button overlay.
+1. **Video** — `VideoBlock` shows YouTube thumbnail (auto-fetched from `i.ytimg.com/vi/{id}/maxresdefault.jpg`) with small red play button centered. Caption overlay hidden under 720px. Default video ID `aN1IN7rYNE4` (Sfooxbeats intro).
 2. **CTAs** — Get Course + Book a Call, right next to the video.
-3. **Hero headline** — "Sell beats. Sell services. Stop guessing." with animated stat counters ($127k+ / 500+ / 5.0 / 7 years).
+3. **Hero headline** — "Sell beats. Sell services. Stop guessing." with **2×2 grid** of animated stat tiles: **$127k** generated · **2,019** orders delivered · **982** unique clients · **5.0** average rating.
 4. **Marquee** — scrolling ticker
 5. **Problem section** — 4 numbered cards
 6. **Solution callout** — red-tinted CTA card
 7. **Marquee** (second)
 8. **Proof screenshots** — 10 overlapping Fiverr review cards, staggered angles, hover to bring to front
-9. **Stats strip**
+9. **Stats strip** — 5.0 rating / 982 clients / 24h delivery / 8 yrs on Fiverr
 10. **Courses** — 3 stacked horizontal course rows (cover left, copy middle, price + CTA right)
 11. **Coaching** — 3 session cards
 12. **Marquee** (third)
 13. **Final CTA**
+
+### Real Sfooxbeats stats (use these everywhere)
+- **On Fiverr since 2018** (top-rated since 2020) — 8 years as of 2026
+- **$127k+** generated
+- **2,019** orders delivered
+- **982** unique clients
+- **5.0** average rating
 
 ### CSS Utilities (`globals.css`)
 - `.text-gold-gradient` — legacy classname, NOW renders as solid `var(--accent)` (red by default). Keep selector for backwards compat across pages.
@@ -129,13 +136,13 @@ See "Page structure" above under design system.
 |---|---|
 | `src/components/PayPalButton.tsx` | Generic PayPal + card checkout. Props: `amount`, `description`, `successMessage` (string), `onPaid` (fn — client only) |
 | `src/components/CoursePayPalButton.tsx` | Course-specific. Captures buyer email, calls `/api/send-course`, shows states |
-| `src/components/Navbar.tsx` | Sticky, mobile hamburger. Uses `.btn-primary` (red) for CTA. Links: Courses, 1-on-1 Coaching, About, Contact |
-| `src/components/Footer.tsx` | Links, Instagram, email, Book a Call CTA |
+| `src/components/Navbar.tsx` | Sticky, mobile drawer. Uses `.btn-primary` (red) for CTA. Links: Home, Courses, 1-on-1 Coaching, About. **No L logo mark** — just the "LoopGem" wordmark in Archivo Black. |
+| `src/components/Footer.tsx` | Links, Instagram, email, Book a Call CTA. Wordmark only (no L mark). |
 | `src/components/SmoothScroll.tsx` | Lenis smooth scroll — mounted in `layout.tsx` |
-| `src/components/Animate.tsx` | `FadeIn`, `StaggerChildren`, `StaggerItem`, `ScaleIn`, `CountUp` — all use `motion/react`. Must default to visible + use IO fallback (see design-direction.md note below) |
-| `src/components/Marquee.tsx` | Scrolling ticker with red `✦` separators — uses `motion/react`. Archivo Black 28px uppercase, slight negative tracking. |
+| `src/components/Animate.tsx` | `FadeIn`, `StaggerChildren`, `StaggerItem`, `ScaleIn`, `CountUp`. `FadeIn` and `CountUp` use the safe-reveal pattern: default visible + IntersectionObserver + 700ms fallback timer (prevents content from being stuck hidden in iframe/preview contexts). `CountUp` API: `to`, `prefix`, `suffix`, `decimals`. |
+| `src/components/Marquee.tsx` | Scrolling ticker with red `✦` separators. Archivo Black 28px uppercase, slight negative tracking. Props: `items?: string[]`, `accent?: boolean`. CSS-only animation (no motion). |
+| `src/components/VideoBlock.tsx` | YouTube facade: shows `i.ytimg.com/vi/{videoId}/maxresdefault.jpg` thumbnail (falls back to `hqdefault.jpg`) with centered red play button + bottom caption overlay (caption hidden under 720px). Props: `videoId?` (default `aN1IN7rYNE4`), `title?`, `duration?`. Play button size: `clamp(44px, 5vw, 72px)`. |
 | `src/types/paypal.d.ts` | Ambient global PayPal types — no `export {}` |
-| `src/components/VideoBlock.tsx` (planned) | YouTube facade: click-to-load 16:9 iframe with large red play button. To be added when porting new design. |
 
 ## Critical Rules
 - **Import animations from `"motion/react"`** — NOT `"framer-motion"` (package was migrated)
@@ -147,28 +154,15 @@ See "Page structure" above under design system.
 - **Proof images** live in `public/proof/` named `r1.jpeg`–`r10.jpeg` (no spaces in filenames — spaces break Vercel).
 - **Scroll-reveal animations** must default to visible OR have a JS timeout fallback (700ms) — iframe contexts can block IntersectionObserver, causing all content to stay hidden. See design prototype `loopgem-design/shared.jsx` for the safe pattern.
 
+## ✅ Recently Completed
+- **Crimson-on-bone design** ported from `loopgem-design/` prototype into Next.js (palette, fonts, components, all 4 pages)
+- **Real Sfooxbeats stats** wired everywhere ($127k, 2,019 orders, 982 clients, since 2018)
+- **Real intro video** (`aN1IN7rYNE4`) wired into `VideoBlock` — shows YouTube thumbnail + small centered play button
+- **L logo mark removed** from navbar + footer (just "LoopGem" wordmark)
+
 ## ⚠️ Pending Tasks
 
-### 1. Port new design direction into Next.js codebase
-The exploration in `loopgem-design/` (prototype HTML) has the agreed direction:
-- Crimson + bone palette
-- Archivo Black display + Manrope body
-- Video-first home layout
-- 4 fully-built pages (Home, Courses, Booking, About) to mirror
-
-Needs:
-- Update `globals.css` `@theme {}` block with new tokens (see palette above)
-- Swap font imports in `layout.tsx` to Archivo Black + Manrope + JetBrains Mono
-- Update `page.tsx` (home) — add VideoBlock above hero, add animated stats hero, restyle problem/proof/courses/coaching sections
-- Update `courses/page.tsx` — stacked horizontal rows + expandable modules + compare table
-- Update `booking/page.tsx` — 3 tier cards + booking form + how-it-works + FAQ
-- Update `about/page.tsx` — story + timeline + values
-- Build `VideoBlock.tsx` component (YouTube facade)
-- Update `Navbar.tsx` — Archivo Black logo, Manrope nav links, red CTA
-- Update `Marquee.tsx` — Archivo Black 28px items, red `✦` separators
-- Update `Animate.tsx` `FadeIn` — add 700ms timeout fallback to IntersectionObserver
-
-### 2. Upload PDF course files
+### 1. Upload PDF course files
 When the 3 PDFs are ready, upload to `public/downloads/` with these exact names:
 - `course-fiverr-beat-seller-blueprint.pdf`
 - `course-sell-music-services-fiverr.pdf`
@@ -176,29 +170,26 @@ When the 3 PDFs are ready, upload to `public/downloads/` with these exact names:
 
 Then: `git add . && git commit -m "add course PDFs" && git push`
 
-### 3. Add Resend API key to Vercel
+### 2. Add Resend API key to Vercel
 - Free account at resend.com → API Keys → Create Key
 - Vercel: loopgem project → Settings → Environment Variables:
   - `RESEND_API_KEY` = key from Resend
   - `NEXT_PUBLIC_SITE_URL` = `https://loopgem.vercel.app`
 - Trigger a redeploy after adding
 
-### 4. Link loopgem.com domain to Vercel
+### 3. Link loopgem.com domain to Vercel
 - Vercel → loopgem project → Settings → Domains → Add `loopgem.com`
 - Update DNS at domain registrar to point to Vercel
 
-### 5. Wire up contact form (Formspree)
+### 4. Wire up contact form (Formspree)
 - Free account at formspree.io → create form → copy form ID
 - Replace `YOUR_FORM_ID` in `src/app/contact/page.tsx`
 - Push to GitHub
 
-### 6. Add more proof screenshots (optional)
+### 5. Add more proof screenshots (optional)
 - Save images to `public/proof/` as `r11.jpeg`, `r12.jpeg` etc. (no spaces in filenames)
 - Add entries to `proofScreenshots` array at top of `src/app/page.tsx`
 - Add matching position object to both desktop and mobile collage arrays
-
-### 7. Drop in real YouTube ID for intro video
-- VideoBlock currently uses a placeholder. Replace with the real Sfooxbeats intro VSL video ID once recorded.
 
 ## Deploy Checklist
 ```bash
