@@ -9,9 +9,9 @@ type Props = {
 };
 
 export default function VideoBlock({
-  videoId = "7n5qK_hXs_U",
-  title = "Sfooxbeats — How I make my money on Fiverr",
-  duration = "2:14",
+  videoId = "aN1IN7rYNE4",
+  title = "Sfooxbeats — How I made $127k selling beats & music services on Fiverr",
+  duration = "Watch now",
 }: Props) {
   const [playing, setPlaying] = useState(false);
 
