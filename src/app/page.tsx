@@ -484,7 +484,13 @@ export default function Home() {
                 <div>
                   <div
                     className="font-display"
-                    style={{ fontSize: 60, color: "var(--accent)", lineHeight: 1, marginBottom: 8 }}
+                    style={{
+                      fontSize: "clamp(36px, 5vw, 60px)",
+                      color: "var(--accent)",
+                      lineHeight: 1,
+                      marginBottom: 8,
+                      whiteSpace: "nowrap",
+                    }}
                   >
                     {s.v}
                   </div>
