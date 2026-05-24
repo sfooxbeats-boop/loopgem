@@ -90,16 +90,16 @@ const proofPositions = [
 ];
 
 const proofPositionsMobile = [
-  { left: "50%", top: "50%", rot: -6, w: 180, z: 10 },
-  { left: "28%", top: "32%", rot: -12, w: 160, z: 5 },
-  { left: "72%", top: "34%", rot: 10, w: 160, z: 6 },
-  { left: "20%", top: "70%", rot: 6, w: 150, z: 4 },
-  { left: "80%", top: "72%", rot: -8, w: 150, z: 3 },
-  { left: "50%", top: "22%", rot: 2, w: 145, z: 8 },
-  { left: "32%", top: "52%", rot: -3, w: 145, z: 7 },
-  { left: "68%", top: "54%", rot: 8, w: 145, z: 9 },
-  { left: "35%", top: "82%", rot: 12, w: 140, z: 2 },
-  { left: "65%", top: "84%", rot: -10, w: 140, z: 1 },
+  { left: "50%", top: "50%", rot: -6, w: 150, z: 10 },
+  { left: "28%", top: "30%", rot: -12, w: 135, z: 5 },
+  { left: "72%", top: "32%", rot: 10, w: 135, z: 6 },
+  { left: "20%", top: "72%", rot: 6, w: 125, z: 4 },
+  { left: "80%", top: "74%", rot: -8, w: 125, z: 3 },
+  { left: "50%", top: "16%", rot: 2, w: 120, z: 8 },
+  { left: "32%", top: "52%", rot: -3, w: 120, z: 7 },
+  { left: "68%", top: "54%", rot: 8, w: 120, z: 9 },
+  { left: "35%", top: "88%", rot: 12, w: 115, z: 2 },
+  { left: "65%", top: "90%", rot: -10, w: 115, z: 1 },
 ];
 
 export default function Home() {
