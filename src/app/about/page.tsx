@@ -36,9 +36,8 @@ export default function AboutPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "1.7fr 1fr",
-              gap: 56,
-              alignItems: "end",
+              gridTemplateColumns: "1fr",
+              gap: 40,
             }}
             className="about-hero-grid"
           >
@@ -82,14 +81,17 @@ export default function AboutPage() {
               </FadeIn>
             </div>
             <FadeIn delay={0.2}>
-              <div style={{ borderRadius: "var(--radius-lg)", overflow: "hidden", aspectRatio: "4 / 5" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/sfooxbeats-studio.png"
-                  alt="Sfooxbeats in his studio"
-                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }}
-                />
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/sfooxbeats-studio.png"
+                alt="Sfooxbeats in his studio"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  display: "block",
+                  borderRadius: "var(--radius-lg)",
+                }}
+              />
             </FadeIn>
           </div>
           <style>{`
