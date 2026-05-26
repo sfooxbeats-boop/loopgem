@@ -384,6 +384,11 @@ body {
 }
 
 /* ── coaching card ─────────────────────────────────────────────── */
+
+/* Make reveal wrappers inside card grids stretch to full row height */
+.grid-3-1 .reveal { height: 100%; }
+.grid-3-1 .coach-card { height: 100%; }
+
 .coach-card {
   padding: 36px 32px;
   background: var(--bg-2);
