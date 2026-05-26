@@ -160,6 +160,11 @@ See "Page structure" above under design system.
 - **Real intro video** (`aN1IN7rYNE4`) wired into `VideoBlock` — shows YouTube thumbnail + small centered play button
 - **L logo mark removed** from navbar + footer (just "LoopGem" wordmark)
 - **Course 01 PDF pipeline built** — see "PDF generation pipeline" below
+- **Pricing calculator** built at `/pricing-calculator` (3 tabs: package pricing, revenue projector, income goal). Publicly accessible, no login. Linked from PDF page 27 as clickable yellow hyperlink.
+- **Sfooxbeats studio photo** added to About page (`public/sfooxbeats-studio.png`) at natural landscape ratio
+- **Coaching tier cards** equal height fixed on booking + home pages (`.grid-3-1 .reveal { height: 100% }`)
+- **Canva design** (`DAHKvBnPMUo`) — PDF imported, styled dark green `#1B3520` bg + white text + yellow `#FFD700` accents. Text colors fixed on pages 1–29 via API. Pages 30–54 need manual Ctrl+A → white in Canva.
+- **Sparse pages fixed** in Canva (pages 6, 8, 10, 14, 24) — content spread to fill full page height via API. Pages 18 and 44 still need manual fix in Canva (Ctrl+A → scale/spread elements).
 
 ## 📄 PDF generation pipeline
 
@@ -187,15 +192,23 @@ node convert.js
 - Pairs/triples like `brief_exemple.png + exemple_of_brief_responding.png — caption` render side-by-side in a `.screenshot-pair` grid.
 - The vision tool can't extract image bytes from chat attachments — user has to manually save each screenshot to `screenshots/` with the right filename.
 
-**Course 01 status:** PDF built (4.7MB, 12 screenshots wired). Awaiting user review before shipping to `loopgem/public/downloads/course-fiverr-beat-seller-blueprint.pdf`.
+**Course 01 status:**
+- Puppeteer PDF: `C:\Users\KATANA\Downloads\loopgem-pdf\fiverr-beat-seller-blueprint.pdf` (4.7MB, 12 screenshots wired)
+- Canva design: `DAHKvBnPMUo` — dark green theme, text colors fixed pages 1-29, sparse pages 6/8/10/14/24 fixed
+- Pricing calculator link on page 27 → clickable yellow hyperlink → `https://loopgem.vercel.app/pricing-calculator`
+- **Still to do in Canva manually:** pages 30-54 text color (Ctrl+A → white each page), pages 18 + 44 layout fix
 
 ## ⚠️ Pending Tasks
 
-### 1. Ship Course 01 PDF + write Courses 02 + 03
-- [ ] User reviews `fiverr-beat-seller-blueprint.pdf` for visual issues
-- [ ] When approved: copy to `loopgem/public/downloads/course-fiverr-beat-seller-blueprint.pdf`, commit, push
-- [ ] Write Course 02 — **"Sell Music Services on Fiverr"** ($27, 40 pages) — content drafted in claude.ai (see CLAUDE.md context block below), same screenshot pipeline
-- [ ] Write Course 03 — **"Full Freelance Music Producer Playbook"** ($47, 80 pages) — bundle of 01+02 plus outreach/content/retention modules
+### 1. Course 01 PDF — finish & ship
+- [ ] Fix pages 18, 44 in Canva (Ctrl+A → spread elements to fill page)
+- [ ] Fix pages 30–54 text color in Canva (select each page → Ctrl+A → change text to white)
+- [ ] Export final PDF from Canva
+- [ ] Copy to `loopgem/public/downloads/course-fiverr-beat-seller-blueprint.pdf`, commit, push
+
+### 2. Write Courses 02 + 03
+- [ ] Course 02 — **"Sell Music Services on Fiverr"** ($27, 40 pages) — draft in claude.ai using same brief template, same screenshot pipeline
+- [ ] Course 03 — **"Full Freelance Music Producer Playbook"** ($47, 80 pages) — bundle of 01+02 plus outreach/content/retention modules
 
 ### 2. Upload final PDFs to repo
 When each PDF is finalised, copy from `C:\Users\KATANA\Downloads\loopgem-pdf\` to `loopgem/public/downloads/` with these EXACT filenames:
