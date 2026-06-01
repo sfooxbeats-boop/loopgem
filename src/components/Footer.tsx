@@ -15,7 +15,7 @@ export default function Footer() {
         >
           <div>
             <div className="lg-logo" style={{ marginBottom: 18 }}>
-              <span>LoopGem</span>
+              <span>Loop<span style={{ color: "var(--accent)" }}>Gem</span></span>
             </div>
             <p
               style={{

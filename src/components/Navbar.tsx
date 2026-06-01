@@ -20,7 +20,7 @@ export default function Navbar() {
       <nav className="lg-nav">
         <div className="container-lg lg-nav-inner">
           <Link href="/" className="lg-logo">
-            <span>LoopGem</span>
+            <span>Loop<span style={{ color: "var(--accent)" }}>Gem</span></span>
           </Link>
 
           <div className="lg-nav-links desktop">
@@ -58,7 +58,7 @@ export default function Navbar() {
             marginBottom: 48,
           }}
         >
-          <span className="lg-logo">LoopGem</span>
+          <span className="lg-logo">Loop<span style={{ color: "var(--accent)" }}>Gem</span></span>
           <button className="btn btn-ghost btn-sm" onClick={() => setOpen(false)}>
             Close
           </button>
