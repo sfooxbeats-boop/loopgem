@@ -23,7 +23,7 @@ const coursesList = [
       { n: "05", t: "Delivery + 5-star reviews", d: "Communication scripts, revision boundaries, getting tips and repeat orders." },
     ],
     bullets: [
-      "45-page tactical PDF (no fluff)",
+      "38-page tactical PDF (no fluff)",
       "Templates for gig copy + buyer-request DMs",
       "Pricing calculator (Numbers / Sheets compatible)",
       "Lifetime updates — free",
