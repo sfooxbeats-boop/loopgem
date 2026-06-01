@@ -6,6 +6,12 @@ import { FadeIn } from "@/components/Animate";
 import Marquee from "@/components/Marquee";
 import CoursePayPalButton from "@/components/CoursePayPalButton";
 
+const courseCovers: Record<string, string> = {
+  c1: "/cover-c1.png",
+  c2: "/cover-c2.jpeg",
+  c3: "/cover-c3.png",
+};
+
 const coursesList = [
   {
     id: "c1",
@@ -281,9 +287,12 @@ function CourseDetailRow({
         }}
         className="course-detail-grid"
       >
-        <div className="ph-img" style={{ aspectRatio: "1 / 1", borderRadius: "var(--radius)" }}>
-          <span className="ph-img-label">Cover: {course.id}</span>
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={courseCovers[course.id]}
+          alt={course.title}
+          style={{ width: "100%", aspectRatio: "1 / 1", objectFit: "cover", borderRadius: "var(--radius)", display: "block" }}
+        />
         <div>
           <div style={{ display: "flex", gap: 8, marginBottom: 14, flexWrap: "wrap" }}>
             <span className="chip chip-accent">{course.badge}</span>

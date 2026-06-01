@@ -709,6 +709,12 @@ function SectionHeader({
   );
 }
 
+const covers: Record<string, string> = {
+  fiverr: "/cover-c1.png",
+  services: "/cover-c2.jpeg",
+  playbook: "/cover-c3.png",
+};
+
 // ── Course row ────────────────────────────────────────────────
 function CourseRow({
   course,
@@ -729,9 +735,12 @@ function CourseRow({
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
           <span className="chip chip-accent">{course.tag}</span>
         </div>
-        <div className="ph-img" style={{ aspectRatio: "4 / 3", borderRadius: "var(--radius)" }}>
-          <span className="ph-img-label">Course cover — {course.id}</span>
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={covers[course.id]}
+        alt={course.title}
+        style={{ width: "100%", aspectRatio: "4 / 3", objectFit: "cover", borderRadius: "var(--radius)", display: "block" }}
+      />
       </div>
       <div>
         <div className="h-eyebrow" style={{ color: "var(--accent)", marginBottom: 10 }}>
