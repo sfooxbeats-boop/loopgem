@@ -36,55 +36,76 @@ export async function POST(req: NextRequest) {
       replyTo: "Sfooxbeats@gmail.com",
       subject: `Your PDF is here — ${course.name}`,
       html: `
-        <div style="background:#0a0a0a;padding:40px 20px;font-family:Arial,sans-serif;color:#ededed;">
-          <div style="max-width:560px;margin:0 auto;">
+        <div style="background:#f7f3ea;padding:40px 20px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#0c0a05;">
+          <div style="max-width:560px;margin:0 auto;background:#ffffff;padding:48px 40px;border-radius:24px;border:1px solid rgba(20,17,11,0.08);">
 
-            <h1 style="color:#c9a84c;font-size:24px;margin-bottom:4px;">LoopGem</h1>
-            <p style="color:#7a7a7a;font-size:12px;margin-top:0;margin-bottom:32px;">by Sfooxbeats</p>
+            <div style="margin-bottom:36px;">
+              <span style="font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:28px;letter-spacing:-0.01em;color:#0c0a05;">Loop<span style="color:#e11d2c;">Gem</span></span>
+              <p style="color:rgba(12,10,5,0.55);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;margin:6px 0 0;font-weight:600;">by Sfooxbeats</p>
+            </div>
 
-            <h2 style="font-size:20px;margin-bottom:8px;">Hey ${firstName}, your PDF is ready!</h2>
-            <p style="color:#a0a0a0;font-size:15px;line-height:1.6;margin-bottom:24px;">
-              Thank you for purchasing <strong style="color:#ededed;">${course.name}</strong>.
-              Click the button below to download your PDF guide.
+            <h2 style="font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:32px;line-height:1.05;letter-spacing:-0.02em;margin:0 0 16px;color:#0c0a05;">
+              Hey ${firstName},<br/>your PDF is <span style="color:#e11d2c;">ready.</span>
+            </h2>
+
+            <p style="color:rgba(12,10,5,0.65);font-size:15px;line-height:1.6;margin:0 0 32px;">
+              Thank you for purchasing <strong style="color:#0c0a05;">${course.name}</strong>. Tap the button below to download your PDF — it's yours forever.
             </p>
 
             <a href="${downloadUrl}"
-               style="display:inline-block;background:#c9a84c;color:#0a0a0a;font-weight:700;
-                      font-size:15px;padding:14px 32px;border-radius:6px;text-decoration:none;
-                      margin-bottom:24px;">
-              Download Your PDF
+               style="display:inline-block;background:#e11d2c;color:#ffffff;font-weight:800;
+                      font-size:13px;letter-spacing:0.10em;text-transform:uppercase;
+                      padding:16px 32px;border-radius:9999px;text-decoration:none;
+                      box-shadow:0 14px 32px -10px rgba(225,29,44,0.55);">
+              Download your PDF →
             </a>
 
-            <p style="color:#7a7a7a;font-size:13px;line-height:1.6;">
-              If the button doesn't work, copy and paste this link into your browser:<br/>
-              <a href="${downloadUrl}" style="color:#c9a84c;">${downloadUrl}</a>
+            <p style="color:rgba(12,10,5,0.55);font-size:13px;line-height:1.6;margin:32px 0 0;">
+              If the button doesn't work, paste this link into your browser:<br/>
+              <a href="${downloadUrl}" style="color:#e11d2c;word-break:break-all;">${downloadUrl}</a>
             </p>
 
-            <hr style="border:none;border-top:1px solid #2a2a2a;margin:32px 0;"/>
+            <hr style="border:none;border-top:1px solid rgba(20,17,11,0.10);margin:36px 0;"/>
 
-            <p style="color:#7a7a7a;font-size:13px;line-height:1.6;">
-              Questions? Just reply to this email or reach out at
-              <a href="mailto:Sfooxbeats@gmail.com" style="color:#c9a84c;">Sfooxbeats@gmail.com</a>
+            <p style="color:rgba(12,10,5,0.65);font-size:13px;line-height:1.6;margin:0 0 12px;">
+              Questions? Reply to this email or reach out at
+              <a href="mailto:Sfooxbeats@gmail.com" style="color:#e11d2c;font-weight:600;">Sfooxbeats@gmail.com</a>
             </p>
 
-            <p style="color:#4a4a4a;font-size:12px;margin-top:32px;">
-              &copy; ${new Date().getFullYear()} LoopGem &mdash; loopgem.com
+            <p style="color:rgba(12,10,5,0.42);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;margin:24px 0 0;font-weight:600;">
+              &copy; ${new Date().getFullYear()} LoopGem &middot; loopgem.com
             </p>
           </div>
         </div>
       `,
     });
 
-    // Also notify yourself
+    // Notify yourself — same brand styling
     await resend.emails.send({
       from: "LoopGem <onboarding@resend.dev>",
       to: "Sfooxbeats@gmail.com",
       subject: `New course sale — ${course.name}`,
       html: `
-        <p><strong>Course sold:</strong> ${course.name}</p>
-        <p><strong>Buyer email:</strong> ${payerEmail}</p>
-        <p><strong>Buyer name:</strong> ${payerName ?? "Unknown"}</p>
-        <p>PDF delivery email sent automatically.</p>
+        <div style="background:#f7f3ea;padding:40px 20px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#0c0a05;">
+          <div style="max-width:520px;margin:0 auto;background:#ffffff;padding:36px 32px;border-radius:24px;border:1px solid rgba(20,17,11,0.08);">
+
+            <span style="font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:22px;letter-spacing:-0.01em;color:#0c0a05;">Loop<span style="color:#e11d2c;">Gem</span></span>
+
+            <h2 style="font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:24px;line-height:1.05;margin:20px 0 16px;color:#0c0a05;">
+              New sale — <span style="color:#e11d2c;">cha-ching.</span>
+            </h2>
+
+            <div style="background:#f7f3ea;border-radius:16px;padding:20px 24px;margin:16px 0;">
+              <p style="margin:0 0 10px;font-size:14px;color:rgba(12,10,5,0.65);"><strong style="color:#0c0a05;">Course:</strong> ${course.name}</p>
+              <p style="margin:0 0 10px;font-size:14px;color:rgba(12,10,5,0.65);"><strong style="color:#0c0a05;">Buyer:</strong> ${payerName ?? "Unknown"}</p>
+              <p style="margin:0;font-size:14px;color:rgba(12,10,5,0.65);"><strong style="color:#0c0a05;">Email:</strong> <a href="mailto:${payerEmail}" style="color:#e11d2c;">${payerEmail}</a></p>
+            </div>
+
+            <p style="color:rgba(12,10,5,0.55);font-size:12px;line-height:1.6;margin:16px 0 0;">
+              PDF delivery email sent automatically to the buyer.
+            </p>
+          </div>
+        </div>
       `,
     });
 
