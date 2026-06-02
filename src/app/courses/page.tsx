@@ -140,7 +140,7 @@ export default function CoursesPage() {
               </p>
             </FadeIn>
             <FadeIn delay={0.22}>
-              <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }}>
                 <Mini label="Courses" value="3" />
                 <Mini label="Format" value="PDF" />
                 <Mini label="Delivery" value="Instant" />
@@ -241,10 +241,15 @@ export default function CoursesPage() {
 
 function Mini({ label, value }: { label: string; value: string }) {
   return (
-    <div style={{ minWidth: 92 }}>
+    <div style={{ minWidth: 0 }}>
       <div
         className="font-display"
-        style={{ fontSize: 36, color: "var(--accent)", lineHeight: 1 }}
+        style={{
+          fontSize: "clamp(20px, 2.6vw, 32px)",
+          color: "var(--accent)",
+          lineHeight: 1,
+          whiteSpace: "nowrap",
+        }}
       >
         {value}
       </div>
