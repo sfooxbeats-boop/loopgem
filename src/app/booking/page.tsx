@@ -121,7 +121,7 @@ export default function BookingPage() {
               </p>
             </FadeIn>
             <FadeIn delay={0.22}>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }}>
+              <div style={{ display: "flex", gap: 32, flexWrap: "nowrap" }}>
                 <Mini label="Sessions" value="3" />
                 <Mini label="Format" value="Zoom" />
                 <Mini label="Recap" value="Written" />
@@ -340,15 +340,10 @@ function SectionHeader({
 
 function Mini({ label, value }: { label: string; value: string }) {
   return (
-    <div style={{ minWidth: 0 }}>
+    <div>
       <div
         className="font-display"
-        style={{
-          fontSize: "clamp(20px, 2.6vw, 32px)",
-          color: "var(--accent)",
-          lineHeight: 1,
-          whiteSpace: "nowrap",
-        }}
+        style={{ fontSize: 28, color: "var(--accent)", lineHeight: 1 }}
       >
         {value}
       </div>
