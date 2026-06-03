@@ -82,6 +82,7 @@ export default function WhatsAppButton() {
 
       {/* FAB toggle button */}
       <button onClick={toggle} className="wa-fab" aria-label={open ? "Close chat" : "Chat on WhatsApp"}>
+        {!open && <span className="wa-fab-badge">1</span>}
         <span className={`wa-fab-icon ${open ? "wa-fab-icon--hidden" : ""}`}>
           <WhatsAppIcon size={28} />
         </span>
