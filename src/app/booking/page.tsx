@@ -121,7 +121,7 @@ export default function BookingPage() {
               </p>
             </FadeIn>
             <FadeIn delay={0.22}>
-              <div style={{ display: "flex", gap: 32, flexWrap: "nowrap" }}>
+              <div className="hero-mini-grid">
                 <Mini label="Sessions" value="3" />
                 <Mini label="Format" value="Zoom" />
                 <Mini label="Recap" value="Written" />

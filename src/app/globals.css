@@ -632,6 +632,20 @@ body { overflow-x: hidden; }
 ::-webkit-scrollbar-thumb { background: color-mix(in oklch, var(--fg) 20%, transparent); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
+/* ── hero mini stats grid (courses + booking pages) ─────────────── */
+.hero-mini-grid {
+  display: flex;
+  gap: 32px;
+  flex-wrap: nowrap;
+}
+@media (max-width: 720px) {
+  .hero-mini-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 24px;
+  }
+}
+
 /* ── form input ────────────────────────────────────────────────── */
 .lg-input {
   width: 100%;

@@ -140,7 +140,7 @@ export default function CoursesPage() {
               </p>
             </FadeIn>
             <FadeIn delay={0.22}>
-              <div style={{ display: "flex", gap: 32, flexWrap: "nowrap" }}>
+              <div className="hero-mini-grid">
                 <Mini label="Courses" value="3" />
                 <Mini label="Format" value="PDF" />
                 <Mini label="Delivery" value="Instant" />
