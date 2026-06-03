@@ -159,15 +159,17 @@ See "Page structure" above under design system.
 - **Real Sfooxbeats stats** wired everywhere ($127k, 2,019 orders, 982 clients, since 2018)
 - **Real intro video** (`aN1IN7rYNE4`) wired into `VideoBlock` — shows YouTube thumbnail + small centered play button
 - **Logo** — "Loop" black, "Gem" red (`var(--accent)`) in both Navbar + Footer
-- **Pricing calculator** at `/pricing-calculator` — 3 tabs, publicly accessible, linked from both PDFs
+- **Pricing calculator** at `/pricing-calculator` — 3 tabs, publicly accessible, linked from PDFs
 - **Studio photo** on About page (`public/sfooxbeats-studio.png`) at natural landscape ratio
 - **Coaching cards** equal height on booking + home pages
 - **Course covers** — `cover-c1.png`, `cover-c2.jpeg`, `cover-c3.png` in `public/`, wired into courses + home pages
-- **RESEND_API_KEY** added to Vercel via CLI — email delivery live. Sender is `onboarding@resend.dev` until `loopgem.com` domain verified in Resend
-- **`NEXT_PUBLIC_SITE_URL`** set to `https://loopgem.vercel.app` in Vercel
-- **Course 01 PDF** — `public/downloads/course-fiverr-beat-seller-blueprint.pdf` (38 pages, 5.5MB, live on site)
-- **Course 02 PDF** — `public/downloads/course-sell-music-services-fiverr.pdf` (28 pages, 5MB, live on site)
-- **Course content on site** — modules, bullets, page counts, descriptions updated to match exact PDF content
+- **Email delivery live** — `RESEND_API_KEY` + `NEXT_PUBLIC_SITE_URL` in Vercel. Sender `onboarding@resend.dev` (temp until `loopgem.com` verified in Resend). Buyer email redesigned to match site branding (bone bg, red accent, pill CTA).
+- **All 3 course PDFs live:**
+  - Course 01: `public/downloads/course-fiverr-beat-seller-blueprint.pdf` (38 pages)
+  - Course 02: `public/downloads/course-sell-music-services-fiverr.pdf` (28 pages)
+  - Course 03: `public/downloads/course-full-freelance-music-producer-playbook.pdf` (27 pages)
+- **Course content on site** — modules, bullets, page counts updated to match exact PDF content for all 3 courses
+- **Hero mini-stats** (courses + booking pages) — 4-in-a-row on desktop, 2×2 grid on mobile (`<720px`) via `.hero-mini-grid` class in globals.css
 
 ## 📄 PDF generation pipeline
 
@@ -208,13 +210,7 @@ node convert.js
 
 ## ⚠️ Pending Tasks
 
-### 1. Course 03 — Full Freelance Music Producer Playbook ($47)
-- [ ] Write content (use claude.ai brief, same style as Course 01/02)
-- [ ] Build `source3.html` + `convert3.js`
-- [ ] Import to Canva, style, export
-- [ ] Ship to `public/downloads/course-full-freelance-music-producer-playbook.pdf`
-
-### 2. Connect loopgem.com domain + fix email sender
+### 1. Connect loopgem.com domain + fix email sender
 - [ ] Vercel: Settings → Domains → add `loopgem.com` + update DNS at registrar
 - [ ] Resend: Domains → add `loopgem.com` → add SPF/DKIM DNS records → verify
 - [ ] Update `from` in `/api/send-course/route.ts`: `onboarding@resend.dev` → `courses@loopgem.com`
