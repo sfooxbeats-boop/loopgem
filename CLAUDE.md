@@ -170,6 +170,7 @@ See "Page structure" above under design system.
   - Course 03: `public/downloads/course-full-freelance-music-producer-playbook.pdf` (27 pages)
 - **Course content on site** — modules, bullets, page counts updated to match exact PDF content for all 3 courses
 - **Hero mini-stats** (courses + booking pages) — 4-in-a-row on desktop, 2×2 grid on mobile (`<720px`) via `.hero-mini-grid` class in globals.css
+- **WhatsApp widget** — `src/components/WhatsAppButton.tsx` mounted in `layout.tsx`. Auto-opens after 2.5s on first visit (sessionStorage `wa_dismissed` prevents re-opening). Red "1" badge on FAB. Popup has red header, message bubble, green CTA → `wa.me/212694569906`. Dismisses on X click or re-click of FAB.
 
 ## 📄 PDF generation pipeline
 
@@ -240,10 +241,19 @@ Then: `git add public/downloads && git commit -m "add course PDF" && git push`
 - Replace `YOUR_FORM_ID` in `src/app/contact/page.tsx`
 - Push to GitHub
 
-### 5. Add more proof screenshots (optional)
+### 5. Update homepage video
+- User is filming a new ~1 min VSL video tonight
+- Once uploaded to YouTube, update `videoId` prop in `src/app/page.tsx` → `<VideoBlock videoId="NEW_ID" />`
+- Push to GitHub after updating
+
+### 6. Add more proof screenshots (optional)
 - Save images to `public/proof/` as `r11.jpeg`, `r12.jpeg` etc. (no spaces in filenames)
 - Add entries to `proofScreenshots` array at top of `src/app/page.tsx`
 - Add matching position object to both desktop and mobile collage arrays
+
+## Workflow Rules
+- **Always update CLAUDE.md** after every change and push to GitHub
+- **Always git commit + push** after every code change — never leave edits unpushed
 
 ## Deploy Checklist
 ```bash
