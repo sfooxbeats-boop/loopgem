@@ -5,6 +5,10 @@ import { FadeIn } from "@/components/Animate";
 import Marquee from "@/components/Marquee";
 import PayPalButton from "@/components/PayPalButton";
 
+// TEMP: while testing the Cal.com flow, hide prices + PayPal and show
+// the calendar directly. Flip back to false to re-enable payment.
+const TEST_MODE = true;
+
 const tiers = [
   {
     id: "starter",
@@ -199,18 +203,32 @@ export default function BookingPage() {
                       </div>
                     ))}
                   </div>
-                  <div className="price" style={{ marginTop: "auto", marginBottom: 14 }}>
-                    ${Math.floor(t.price)}
-                    <span className="price-cents">
-                      .{String(Math.round((t.price % 1) * 100)).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <PayPalButton
-                    amount={t.price.toFixed(2)}
-                    description={`LoopGem Coaching: ${t.name} (${t.duration})`}
-                    calLink={t.calLink}
-                    successMessage="Booking confirmed! Pick a time below."
-                  />
+                  {!TEST_MODE && (
+                    <div className="price" style={{ marginTop: "auto", marginBottom: 14 }}>
+                      ${Math.floor(t.price)}
+                      <span className="price-cents">
+                        .{String(Math.round((t.price % 1) * 100)).padStart(2, "0")}
+                      </span>
+                    </div>
+                  )}
+                  {TEST_MODE ? (
+                    <a
+                      href={`https://cal.com/${t.calLink}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-primary"
+                      style={{ marginTop: "auto", width: "100%" }}
+                    >
+                      Book your call →
+                    </a>
+                  ) : (
+                    <PayPalButton
+                      amount={t.price.toFixed(2)}
+                      description={`LoopGem Coaching: ${t.name} (${t.duration})`}
+                      calLink={t.calLink}
+                      successMessage="Booking confirmed! Pick a time below."
+                    />
+                  )}
                 </div>
               </FadeIn>
             ))}
