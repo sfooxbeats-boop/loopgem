@@ -110,9 +110,9 @@ See "Page structure" above under design system.
 | PDF Course — Fiverr Beat Seller Blueprint | $27 | PayPal/card → Resend auto-delivers PDF by email |
 | PDF Course — Sell Music Services on Fiverr | $27 | PayPal/card → Resend auto-delivers PDF by email |
 | PDF Course — Full Freelance Music Producer Playbook | $47 | PayPal/card → Resend auto-delivers PDF by email |
-| 1-on-1 Coaching — Starter Session (30 min) | $49.99 | PayPal/card → scheduling link sent by email within 24h |
-| 1-on-1 Coaching — Sales Strategy Call (60 min) | $89.99 | PayPal/card → scheduling link sent by email within 24h |
-| 1-on-1 Coaching — Freelancer Blueprint (4×60 min) | $299.99 | PayPal/card → scheduling link sent by email within 24h |
+| 1-on-1 Coaching — Starter Session (30 min) | $49.99 | PayPal/card → Cal.com inline scheduler appears (cal.com/sfooxbeats/starter-30min) |
+| 1-on-1 Coaching — Sales Strategy Call (60 min) | $89.99 | PayPal/card → Cal.com inline scheduler appears (cal.com/sfooxbeats/strategy-60min) |
+| 1-on-1 Coaching — Freelancer Blueprint (4×60 min) | $299.99 | PayPal/card → Cal.com inline scheduler appears (cal.com/sfooxbeats/blueprint-60min) |
 
 ## Routes
 | Route | Description |
@@ -134,7 +134,7 @@ See "Page structure" above under design system.
 ## Key Components
 | File | Notes |
 |---|---|
-| `src/components/PayPalButton.tsx` | Generic PayPal + card checkout. Props: `amount`, `description`, `successMessage` (string), `onPaid` (fn — client only) |
+| `src/components/PayPalButton.tsx` | Generic PayPal + card checkout. Props: `amount`, `description`, `successMessage` (string), `onPaid` (fn — client only), `calLink` (optional, e.g. `"sfooxbeats/starter-30min"` — after successful payment, embeds Cal.com inline scheduler in a 720px iframe so client can pick a time immediately) |
 | `src/components/CoursePayPalButton.tsx` | Course-specific. Captures buyer email, calls `/api/send-course`, shows states |
 | `src/components/Navbar.tsx` | Sticky, mobile drawer. Uses `.btn-primary` (red) for CTA. Links: Home, Courses, 1-on-1 Coaching, About. **No L logo mark** — just the "LoopGem" wordmark in Archivo Black. |
 | `src/components/Footer.tsx` | Links, Instagram, email, Book a Call CTA. Wordmark only (no L mark). |
@@ -170,7 +170,15 @@ See "Page structure" above under design system.
   - Course 03: `public/downloads/course-full-freelance-music-producer-playbook.pdf` (27 pages)
 - **Course content on site** — modules, bullets, page counts updated to match exact PDF content for all 3 courses
 - **Hero mini-stats** (courses + booking pages) — 4-in-a-row on desktop, 2×2 grid on mobile (`<720px`) via `.hero-mini-grid` class in globals.css
-- **WhatsApp widget** — `src/components/WhatsAppButton.tsx` mounted in `layout.tsx`. Auto-opens after 2.5s on first visit (sessionStorage `wa_dismissed` prevents re-opening). Red "1" badge on FAB. Popup has red header, message bubble, green CTA → `wa.me/212694569906`. Dismisses on X click or re-click of FAB.
+- **WhatsApp widget** — `src/components/WhatsAppButton.tsx` mounted in `layout.tsx`. Auto-opens after 2.5s on first visit (sessionStorage `wa_dismissed` prevents re-opening). Red "1" badge on FAB. Popup has red header, message bubble, green CTA → `wa.me/212694569906`. Dismisses on X click or re-click of FAB. **`.wa-widget` container is `pointer-events: none`** with children re-enabled — clicks pass through empty area so the FAB doesn't swallow clicks on elements behind it (e.g. footer Book a call button).
+- **Mobile double-tap fix** — `globals.css` adds `touch-action: manipulation` to all interactive elements (buttons, links, cards, inputs) and a `@media (hover: none), (pointer: coarse)` block that disables hover transforms/state changes on touch devices. Without this, the first tap on mobile triggered the hover state and the user had to tap twice to fire the click.
+- **Real client photos in hero** — `public/clients/c1.png` … `c5.png` (5 real client headshots) replace the A–E placeholder avatar circles in both hero proof rows on the homepage. 30px / 32px, `border-radius: 999px`, 2px bone-bg border, slight shadow.
+- **Cal.com 1-on-1 scheduling live** — username `sfooxbeats`, availability 10:00–23:00 Africa/Casablanca, 3 free event types (Cal Video location):
+  - `cal.com/sfooxbeats/starter-30min` — 30 min Starter Session
+  - `cal.com/sfooxbeats/strategy-60min` — 60 min Sales Strategy Call
+  - `cal.com/sfooxbeats/blueprint-60min` — 60 min Freelancer Blueprint week (booked 4× weekly)
+  - Embedded inline on `/booking` after successful PayPal capture via the `PayPalButton`'s new `calLink` prop. Iframe URL: `https://cal.com/{calLink}?embed=true&layout=month_view&theme=light`, 720px tall.
+- **Booking page `TEST_MODE` flag** — `src/app/booking/page.tsx` top constant. When `true`, hides prices and replaces PayPal with a direct "Book your call →" button linking out to Cal.com — useful for testing the scheduling flow without spending money. Default is `false` (paid flow).
 
 ## 📄 PDF generation pipeline
 
