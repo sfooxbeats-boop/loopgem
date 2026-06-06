@@ -163,20 +163,21 @@ export default function Home() {
             >
               <div style={{ display: "flex", gap: 14, alignItems: "center", flexWrap: "wrap" }}>
                 <div style={{ display: "flex" }}>
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <div
-                      key={i}
-                      className="avatar-ph"
+                  {[1, 2, 3, 4, 5].map((n, i) => (
+                    <img
+                      key={n}
+                      src={`/clients/c${n}.png`}
+                      alt=""
                       style={{
                         width: 30,
                         height: 30,
                         borderRadius: 999,
                         marginLeft: i ? -10 : 0,
-                        fontSize: 9,
+                        objectFit: "cover",
+                        border: "2px solid var(--bg)",
+                        boxShadow: "0 1px 3px rgba(0,0,0,0.12)",
                       }}
-                    >
-                      {String.fromCharCode(65 + i)}
-                    </div>
+                    />
                   ))}
                 </div>
                 <div style={{ color: "var(--accent)", fontSize: 13 }}>
@@ -238,20 +239,21 @@ export default function Home() {
                 }}
               >
                 <div style={{ display: "flex" }}>
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <div
-                      key={i}
-                      className="avatar-ph"
+                  {[1, 2, 3, 4, 5].map((n, i) => (
+                    <img
+                      key={n}
+                      src={`/clients/c${n}.png`}
+                      alt=""
                       style={{
                         width: 32,
                         height: 32,
                         borderRadius: 999,
                         marginLeft: i ? -10 : 0,
-                        fontSize: 9,
+                        objectFit: "cover",
+                        border: "2px solid var(--bg)",
+                        boxShadow: "0 1px 3px rgba(0,0,0,0.12)",
                       }}
-                    >
-                      {String.fromCharCode(65 + i)}
-                    </div>
+                    />
                   ))}
                 </div>
                 <div>
