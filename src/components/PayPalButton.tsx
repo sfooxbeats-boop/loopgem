@@ -7,9 +7,12 @@ interface PayPalButtonProps {
   description: string;
   successMessage?: string;
   onPaid?: () => void;
+  /** If provided, after successful payment a Cal.com inline scheduler
+   * is shown instead of the plain success message. e.g. "sfooxbeats/starter-30min" */
+  calLink?: string;
 }
 
-export default function PayPalButton({ amount, description, successMessage, onPaid }: PayPalButtonProps) {
+export default function PayPalButton({ amount, description, successMessage, onPaid, calLink }: PayPalButtonProps) {
   const paypalRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const rendered = useRef(false);
@@ -72,22 +75,44 @@ export default function PayPalButton({ amount, description, successMessage, onPa
 
   if (success) {
     return (
-      <div
-        style={{
-          width: "100%",
-          borderRadius: 12,
-          background: "var(--accent-soft)",
-          border: "1px solid color-mix(in oklch, var(--accent) 35%, var(--border))",
-          padding: "14px 16px",
-          textAlign: "center",
-        }}
-      >
-        <p style={{ margin: 0, fontSize: 14, color: "var(--accent)", fontWeight: 700 }}>
-          Payment Complete!
-        </p>
-        <p style={{ margin: "4px 0 0", fontSize: 12, color: "var(--fg-muted)" }}>
-          {successMessage ?? "Check your email for next steps."}
-        </p>
+      <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: 14 }}>
+        <div
+          style={{
+            width: "100%",
+            borderRadius: 12,
+            background: "var(--accent-soft)",
+            border: "1px solid color-mix(in oklch, var(--accent) 35%, var(--border))",
+            padding: "14px 16px",
+            textAlign: "center",
+          }}
+        >
+          <p style={{ margin: 0, fontSize: 14, color: "var(--accent)", fontWeight: 700 }}>
+            Payment Complete!
+          </p>
+          <p style={{ margin: "4px 0 0", fontSize: 12, color: "var(--fg-muted)" }}>
+            {calLink
+              ? "Now pick a time below that works for you. You'll get a confirmation email with the Cal Video link."
+              : successMessage ?? "Check your email for next steps."}
+          </p>
+        </div>
+        {calLink && (
+          <div
+            style={{
+              width: "100%",
+              borderRadius: 12,
+              overflow: "hidden",
+              border: "1px solid var(--border-strong)",
+              background: "var(--bg-2)",
+            }}
+          >
+            <iframe
+              src={`https://cal.com/${calLink}?embed=true&layout=month_view&theme=light`}
+              title="Pick a time"
+              style={{ width: "100%", height: 720, border: 0, display: "block" }}
+              allow="camera; microphone; autoplay; fullscreen; clipboard-write"
+            />
+          </div>
+        )}
       </div>
     );
   }

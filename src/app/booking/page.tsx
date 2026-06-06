@@ -11,6 +11,7 @@ const tiers = [
     name: "Starter Session",
     duration: "30 min",
     price: 49.99,
+    calLink: "sfooxbeats/starter-30min",
     desc: "One focused call. We audit your Fiverr profile, fix the obvious leaks, and leave you with a 30-day plan you can start tomorrow.",
     includes: [
       "Full profile + gig audit",
@@ -24,6 +25,7 @@ const tiers = [
     name: "Sales Strategy Call",
     duration: "60 min",
     price: 89.99,
+    calLink: "sfooxbeats/strategy-60min",
     desc: "We map your 90-day strategy. Pricing, positioning, gig overhaul, outreach scripts — calibrated for YOUR genre and where you are now.",
     includes: [
       "Everything in Starter, plus:",
@@ -39,6 +41,7 @@ const tiers = [
     name: "Freelancer Blueprint",
     duration: "4 × 60 min",
     price: 299.99,
+    calLink: "sfooxbeats/blueprint-60min",
     desc: "Four weekly calls. We rebuild your profile, land your first paying clients, install a retention system, and keep accountability week-to-week.",
     includes: [
       "Week 1 — Profile + gig rebuild",
@@ -205,7 +208,8 @@ export default function BookingPage() {
                   <PayPalButton
                     amount={t.price.toFixed(2)}
                     description={`LoopGem Coaching: ${t.name} (${t.duration})`}
-                    successMessage="Booking confirmed! You'll receive a scheduling link within 24 hours."
+                    calLink={t.calLink}
+                    successMessage="Booking confirmed! Pick a time below."
                   />
                 </div>
               </FadeIn>
