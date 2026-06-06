@@ -519,6 +519,11 @@ body {
   border-top: 1px solid var(--border);
   margin-top: 80px;
 }
+/* Reserve space at the bottom so the fixed WhatsApp FAB doesn't sit
+ * on top of footer CTAs (Book a call, copyright row, etc.). */
+@media (max-width: 880px) {
+  .lg-footer { padding-bottom: 110px; }
+}
 
 /* ── responsive: tighten huge section paddings on mobile ─────── */
 @media (max-width: 720px) {
@@ -708,7 +713,12 @@ button, a, [role="button"], input, select, textarea, label,
   flex-direction: column;
   align-items: flex-end;
   gap: 12px;
+  /* Let clicks pass through the empty container area to elements
+   * underneath (e.g. footer Book a call button). Only the FAB and
+   * popup re-enable pointer-events on themselves. */
+  pointer-events: none;
 }
+.wa-widget > * { pointer-events: auto; }
 
 /* Popup card */
 .wa-popup {
