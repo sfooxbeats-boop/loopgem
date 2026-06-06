@@ -7,7 +7,7 @@ import PayPalButton from "@/components/PayPalButton";
 
 // TEMP: while testing the Cal.com flow, hide prices + PayPal and show
 // the calendar directly. Flip back to false to re-enable payment.
-const TEST_MODE = true;
+const TEST_MODE = false;
 
 const tiers = [
   {
