@@ -578,6 +578,41 @@ body { overflow-x: hidden; }
   .grain { animation: none; }
 }
 
+/* ── touch device fixes ─────────────────────────────────────────────
+ * On touch devices, :hover styles "stick" after the first tap, so the
+ * user has to tap twice to actually fire the click. Disable hover
+ * transforms/state changes on touch, and remove the 300ms tap delay
+ * with touch-action: manipulation.
+ * ─────────────────────────────────────────────────────────────────── */
+button, a, [role="button"], input, select, textarea, label,
+.btn, .btn-primary, .btn-gold, .btn-ghost, .btn-outline, .btn-sm,
+.lg-nav-link, .lg-logo, .card, .card-hover, .coach-card, .course-row,
+.problem-card, .faq-item, .proof-card, .chip, .wa-fab, .wa-popup-cta,
+.wa-popup-close {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .btn-primary:hover, .btn-gold:hover,
+  .btn-ghost:hover, .btn-outline:hover,
+  .card:hover, .card-hover:hover,
+  .coach-card:hover, .course-row:hover,
+  .problem-card:hover, .proof-card:hover,
+  .lg-nav-link:hover, .wa-fab:hover, .wa-popup-cta:hover,
+  .wa-popup-close:hover {
+    transform: none !important;
+    background: revert;
+    border-color: revert;
+    color: revert;
+    box-shadow: revert;
+  }
+  .btn-primary:hover, .btn-gold:hover { background: var(--accent); color: var(--accent-fg); }
+  .wa-popup-cta:hover { background: #25d366; color: #fff; }
+  .wa-fab:hover { background: #25d366; }
+  .proof-card:hover { transform: revert !important; z-index: revert !important; }
+}
+
 .h-eyebrow {
   font-family: var(--font-jetbrains-mono), monospace;
   font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
