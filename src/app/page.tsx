@@ -148,7 +148,7 @@ export default function Home() {
             </div>
           </FadeIn>
           <FadeIn delay={0.12}>
-            <VideoBlock />
+            <VideoBlock videoId="QcqsS62loY0" />
           </FadeIn>
           <FadeIn delay={0.2}>
             <div

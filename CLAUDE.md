@@ -157,7 +157,7 @@ See "Page structure" above under design system.
 ## ✅ Recently Completed
 - **Crimson-on-bone design** ported from `loopgem-design/` prototype into Next.js (palette, fonts, components, all 4 pages)
 - **Real Sfooxbeats stats** wired everywhere ($127k, 2,019 orders, 982 clients, since 2018)
-- **Real intro video** (`aN1IN7rYNE4`) wired into `VideoBlock` — shows YouTube thumbnail + small centered play button
+- **Real intro video** — VSL wired into `VideoBlock` on homepage. Current video ID: `QcqsS62loY0` (unlisted on YouTube; unlisted videos still embed + return thumbnails fine)
 - **Logo** — "Loop" black, "Gem" red (`var(--accent)`) in both Navbar + Footer
 - **Pricing calculator** at `/pricing-calculator` — 3 tabs, publicly accessible, linked from PDFs
 - **Studio photo** on About page (`public/sfooxbeats-studio.png`) at natural landscape ratio
@@ -250,9 +250,8 @@ Then: `git add public/downloads && git commit -m "add course PDF" && git push`
 - Push to GitHub
 
 ### 5. Update homepage video
-- User is filming a new ~1 min VSL video tonight
-- Once uploaded to YouTube, update `videoId` prop in `src/app/page.tsx` → `<VideoBlock videoId="NEW_ID" />`
-- Push to GitHub after updating
+- ✅ DONE — VSL uploaded as `QcqsS62loY0` (unlisted), wired into `<VideoBlock videoId="QcqsS62loY0" />` on the homepage
+- If a new video is filmed later, update the `videoId` prop in `src/app/page.tsx` and push
 
 ### 6. Add more proof screenshots (optional)
 - Save images to `public/proof/` as `r11.jpeg`, `r12.jpeg` etc. (no spaces in filenames)
