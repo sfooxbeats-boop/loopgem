@@ -101,8 +101,51 @@ Never commit `.env.local` — covered by `.gitignore`.
 - `.reveal` / `.reveal.in` — scroll-reveal classes (used by `Animate.tsx`)
 - `.section-label` — small red eyebrow with leading rule
 
-## Home Page Structure (`src/app/page.tsx`) — "use client"
-See "Page structure" above under design system.
+## Home Page Structure — logic lives in `src/app/HomeClient.tsx` ("use client")
+`src/app/page.tsx` itself is a thin Server Component (metadata only) — see "SEO" section below. See "Page structure" above under design system for the actual layout.
+
+## SEO
+
+**Architecture:** every route is split into a Server Component `page.tsx` (metadata export only) + a `*Client.tsx` sibling holding all interactive content:
+
+| Route | Server wrapper | Client component |
+|---|---|---|
+| `/` | `src/app/page.tsx` | `src/app/HomeClient.tsx` |
+| `/courses` | `src/app/courses/page.tsx` | `src/app/courses/CoursesClient.tsx` |
+| `/booking` | `src/app/booking/page.tsx` | `src/app/booking/BookingClient.tsx` |
+| `/contact` | `src/app/contact/page.tsx` | `src/app/contact/ContactClient.tsx` |
+| `/pricing-calculator` | `src/app/pricing-calculator/page.tsx` | `src/app/pricing-calculator/PricingCalculatorClient.tsx` |
+| `/about` | already a Server Component with its own metadata — no split needed |
+
+**Why:** before this split, `page.tsx` for 5 of 6 routes had `"use client"` at the top, which means Next.js could not run their `export const metadata` — every page silently inherited the root layout's title. Google saw the identical title/description on the homepage, courses, booking, contact, and pricing calculator. This is the single most important rule to preserve: **never put `"use client"` back on a `page.tsx` file.**
+
+**Per-page metadata (title, description, OG, canonical)** — targets the keyword clusters below:
+- `/` — "How to Sell Beats on Fiverr — Courses & Coaching | LoopGem"
+- `/courses` — "How to Sell Beats on Fiverr — PDF Courses | LoopGem"
+- `/booking` — "1-on-1 Music Producer Coaching — Book a Call | LoopGem"
+- `/pricing-calculator` — "Beat Pricing Calculator — How Much to Charge on Fiverr | LoopGem"
+- `/contact` — "Contact Sfooxbeats — LoopGem"
+- `/about` — "About — LoopGem"
+
+**Target keyword clusters** (no live Ahrefs/SEMrush data connected — these are directional, verify before heavy content investment):
+1. Sell beats on Fiverr → `/courses`, `/`
+2. Sell music production services on Fiverr → `/courses`
+3. Freelance music producer income → `/courses`
+4. Music producer coaching → `/booking`
+5. Beat pricing calculator → `/pricing-calculator` (near-exact match to the tool itself)
+6. Branded — sfooxbeats, loopgem → `/about`, `/`
+7. (Future, not yet built) beginner producer / how to start selling beats → candidate for a blog if one is ever added
+
+**Structured data (JSON-LD):**
+- `Organization` schema — sitewide, in `layout.tsx`
+- `FAQPage` schema — `src/app/booking/page.tsx` (mirrors the FAQ content in `BookingClient.tsx` — **if the FAQ copy changes, update both places**)
+- `Course` schema (×3) — `src/app/courses/page.tsx` (mirrors `coursesList` in `CoursesClient.tsx` — **if course price/title changes, update both places**)
+
+**Sitemap + robots:** `src/app/sitemap.ts` and `src/app/robots.ts` (Next.js native `MetadataRoute` — no manual XML). Redirect-only routes (`/beat-store`, `/drum-kits`, `/services`) are excluded from the sitemap and disallowed in robots.txt to avoid wasting crawl budget.
+
+**OG image:** root layout now sets `/sfooxbeats-studio.png` as `og:image` + Twitter Card image (previously unset — link previews on WhatsApp/Instagram showed nothing).
+
+**Not yet done:** verify Google Search Console ownership + submit sitemap; convert raw `<img>` tags to `next/image` for automatic WebP/AVIF + CLS prevention (currently every image on the site is a plain `<img>`).
 
 ## Products & Pricing
 | Product | Price | Payment Flow |
@@ -150,11 +193,13 @@ See "Page structure" above under design system.
 - **Tailwind v4 — no config file.** All tokens in `@theme {}` in `src/app/globals.css`.
 - **PayPal SDK loads once per page** — checks for `script[data-paypal-sdk]` before injecting.
 - **Resend must be lazy-init** — `new Resend(key)` inside the POST handler, never at module top level.
-- **next.config.mjs must keep `outputFileTracingRoot`** — removing it breaks Vercel builds.
+- **next.config.mjs must keep `outputFileTracingRoot`** — removing it breaks Vercel builds. (Top-level only now — the duplicate `experimental.outputFileTracingRoot` was removed since Next 16 deprecated it there.)
+- **Page metadata pattern (SEO)** — every route under `src/app/*/page.tsx` MUST be a thin Server Component that only exports `metadata` and renders a `*Client.tsx` component. All interactive content (state, hooks) lives in `[Route]Client.tsx` with `"use client"`. **Never put `"use client"` back on a `page.tsx` file** — it silently kills that page's unique `<title>`/meta description (this was the #1 SEO bug on the site before the 2026-07 SEO pass: 5 of 6 pages shared one identical title).
 - **Proof images** live in `public/proof/` named `r1.jpeg`–`r10.jpeg` (no spaces in filenames — spaces break Vercel).
 - **Scroll-reveal animations** must default to visible OR have a JS timeout fallback (700ms) — iframe contexts can block IntersectionObserver, causing all content to stay hidden. See design prototype `loopgem-design/shared.jsx` for the safe pattern.
 
 ## ✅ Recently Completed
+- **SEO overhaul (2026-07)** — see full breakdown below under "SEO"
 - **Crimson-on-bone design** ported from `loopgem-design/` prototype into Next.js (palette, fonts, components, all 4 pages)
 - **Real Sfooxbeats stats** wired everywhere ($127k, 2,019 orders, 982 clients, since 2018)
 - **Real intro video** — VSL wired into `VideoBlock` on homepage. Current video ID: `QcqsS62loY0` (unlisted on YouTube; unlisted videos still embed + return thumbnails fine)
