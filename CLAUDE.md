@@ -264,35 +264,43 @@ node convert.js
 
 ## ⚠️ Pending Tasks
 
-### 1. Connect loopgem.com domain + fix email sender
-- [ ] Vercel: Settings → Domains → add `loopgem.com` + update DNS at registrar
-- [ ] Resend: Domains → add `loopgem.com` → add SPF/DKIM DNS records → verify
-- [ ] Update `from` in `/api/send-course/route.ts`: `onboarding@resend.dev` → `courses@loopgem.com`
-- [ ] Update `NEXT_PUBLIC_SITE_URL` in Vercel to `https://loopgem.com` after domain live
+> **Session paused 2026-07-22 mid-setup — resume from tasks 1 & 2 below.**
 
-### 2. Upload final PDFs to repo
-When each PDF is finalised, copy from `C:\Users\KATANA\Downloads\loopgem-pdf\` to `loopgem/public/downloads/` with these EXACT filenames:
+### ✅ DONE — Domain live
+`loopgem.com` is connected to Vercel and live (2026-07-22). Production host is `www.loopgem.com`; apex `loopgem.com` 308-redirects to www. `NEXT_PUBLIC_SITE_URL` in Vercel updated to `https://www.loopgem.com` and redeployed. Namecheap DNS: A `@`→`216.198.79.1`, CNAME `www`→`5ee42e75a71a9c39.vercel-dns-017.com`.
+
+### 1. Finish Resend email sender switch (IN PROGRESS — waiting on DNS)
+- [x] Resend: added `loopgem.com` domain, region **eu-west-1**
+- [x] Added all 4 DNS records at Namecheap (scoped to `send.` subdomain — do NOT touch the root `@` Private Email records):
+  - TXT `resend._domainkey` = DKIM key
+  - TXT `send` = `v=spf1 include:amazonses.com ~all`
+  - MX `send` = `feedback-smtp.eu-west-1.amazonses.com` (priority 10)
+  - TXT `_dmarc` = `v=DMARC1; p=none;`
+- [ ] **NEXT:** wait for Resend to show all records **Verified** (was Pending when we paused)
+- [ ] Then change `from: "onboarding@resend.dev"` → `courses@loopgem.com` in `src/app/api/send-course/route.ts`, build, push
+
+### 2. Google Search Console (IN PROGRESS)
+- Decided: use **Domain property** (covers apex + www + all subdomains), NOT URL prefix
+- [ ] **NEXT:** enter `loopgem.com` → Google gives a TXT record → add at Namecheap (Host `@`) → Verify
+- [ ] Then submit sitemap: `https://loopgem.com/sitemap.xml`
+- Sitemap + robots are already live in code (`src/app/sitemap.ts`, `src/app/robots.ts`)
+
+### 3. Wire up contact form (Formspree)
+- Free account at formspree.io → create form → copy form ID
+- Replace `YOUR_FORM_ID` in `src/app/contact/ContactClient.tsx` (moved here from `page.tsx` during the SEO split)
+- Push to GitHub
+
+### 4. SEO follow-ups (optional, not started)
+- Convert raw `<img>` tags → `next/image` across the site for auto WebP/AVIF + CLS prevention
+- After GSC indexes, review Search Console for actual keyword impressions and refine titles/descriptions
+
+### 5. Upload final PDFs to repo (reference — all 3 currently live)
+When a PDF is re-finalised, copy from `C:\Users\KATANA\Downloads\loopgem-pdf\` to `loopgem/public/downloads/` with EXACT filenames:
 - `course-fiverr-beat-seller-blueprint.pdf`
 - `course-sell-music-services-fiverr.pdf`
 - `course-full-freelance-music-producer-playbook.pdf`
 
 Then: `git add public/downloads && git commit -m "add course PDF" && git push`
-
-### 2. Add Resend API key to Vercel
-- Free account at resend.com → API Keys → Create Key
-- Vercel: loopgem project → Settings → Environment Variables:
-  - `RESEND_API_KEY` = key from Resend
-  - `NEXT_PUBLIC_SITE_URL` = `https://loopgem.vercel.app`
-- Trigger a redeploy after adding
-
-### 3. Link loopgem.com domain to Vercel
-- Vercel → loopgem project → Settings → Domains → Add `loopgem.com`
-- Update DNS at domain registrar to point to Vercel
-
-### 4. Wire up contact form (Formspree)
-- Free account at formspree.io → create form → copy form ID
-- Replace `YOUR_FORM_ID` in `src/app/contact/page.tsx`
-- Push to GitHub
 
 ### 5. Update homepage video
 - ✅ DONE — VSL uploaded as `QcqsS62loY0` (unlisted), wired into `<VideoBlock videoId="QcqsS62loY0" />` on the homepage
