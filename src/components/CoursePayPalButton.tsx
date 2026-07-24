@@ -42,12 +42,14 @@ export default function CoursePayPalButton({ amount, courseId, courseName }: Pro
 
         setState("sending");
         try {
-          await fetch("/api/send-course", {
+          const res = await fetch("/api/send-course", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ payerEmail, payerName, courseId }),
           });
-          setState("done");
+          // fetch only throws on network errors, not on HTTP 4xx/5xx —
+          // check res.ok so a failed delivery doesn't falsely show "PDF sent!"
+          setState(res.ok ? "done" : "error");
         } catch {
           setState("error");
         }
