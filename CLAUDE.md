@@ -145,7 +145,15 @@ Never commit `.env.local` — covered by `.gitignore`.
 
 **OG image:** root layout now sets `/sfooxbeats-studio.png` as `og:image` + Twitter Card image (previously unset — link previews on WhatsApp/Instagram showed nothing).
 
-**Not yet done:** verify Google Search Console ownership + submit sitemap; convert raw `<img>` tags to `next/image` for automatic WebP/AVIF + CLS prevention (currently every image on the site is a plain `<img>`).
+**Blog (added 2026-07-24):** SEO content hub at `/blog` — the main lever for ranking beyond the core pages.
+- `src/app/blog/posts.ts` — all posts as TS data. Each = `{slug, title, metaTitle, description, primaryKeyword, excerpt, date, readingMinutes, content}`. `content` is a first-party HTML string rendered via `dangerouslySetInnerHTML` into the `.prose` container (no MDX/markdown deps). **To add a post:** append an object to the `posts` array — listing, `[slug]` route, sitemap, and static generation all pick it up automatically.
+- `src/app/blog/page.tsx` — listing (Server Component, `Blog` JSON-LD).
+- `src/app/blog/[slug]/page.tsx` — async Server Component; `generateStaticParams` + `generateMetadata` that **awaits `params`** (Next 16 makes `params` a Promise — do NOT destructure it synchronously); emits `BlogPosting` + `BreadcrumbList` JSON-LD. All posts prerender as SSG.
+- `.prose` article typography lives in `globals.css` (headings, lists, links, blockquote).
+- Cross-links between posts must use the full `/blog/<slug>` path. Posts link out to `/courses`, `/booking`, `/pricing-calculator`.
+- 6 launch posts target: how-to-sell-beats-online, how-much-to-charge-for-beats, beatstars-vs-fiverr, how-to-sell-your-first-beat, how-to-promote-your-beats, how-to-make-money-as-a-music-producer.
+
+**Not yet done:** verify Google Search Console ownership + submit sitemap; get backlinks (Fiverr profile, IG bio, YouTube descriptions) — the real ranking bottleneck for a new domain; convert raw `<img>` tags to `next/image` for automatic WebP/AVIF + CLS prevention.
 
 ## Products & Pricing
 | Product | Price | Payment Flow |
