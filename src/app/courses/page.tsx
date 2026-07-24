@@ -40,14 +40,14 @@ const courseSchemas = [
 }));
 
 export const metadata: Metadata = {
-  title: "How to Sell Beats on Fiverr — PDF Courses | LoopGem",
+  title: "Courses: How to Sell Beats & Music Services Online | LoopGem",
   description:
-    "3 PDF courses that teach you how to sell beats, mixing, and production services on Fiverr. Built from $127k+ in real orders, not theory. Instant delivery.",
+    "3 PDF courses that teach you how to sell beats online, price your work, and land clients for mixing and production — on Fiverr and beyond. Built from $127k+ in real orders.",
   alternates: { canonical: "https://loopgem.com/courses" },
   openGraph: {
-    title: "How to Sell Beats on Fiverr — PDF Courses | LoopGem",
+    title: "Courses: How to Sell Beats & Music Services Online | LoopGem",
     description:
-      "3 PDF courses that teach you how to sell beats, mixing, and production services on Fiverr. Built from $127k+ in real orders.",
+      "3 PDF courses that teach you how to sell beats online, price your work, and land clients for mixing and production. Built from $127k+ in real orders.",
     url: "https://loopgem.com/courses",
     siteName: "LoopGem",
     type: "website",

@@ -84,6 +84,15 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/blog"
+                  className="lg-nav-link"
+                  style={{ color: "var(--fg)" }}
+                >
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/about"
                   className="lg-nav-link"
                   style={{ color: "var(--fg)" }}

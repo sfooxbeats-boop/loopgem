@@ -666,6 +666,56 @@ button, a, [role="button"], input, select, textarea, label,
 .prose p { color: var(--fg-muted); line-height: 1.7; margin: 0 0 16px; font-size: 16px; }
 .prose p strong { color: var(--fg); font-weight: 600; }
 
+/* ── blog article typography ───────────────────────────────────── */
+.prose { font-size: 17px; }
+.prose > :first-child { margin-top: 0; }
+.prose h2 {
+  font-family: var(--font-archivo-black), 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+  font-size: clamp(26px, 3.5vw, 34px);
+  line-height: 1.1;
+  color: var(--fg);
+  margin: 44px 0 16px;
+  letter-spacing: -0.01em;
+}
+.prose h3 {
+  font-family: var(--font-archivo-black), 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+  font-size: clamp(20px, 2.6vw, 24px);
+  line-height: 1.15;
+  color: var(--fg);
+  margin: 32px 0 12px;
+}
+.prose p { font-size: 17px; line-height: 1.75; margin: 0 0 20px; }
+.prose ul, .prose ol { margin: 0 0 22px; padding-left: 24px; }
+.prose li {
+  color: var(--fg-muted);
+  line-height: 1.7;
+  margin: 0 0 10px;
+  font-size: 17px;
+  padding-left: 4px;
+}
+.prose li strong { color: var(--fg); font-weight: 600; }
+.prose ul li::marker { color: var(--accent); }
+.prose ol li::marker { color: var(--accent); font-weight: 700; }
+.prose a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  transition: color 0.15s ease;
+}
+.prose a:hover { color: var(--accent-dark); }
+.prose blockquote {
+  border-left: 3px solid var(--accent);
+  margin: 24px 0;
+  padding: 4px 0 4px 20px;
+  color: var(--fg);
+  font-size: 18px;
+  font-style: italic;
+}
+
 /* ── scrollbar (light bone bg) ─────────────────────────────────── */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg-3); }
