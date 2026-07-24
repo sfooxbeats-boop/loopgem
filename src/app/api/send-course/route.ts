@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
     const firstName = payerName?.split(" ")[0] ?? "there";
 
     await resend.emails.send({
-      from: "LoopGem <onboarding@resend.dev>",
+      from: "LoopGem <courses@loopgem.com>",
       to: payerEmail,
       replyTo: "Sfooxbeats@gmail.com",
       subject: `Your PDF is here — ${course.name}`,
@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
 
     // Notify yourself — same brand styling
     await resend.emails.send({
-      from: "LoopGem <onboarding@resend.dev>",
+      from: "LoopGem <courses@loopgem.com>",
       to: "Sfooxbeats@gmail.com",
       subject: `New course sale — ${course.name}`,
       html: `
