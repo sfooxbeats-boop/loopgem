@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     const downloadUrl = `${siteUrl}/downloads/${course.file}`;
     const firstName = payerName?.split(" ")[0] ?? "there";
 
-    await resend.emails.send({
+    const buyerResult = await resend.emails.send({
       from: "LoopGem <courses@loopgem.com>",
       to: payerEmail,
       replyTo: "Sfooxbeats@gmail.com",
@@ -80,8 +80,17 @@ export async function POST(req: NextRequest) {
       `,
     });
 
+    // The buyer email is the critical one — if it failed, surface a real error
+    if (buyerResult.error) {
+      console.error("send-course buyer email error:", buyerResult.error);
+      return NextResponse.json(
+        { error: `Email delivery failed: ${buyerResult.error.message}` },
+        { status: 502 }
+      );
+    }
+
     // Notify yourself — same brand styling
-    await resend.emails.send({
+    const notifyResult = await resend.emails.send({
       from: "LoopGem <courses@loopgem.com>",
       to: "Sfooxbeats@gmail.com",
       subject: `New course sale — ${course.name}`,
@@ -108,6 +117,11 @@ export async function POST(req: NextRequest) {
         </div>
       `,
     });
+
+    // Buyer already got their PDF; a failed self-notification shouldn't fail the request
+    if (notifyResult.error) {
+      console.error("send-course notify email error:", notifyResult.error);
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {
