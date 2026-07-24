@@ -21,9 +21,9 @@ Queue for the **weekly auto-draft agent**. Each week the agent picks the **top u
 - [x] how-to-sell-your-first-beat
 - [x] how-to-promote-your-beats
 - [x] how-to-make-money-as-a-music-producer
+- [x] how-to-sell-beats-on-instagram
 
 ## Queue (write in this order)
-- [ ] **how-to-sell-beats-on-instagram** — primary kw: "how to sell beats on instagram"
 - [ ] **how-much-to-charge-for-mixing** — primary kw: "how much to charge for mixing a song"
 - [ ] **exclusive-vs-lease-beats** — primary kw: "exclusive vs lease beats"
 - [ ] **fiverr-gig-for-music-producers** — primary kw: "fiverr gig for music producers"

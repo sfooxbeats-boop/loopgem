@@ -15,6 +15,61 @@ export interface BlogPost {
 // Newest first. Order here = order on the /blog listing.
 export const posts: BlogPost[] = [
   {
+    slug: "how-to-sell-beats-on-instagram",
+    title: "How to Sell Beats on Instagram (Without Buying Followers)",
+    metaTitle: "How to Sell Beats on Instagram — Producer's Guide",
+    description:
+      "How to sell beats on Instagram as a producer: the content that converts, how to set up your profile, and how to turn followers into paying beat clients.",
+    primaryKeyword: "how to sell beats on instagram",
+    excerpt:
+      "Instagram can sell beats for you — but posting loops into the void won't. Here's how to set up, what to post, and how to turn views into buyers.",
+    date: "2026-07-24",
+    readingMinutes: 9,
+    content: `
+<p>Instagram is one of the best free tools a producer has for selling beats — and one of the most wasted. Most producers post a loop, get four likes, and conclude "Instagram doesn't work." The platform is fine. The approach is the problem.</p>
+<p>Here's how to actually sell beats on Instagram, built from the same principles that got me $127k+ in orders — no fake followers, no dancing, no ad budget required.</p>
+
+<h2>First: Instagram doesn't sell beats. It starts conversations.</h2>
+<p>The mistake is treating Instagram like a store. It isn't one — it's the top of your funnel. Its job is to get the right people to notice you and take one step closer: a DM, a profile visit, a click to your store. Once you accept that, everything you post changes.</p>
+
+<h2>Set up your profile to convert</h2>
+<p>Before you post anything, fix the page a buyer lands on. In 5 seconds it must answer "what do you do and how do I buy?"</p>
+<ul>
+<li><strong>Name field:</strong> put "Beats" or "Music Producer" next to your name — it's searchable, unlike your bio.</li>
+<li><strong>Bio:</strong> one line on who you help ("Beats &amp; mixing for indie artists"), one clear call to action ("DM 'BEAT' for custom work").</li>
+<li><strong>Link:</strong> point it to somewhere that actually sells — your beat store or a <a href="/booking">booking page</a>, not your SoundCloud homepage.</li>
+<li><strong>Pinned posts:</strong> pin your 3 best "beat in use" clips so new visitors instantly hear your level.</li>
+</ul>
+
+<h2>The content that actually converts</h2>
+<p>Not all posts are equal. Random loops don't sell. These three types do:</p>
+<ol>
+<li><strong>Beat-in-use clips</strong> — the beat with a hook, a rough vocal, or an artist over it. Buyers need to imagine a finished song, not a raw loop. This is the single highest-converting format.</li>
+<li><strong>Proof and outcomes</strong> — a client's finished track, a "made this in 10 minutes" time-lapse, a screenshot of a happy buyer. Proof lowers the risk of buying from you.</li>
+<li><strong>Open-for-business posts</strong> — an actual offer. "2 custom beat slots open this week — DM to claim." You'd be shocked how many producers never once tell people they can buy.</li>
+</ol>
+<p>Reels are your reach engine — keep them under 15 seconds, lead with the drop, and add one line of on-screen text so it works on mute. For the full breakdown of promo content across platforms, see <a href="/blog/how-to-promote-your-beats">how to promote your beats</a>.</p>
+
+<h2>Use DMs — that's where beats actually get sold</h2>
+<p>The sale rarely happens in the comments. It happens in the DMs. Two ways to make that happen:</p>
+<ul>
+<li><strong>Inbound:</strong> your call to action ("DM 'BEAT'") pulls interested people in. Reply fast, ask one question about their project, then point them to a price.</li>
+<li><strong>Outbound:</strong> find active artists in your genre who are clearly making music with weak beats. Send a specific, low-pressure message — compliment something real, then offer something concrete. Ten thoughtful DMs beat a hundred random posts.</li>
+</ul>
+<p>This outreach is the fastest path to your first sales when you have a small following, because you're talking directly to buyers instead of waiting on an algorithm.</p>
+
+<h2>Don't wait for a big following</h2>
+<p>You do not need 10k followers to sell beats. You need the right few hundred people who make music and a profile that converts them. I've seen producers with 400 real, engaged followers out-earn producers with 40k bought ones. Buying followers actively hurts you — it kills your engagement rate, so the algorithm shows your posts to fewer real people.</p>
+
+<h2>Point the traffic somewhere that closes</h2>
+<p>Instagram gets attention; your store or gig closes the sale. If that destination is weak, all the attention leaks away. Make sure your pricing and offer are dialed in first — our guides on <a href="/blog/how-to-sell-beats-online">how to sell beats online</a> and the <a href="/pricing-calculator">free pricing calculator</a> cover exactly that.</p>
+
+<h2>The bigger system</h2>
+<p>Instagram is one channel feeding a machine — offer, pricing, delivery, retention. If you want the whole system, including a 30-day content plan built specifically to drive beat sales and the exact DM scripts that land clients, that's inside my <a href="/courses">producer courses</a>. Or <a href="/booking">book a 1-on-1 call</a> and we'll build your Instagram-to-sales flow around your genre.</p>
+<p>Post with intent, set up your profile to convert, and move the real conversations to the DMs. Do that consistently and Instagram stops being a vanity feed and starts being a client pipeline.</p>
+`,
+  },
+  {
     slug: "how-to-sell-beats-online",
     title: "How to Sell Beats Online in 2026 (A Producer's Real Playbook)",
     metaTitle: "How to Sell Beats Online in 2026 — Real Producer Playbook",
