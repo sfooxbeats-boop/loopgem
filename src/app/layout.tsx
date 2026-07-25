@@ -39,14 +39,12 @@ export const metadata: Metadata = {
     url: "https://loopgem.com",
     siteName: "LoopGem",
     type: "website",
-    images: [{ url: "/sfooxbeats-studio.png", width: 1200, height: 800, alt: "Sfooxbeats in his studio" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "LoopGem — Sell beats. Sell services. Stop guessing.",
     description:
       "PDF courses and 1-on-1 coaching for music producers who want to actually get paid online.",
-    images: ["/sfooxbeats-studio.png"],
   },
 };
 
