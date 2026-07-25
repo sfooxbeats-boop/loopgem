@@ -152,6 +152,7 @@ Never commit `.env.local` — covered by `.gitignore`.
 - `.prose` article typography lives in `globals.css` (headings, lists, links, blockquote).
 - Cross-links between posts must use the full `/blog/<slug>` path. Posts link out to `/courses`, `/booking`, `/pricing-calculator`.
 - 6 launch posts target: how-to-sell-beats-online, how-much-to-charge-for-beats, beatstars-vs-fiverr, how-to-sell-your-first-beat, how-to-promote-your-beats, how-to-make-money-as-a-music-producer.
+- **Writing quality — always apply the `stop-slop` skill** (installed at `~/.claude/skills/stop-slop/`) when writing/editing any blog post: cut adverbs + filler, active voice, be specific, vary rhythm, **no em dashes**, no "not X but Y" contrasts, no rhetorical-question setups. Score ≥35/50 (Directness/Rhythm/Trust/Authenticity/Density) before publishing. The weekly auto-publish task embeds these rules. NOTE: the 7 existing launch posts predate this and still contain em dashes / AI patterns — clean them up when convenient.
 
 **Not yet done:** verify Google Search Console ownership + submit sitemap; get backlinks (Fiverr profile, IG bio, YouTube descriptions) — the real ranking bottleneck for a new domain; convert raw `<img>` tags to `next/image` for automatic WebP/AVIF + CLS prevention.
 
