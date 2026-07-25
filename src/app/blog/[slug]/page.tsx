@@ -14,7 +14,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post) return { title: "Post not found — LoopGem" };
+  if (!post) return { title: "Post not found | LoopGem" };
 
   const url = `https://loopgem.com/blog/${post.slug}`;
   return {
@@ -159,8 +159,8 @@ export default async function BlogPostPage({ params }: Props) {
                 margin: "0 0 20px",
               }}
             >
-              These guides are the free version. The courses are the exact
-              step-by-step system — gig setup, scripts, pricing maps — that
+              These guides are the free version. The courses are the full
+              step-by-step system: gig setup, scripts, and pricing maps that
               generated $127k+ in real orders.
             </p>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
