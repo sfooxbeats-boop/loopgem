@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     url: "https://loopgem.com/contact",
     siteName: "LoopGem",
     type: "website",
+    images: ["/opengraph-image"],
   },
 };
 

@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "LoopGem",
       type: "article",
       publishedTime: post.date,
+      images: ["/opengraph-image"],
     },
     twitter: {
       card: "summary_large_image",

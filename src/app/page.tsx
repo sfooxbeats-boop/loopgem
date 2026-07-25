@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     url: "https://loopgem.com",
     siteName: "LoopGem",
     type: "website",
+    images: ["/opengraph-image"],
   },
 };
 

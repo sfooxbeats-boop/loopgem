@@ -7,6 +7,16 @@ export const metadata: Metadata = {
   title: "About — LoopGem",
   description:
     "LoopGem is built by Soufiane Remdane (Sfooxbeats) — a music producer dedicated to teaching other producers how to actually get paid online.",
+  alternates: { canonical: "https://loopgem.com/about" },
+  openGraph: {
+    title: "About — LoopGem",
+    description:
+      "LoopGem is built by Soufiane Remdane (Sfooxbeats) — a music producer teaching other producers how to get paid online.",
+    url: "https://loopgem.com/about",
+    siteName: "LoopGem",
+    type: "website",
+    images: ["/opengraph-image"],
+  },
 };
 
 const milestones = [

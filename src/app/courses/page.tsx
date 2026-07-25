@@ -51,6 +51,7 @@ export const metadata: Metadata = {
     url: "https://loopgem.com/courses",
     siteName: "LoopGem",
     type: "website",
+    images: ["/opengraph-image"],
   },
 };
 
