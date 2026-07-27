@@ -40,7 +40,14 @@ export default function WhatsAppButton() {
       <div className={`wa-popup ${open ? "wa-popup--open" : ""}`} role="dialog" aria-label="Chat with Sfooxbeats on WhatsApp">
         {/* Header */}
         <div className="wa-popup-header">
-          <div className="wa-popup-avatar">S</div>
+          <div className="wa-popup-avatar" style={{ overflow: "hidden" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/sfooxbeats-avatar.jpg"
+              alt="Sfooxbeats"
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            />
+          </div>
           <div className="wa-popup-info">
             <div className="wa-popup-name">Sfooxbeats</div>
             <div className="wa-popup-status">
