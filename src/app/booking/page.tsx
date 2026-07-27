@@ -24,12 +24,12 @@ export const metadata: Metadata = {
   title: "1-on-1 Music Producer Coaching — Book a Call | LoopGem",
   description:
     "Get on a call with Sfooxbeats, Top-Rated on Fiverr since 2018. We audit your profile, fix your pricing, and rebuild your outreach — live, on Zoom.",
-  alternates: { canonical: "https://loopgem.com/booking" },
+  alternates: { canonical: "https://www.loopgem.com/booking" },
   openGraph: {
     title: "1-on-1 Music Producer Coaching — Book a Call | LoopGem",
     description:
       "Get on a call with Sfooxbeats, Top-Rated on Fiverr since 2018. We audit your profile, fix your pricing, and rebuild your outreach — live, on Zoom.",
-    url: "https://loopgem.com/booking",
+    url: "https://www.loopgem.com/booking",
     siteName: "LoopGem",
     type: "website",
     images: ["/opengraph-image"],

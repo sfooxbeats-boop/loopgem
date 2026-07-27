@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(slug);
   if (!post) return { title: "Post not found | LoopGem" };
 
-  const url = `https://loopgem.com/blog/${post.slug}`;
+  const url = `https://www.loopgem.com/blog/${post.slug}`;
   return {
     title: post.metaTitle,
     description: post.description,
@@ -43,7 +43,7 @@ export default async function BlogPostPage({ params }: Props) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
-  const url = `https://loopgem.com/blog/${post.slug}`;
+  const url = `https://www.loopgem.com/blog/${post.slug}`;
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -60,7 +60,7 @@ export default async function BlogPostPage({ params }: Props) {
     publisher: {
       "@type": "Organization",
       name: "LoopGem",
-      url: "https://loopgem.com",
+      url: "https://www.loopgem.com",
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
   };
@@ -69,8 +69,8 @@ export default async function BlogPostPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://loopgem.com" },
-      { "@type": "ListItem", position: 2, name: "Blog", item: "https://loopgem.com/blog" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.loopgem.com" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.loopgem.com/blog" },
       { "@type": "ListItem", position: 3, name: post.title, item: url },
     ],
   };

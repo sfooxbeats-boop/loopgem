@@ -32,12 +32,12 @@ export const metadata: Metadata = {
   },
   description:
     "Real producer education from Sfooxbeats. PDF courses and 1-on-1 coaching that teach you how to turn beats, mixes and production into freelance income — on Fiverr and beyond.",
-  metadataBase: new URL("https://loopgem.com"),
+  metadataBase: new URL("https://www.loopgem.com"),
   openGraph: {
     title: "LoopGem — Sell beats. Sell services. Stop guessing.",
     description:
       "PDF courses and 1-on-1 coaching for music producers who want to actually get paid online.",
-    url: "https://loopgem.com",
+    url: "https://www.loopgem.com",
     siteName: "LoopGem",
     type: "website",
   },
@@ -54,8 +54,8 @@ const organizationSchema = {
   "@type": "Organization",
   name: "LoopGem",
   alternateName: "Sfooxbeats",
-  url: "https://loopgem.com",
-  logo: "https://loopgem.com/cover-c1.png",
+  url: "https://www.loopgem.com",
+  logo: "https://www.loopgem.com/cover-c1.png",
   founder: {
     "@type": "Person",
     name: "Soufiane Remdane",

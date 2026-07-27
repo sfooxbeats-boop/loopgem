@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts } from "./blog/posts";
 
-const BASE_URL = "https://loopgem.com";
+const BASE_URL = "https://www.loopgem.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [

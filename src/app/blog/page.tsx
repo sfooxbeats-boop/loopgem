@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: "Blog — How to Sell Beats & Make Money as a Producer | LoopGem",
   description:
     "Real, no-fluff guides on selling beats online, pricing your work, promoting your music, and making money as a music producer — from a top-rated seller.",
-  alternates: { canonical: "https://loopgem.com/blog" },
+  alternates: { canonical: "https://www.loopgem.com/blog" },
   openGraph: {
     title: "Blog — How to Sell Beats & Make Money as a Producer | LoopGem",
     description:
       "Real, no-fluff guides on selling beats online, pricing your work, and making money as a music producer.",
-    url: "https://loopgem.com/blog",
+    url: "https://www.loopgem.com/blog",
     siteName: "LoopGem",
     type: "website",
     images: ["/opengraph-image"],
@@ -24,7 +24,7 @@ const blogSchema = {
   name: "LoopGem Blog",
   description:
     "Guides on selling beats online, pricing, promotion, and making money as a music producer.",
-  url: "https://loopgem.com/blog",
+  url: "https://www.loopgem.com/blog",
   publisher: { "@type": "Organization", name: "LoopGem" },
 };
 

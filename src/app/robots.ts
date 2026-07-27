@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/", "/beat-store", "/drum-kits", "/services"],
     },
-    sitemap: "https://loopgem.com/sitemap.xml",
+    sitemap: "https://www.loopgem.com/sitemap.xml",
   };
 }

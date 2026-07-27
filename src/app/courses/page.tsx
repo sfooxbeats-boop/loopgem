@@ -28,14 +28,14 @@ const courseSchemas = [
   provider: {
     "@type": "Organization",
     name: "LoopGem",
-    sameAs: "https://loopgem.com",
+    sameAs: "https://www.loopgem.com",
   },
   offers: {
     "@type": "Offer",
     price: c.price,
     priceCurrency: "USD",
     availability: "https://schema.org/InStock",
-    url: "https://loopgem.com/courses",
+    url: "https://www.loopgem.com/courses",
   },
 }));
 
@@ -43,12 +43,12 @@ export const metadata: Metadata = {
   title: "Courses: How to Sell Beats & Music Services Online | LoopGem",
   description:
     "3 PDF courses that teach you how to sell beats online, price your work, and land clients for mixing and production — on Fiverr and beyond. Built from $127k+ in real orders.",
-  alternates: { canonical: "https://loopgem.com/courses" },
+  alternates: { canonical: "https://www.loopgem.com/courses" },
   openGraph: {
     title: "Courses: How to Sell Beats & Music Services Online | LoopGem",
     description:
       "3 PDF courses that teach you how to sell beats online, price your work, and land clients for mixing and production. Built from $127k+ in real orders.",
-    url: "https://loopgem.com/courses",
+    url: "https://www.loopgem.com/courses",
     siteName: "LoopGem",
     type: "website",
     images: ["/opengraph-image"],
