@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { trackEvent } from "@/lib/gtag";
 
 interface PayPalButtonProps {
   amount: string;
@@ -30,11 +31,24 @@ export default function PayPalButton({ amount, description, successMessage, onPa
         purchase_units: [{ description, amount: { value: amount, currency_code: "USD" } }],
       };
 
-      const createOrder = (_d: unknown, actions: PayPalOrderActions) =>
-        actions.order.create(orderConfig);
+      const createOrder = (_d: unknown, actions: PayPalOrderActions) => {
+        trackEvent("begin_checkout", {
+          currency: "USD",
+          value: Number(amount),
+          items: [{ item_name: description, price: Number(amount), quantity: 1 }],
+        });
+        return actions.order.create(orderConfig);
+      };
 
       const onApprove = async (_d: unknown, actions: PayPalOrderActions) => {
-        await actions.order.capture();
+        const details = await actions.order.capture();
+        // GA4 ecommerce purchase event (coaching / other checkouts)
+        trackEvent("purchase", {
+          transaction_id: (details as { id?: string })?.id,
+          value: Number(amount),
+          currency: "USD",
+          items: [{ item_name: description, price: Number(amount), quantity: 1 }],
+        });
         setSuccess(true);
         onPaid?.();
       };

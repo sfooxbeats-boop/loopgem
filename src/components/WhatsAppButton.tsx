@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { trackEvent } from "@/lib/gtag";
 
 function WhatsAppIcon({ size = 24 }: { size?: number }) {
   return (
@@ -69,6 +70,7 @@ export default function WhatsAppButton() {
             target="_blank"
             rel="noopener noreferrer"
             className="wa-popup-cta"
+            onClick={() => trackEvent("whatsapp_click", { location: "widget" })}
           >
             <WhatsAppIcon size={20} />
             Start the conversation

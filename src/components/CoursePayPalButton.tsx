@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { trackEvent } from "@/lib/gtag";
 
 interface Props {
   amount: string;
@@ -24,13 +25,19 @@ export default function CoursePayPalButton({ amount, courseId, courseName }: Pro
       if (!window.paypal || rendered.current) return;
       rendered.current = true;
 
-      const createOrder = (_d: unknown, actions: PayPalOrderActions) =>
-        actions.order.create({
+      const createOrder = (_d: unknown, actions: PayPalOrderActions) => {
+        trackEvent("begin_checkout", {
+          currency: "USD",
+          value: Number(amount),
+          items: [{ item_id: courseId, item_name: courseName, price: Number(amount), quantity: 1 }],
+        });
+        return actions.order.create({
           purchase_units: [{
             description: `LoopGem PDF Course: ${courseName}`,
             amount: { value: amount, currency_code: "USD" },
           }],
         });
+      };
 
       const onApprove = async (_d: unknown, actions: PayPalOrderActions) => {
         const details = await actions.order.capture();
@@ -39,6 +46,14 @@ export default function CoursePayPalButton({ amount, courseId, courseName }: Pro
           details?.payer?.name?.given_name,
           details?.payer?.name?.surname,
         ].filter(Boolean).join(" ");
+
+        // GA4 ecommerce purchase event (feeds monetization reports)
+        trackEvent("purchase", {
+          transaction_id: (details as { id?: string })?.id,
+          value: Number(amount),
+          currency: "USD",
+          items: [{ item_id: courseId, item_name: courseName, price: Number(amount), quantity: 1 }],
+        });
 
         setState("sending");
         try {
