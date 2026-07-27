@@ -3,11 +3,34 @@
 Short posts for **both X (Twitter) and Threads**. One post goes to both platforms.
 Written in Sfooxbeats' voice and run through the `stop-slop` skill (no em dashes, no adverbs, no "not X but Y" contrasts, no AI throat-clearing).
 
-**Rules for this file**
+---
+
+## HOW TO USE THIS FILE
+
+**Where it lives:** `C:\Users\KATANA\Desktop\my website\loopgem\social-content-bank.md`
+Open it any time. No need to look in chat.
+
+**Your routine (about 5 min, twice a week):**
+1. Open this file.
+2. Start at the TOP and find the first post with an empty `- [ ]` box.
+3. Copy it into Buffer. Select **both X and Threads** so one entry posts to both.
+4. Come back here and change that post's `- [ ]` to `- [x]`.
+5. Repeat until Buffer's queue is full (free plan holds about 10 per channel).
+6. Save the file.
+
+**Rule of thumb: empty box `[ ]` = not posted yet. Checked box `[x]` = already used, skip it.**
+Always work top to bottom so you never lose your place.
+
+**Important:** edit this file **on your computer**, not on GitHub.com. The weekly agent pushes new batches from the local copy, and editing on the website puts them out of sync.
+
+**New posts arrive automatically every Sunday**, added at the BOTTOM under a dated heading like `### Batch 2026-08-02`. So the unposted ones naturally collect toward the end of the file as you work down.
+
+---
+
+**Post rules**
 - Every post stays **under 280 characters** so it works on X and reads fast on Threads.
 - **Cadence: 3-4 posts per day**, each posted to both platforms.
 - Roughly **1 in 4** posts carries a CTA (link or "DM me"). The rest build trust.
-- Tick the checkbox once a post has been queued so it never repeats.
 
 ---
 
