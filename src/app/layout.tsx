@@ -71,7 +71,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  // GA4 Measurement ID. Not a secret (it ships in the public page HTML),
+  // so it's committed as the default; an env var can still override it.
+  const gaId = process.env.NEXT_PUBLIC_GA_ID ?? "G-S89ZX3WCP9";
   return (
     <html
       lang="en"
