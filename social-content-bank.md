@@ -33,7 +33,8 @@ These posts should sound like a producer typing on his phone, not like marketing
 - **1 to 3 sentences. Short.** Most under 150 characters. Nobody reads paragraphs on Threads.
 - **Casual.** Contractions, "y'all", lowercase where it feels natural. Write how you talk.
 - **Ask questions.** The posts that blow up are the ones people can answer in one line.
-- **Use producer words** so the right people find it: beats, beatmakers, producers, mixing, FL Studio, type beats, Fiverr, gigs, clients, bedroom producer.
+- **Use producer words** so the right people find it: beats, beatmakers, producers, mixing, FL Studio, type beats, Fiverr, clients, bedroom producer.
+- **Always write "Fiverr gig", never just "gig".** On its own, "gig" reads like a live show. The platform has to be named or the post makes no sense to a stranger.
 - **No em dashes. No corporate voice. No "here's what nobody tells you."**
 - Roughly **1 in 4** carries a link or a DM ask. The rest are pure conversation.
 
@@ -69,7 +70,7 @@ These posts should sound like a producer typing on his phone, not like marketing
 ### Short takes
 - [ ] Stop selling beats for $5. You're teaching buyers your work is worth nothing.
 
-- [ ] Your beats aren't the problem. Your gig title is.
+- [ ] Your beats aren't the problem. Your Fiverr gig title is.
 
 - [ ] Mixing sells easier than beats. The buyer already has the song and knows they need help.
 
@@ -98,7 +99,7 @@ These posts should sound like a producer typing on his phone, not like marketing
 ### Personal / proof
 - [ ] Sold my first beat for $25 in 2019. Took 4 months. Did 2,019 orders after that.
 
-- [ ] 4 months, zero sales. Changed my gig title and pricing, got 3 orders that week. Same beats.
+- [ ] 4 months, zero sales. Changed my Fiverr gig title and pricing, got 3 orders that week. Same beats.
 
 - [ ] Started in a bedroom in Casablanca with no followers and a cracked DAW. $127k later, selling was the skill that mattered.
 
@@ -106,7 +107,7 @@ These posts should sound like a producer typing on his phone, not like marketing
 
 - [ ] A third of my income came from people who bought twice. Chasing new buyers is the slow way.
 
-- [ ] Spent 2 years thinking I needed better plugins. I needed a better gig description.
+- [ ] Spent 2 years thinking I needed better plugins. I needed a better Fiverr gig description.
 
 - [ ] 982 clients in and buyers still don't want beats. They want a song they're proud to send their friends.
 
@@ -117,8 +118,8 @@ These posts should sound like a producer typing on his phone, not like marketing
 
 - [ ] Wrote down everything that got me 2,019 orders on Fiverr. Gig setup, pricing, the scripts. $27. loopgem.com/courses
 
-- [ ] Producers stuck at zero sales: tell me where you're stuck. Pricing, gigs, finding clients. I'll answer as many as I can.
+- [ ] Producers stuck at zero sales: tell me where you're stuck. Pricing, Fiverr gigs, finding clients. I'll answer as many as I can.
 
 - [ ] I do 1 on 1 calls where we fix your profile and pricing live. 30 min, you leave with a plan. loopgem.com/booking
 
-- [ ] If your gig gets views but no orders it's almost always the price or the first sample. DM me the link, I'll tell you which.
+- [ ] If your Fiverr gig gets views but no orders it's almost always the price or the first sample. DM me the link, I'll tell you which.
