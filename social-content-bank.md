@@ -55,7 +55,7 @@ These posts should sound like a producer typing on his phone, not like marketing
 
 - [x] What's stopping you from selling your beats right now? Drop it below and I'll give you a straight answer.
 
-- [ ] Producers who went full time, how long did it take you? Took me about 3 years.
+- [x] Producers who went full time, how long did it take you? Took me about 3 years.
 
 - [ ] Which converts better for you, selling beats or selling mixing? Mixing tripled my orders.
 
@@ -125,3 +125,54 @@ These posts should sound like a producer typing on his phone, not like marketing
 - [ ] I do 1 on 1 calls where we fix your profile and pricing live. 30 min, you leave with a plan. loopgem.com/booking
 
 - [ ] If your Fiverr gig gets views but no orders it's almost always the price or the first sample. DM me the link, I'll tell you which.
+
+### Batch 2026-07-28
+- [ ] Y'all mixing inside FL Studio itself or bouncing out to another DAW? Curious what's standard now.
+
+- [ ] What made you finally raise your prices? Mine was almost running out of month before payday.
+
+- [ ] Anyone running type beats AND mixing on the same Fiverr gig? Does that confuse buyers or help.
+
+- [ ] How many revisions do you cap an order at? Learned this one the hard way.
+
+- [ ] What's your go to move when a client says "make it sound professional"? That phrase means nothing and everything.
+
+- [ ] Producers, do you screen clients before accepting or just take the order and hope for the best?
+
+- [ ] Who else checks their Fiverr stats way more than they should?
+
+- [ ] What genre are you getting the most beat requests for right now?
+
+- [ ] Your demo reel is doing more selling than you are some days. Make sure it's not the weak link.
+
+- [ ] A slow response time kills more orders than a slow beat ever will.
+
+- [ ] Free samples with a watermark convert way better than silence. Let people hear the idea first.
+
+- [ ] You can't undercut your way to a full time income. Volume doesn't fix a $5 price tag.
+
+- [ ] Zero reviews on your Fiverr gig? Price it lower than you want to for now. Earn the proof first.
+
+- [ ] The producers who last aren't always the most talented ones. They're the ones who reply fast.
+
+- [ ] Stop redesigning your logo for the tenth time. Go get your next order instead.
+
+- [ ] Every unhappy client taught me something about my Fiverr gig, not my mixing skills.
+
+- [ ] Buyers pay for a finished feeling, not your plugin count. Keep that in mind before you upgrade again.
+
+- [ ] First 6 months on Fiverr I had one review. Just one. Kept showing up anyway.
+
+- [ ] Hit $127k total and I still remember refreshing my Fiverr app waiting on that first message.
+
+- [ ] Started in a bedroom in Casablanca, headphones only, no monitors. Built years of orders on that setup.
+
+- [ ] 982 clients in and the biggest jump still came from raising prices, not from lowering them.
+
+- [ ] Booking 1 on 1 calls this week to fix pricing and your Fiverr gig. loopgem.com/booking
+
+- [ ] Free calculator tells you exactly what to charge based on your goals. loopgem.com/pricing-calculator
+
+- [ ] Send me your Fiverr gig link and I'll tell you the first thing I'd fix.
+
+- [ ] Put the whole system that got me to 2,019 orders into one course. loopgem.com/courses
