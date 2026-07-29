@@ -26,10 +26,11 @@ Focused entirely on **selling PDF courses and 1-on-1 coaching calls** teaching p
 | Key | Status |
 |---|---|
 | `NEXT_PUBLIC_PAYPAL_CLIENT_ID` | ✅ Set in `.env.local` + Vercel |
-| `RESEND_API_KEY` | ⏳ Placeholder in `.env.local` — needs real key added to Vercel |
-| `NEXT_PUBLIC_SITE_URL` | ⏳ Needs adding to Vercel (`https://loopgem.vercel.app`) |
+| `RESEND_API_KEY` | ✅ Live in Vercel (domain `loopgem.com` verified in Resend, eu-west-1) |
+| `NEXT_PUBLIC_SITE_URL` | ✅ Vercel = `https://www.loopgem.com` |
+| `NEXT_PUBLIC_GA_ID` | Optional. GA4 ID `G-S89ZX3WCP9` is committed as the default in `layout.tsx` (GA IDs are public), so no env var needed; setting one overrides. |
 
-Never commit `.env.local` — covered by `.gitignore`.
+Note the local `.env.local` `RESEND_API_KEY` is a PLACEHOLDER (`re_your_...`) — email only works in production where the real Vercel key exists. Never commit `.env.local` (gitignored).
 
 ## Brand & Design System (updated 2026)
 - Website: **LoopGem** (loopgem.com)
@@ -158,7 +159,35 @@ Never commit `.env.local` — covered by `.gitignore`.
 - 6 launch posts target: how-to-sell-beats-online, how-much-to-charge-for-beats, beatstars-vs-fiverr, how-to-sell-your-first-beat, how-to-promote-your-beats, how-to-make-money-as-a-music-producer.
 - **Writing quality — always apply the `stop-slop` skill** (installed at `~/.claude/skills/stop-slop/`) when writing/editing any blog post: cut adverbs + filler, active voice, be specific, vary rhythm, **no em dashes**, no "not X but Y" contrasts, no rhetorical-question setups. Score ≥35/50 (Directness/Rhythm/Trust/Authenticity/Density) before publishing. The weekly auto-publish task embeds these rules. All existing posts have been run through the skill (no em dashes, adverbs, or "not X but Y" patterns) — keep new posts to the same standard.
 
-**Not yet done:** verify Google Search Console ownership + submit sitemap; get backlinks (Fiverr profile, IG bio, YouTube descriptions) — the real ranking bottleneck for a new domain; convert raw `<img>` tags to `next/image` for automatic WebP/AVIF + CLS prevention.
+**Google Search Console:** verified (Domain property, TXT record at Namecheap). Sitemap submitted + processing successfully (14 pages). As of late July 2026 only ~2 pages indexed, rest "Crawled/Discovered - currently not indexed" (normal for a new domain). The `www` canonical fix (see top of SEO section) resolved a "Duplicate, Google chose different canonical" error.
+
+**Backlinks done:** Instagram bio (@sfoox_beats), Twitter bio, LinkedIn (headline/about/experience/featured), YouTube channel about, email signature. All point to loopgem.com. This is the real ranking bottleneck for a new domain — more is better.
+
+**Not yet done:** convert raw `<img>` tags to `next/image` for WebP/AVIF + CLS; keep earning backlinks.
+
+## Analytics (GA4)
+- **Live. Measurement ID `G-S89ZX3WCP9`** (committed default in `layout.tsx`; env var can override).
+- `src/components/GoogleAnalytics.tsx` — gtag.js via `next/script` (afterInteractive). Rendered from `layout.tsx`. GA4 enhanced measurement tracks SPA route-change pageviews automatically.
+- **Custom events** via `src/lib/gtag.ts` `trackEvent()`:
+  - `begin_checkout` — fired in `createOrder` of both `CoursePayPalButton.tsx` and `PayPalButton.tsx`
+  - `purchase` (GA4 ecommerce, feeds monetization reports) — fired on PayPal capture success in both buttons
+  - `whatsapp_click` — WhatsApp CTA in `WhatsAppButton.tsx`
+- All events no-op safely when gtag is blocked (ad blocker) or on SSR.
+- WhatsApp widget avatar = `public/sfooxbeats-avatar.jpg` (real photo, cropped to circle in `WhatsAppButton.tsx`).
+
+## Social autopilot (X + Threads via Buffer)
+- **`social-content-bank.md`** (repo root) — ONE unified list of short posts. The SAME post goes to BOTH X and Threads. All under 280 chars. Has a `## VOICE RULES` section (read it before writing posts): casual producer voice, 1-3 sentences, ~a third questions, producer vocabulary, always "Fiverr gig" never bare "gig", no em dashes, never start a post with "DM "/"D " (X rejects it as a direct-message command). `- [ ]` = unposted, `- [x]` = posted.
+- **Buffer MCP is connected.** Org `660e2e37ccd5a62d2a359772`. Channels: Twitter `sfooxbeats` = `660e2f20f1ac4a3c9484784a`, Threads `sfoox_beats` = `6a677bce4b2d03035f4d27de`. Timezone Africa/Casablanca. Post via `create_post` with `schedulingType:"automatic"`, `mode:"addToQueue"`. **Buffer free cap = 10 scheduled posts PER CHANNEL** (20 total); beyond that returns "Limit reached".
+- Buffer publishes on its own cloud servers (fully hands-off once queued). Posts are already going out live.
+
+## Scheduled agents (in `~/.claude/scheduled-tasks/`, run only while the Claude app is open)
+1. **`loopgem-weekly-blog-draft`** — Mon 9am. Reads `content-backlog.md`, writes 1 blog post (stop-slop, build-gated), pushes to `main` → auto-publishes live.
+2. **`loopgem-weekly-social-refill`** — Sun 9am. Generates 25 new short posts (stop-slop, casual voice, <280 chars), appends dated batch to `social-content-bank.md`, pushes.
+3. **`loopgem-daily-buffer-topup`** — daily ~8:26am. Checks per-channel free slots, schedules next unchecked posts from the bank to both channels via Buffer, marks them `[x]`, pushes. `git pull --rebase` first.
+- **Permissions pre-approved** in `~/.claude/settings.json` (allow: Read/Write/Edit/Glob/Grep/Skill, `Bash(git *)`, `Bash(npm run build)`, Buffer MCP tools `mcp__99f1489a-bf89-4bca-ae12-bf676f47a064__*`; deny: `rm -rf *`, `git push --force*`, `git reset --hard*`) so the agents run unattended. **Requires a Claude app restart to take effect.**
+
+## Content pipeline skill
+- **`stop-slop`** skill installed at `~/.claude/skills/stop-slop/` (from github.com/hardikpandya/stop-slop, MIT). Removes AI-writing tells. Apply to ALL blog + social content. For social, keep it casual (contractions/"y'all"/"just" are fine); for blog, formal-but-human.
 
 ## Products & Pricing
 | Product | Price | Payment Flow |
@@ -282,32 +311,25 @@ node convert.js
 ### ✅ DONE — Domain live
 `loopgem.com` is connected to Vercel and live (2026-07-22). Production host is `www.loopgem.com`; apex `loopgem.com` 308-redirects to www. `NEXT_PUBLIC_SITE_URL` in Vercel updated to `https://www.loopgem.com` and redeployed. Namecheap DNS: A `@`→`216.198.79.1`, CNAME `www`→`5ee42e75a71a9c39.vercel-dns-017.com`.
 
-### 1. Finish Resend email sender switch (IN PROGRESS — waiting on DNS)
-- [x] Resend: added `loopgem.com` domain, region **eu-west-1**
-- [x] Added all 4 DNS records at Namecheap (scoped to `send.` subdomain — do NOT touch the root `@` Private Email records):
-  - TXT `resend._domainkey` = DKIM key
-  - TXT `send` = `v=spf1 include:amazonses.com ~all`
-  - MX `send` = `feedback-smtp.eu-west-1.amazonses.com` (priority 10)
-  - TXT `_dmarc` = `v=DMARC1; p=none;`
-- [ ] **NEXT:** wait for Resend to show all records **Verified** (was Pending when we paused)
-- [ ] Then change `from: "onboarding@resend.dev"` → `courses@loopgem.com` in `src/app/api/send-course/route.ts`, build, push
+### ✅ DONE — Email sender live
+Resend domain `loopgem.com` verified (eu-west-1). `src/app/api/send-course/route.ts` sends from `courses@loopgem.com` (both buyer email + self sale-notification). The route now checks the Resend `{error}` return and returns 502 on failure (the SDK does not throw); the course button reads `res.ok` so a failed delivery shows the "contact support" state instead of a false "PDF sent".
 
-### 2. Google Search Console (IN PROGRESS)
-- Decided: use **Domain property** (covers apex + www + all subdomains), NOT URL prefix
-- [ ] **NEXT:** enter `loopgem.com` → Google gives a TXT record → add at Namecheap (Host `@`) → Verify
-- [ ] Then submit sitemap: `https://loopgem.com/sitemap.xml`
-- Sitemap + robots are already live in code (`src/app/sitemap.ts`, `src/app/robots.ts`)
+### ✅ DONE — Google Search Console
+Verified via Domain property (TXT `@` at Namecheap). Sitemap `https://www.loopgem.com/sitemap.xml` submitted + processed. Indexing is in Google's hands now (slow for a new domain).
 
-### 3. Wire up contact form (Formspree)
+### ✅ DONE — Analytics, social autopilot, backlinks
+See the "Analytics", "Social autopilot", and "Scheduled agents" sections above.
+
+### 1. Wire up contact form (Formspree) — STILL PENDING
 - Free account at formspree.io → create form → copy form ID
 - Replace `YOUR_FORM_ID` in `src/app/contact/ContactClient.tsx` (moved here from `page.tsx` during the SEO split)
 - Push to GitHub
 
-### 4. SEO follow-ups (optional, not started)
-- Convert raw `<img>` tags → `next/image` across the site for auto WebP/AVIF + CLS prevention
-- After GSC indexes, review Search Console for actual keyword impressions and refine titles/descriptions
+### 2. SEO follow-ups (optional)
+- Convert raw `<img>` tags → `next/image` for auto WebP/AVIF + CLS prevention
+- Keep earning backlinks; review Search Console impressions once indexing catches up
 
-### 5. Upload final PDFs to repo (reference — all 3 currently live)
+### 3. Upload final PDFs to repo (reference — all 3 currently live)
 When a PDF is re-finalised, copy from `C:\Users\KATANA\Downloads\loopgem-pdf\` to `loopgem/public/downloads/` with EXACT filenames:
 - `course-fiverr-beat-seller-blueprint.pdf`
 - `course-sell-music-services-fiverr.pdf`
