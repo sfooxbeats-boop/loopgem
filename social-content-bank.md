@@ -57,11 +57,11 @@ These posts should sound like a producer typing on his phone, not like marketing
 
 - [x] Producers who went full time, how long did it take you? Took me about 3 years.
 
-- [ ] Which converts better for you, selling beats or selling mixing? Mixing tripled my orders.
+- [x] Which converts better for you, selling beats or selling mixing? Mixing tripled my orders.
 
-- [ ] Bedroom producers, how many beats do you have sitting unsold right now? Be honest.
+- [x] Bedroom producers, how many beats do you have sitting unsold right now? Be honest.
 
-- [ ] What's the worst client experience you've had selling beats? Mine asked for 11 revisions on a $30 order.
+- [x] What's the worst client experience you've had selling beats? Mine asked for 11 revisions on a $30 order.
 
 - [ ] Where are y'all finding clients in 2026? Fiverr still works for me but curious what else is out there.
 
