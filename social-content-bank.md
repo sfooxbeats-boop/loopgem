@@ -63,11 +63,11 @@ These posts should sound like a producer typing on his phone, not like marketing
 
 - [x] What's the worst client experience you've had selling beats? Mine asked for 11 revisions on a $30 order.
 
-- [ ] Where are y'all finding clients in 2026? Fiverr still works for me but curious what else is out there.
+- [x] Where are y'all finding clients in 2026? Fiverr still works for me but curious what else is out there.
 
-- [ ] How long did it take you to get your first paid beat? Took me 4 months and I almost quit.
+- [x] How long did it take you to get your first paid beat? Took me 4 months and I almost quit.
 
-- [ ] Producers: do you sell exclusives or leases mostly? Trying to see what's normal now.
+- [x] Producers: do you sell exclusives or leases mostly? Trying to see what's normal now.
 
 ### Short takes
 - [x] Stop selling beats for $5. You're teaching buyers your work is worth nothing.
@@ -76,9 +76,9 @@ These posts should sound like a producer typing on his phone, not like marketing
 
 - [x] Mixing sells easier than beats. The buyer already has the song and knows they need help.
 
-- [ ] Nobody's buying your beats because nobody knows they exist. That's a marketing problem, not a music problem.
+- [x] Nobody's buying your beats because nobody knows they exist. That's a marketing problem, not a music problem.
 
-- [ ] You don't need 10k followers to sell beats. You need 10 people who make music and trust you.
+- [x] You don't need 10k followers to sell beats. You need 10 people who make music and trust you.
 
 - [ ] Three pricing tiers. Always. One flat price leaves money on the table every single time.
 
