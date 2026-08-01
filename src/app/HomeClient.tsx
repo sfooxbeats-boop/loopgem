@@ -122,7 +122,7 @@ export default function Home() {
             >
               <div>
                 <div className="section-label" style={{ marginBottom: 12 }}>
-                  Watch first · 2 min
+                  Watch first · 35 sec
                 </div>
                 <h1
                   className="font-display"
