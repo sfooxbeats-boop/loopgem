@@ -80,21 +80,21 @@ These posts should sound like a producer typing on his phone, not like marketing
 
 - [x] You don't need 10k followers to sell beats. You need 10 people who make music and trust you.
 
-- [ ] Three pricing tiers. Always. One flat price leaves money on the table every single time.
+- [x] Three pricing tiers. Always. One flat price leaves money on the table every single time.
 
-- [ ] Fiverr takes 20%. Your $50 order pays you $40. Price like you know that.
+- [x] Fiverr takes 20%. Your $50 order pays you $40. Price like you know that.
 
-- [ ] "I'll start selling when my beats get better" is how producers stay broke for 3 years.
+- [x] "I'll start selling when my beats get better" is how producers stay broke for 3 years.
 
-- [ ] Buying followers makes the algorithm show you to fewer real people. You're paying to be invisible.
+- [x] Buying followers makes the algorithm show you to fewer real people. You're paying to be invisible.
 
-- [ ] Most producers post beats and wait. The ones getting paid are in the DMs asking for work.
+- [x] Most producers post beats and wait. The ones getting paid are in the DMs asking for work.
 
-- [ ] Ask for the review. That one message is the difference between 4 reviews and 400.
+- [x] Ask for the review. That one message is the difference between 4 reviews and 400.
 
-- [ ] Put your 3 best beats on your page. Not 30. People judge you by the worst one they hear.
+- [x] Put your 3 best beats on your page. Not 30. People judge you by the worst one they hear.
 
-- [ ] Talent isn't the bottleneck. I know producers who'd smoke me musically and still can't get a client.
+- [x] Talent isn't the bottleneck. I know producers who'd smoke me musically and still can't get a client.
 
 - [ ] Your first order isn't about money. It's about the review that gets you the next 50.
 
