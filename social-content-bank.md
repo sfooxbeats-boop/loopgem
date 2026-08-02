@@ -96,14 +96,14 @@ These posts should sound like a producer typing on his phone, not like marketing
 
 - [x] Talent isn't the bottleneck. I know producers who'd smoke me musically and still can't get a client.
 
-- [ ] Your first order isn't about money. It's about the review that gets you the next 50.
+- [x] Your first order isn't about money. It's about the review that gets you the next 50.
 
 ### Personal / proof
 - [x] Sold my first beat for $25 in 2019. Took 4 months. Did 2,019 orders after that.
 
-- [ ] 4 months, zero sales. Changed my Fiverr gig title and pricing, got 3 orders that week. Same beats.
+- [x] 4 months, zero sales. Changed my Fiverr gig title and pricing, got 3 orders that week. Same beats.
 
-- [ ] Started in a bedroom in Casablanca with no followers and a cracked DAW. $127k later, selling was the skill that mattered.
+- [x] Started in a bedroom in Casablanca with no followers and a cracked DAW. $127k later, selling was the skill that mattered.
 
 - [ ] The month I added mixing next to beats my order volume tripled. Same skills, different offer.
 
