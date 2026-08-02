@@ -176,3 +176,54 @@ These posts should sound like a producer typing on his phone, not like marketing
 - [ ] Send me your Fiverr gig link and I'll tell you the first thing I'd fix.
 
 - [ ] Put the whole system that got me to 2,019 orders into one course. loopgem.com/courses
+
+### Batch 2026-08-02
+- [ ] What time of day do you get the most Fiverr messages? Mine's always right before I try to sleep.
+
+- [ ] How many active Fiverr gigs you running right now? I keep it to 3, more gets messy fast.
+
+- [ ] Anyone charging extra for rush delivery? How much is that actually worth to you.
+
+- [ ] What's your average delivery time on a beat order? Trying to see if 24 hours is still normal.
+
+- [ ] Do you sell add-ons like extra revisions or stems separately? Curious what people actually buy.
+
+- [ ] How do you handle a client who goes quiet after asking for a revision? Happens to me every month.
+
+- [ ] Anyone still cold messaging artists to sell beats or is that a waste of time now?
+
+- [ ] What's the one Fiverr gig extra that actually sells for you? Mine's rush delivery, nobody skips it.
+
+- [ ] A messy Fiverr profile photo costs you more orders than a mediocre beat ever will.
+
+- [ ] A Fiverr gig description that's just a list of file formats won't sell anything on its own.
+
+- [ ] Charging by the hour on Fiverr caps your income to the hours you're awake. Learned to price the result instead.
+
+- [ ] Free work doesn't build a client base. It trains people to expect free forever.
+
+- [ ] A client going quiet after delivery isn't on you. Happens to everyone doing real volume.
+
+- [ ] If posting beats is your whole marketing plan, you don't have a marketing plan.
+
+- [ ] Your Fiverr gig video is doing more selling than another plugin purchase ever will.
+
+- [ ] Fast delivery wins over perfect delivery way more than people want to admit.
+
+- [ ] Raise your price before you raise your skill level. A better price gets noticed faster than a better mix.
+
+- [ ] My first year on Fiverr I didn't even know what a "brief" was. Learned it by getting orders wrong.
+
+- [ ] Took me way too long to notice buyers were judging my thumbnail before they ever heard the beat.
+
+- [ ] Used to check messages once a day. Started replying in minutes and orders picked up within a week.
+
+- [ ] Every one of my first 10 reviews came from underpricing hard on purpose. Worth it just for the proof.
+
+- [ ] Booking calls this week to go through your Fiverr gig live and fix what's costing you orders. loopgem.com/booking
+
+- [ ] Not sure what to charge? Free calculator does the math for you. loopgem.com/pricing-calculator
+
+- [ ] Send me your Fiverr gig link and I'll tell you the first thing that's costing you orders.
+
+- [ ] Everything that got me to 2,019 orders is in one course now. loopgem.com/courses
