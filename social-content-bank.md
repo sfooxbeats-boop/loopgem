@@ -105,29 +105,29 @@ These posts should sound like a producer typing on his phone, not like marketing
 
 - [x] Started in a bedroom in Casablanca with no followers and a cracked DAW. $127k later, selling was the skill that mattered.
 
-- [ ] The month I added mixing next to beats my order volume tripled. Same skills, different offer.
+- [x] The month I added mixing next to beats my order volume tripled. Same skills, different offer.
 
-- [ ] A third of my income came from people who bought twice. Chasing new buyers is the slow way.
+- [x] A third of my income came from people who bought twice. Chasing new buyers is the slow way.
 
-- [ ] Spent 2 years thinking I needed better plugins. I needed a better Fiverr gig description.
+- [x] Spent 2 years thinking I needed better plugins. I needed a better Fiverr gig description.
 
-- [ ] 982 clients in and buyers still don't want beats. They want a song they're proud to send their friends.
+- [x] 982 clients in and buyers still don't want beats. They want a song they're proud to send their friends.
 
 ### CTA (roughly 1 in 4)
 - [x] Send me your Fiverr gig and I'll tell you why it's not getting orders. Free, no catch.
 
-- [ ] Made a free calculator for producers. Tells you what to charge and how many orders you need to hit your goal. loopgem.com/pricing-calculator
+- [x] Made a free calculator for producers. Tells you what to charge and how many orders you need to hit your goal. loopgem.com/pricing-calculator
 
-- [ ] Wrote down everything that got me 2,019 orders on Fiverr. Gig setup, pricing, the scripts. $27. loopgem.com/courses
+- [x] Wrote down everything that got me 2,019 orders on Fiverr. Gig setup, pricing, the scripts. $27. loopgem.com/courses
 
-- [ ] Producers stuck at zero sales: tell me where you're stuck. Pricing, Fiverr gigs, finding clients. I'll answer as many as I can.
+- [x] Producers stuck at zero sales: tell me where you're stuck. Pricing, Fiverr gigs, finding clients. I'll answer as many as I can.
 
-- [ ] I do 1 on 1 calls where we fix your profile and pricing live. 30 min, you leave with a plan. loopgem.com/booking
+- [x] I do 1 on 1 calls where we fix your profile and pricing live. 30 min, you leave with a plan. loopgem.com/booking
 
-- [ ] If your Fiverr gig gets views but no orders it's almost always the price or the first sample. DM me the link, I'll tell you which.
+- [x] If your Fiverr gig gets views but no orders it's almost always the price or the first sample. DM me the link, I'll tell you which.
 
 ### Batch 2026-07-28
-- [ ] Y'all mixing inside FL Studio itself or bouncing out to another DAW? Curious what's standard now.
+- [x] Y'all mixing inside FL Studio itself or bouncing out to another DAW? Curious what's standard now.
 
 - [ ] What made you finally raise your prices? Mine was almost running out of month before payday.
 
