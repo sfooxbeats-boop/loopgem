@@ -15,6 +15,65 @@ export interface BlogPost {
 // Newest first. Order here = order on the /blog listing.
 export const posts: BlogPost[] = [
   {
+    slug: "how-much-to-charge-for-mixing",
+    title: "How Much to Charge for Mixing a Song (2026 Pricing Guide)",
+    metaTitle: "How Much to Charge for Mixing a Song: 2026 Guide",
+    description:
+      "How much to charge for mixing a song in 2026: stem count, revisions, turnaround, and a three-tier pricing structure with real numbers and a free calculator.",
+    primaryKeyword: "how much to charge for mixing a song",
+    excerpt:
+      "Mixing engineers price by gut feeling and either burn out on $10 jobs or scare buyers off. Here's the stem-count, revision, and tier structure I actually use.",
+    date: "2026-08-06",
+    readingMinutes: 8,
+    content: `
+<p>"How much do I charge to mix a song?" comes up more than any question except beat pricing, and mixing engineers get it wrong in both directions. Some charge $10 a song and burn out doing free-level work for hours at a time. Others copy a number they saw on a forum and wonder why nobody orders.</p>
+<p>I've delivered over 2,000 orders on Fiverr, a good chunk of them mixing and mixing-and-mastering packages. This is how I price the work, and how you should price yours.</p>
+
+<h2>Mixing isn't priced like a beat</h2>
+<p>A beat is a fixed product. You make it once and sell it many times. A mix is a service: you trade hours for one specific song, and every song brings a different problem. A four-stem acoustic demo takes thirty minutes. A sixty-track trap record with three vocalists takes half a day. Price by the song, not by a flat rate, and you'll either overcharge simple jobs or lose money on hard ones.</p>
+<p>Base your pricing on the variables that change your time on a session. A competitor's number tells you nothing about your own turnaround.</p>
+
+<h2>What moves the price</h2>
+<p>Four things decide what a mix should cost:</p>
+<ul>
+<li><strong>Stem count.</strong> A 10-stem session and a 60-stem session are different jobs. Charge more past a stem threshold, or charge per stem above a base number.</li>
+<li><strong>Revisions.</strong> Unlimited revisions sound generous and cost you weeks. Cap it at two or three rounds and charge for extra ones.</li>
+<li><strong>Turnaround.</strong> A 48-hour rush deserves a rush fee. Artists on a deadline will pay it.</li>
+<li><strong>Mastering.</strong> Mixing and mastering are two different skills and two different line items. Bundle them at a discount, but never give mastering away free.</li>
+</ul>
+<p>Write these into your gig description so buyers know the price before they message you. Vague pricing is why so many mixing gigs sit empty while a clearer one two rows down gets the order.</p>
+
+<h2>What to charge as a beginner</h2>
+<p>If you have few reviews, price low enough to get booked and high enough to respect your time. A starting structure that holds up:</p>
+<ul>
+<li><strong>Basic mix (up to 10 stems):</strong> $30 to $50</li>
+<li><strong>Standard mix (up to 25 stems, 2 revisions):</strong> $60 to $100</li>
+<li><strong>Mix and master (up to 25 stems):</strong> $100 to $175</li>
+</ul>
+<p>Those numbers move with your genre, your local market, and how fast you work. The logic stays fixed: price the session. Raise every tier as your delivered work builds proof.</p>
+
+<h2>Use three tiers, not one price</h2>
+<p>The same tier structure that works for beats works for mixing. One flat price gives a buyer nothing to compare against. Three tiers give them a reason to spend more:</p>
+<ol>
+<li><strong>Basic:</strong> a straight mix, limited stems, one revision. Your entry point.</li>
+<li><strong>Standard:</strong> more stems, two or three revisions, maybe stem delivery back to the client. This is where most orders land.</li>
+<li><strong>Premium:</strong> mix and master together, unlimited stems within reason, a faster turnaround. A handful of buyers take this, and it makes Standard look like the smart choice.</li>
+</ol>
+<p>If you're not sure where your numbers should sit, run them through the <a href="/pricing-calculator">free pricing calculator</a> I built. It handles beats and services, and shows what you take home after Fiverr's cut.</p>
+
+<h2>Raising your rate without losing clients</h2>
+<p>Your first ten mixes exist to build reviews. Price them for that. After that, raise your rates in small steps: $10 or $15 at a time. Existing clients who already trust your ear will follow those increases without blinking. Jump from $40 to $150 in one move and they go looking for whoever is still cheap.</p>
+<p>Tell repeat clients directly when a price change is coming instead of letting them find out at checkout. "My rates go up next month, want to lock in a session before then?" turns a price hike into another sale.</p>
+
+<h2>Don't forget the platform cut</h2>
+<p>Whatever marketplace you sell through takes a percentage before the money hits your account. Fiverr keeps 20%. A $100 mix nets you $80. Build that into your tiers instead of discovering it after your first payout.</p>
+
+<h2>The bottom line</h2>
+<p>Price the session. Cap your revisions. Put mastering on its own line. Three tiers beat one flat rate. If you want the exact rate cards I use by genre, the client-facing scripts for scope creep, and the full mixing gig setup, that's inside my <a href="/courses">producer courses</a>. If you'd rather I look at your gig and price it with you directly, <a href="/booking">book a 1-on-1 call</a> and we'll fix it in one session.</p>
+<p>Mixing is one of the highest-margin services a producer can offer, right alongside beats and custom production. For the full picture of where the money comes from, read <a href="/blog/how-to-make-money-as-a-music-producer">how to make money as a music producer</a>, or if you're still deciding between beats and services, start with <a href="/blog/how-much-to-charge-for-beats">how much to charge for beats</a>.</p>
+`,
+  },
+  {
     slug: "how-to-sell-beats-on-instagram",
     title: "How to Sell Beats on Instagram (Without Buying Followers)",
     metaTitle: "How to Sell Beats on Instagram: A Producer's Guide",
