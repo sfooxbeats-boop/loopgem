@@ -160,6 +160,8 @@ Note the local `.env.local` `RESEND_API_KEY` is a PLACEHOLDER (`re_your_...`) �
 - **Writing quality — always apply the `stop-slop` skill** (installed at `~/.claude/skills/stop-slop/`) when writing/editing any blog post: cut adverbs + filler, active voice, be specific, vary rhythm, **no em dashes**, no "not X but Y" contrasts, no rhetorical-question setups. Score ≥35/50 (Directness/Rhythm/Trust/Authenticity/Density) before publishing. The weekly auto-publish task embeds these rules. All existing posts have been run through the skill (no em dashes, adverbs, or "not X but Y" patterns) — keep new posts to the same standard.
 
 **Google Search Console:** verified (Domain property, TXT record at Namecheap). Sitemap submitted + processing successfully (14 pages). As of late July 2026 only ~2 pages indexed, rest "Crawled/Discovered - currently not indexed" (normal for a new domain). The `www` canonical fix (see top of SEO section) resolved a "Duplicate, Google chose different canonical" error.
+- **URL-prefix property + GA4 link (2026-08-06):** Also added a **URL-prefix** property `https://www.loopgem.com` (Domain properties do NOT show in GA4's Search Console link picker — needed URL-prefix). Verified via the **HTML file** method: `public/google9b6c002e9c96ca28.html` (served at site root). **NEVER delete that file** — removing it un-verifies the property and breaks the GA4 link. GA verification via the "Google Analytics" method FAILS here because GA loads via `next/script afterInteractive` (not in server-rendered `<head>`); use HTML file or meta tag instead. GA4 ↔ Search Console now linked, reports published in GA4 Library.
+- **First real query data (Aug 2026):** ~29-49 impressions, avg position ~37. Winning theme = "how do producers make money / get paid / make money from beats." Blog posts pull nearly all impressions. Strengthened `/blog/how-to-make-money-as-a-music-producer` (was ranking ~54 with 19 impressions) to match those exact queries + added inbound internal links from 3 posts.
 
 **Backlinks done:** Instagram bio (@sfoox_beats), Twitter bio, LinkedIn (headline/about/experience/featured), YouTube channel about, email signature. All point to loopgem.com. This is the real ranking bottleneck for a new domain — more is better.
 
@@ -184,10 +186,20 @@ Note the local `.env.local` `RESEND_API_KEY` is a PLACEHOLDER (`re_your_...`) �
 1. **`loopgem-weekly-blog-draft`** — Mon 9am. Reads `content-backlog.md`, writes 1 blog post (stop-slop, build-gated), pushes to `main` → auto-publishes live.
 2. **`loopgem-weekly-social-refill`** — Sun 9am. Generates 25 new short posts (stop-slop, casual voice, <280 chars), appends dated batch to `social-content-bank.md`, pushes.
 3. **`loopgem-daily-buffer-topup`** — daily ~8:26am. Checks per-channel free slots, schedules next unchecked posts from the bank to both channels via Buffer, marks them `[x]`, pushes. `git pull --rebase` first.
+4. **`loopgem-qa-outreach`** — Mon/Wed/Fri 2pm (cron `0 14 * * 1,3,5`; readout mislabels it "Monday" but it runs 3x/week). Drafts a genuine Reddit/Quora answer and sends ONE to Telegram with where + when to post. See "Q&A outreach" section below. Never posts to Reddit/Quora itself.
 - **Permissions pre-approved** in `~/.claude/settings.json` (allow: Read/Write/Edit/Glob/Grep/Skill, `Bash(git *)`, `Bash(npm run build)`, Buffer MCP tools `mcp__99f1489a-bf89-4bca-ae12-bf676f47a064__*`; deny: `rm -rf *`, `git push --force*`, `git reset --hard*`) so the agents run unattended. **Requires a Claude app restart to take effect.**
 
 ## Content pipeline skill
 - **`stop-slop`** skill installed at `~/.claude/skills/stop-slop/` (from github.com/hardikpandya/stop-slop, MIT). Removes AI-writing tells. Apply to ALL blog + social content. For social, keep it casual (contractions/"y'all"/"just" are fine); for blog, formal-but-human.
+
+## Q&A outreach (Reddit + Quora via Telegram) — added 2026-08-06
+Backlink/authority play for the new domain. The agent DRAFTS answers only; **the user posts them manually** (auto-posting to Reddit/Quora = instant ban + nofollow links = worthless).
+- **`qa-outreach.md`** (repo root): bank of ready-to-post answers. Format: heading + WHERE + `PURE VALUE`/`LINK OK` tag + body. Delivered items tagged `(sent YYYY-MM-DD)`. `[ ]`/`[x]` = posted by user. Pure-value answers go out first (warm up accounts); links only after ~4 posted.
+- **Telegram bot:** @LoopGem_bot. Creds in `C:\Users\KATANA\.claude\loopgem-telegram.env` (`TELEGRAM_TOKEN`, `TELEGRAM_CHAT_ID=7813158930`) — **OUTSIDE the repo, never commit**.
+- **⚠️ Telegram send gotchas:** (1) native Windows curl mangles emojis/en-dashes → HTTP 400 "strings must be encoded in UTF-8", so send **ASCII only**. (2) Do NOT use `--data-urlencode text@file` (curl.exe can't read MSYS `/c/...` paths) — `cat` the file into a shell var and pass `--data-urlencode "text=$MSG"`.
+- **Reddit is un-fetchable** (crawler + WebFetch + old.reddit + .json all blocked). Can't pull live Reddit URLs — give search terms instead. **Quora IS searchable** via WebSearch `allowed_domains:["quora.com"]`, so real Quora question URLs can be delivered.
+- Scheduled agent `loopgem-qa-outreach` (Mon/Wed/Fri 2pm) sends one answer/run to Telegram. Best post time: Reddit weekday 2-6pm Casablanca, Quora anytime.
+- Reddit + Quora profiles set up. Quora credential 50-char cap. Reddit bio must be non-salesy (no link until karma built). **Fiverr profile link is OFF LIMITS** (Fiverr bans off-platform linking; risks the $127k account).
 
 ## Products & Pricing
 | Product | Price | Payment Flow |
