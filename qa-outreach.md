@@ -31,7 +31,7 @@ This tier setup made the biggest difference for me. If you want to plug in real 
 
 ---
 
-## 2. "How do I sell my first beat with no followers?"  — PURE VALUE (no link)
+## 2. "How do I sell my first beat with no followers?"  — PURE VALUE (no link)  (sent 2026-08-06)
 **Post to:** r/makinghiphop, r/WeAreTheMusicMakers, r/Beatmakers
 
 The first sale is the hardest one, because you have no reviews and no audience yet. Two things that actually got me there:
@@ -57,7 +57,7 @@ Want money soon? Start with services and beats on a marketplace where buyers alr
 
 ---
 
-## 4. "Is selling beats on Fiverr worth it? / How do I get orders on Fiverr?"  — PURE VALUE (no link)
+## 4. "Is selling beats on Fiverr worth it? / How do I get orders on Fiverr?"  — PURE VALUE (no link)  (sent 2026-08-06)
 **Post to:** r/Fiverr, r/makinghiphop
 
 It's where I built most of my beat income. The reason it works when nobody knows you: buyers land there already looking to spend, so you skip the "build an audience for two years" step.
