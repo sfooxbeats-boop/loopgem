@@ -2,6 +2,7 @@ type PayPalOrderActions = {
   order: {
     create: (opts: unknown) => Promise<string>;
     capture: () => Promise<{
+      id?: string;
       payer?: {
         email_address?: string;
         name?: { given_name?: string; surname?: string };

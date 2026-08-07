@@ -30,6 +30,8 @@ Focused entirely on **selling PDF courses and 1-on-1 coaching calls** teaching p
 | `NEXT_PUBLIC_SITE_URL` | ✅ Vercel = `https://www.loopgem.com` |
 | `NEXT_PUBLIC_GA_ID` | Optional. GA4 ID `G-S89ZX3WCP9` is committed as the default in `layout.tsx` (GA IDs are public), so no env var needed; setting one overrides. |
 | `DOWNLOAD_TOKEN_SECRET` | Optional but recommended. HMAC secret for signed course-download links. Falls back to `RESEND_API_KEY` if unset, so downloads keep working — but rotating the Resend key would then invalidate every outstanding download link. Set a dedicated random value in Vercel to decouple them. |
+| `PAYPAL_CLIENT_SECRET` | **REQUIRED for course sales.** Server-side PayPal REST secret (developer.paypal.com → Apps & Credentials → Live → the `LoopGem` app). Without it `/api/send-course` fails closed with 503 and no course is delivered. Never `NEXT_PUBLIC_`. |
+| `PAYPAL_ENV` | Optional. Set to `sandbox` to verify against PayPal's sandbox API. Anything else (or unset) = live. |
 
 Note the local `.env.local` `RESEND_API_KEY` is a PLACEHOLDER (`re_your_...`) — email only works in production where the real Vercel key exists. Never commit `.env.local` (gitignored).
 
@@ -349,6 +351,17 @@ Formspree is gone. The form posts to **`/api/contact`**, which emails `Sfooxbeat
 ### 2. SEO follow-ups (optional)
 - Convert raw `<img>` tags → `next/image` for auto WebP/AVIF + CLS prevention
 - Keep earning backlinks; review Search Console impressions once indexing catches up
+
+### 🔒 Payment verification — `/api/send-course` (2026-08-07)
+
+**The bug:** the route accepted `{payerEmail, payerName, courseId}` and emailed the course with **no proof of payment whatsoever**. A plain `curl` with no PayPal involvement returned `{"success":true}` and a working download link — and the endpoint is visible in the shipped client bundle, so it was trivially discoverable. Signing the download links did nothing while this front door stayed open.
+
+**The fix:** the client now sends only `{orderId, courseId}`. `src/lib/paypal.ts` fetches an OAuth token and re-reads the order from PayPal's REST API, requiring `status === "COMPLETED"`, `USD`, and a captured amount ≥ the server-side `price` in `courseFiles`. **The order amount is chosen in client code, so the price check must always come from `courseFiles`, never from the request.**
+
+- **Buyer identity comes from PayPal's response, not the client.** That is also the replay defence: reusing someone else's order id can only re-deliver the course to the person who actually paid, so no shared token store is needed.
+- **Fails closed.** Missing credentials → 503, unverifiable order → 402, and no email is sent either way. If `PAYPAL_CLIENT_SECRET` is ever removed from Vercel, **course sales stop delivering** (buyers see the "contact Sfooxbeats@gmail.com" state). That is deliberate — never "fix" it by falling back to trusting the client.
+- Prices in `courseFiles` (c1 $27, c2 $27, c3 $47) must stay in sync with `coursesList` in `CoursesClient.tsx`.
+- `PayPalButton.tsx` (coaching) is unaffected — it never calls a delivery endpoint, it just reveals the Cal.com embed.
 
 ### 🔒 Course PDF delivery — signed expiring links (2026-08-07)
 

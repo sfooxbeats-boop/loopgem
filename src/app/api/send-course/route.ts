@@ -1,16 +1,50 @@
 import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
 import { buildDownloadUrl, courseFiles, LINK_TTL_DAYS } from "@/lib/downloads";
+import { PayPalNotConfiguredError, verifyOrder } from "@/lib/paypal";
 
 export async function POST(req: NextRequest) {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
-    const { payerEmail, payerName, courseId } = await req.json();
+    const { orderId, courseId } = await req.json();
 
     const course = courseFiles[courseId];
     if (!course) {
       return NextResponse.json({ error: "Course not found" }, { status: 400 });
     }
+
+    if (typeof orderId !== "string" || !orderId.trim()) {
+      return NextResponse.json({ error: "Missing PayPal order id" }, { status: 400 });
+    }
+
+    // Never trust the client about payment — confirm the order with PayPal.
+    // Buyer identity comes back from PayPal too, so a replayed order id can
+    // only re-deliver the course to whoever actually paid.
+    let verified;
+    try {
+      verified = await verifyOrder(orderId.trim(), course.price);
+    } catch (err) {
+      if (err instanceof PayPalNotConfiguredError) {
+        // Fail closed: without credentials we cannot tell a real sale from a forgery
+        console.error("send-course: PayPal credentials missing —", err.message);
+        return NextResponse.json(
+          { error: "Payment verification is unavailable. Contact Sfooxbeats@gmail.com." },
+          { status: 503 }
+        );
+      }
+      console.error("send-course: PayPal verification error:", err);
+      return NextResponse.json(
+        { error: "Could not verify your payment. Contact Sfooxbeats@gmail.com." },
+        { status: 502 }
+      );
+    }
+
+    if (!verified.ok) {
+      console.warn(`send-course: rejected order ${orderId} — ${verified.reason}`);
+      return NextResponse.json({ error: "Payment could not be verified." }, { status: 402 });
+    }
+
+    const { payerEmail, payerName } = verified;
 
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.loopgem.com";
     // Signed link, valid for LINK_TTL_DAYS — the PDF itself is not publicly served
@@ -97,7 +131,8 @@ export async function POST(req: NextRequest) {
 
             <div style="background:#f7f3ea;border-radius:16px;padding:20px 24px;margin:16px 0;">
               <p style="margin:0 0 10px;font-size:14px;color:rgba(12,10,5,0.65);"><strong style="color:#0c0a05;">Course:</strong> ${course.name}</p>
-              <p style="margin:0 0 10px;font-size:14px;color:rgba(12,10,5,0.65);"><strong style="color:#0c0a05;">Buyer:</strong> ${payerName ?? "Unknown"}</p>
+              <p style="margin:0 0 10px;font-size:14px;color:rgba(12,10,5,0.65);"><strong style="color:#0c0a05;">Buyer:</strong> ${payerName || "Unknown"}</p>
+              <p style="margin:0 0 10px;font-size:14px;color:rgba(12,10,5,0.65);"><strong style="color:#0c0a05;">Paid:</strong> $${verified.paid.toFixed(2)} USD &middot; verified with PayPal (order ${orderId})</p>
               <p style="margin:0;font-size:14px;color:rgba(12,10,5,0.65);"><strong style="color:#0c0a05;">Email:</strong> <a href="mailto:${payerEmail}" style="color:#e11d2c;">${payerEmail}</a></p>
             </div>
 

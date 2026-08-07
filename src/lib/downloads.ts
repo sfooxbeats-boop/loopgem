@@ -6,18 +6,27 @@ import path from "path";
  * served as static files. They are only reachable through a signed, expiring link
  * issued by /api/send-course after a successful PayPal capture.
  */
-export const courseFiles: Record<string, { name: string; file: string }> = {
+/**
+ * `price` is the server-side source of truth in USD. The PayPal order is built
+ * in client code, so the amount a buyer "paid" is only trustworthy after it has
+ * been checked against these numbers via the PayPal API.
+ * Keep in sync with `coursesList` in src/app/courses/CoursesClient.tsx.
+ */
+export const courseFiles: Record<string, { name: string; file: string; price: number }> = {
   c1: {
     name: "Fiverr Beat Seller Blueprint",
     file: "course-fiverr-beat-seller-blueprint.pdf",
+    price: 27,
   },
   c2: {
     name: "Sell Music Services on Fiverr",
     file: "course-sell-music-services-fiverr.pdf",
+    price: 27,
   },
   c3: {
     name: "The Full Freelance Music Producer Playbook",
     file: "course-full-freelance-music-producer-playbook.pdf",
+    price: 47,
   },
 };
 

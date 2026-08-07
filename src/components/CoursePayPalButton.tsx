@@ -41,15 +41,11 @@ export default function CoursePayPalButton({ amount, courseId, courseName }: Pro
 
       const onApprove = async (_d: unknown, actions: PayPalOrderActions) => {
         const details = await actions.order.capture();
-        const payerEmail = details?.payer?.email_address ?? "";
-        const payerName = [
-          details?.payer?.name?.given_name,
-          details?.payer?.name?.surname,
-        ].filter(Boolean).join(" ");
+        const orderId = details?.id;
 
         // GA4 ecommerce purchase event (feeds monetization reports)
         trackEvent("purchase", {
-          transaction_id: (details as { id?: string })?.id,
+          transaction_id: orderId,
           value: Number(amount),
           currency: "USD",
           items: [{ item_id: courseId, item_name: courseName, price: Number(amount), quantity: 1 }],
@@ -57,10 +53,12 @@ export default function CoursePayPalButton({ amount, courseId, courseName }: Pro
 
         setState("sending");
         try {
+          // Only the order id goes up — the server re-checks it with PayPal and
+          // takes the buyer's email from there, so nothing here is trusted.
           const res = await fetch("/api/send-course", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ payerEmail, payerName, courseId }),
+            body: JSON.stringify({ orderId, courseId }),
           });
           // fetch only throws on network errors, not on HTTP 4xx/5xx —
           // check res.ok so a failed delivery doesn't falsely show "PDF sent!"
