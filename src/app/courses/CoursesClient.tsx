@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { FadeIn } from "@/components/Animate";
 import Marquee from "@/components/Marquee";
 import CoursePayPalButton from "@/components/CoursePayPalButton";
@@ -287,11 +288,13 @@ function CourseDetailRow({
         }}
         className="course-detail-grid"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={courseCovers[course.id]}
           alt={course.title}
-          style={{ width: "100%", aspectRatio: "1 / 1", objectFit: "cover", borderRadius: "var(--radius)", display: "block" }}
+          width={420}
+          height={420}
+          sizes="(max-width: 880px) 92vw, 420px"
+          style={{ width: "100%", height: "auto", aspectRatio: "1 / 1", objectFit: "cover", borderRadius: "var(--radius)", display: "block" }}
         />
         <div>
           <div style={{ display: "flex", gap: 8, marginBottom: 14, flexWrap: "wrap" }}>

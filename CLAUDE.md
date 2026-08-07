@@ -165,7 +165,14 @@ Note the local `.env.local` `RESEND_API_KEY` is a PLACEHOLDER (`re_your_...`) �
 
 **Backlinks done:** Instagram bio (@sfoox_beats), Twitter bio, LinkedIn (headline/about/experience/featured), YouTube channel about, email signature. All point to loopgem.com. This is the real ranking bottleneck for a new domain — more is better.
 
-**Not yet done:** convert raw `<img>` tags to `next/image` for WebP/AVIF + CLS; keep earning backlinks.
+**Not yet done:** keep earning backlinks.
+
+**⚠️ Image weight — fixed 2026-08-07 (was breaking the site on mobile).** The homepage was shipping **~14 MB of images**; the About page alone had a 6.4 MB PNG. The five hero "client" avatars were 1080×1080 PNGs (1–2.7 MB each, 8.6 MB total) rendered at 30×30 px. On mobile data through the Instagram/Threads in-app browser this saturated the connection, starved the JS chunks that drive the `.reveal` animations, and left visitors on a blank/white screen — reported as "the site won't open," intermittently, several times a day. Infra was never at fault (DNS consistent across all resolvers, no rate limiting, ~0.42 s TTFB).
+- **All local `<img>` are now `next/image`** (HomeClient ×4, CoursesClient, about, WhatsAppButton). Vercel's optimizer serves resized AVIF/WebP with `srcset` + lazy loading + immutable cache headers. Homepage first-load images went **8.64 MB → 6 KB**; the studio photo serves as a **33 KB WebP** at 750w.
+- **Source files were downscaled** with sharp (`20.2 MB → 1.24 MB`): client avatars → 320 px, covers → 900 px, studio → 1800 px, WhatsApp avatar → 200 px. Originals remain in git history if ever needed.
+- **Rule: never add a raw `<img>` for a local asset.** Use `next/image` with `width`/`height` (or `fill` + a `position:relative` parent) and a real `sizes` value. `VideoBlock`'s YouTube thumbnail stays a raw `<img>` on purpose — it's a remote `i.ytimg.com` URL with an `onError` fallback.
+- **Next 16 note:** the `priority` prop is deprecated; use `preload`, or `loading="eager"` for above-the-fold images.
+- **Before adding any image to `public/`, check its size.** Anything over ~300 KB should be resized first.
 
 ## Analytics (GA4)
 - **Live. Measurement ID `G-S89ZX3WCP9`** (committed default in `layout.tsx`; env var can override).

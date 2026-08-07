@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { FadeIn, CountUp } from "@/components/Animate";
 import Marquee from "@/components/Marquee";
 
@@ -91,10 +92,12 @@ export default function AboutPage() {
               </FadeIn>
             </div>
             <FadeIn delay={0.2}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/sfooxbeats-studio.png"
                 alt="Sfooxbeats in his studio"
+                width={5504}
+                height={3072}
+                sizes="(max-width: 980px) 92vw, 620px"
                 style={{
                   width: "100%",
                   height: "auto",

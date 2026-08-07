@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FadeIn, CountUp } from "@/components/Animate";
 import Marquee from "@/components/Marquee";
@@ -164,10 +165,13 @@ export default function Home() {
               <div style={{ display: "flex", gap: 14, alignItems: "center", flexWrap: "wrap" }}>
                 <div style={{ display: "flex" }}>
                   {[1, 2, 3, 4, 5].map((n, i) => (
-                    <img
+                    <Image
                       key={n}
                       src={`/clients/c${n}.png`}
                       alt=""
+                      width={30}
+                      height={30}
+                      loading="eager"
                       style={{
                         width: 30,
                         height: 30,
@@ -240,10 +244,12 @@ export default function Home() {
               >
                 <div style={{ display: "flex" }}>
                   {[1, 2, 3, 4, 5].map((n, i) => (
-                    <img
+                    <Image
                       key={n}
                       src={`/clients/c${n}.png`}
                       alt=""
+                      width={32}
+                      height={32}
                       style={{
                         width: 32,
                         height: 32,
@@ -737,11 +743,13 @@ function CourseRow({
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
           <span className="chip chip-accent">{course.tag}</span>
         </div>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         src={covers[course.id]}
         alt={course.title}
-        style={{ width: "100%", aspectRatio: "4 / 3", objectFit: "cover", borderRadius: "var(--radius)", display: "block" }}
+        width={400}
+        height={300}
+        sizes="(max-width: 880px) 92vw, 280px"
+        style={{ width: "100%", height: "auto", aspectRatio: "4 / 3", objectFit: "cover", borderRadius: "var(--radius)", display: "block" }}
       />
       </div>
       <div>
@@ -837,8 +845,14 @@ function ProofCollage() {
             }}
           >
             {src ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={src} alt={`Fiverr review from ${t.name}`} />
+              <Image
+                src={src}
+                alt={`Fiverr review from ${t.name}`}
+                width={591}
+                height={1280}
+                sizes="(max-width: 880px) 150px, 280px"
+                style={{ width: "100%", height: "auto", display: "block" }}
+              />
             ) : (
               <ReviewCard t={t} />
             )}

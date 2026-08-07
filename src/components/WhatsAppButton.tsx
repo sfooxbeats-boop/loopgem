@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { trackEvent } from "@/lib/gtag";
 
 function WhatsAppIcon({ size = 24 }: { size?: number }) {
@@ -41,10 +42,11 @@ export default function WhatsAppButton() {
         {/* Header */}
         <div className="wa-popup-header">
           <div className="wa-popup-avatar" style={{ overflow: "hidden" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/sfooxbeats-avatar.jpg"
               alt="Sfooxbeats"
+              width={42}
+              height={42}
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
             />
           </div>
