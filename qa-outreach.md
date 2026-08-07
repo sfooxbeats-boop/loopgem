@@ -88,6 +88,22 @@ The mistake I see constantly: someone pours months into a BeatStars store with n
 
 ---
 
+## 6. "How many beats should I have before I start selling?"  — PURE VALUE (no link)  (sent 2026-08-07)
+**Post to:** r/makinghiphop, r/Beatmakers, r/WeAreTheMusicMakers, Quora
+
+You don't need 50 beats sitting in a folder before you open shop. You need 8-10 solid ones across 2-3 genres and a place for people to find them.
+
+Waiting for "enough" beats just delays your first sale, and your first sale teaches you more than beat #40 ever will. I started selling with about ten in my catalog, not forty.
+
+What matters more than quantity:
+- Every beat has to be mixed clean. Buyers hear a bad mix in five seconds even if the melody is great.
+- Cover 2-3 lanes (trap, R&B, drill, whatever you're strongest at) so different buyers have something to click.
+- Tag your files right and title your gig clearly. A great beat with a messy title gets skipped.
+
+Add 2-3 new beats a week once you're live. Grow the catalog while you're already making sales, not before.
+
+---
+
 ## Reddit survival rules (read before posting)
 1. Comment genuinely in a sub for a bit before dropping any answer with a link.
 2. Keep it roughly 1 link for every 9 pure-value posts.
