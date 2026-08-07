@@ -129,11 +129,11 @@ These posts should sound like a producer typing on his phone, not like marketing
 ### Batch 2026-07-28
 - [x] Y'all mixing inside FL Studio itself or bouncing out to another DAW? Curious what's standard now.
 
-- [ ] What made you finally raise your prices? Mine was almost running out of month before payday.
+- [x] What made you finally raise your prices? Mine was almost running out of month before payday.
 
-- [ ] Anyone running type beats AND mixing on the same Fiverr gig? Does that confuse buyers or help.
+- [x] Anyone running type beats AND mixing on the same Fiverr gig? Does that confuse buyers or help.
 
-- [ ] How many revisions do you cap an order at? Learned this one the hard way.
+- [x] How many revisions do you cap an order at? Learned this one the hard way.
 
 - [ ] What's your go to move when a client says "make it sound professional"? That phrase means nothing and everything.
 
