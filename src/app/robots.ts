@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/beat-store", "/drum-kits", "/services"],
+      disallow: ["/api/", "/downloads/", "/beat-store", "/drum-kits", "/services"],
     },
     sitemap: "https://www.loopgem.com/sitemap.xml",
   };

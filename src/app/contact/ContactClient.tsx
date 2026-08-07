@@ -10,6 +10,7 @@ function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const sub = searchParams.get("subject");
@@ -19,13 +20,25 @@ function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    await fetch("https://formspree.io/f/YOUR_FORM_ID", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({ ...form, _replyto: form.email }),
-    });
-    setSent(true);
-    setLoading(false);
+    setError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(form),
+      });
+      // Never show "sent" unless the server actually accepted it
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        setError(data?.error ?? "Something went wrong. Please email Sfooxbeats@gmail.com directly.");
+        return;
+      }
+      setSent(true);
+    } catch {
+      setError("Couldn't reach the server. Please email Sfooxbeats@gmail.com directly.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = ["Course question", "1-on-1 coaching inquiry", "General question", "Other"];
@@ -188,6 +201,22 @@ function ContactForm() {
                 className="card"
                 style={{ padding: 32, display: "grid", gap: 14, background: "var(--bg-2)" }}
               >
+                {error ? (
+                  <div
+                    role="alert"
+                    style={{
+                      padding: "14px 16px",
+                      borderRadius: "var(--radius)",
+                      background: "var(--accent-soft)",
+                      border: "1px solid color-mix(in oklch, var(--accent) 35%, var(--border))",
+                      color: "var(--accent-dark)",
+                      fontSize: 14,
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {error}
+                  </div>
+                ) : null}
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
                   <Field label="Name *">
                     <input

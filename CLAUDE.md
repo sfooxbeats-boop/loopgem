@@ -29,6 +29,7 @@ Focused entirely on **selling PDF courses and 1-on-1 coaching calls** teaching p
 | `RESEND_API_KEY` | ✅ Live in Vercel (domain `loopgem.com` verified in Resend, eu-west-1) |
 | `NEXT_PUBLIC_SITE_URL` | ✅ Vercel = `https://www.loopgem.com` |
 | `NEXT_PUBLIC_GA_ID` | Optional. GA4 ID `G-S89ZX3WCP9` is committed as the default in `layout.tsx` (GA IDs are public), so no env var needed; setting one overrides. |
+| `DOWNLOAD_TOKEN_SECRET` | Optional but recommended. HMAC secret for signed course-download links. Falls back to `RESEND_API_KEY` if unset, so downloads keep working — but rotating the Resend key would then invalidate every outstanding download link. Set a dedicated random value in Vercel to decouple them. |
 
 Note the local `.env.local` `RESEND_API_KEY` is a PLACEHOLDER (`re_your_...`) — email only works in production where the real Vercel key exists. Never commit `.env.local` (gitignored).
 
@@ -339,22 +340,33 @@ Verified via Domain property (TXT `@` at Namecheap). Sitemap `https://www.loopge
 ### ✅ DONE — Analytics, social autopilot, backlinks
 See the "Analytics", "Social autopilot", and "Scheduled agents" sections above.
 
-### 1. Wire up contact form (Formspree) — STILL PENDING
-- Free account at formspree.io → create form → copy form ID
-- Replace `YOUR_FORM_ID` in `src/app/contact/ContactClient.tsx` (moved here from `page.tsx` during the SEO split)
-- Push to GitHub
+### ✅ DONE — Contact form (2026-08-07)
+Formspree is gone. The form posts to **`/api/contact`**, which emails `Sfooxbeats@gmail.com` from the verified `courses@loopgem.com` with `replyTo` set to the visitor — hit reply to answer them directly. No third-party account, no 50/month cap.
+- **The bug this fixed:** the old code posted to the literal placeholder `https://formspree.io/f/YOUR_FORM_ID` (a real 404) and then ran `setSent(true)` unconditionally. Every visitor saw "Message sent!" and every message was silently discarded.
+- `ContactClient.tsx` now checks `res.ok`, renders a `role="alert"` error box on failure, and keeps the form filled in so nothing is lost. **Never set `sent` without checking the response.**
+- Server-side: required-field + email-format validation, length caps, and HTML escaping on every interpolated field. Resend is lazy-initialised inside the handler and its `{error}` return is checked (the SDK does not throw).
 
 ### 2. SEO follow-ups (optional)
 - Convert raw `<img>` tags → `next/image` for auto WebP/AVIF + CLS prevention
 - Keep earning backlinks; review Search Console impressions once indexing catches up
 
-### 3. Upload final PDFs to repo (reference — all 3 currently live)
-When a PDF is re-finalised, copy from `C:\Users\KATANA\Downloads\loopgem-pdf\` to `loopgem/public/downloads/` with EXACT filenames:
+### 🔒 Course PDF delivery — signed expiring links (2026-08-07)
+
+**The PDFs are NOT in `public/` any more.** They live in **`private/downloads/`** so Next never serves them as static files. Previously all three were downloadable by anyone at `https://www.loopgem.com/downloads/<name>.pdf` with no payment — a $47 course sitting at a guessable URL.
+
+- `src/lib/downloads.ts` — course map, HMAC-SHA256 sign/verify (timing-safe compare), TTL and grace-period constants, plus `resolveCoursePath` which `basename`s the input to block path traversal.
+- `src/app/api/download/route.ts` — the only legitimate way in. Validates the token, returns **403** on a bad signature, **410** on expiry (with a "email me for a fresh one" message), and sends `Cache-Control: private, no-store` + `X-Robots-Tag: noindex`.
+- `src/app/downloads/[file]/route.ts` — **legacy grace handler.** Links emailed to buyers *before* this change pointed at the old public path; this keeps them working until **`LEGACY_GRACE_UNTIL` = 2026-09-30**, then returns 410. Shorten or delete it once past buyers have re-downloaded — while it's live the old links are still unauthenticated.
+- Links issued by `/api/send-course` are valid for **`LINK_TTL_DAYS` = 30**. The buyer email says so explicitly (it used to promise "yours forever" — don't reintroduce that).
+- `robots.ts` disallows `/downloads/`.
+- **`next.config.mjs` needs `outputFileTracingIncludes`** for `/api/download` and `/downloads/[file]` — without it Vercel won't bundle the PDFs into those functions and every download 404s in production.
+
+**To replace a PDF:** copy from `C:\Users\KATANA\Downloads\loopgem-pdf\` into **`private/downloads/`** (not `public/`) with EXACT filenames:
 - `course-fiverr-beat-seller-blueprint.pdf`
 - `course-sell-music-services-fiverr.pdf`
 - `course-full-freelance-music-producer-playbook.pdf`
 
-Then: `git add public/downloads && git commit -m "add course PDF" && git push`
+Then: `git add private/downloads && git commit -m "add course PDF" && git push`
 
 ### 5. Update homepage video
 - ✅ DONE — VSL uploaded as `QcqsS62loY0` (unlisted), wired into `<VideoBlock videoId="QcqsS62loY0" />` on the homepage

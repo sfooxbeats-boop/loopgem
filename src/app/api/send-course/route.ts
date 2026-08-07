@@ -1,20 +1,6 @@
 import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
-
-const courseFiles: Record<string, { name: string; file: string }> = {
-  "c1": {
-    name: "Fiverr Beat Seller Blueprint",
-    file: "course-fiverr-beat-seller-blueprint.pdf",
-  },
-  "c2": {
-    name: "Sell Music Services on Fiverr",
-    file: "course-sell-music-services-fiverr.pdf",
-  },
-  "c3": {
-    name: "The Full Freelance Music Producer Playbook",
-    file: "course-full-freelance-music-producer-playbook.pdf",
-  },
-};
+import { buildDownloadUrl, courseFiles, LINK_TTL_DAYS } from "@/lib/downloads";
 
 export async function POST(req: NextRequest) {
   try {
@@ -26,8 +12,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Course not found" }, { status: 400 });
     }
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://loopgem.vercel.app";
-    const downloadUrl = `${siteUrl}/downloads/${course.file}`;
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.loopgem.com";
+    // Signed link, valid for LINK_TTL_DAYS — the PDF itself is not publicly served
+    const downloadUrl = buildDownloadUrl(siteUrl, courseId);
     const firstName = payerName?.split(" ")[0] ?? "there";
 
     const buyerResult = await resend.emails.send({
@@ -49,7 +36,11 @@ export async function POST(req: NextRequest) {
             </h2>
 
             <p style="color:rgba(12,10,5,0.65);font-size:15px;line-height:1.6;margin:0 0 32px;">
-              Thank you for purchasing <strong style="color:#0c0a05;">${course.name}</strong>. Tap the button below to download your PDF — it's yours forever.
+              Thank you for purchasing <strong style="color:#0c0a05;">${course.name}</strong>. Tap the button below to download your PDF, then save it somewhere safe — the file is yours to keep.
+            </p>
+
+            <p style="color:rgba(12,10,5,0.55);font-size:13px;line-height:1.6;margin:0 0 28px;">
+              Heads up: this download link works for the next ${LINK_TTL_DAYS} days. If it stops working, just reply to this email and I'll send you a fresh one.
             </p>
 
             <a href="${downloadUrl}"
